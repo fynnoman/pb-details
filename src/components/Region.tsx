@@ -28,14 +28,16 @@ export default function Region() {
     <section ref={ref} className="relative py-32 sm:py-40 overflow-hidden">
       <motion.div
         style={{ y: bgY, scale: bgScale }}
-        className="absolute inset-0 opacity-40 will-change-transform"
+        className="absolute inset-0 will-change-transform"
       >
         <img
           src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=2000&q=85&auto=format&fit=crop"
           alt=""
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-[var(--bg)]/60 to-[var(--bg)]" />
+        {/* Weich ausblendende Ränder, Mitte deutlich heller */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
+        <div className="absolute inset-0 bg-black/10" />
       </motion.div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">

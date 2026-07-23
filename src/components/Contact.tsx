@@ -30,7 +30,7 @@ export default function Contact() {
       {/* Background video */}
       <motion.div
         style={{ y: bgY, scale: bgScale }}
-        className="absolute inset-0 opacity-40 will-change-transform"
+        className="absolute inset-0 will-change-transform"
       >
         <video
           autoPlay
@@ -46,7 +46,9 @@ export default function Contact() {
             type="video/mp4"
           />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-black/50 to-[var(--bg)]" />
+        {/* Weich ausblendende Ränder, Mitte deutlich heller */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
+        <div className="absolute inset-0 bg-black/10" />
       </motion.div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">

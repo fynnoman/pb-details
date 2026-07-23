@@ -36,14 +36,16 @@ export default function Process() {
       {/* Background image with strong parallax */}
       <motion.div
         style={{ y, scale }}
-        className="absolute inset-0 opacity-30 will-change-transform"
+        className="absolute inset-0 will-change-transform"
       >
         <img
           src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?w=2000&q=85&auto=format&fit=crop"
           alt=""
           className="w-full h-full object-cover"
         />
+        {/* Weich ausblendende Ränder, Mitte deutlich heller */}
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
+        <div className="absolute inset-0 bg-black/10" />
       </motion.div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
