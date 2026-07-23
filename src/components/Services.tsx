@@ -89,7 +89,7 @@ function ServiceCard({
 
       <div className="col-span-12 lg:col-span-5">
         <Reveal>
-          <div className="font-display text-[10rem] leading-none text-[var(--ink)]/[0.06] absolute -translate-y-16 select-none pointer-events-none hidden lg:block">
+          <div className="font-display text-[10rem] leading-none text-[var(--ink)]/[0.18] absolute -translate-y-16 select-none pointer-events-none hidden lg:block">
             {service.tag}
           </div>
         </Reveal>

@@ -73,7 +73,7 @@ export default function Process() {
               transition={{ duration: 1, delay: i * 0.12, ease: [0.2, 0.7, 0.2, 1] }}
               className="glass rounded-[1.75rem] p-8 sm:p-10 relative overflow-hidden"
             >
-              <div className="font-display text-[7rem] leading-none text-[var(--ink)]/[0.05] absolute -top-4 -right-2 select-none pointer-events-none">
+              <div className="font-display text-[7rem] leading-none text-[var(--ink)]/[0.18] absolute -top-4 -right-2 select-none pointer-events-none">
                 {s.n}
               </div>
               <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
