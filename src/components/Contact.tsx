@@ -46,9 +46,9 @@ export default function Contact() {
             type="video/mp4"
           />
         </video>
-        {/* Weich ausblendende Ränder, Mitte deutlich heller */}
+        {/* Weich ausblendende Ränder + dezente Abdunklung für Lesbarkeit */}
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/35" />
       </motion.div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
