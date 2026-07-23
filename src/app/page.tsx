@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import ScrollTopOnLoad from "@/components/ScrollTopOnLoad";
 import Hero from "@/components/Hero";
 import Anspruch from "@/components/Anspruch";
 import Services from "@/components/Services";
@@ -13,6 +14,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <ScrollTopOnLoad />
       <Nav />
       <main className="relative">
         <Hero />
