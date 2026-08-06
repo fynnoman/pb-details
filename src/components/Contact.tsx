@@ -23,7 +23,10 @@ export default function Contact() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
   const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.12, 1.02, 1.12]);
 
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [service, setService] = useState<string>("Keramikversiegelung");
 
   return (
@@ -128,12 +131,64 @@ export default function Contact() {
           <div className="col-span-12 lg:col-span-7">
             <Reveal delay={0.05}>
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  setStatus("sent");
+                  const form = e.currentTarget;
+                  const fd = new FormData(form);
+                  setStatus("sending");
+                  setErrorMessage(null);
+                  try {
+                    const res = await fetch("/api/contact", {
+                      method: "POST",
+                      headers: { "content-type": "application/json" },
+                      body: JSON.stringify({
+                        firstname: fd.get("firstname"),
+                        email: fd.get("email"),
+                        phone: fd.get("phone"),
+                        vehicle: fd.get("vehicle"),
+                        service: fd.get("service"),
+                        message: fd.get("message"),
+                        website: fd.get("website"),
+                      }),
+                    });
+                    const json = (await res.json().catch(() => ({}))) as {
+                      ok?: boolean;
+                      error?: string;
+                    };
+                    if (res.ok && json.ok) {
+                      setStatus("sent");
+                      form.reset();
+                      setService("Keramikversiegelung");
+                    } else {
+                      setStatus("error");
+                      setErrorMessage(
+                        json.error ??
+                          "Es ist ein Fehler aufgetreten. Bitte rufen Sie uns direkt an.",
+                      );
+                    }
+                  } catch {
+                    setStatus("error");
+                    setErrorMessage(
+                      "Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung oder rufen Sie uns an.",
+                    );
+                  }
                 }}
                 className="glass-strong rounded-[1.75rem] p-6 sm:p-10 relative"
               >
+                {/* Honeypot: Bots füllen dieses Feld aus, Menschen sehen es nicht */}
+                <label
+                  className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                >
+                  Website (bitte leer lassen)
+                  <input
+                    type="text"
+                    name="website"
+                    autoComplete="off"
+                    tabIndex={-1}
+                  />
+                </label>
                 <div className="grid grid-cols-2 gap-4">
                   <label className="col-span-2 sm:col-span-1 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
                     Vorname *
@@ -215,8 +270,12 @@ export default function Contact() {
                     Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu.
                     Wir melden uns i. d. R. innerhalb von 24 h zurück.
                   </p>
-                  <button type="submit" className="btn-gold shrink-0">
-                    Anfrage senden
+                  <button
+                    type="submit"
+                    className="btn-gold shrink-0"
+                    disabled={status === "sending"}
+                  >
+                    {status === "sending" ? "Wird gesendet …" : "Anfrage senden"}
                     <span aria-hidden>→</span>
                   </button>
                 </div>
@@ -231,6 +290,15 @@ export default function Contact() {
                       ✓
                     </span>
                     Danke für Ihre Anfrage. Wir melden uns kurzfristig zurück.
+                  </motion.div>
+                )}
+                {status === "error" && errorMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-6 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-[var(--ink)]"
+                  >
+                    {errorMessage}
                   </motion.div>
                 )}
               </form>
