@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { SITE } from "@/lib/site";
+import { clientKey, rateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -37,6 +38,23 @@ async function verifyHcaptcha(token: string | undefined): Promise<boolean> {
 }
 
 export async function POST(req: Request) {
+  const limit = rateLimit(clientKey(req), 5, 60 * 60 * 1000);
+  if (!limit.ok) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          "Zu viele Anfragen von dieser Adresse. Bitte versuchen Sie es später erneut oder rufen Sie uns direkt an.",
+      },
+      {
+        status: 429,
+        headers: limit.retryAfterSec
+          ? { "Retry-After": String(limit.retryAfterSec) }
+          : undefined,
+      },
+    );
+  }
+
   let data: Payload;
   try {
     data = (await req.json()) as Payload;

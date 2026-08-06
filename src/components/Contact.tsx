@@ -138,7 +138,7 @@ export default function Contact() {
                   setStatus("sending");
                   setErrorMessage(null);
                   try {
-                    const res = await fetch("/api/contact", {
+                    const res = await fetch("/api/contact/", {
                       method: "POST",
                       headers: { "content-type": "application/json" },
                       body: JSON.stringify({
