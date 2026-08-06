@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Reveal from "./Reveal";
+import { SITE } from "@/lib/site";
 
 export default function Anspruch() {
   const ref = useRef<HTMLDivElement>(null);
@@ -44,10 +45,11 @@ export default function Anspruch() {
                   Weiterempfehlung
                 </div>
                 <div className="font-display text-4xl text-chrome leading-none">
-                  95<span className="text-[var(--gold)]">%</span>
+                  {SITE.ratings.recommendation}
+                  <span className="text-[var(--gold)]">%</span>
                 </div>
                 <div className="text-xs text-[var(--ink-dim)] mt-2">
-                  aus 646 verifizierten Bewertungen
+                  aus {SITE.ratings.count} verifizierten Bewertungen
                 </div>
               </motion.div>
             </div>
@@ -68,16 +70,18 @@ export default function Anspruch() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-8 text-[var(--ink-dim)] text-lg leading-relaxed max-w-xl">
-                Unser Anspruch beginnt dort, wo andere ihre Arbeit als beendet ansehen. Wir
-                nehmen uns die Zeit, die eine perfekte Aufbereitung braucht — und hören erst
-                auf, wenn das Ergebnis stimmt.
+                Unser Qualitäts- und Leistungsanspruch beginnt dort, wo andere
+                ihre Arbeit bereits als beendet ansehen. Wir nehmen uns die Zeit,
+                die eine perfekte Aufbereitung braucht, und hören erst auf, wenn
+                das Ergebnis stimmt.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
               <p className="mt-4 text-[var(--ink-dim)] leading-relaxed max-w-xl">
-                Da wir ausschließlich private Kundenfahrzeuge betreuen — darunter viele
-                Sportwagen, Oldtimer und Luxusfahrzeuge — ist Ihr Fahrzeug bei uns in besten
-                Händen.
+                Da wir ausschließlich private Kundenfahrzeuge betreuen – darunter
+                viele Sportwagen, Oldtimer und Luxusfahrzeuge – ist Ihr Fahrzeug
+                bei uns in besten Händen. Billig kann jeder – deshalb lautet
+                unser Motto: „Glanz oder gar nicht!"
               </p>
             </Reveal>
             <Reveal delay={0.2}>

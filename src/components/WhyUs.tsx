@@ -3,23 +3,30 @@
 import Reveal from "./Reveal";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { SITE } from "@/lib/site";
 
 const reasons = [
-  { headline: "Seit 1997", body: "Inhabergeführt von Thomas Paul & Karsten Becker" },
-  { headline: "600+", body: "positive, verifizierte Kundenbewertungen" },
-  { headline: "95 %", body: "Weiterempfehlungsquote" },
+  { headline: "Seit 1997", body: `Inhabergeführt von ${SITE.founders}` },
+  {
+    headline: `${SITE.ratings.count}`,
+    body: "positive, verifizierte Kundenbewertungen",
+  },
+  {
+    headline: `${SITE.ratings.recommendation} %`,
+    body: "Weiterempfehlungsquote",
+  },
   { headline: "Q-Siegel", body: "Deutschlands erster Fahrzeugpflegebetrieb mit Q-Siegel" },
-  { headline: "BRILA", body: "zertifizierter Fachbetrieb für Keramikversiegelungen" },
-  { headline: "ZDF & SR3", body: "Bekannt aus TV und Radio-Berichten" },
 ];
 
 const bullets = [
   "Einer der dienstältesten Fahrzeugaufbereiter Deutschlands",
-  "Auszeichnungen durch Heiko Maas und Anke Rehlinger",
+  "Auszeichnungen durch Heiko Maas und Anke Rehlinger für besondere Servicequalität",
+  "BRILA zertifizierter Fachbetrieb für Keramikversiegelungen",
   "Eigener Qualitäts-Coach",
-  "Spezialisierung auf Sport-, Luxus- und Sammlerfahrzeuge",
+  "Spezialisierung auf Sportwagen, Luxusfahrzeuge und Sammlerfahrzeuge",
   "Kunden aus dem Saarland, Luxemburg und ganz Deutschland",
   "Ausschließlich Privatkunden statt Massenabfertigung",
+  "Bekannt aus ZDF Fernsehen, SR3 Radio sowie weiteren Medienberichten",
 ];
 
 export default function WhyUs() {
@@ -82,7 +89,7 @@ export default function WhyUs() {
 
           {/* Metrics */}
           <div className="col-span-12 md:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 content-start">
-            {reasons.slice(0, 4).map((r, i) => (
+            {reasons.map((r, i) => (
               <motion.div
                 key={r.headline}
                 initial={{ opacity: 0, y: 40 }}

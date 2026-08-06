@@ -16,14 +16,15 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "PB Fahrzeugpflege Saarlouis — The Art of Detailing",
-  description:
-    "Premium-Fahrzeugaufbereitung, Keramikversiegelung und Lackschutz im Saarland und in Luxemburg. Inhabergeführt seit 1997. Sportwagen, Luxusfahrzeuge, Oldtimer.",
   metadataBase: new URL("https://www.pb-fahrzeugpflege.de"),
+  title: {
+    default: "PB Fahrzeugpflege Saarlouis — The Art of Detailing",
+    template: "%s | PB Fahrzeugpflege Saarlouis",
+  },
+  description:
+    "Premium-Fahrzeugaufbereitung und Keramikversiegelung im Saarland und in Luxemburg. Inhabergeführt seit 1997. Sportwagen, Luxusfahrzeuge, Oldtimer.",
   openGraph: {
-    title: "PB Fahrzeugpflege Saarlouis — The Art of Detailing",
-    description:
-      "Keramikversiegelung, Fahrzeugaufbereitung und Lackschutz auf Studio-Niveau. Seit 1997.",
+    siteName: "PB Fahrzeugpflege Saarlouis",
     locale: "de_DE",
     type: "website",
   },

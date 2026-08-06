@@ -3,16 +3,17 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Reveal from "./Reveal";
+import { SITE } from "@/lib/site";
 
 const regions = [
   "Saarlouis",
   "Saarbrücken",
   "Merzig",
   "St. Wendel",
+  "Dillingen",
   "Luxemburg",
   "Trier",
-  "Neunkirchen",
-  "Homburg",
+  "Grenznaher Raum",
 ];
 
 export default function Region() {
@@ -56,9 +57,10 @@ export default function Region() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-lg">
-                Sie finden uns in der Provinzialstraße 243 in 66806 Ensdorf —
+                Sie finden uns in der Provinzialstraße 243 in 66806 Ensdorf –
                 direkt bei Saarlouis. Zu uns kommen Kunden aus dem gesamten
-                Saarland sowie aus Luxemburg und dem grenznahen Raum.
+                Saarland, u. a. aus Saarlouis, Saarbrücken, Merzig und St.
+                Wendel, sowie aus Luxemburg und dem grenznahen Raum.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
@@ -92,26 +94,26 @@ export default function Region() {
                 <div className="mt-6 pt-6 border-t border-white/10 space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-[var(--ink-mute)]">Mo – Fr</span>
-                    <span className="text-[var(--ink)]">09:00 – 12:00 · 13:00 – 17:00</span>
+                    <span className="text-[var(--ink)]">{SITE.hours.weekday}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[var(--ink-mute)]">Sa</span>
-                    <span className="text-[var(--ink)]">09:00 – 12:00</span>
+                    <span className="text-[var(--ink)]">{SITE.hours.saturday}</span>
                   </div>
                   <div className="text-[11px] text-[var(--ink-mute)] pt-2">
-                    Abweichungen möglich — bitte vorab kurz anrufen.
+                    Abweichungen möglich – bitte vorab kurz anrufen.
                   </div>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=Provinzialstraße+243+66806+Ensdorf"
+                    href={SITE.social.googleMaps}
                     target="_blank"
                     rel="noopener"
                     className="btn-glass text-sm py-2.5 px-4"
                   >
                     In Karten öffnen →
                   </a>
-                  <a href="tel:+4968314612 29" className="btn-gold text-sm py-2.5 px-4">
+                  <a href={SITE.phone.href} className="btn-gold text-sm py-2.5 px-4">
                     Anrufen
                   </a>
                 </div>

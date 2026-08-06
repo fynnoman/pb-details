@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { SITE } from "@/lib/site";
+
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
@@ -11,10 +14,10 @@ export default function Footer() {
             </div>
             <p className="mt-5 text-sm text-[var(--ink-dim)] max-w-sm leading-relaxed">
               The Art of Detailing. Premium-Fahrzeugaufbereitung und
-              Keramikversiegelung — inhabergeführt seit 1997.
+              Keramikversiegelung – inhabergeführt seit {SITE.founded}.
             </p>
             <div className="mt-8 text-xs tracking-[0.32em] uppercase text-[var(--gold)]">
-              „Glanz oder gar nicht.“
+              „Glanz oder gar nicht."
             </div>
           </div>
 
@@ -23,23 +26,23 @@ export default function Footer() {
               Kontakt
             </div>
             <address className="not-italic text-sm text-[var(--ink-dim)] leading-relaxed">
-              Provinzialstraße 243
+              {SITE.address.street}
               <br />
-              66806 Ensdorf
+              {SITE.address.zip} {SITE.address.city}
               <br />
               <br />
               <a
-                href="tel:+4968314612 29"
+                href={SITE.phone.href}
                 className="text-[var(--ink)] hover:text-[var(--gold)] transition-colors"
               >
-                +49 (0) 6831 461229
+                {SITE.phone.display}
               </a>
               <br />
               <a
-                href="mailto:info@pb-fahrzeugpflege.de"
+                href={`mailto:${SITE.email}`}
                 className="text-[var(--ink)] hover:text-[var(--gold)] transition-colors"
               >
-                info@pb-fahrzeugpflege.de
+                {SITE.email}
               </a>
             </address>
           </div>
@@ -64,32 +67,45 @@ export default function Footer() {
             <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-4">
               Bewertungen
             </div>
-            <div className="glass rounded-2xl p-4">
-              <div className="font-display text-3xl text-chrome">4,9</div>
+            <a
+              href={SITE.social.provenExpert}
+              target="_blank"
+              rel="noopener"
+              className="glass rounded-2xl p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition"
+            >
+              <div className="font-display text-3xl text-chrome">
+                {SITE.ratings.value.toString().replace(".", ",")}
+              </div>
               <div className="text-xs text-[var(--ink-dim)] mt-1">
-                646 · ProvenExpert
+                {SITE.ratings.count} · {SITE.ratings.source}
               </div>
-              <div className="text-xs text-[var(--ink-mute)] mt-3">
-                440 · werkenntdenBESTEN
-              </div>
-            </div>
+            </a>
           </div>
         </div>
 
         <div className="hairline mb-8" />
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[var(--ink-mute)]">
-          <div>© {year} PB Fahrzeugpflege Saarlouis ® — Alle Rechte vorbehalten.</div>
+          <div>© {year} {SITE.name} ® — Alle Rechte vorbehalten.</div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-[var(--ink)] transition-colors">
+            <Link
+              href="/impressum/"
+              className="hover:text-[var(--ink)] transition-colors"
+            >
               Impressum
-            </a>
-            <a href="#" className="hover:text-[var(--ink)] transition-colors">
+            </Link>
+            <Link
+              href="/datenschutzerklaerung/"
+              className="hover:text-[var(--ink)] transition-colors"
+            >
               Datenschutz
-            </a>
-            <a href="#" className="hover:text-[var(--ink)] transition-colors">
+            </Link>
+            <Link
+              href="/allgemeine-geschaeftsbedingungen/"
+              className="hover:text-[var(--ink)] transition-colors"
+            >
               AGB
-            </a>
+            </Link>
           </div>
         </div>
       </div>

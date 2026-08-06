@@ -1,0 +1,65 @@
+export const SITE = {
+  name: "PB Fahrzeugpflege Saarlouis",
+  legalName: "PB Fahrzeugpflege Saarlouis",
+  tagline: "The Art of Detailing",
+  domain: "https://www.pb-fahrzeugpflege.de",
+  founded: 1997,
+  owner: "Thomas Paul-Mohm",
+  founders: "Thomas Paul & Karsten Becker",
+  address: {
+    street: "Provinzialstraße 243",
+    zip: "66806",
+    city: "Ensdorf",
+    region: "Saarland",
+    country: "Deutschland",
+  },
+  geo: { lat: 49.2973359, lng: 6.7782342 },
+  phone: {
+    display: "+49 (0) 6831 461229",
+    href: "tel:+496831461229",
+    e164: "+496831461229",
+  },
+  fax: "06831 645425",
+  email: "info@pb-fahrzeugpflege.de",
+  whatsapp: "https://wa.me/+496831461229",
+  vatId: "DE268106468",
+  hours: {
+    weekday: "09:00 – 12:00 · 13:00 – 17:00",
+    saturday: "09:00 – 12:00",
+  },
+  social: {
+    facebook: "https://de-de.facebook.com/pbfahrzeugpflege",
+    instagram: "https://www.instagram.com/pbfahrzeugpflege/",
+    youtube: "https://www.youtube.com/channel/UC7Xmy1J1uXXCQCz9rvTxuNA",
+    googleMaps: "https://g.page/pbfahrzeugpflege?share",
+    googleProfile: "https://share.google/ctOJCy04RFzGMWZIt",
+    provenExpert: "https://www.provenexpert.com/pb-fahrzeugpflege-saarlouis/",
+  },
+  ratings: {
+    count: 648,
+    value: 4.92,
+    scale: 5,
+    source: "ProvenExpert",
+    recommendation: 95,
+  },
+} as const;
+
+export const NAV = [
+  { label: "Home", href: "/" },
+  { label: "Über uns", href: "/ueber-uns/" },
+  {
+    label: "Leistungen",
+    href: "/leistungen/",
+    children: [
+      { label: "Keramikversiegelung", href: "/leistungen/keramikversiegelung/" },
+      { label: "Nanoversiegelung", href: "/leistungen/nanoversiegelung/" },
+      { label: "Fahrzeugaufbereitung", href: "/leistungen/fahrzeugaufbereitung/" },
+      { label: "Lack- & Beulendoktor", href: "/leistungen/lack-und-beulendoktor/" },
+    ],
+  },
+  { label: "Unfallschaden", href: "/unfallschaden/" },
+  { label: "Preise", href: "/preise/" },
+  { label: "FAQ", href: "/faq/" },
+  { label: "Referenzen", href: "/referenzen/" },
+  { label: "Kontakt", href: "/kontakt/" },
+] as const;

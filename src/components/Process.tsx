@@ -8,12 +8,12 @@ const steps = [
   {
     n: "01",
     title: "Begutachtung",
-    desc: "Kommen Sie während der Öffnungszeiten auch ohne Termin vorbei — wir sehen uns Ihr Fahrzeug direkt an.",
+    desc: "Kommen Sie während der Öffnungszeiten auch ohne Termin vorbei – wir sehen uns Ihr Fahrzeug direkt an.",
   },
   {
     n: "02",
     title: "Individuelles Angebot",
-    desc: "Auf Basis von Lackzustand, Aufwand und Ihrem Ziel — Verkauf, Leasingrückgabe oder Werterhalt — erstellen wir ein transparentes Angebot.",
+    desc: "Auf Basis von Lackzustand, Aufwand und Ihrem Ziel – Verkauf, Leasingrückgabe oder Werterhalt – erstellen wir ein transparentes Angebot.",
   },
   {
     n: "03",
@@ -89,7 +89,7 @@ export default function Process() {
 
         <Reveal delay={0.3}>
           <p className="mt-12 text-center text-sm text-[var(--ink-mute)]">
-            Bei weiterer Anfahrt — etwa aus Luxemburg — lohnt sich ein kurzer Anruf vorab.
+            Bei weiterer Anfahrt – etwa aus Luxemburg – lohnt sich ein kurzer Anruf vorab.
           </p>
         </Reveal>
       </div>

@@ -7,25 +7,25 @@ import Reveal from "./Reveal";
 const vehicles = [
   {
     label: "Neuwagen",
-    desc: "Lackschutz ab dem ersten Kilometer — bevor Flugrost, Insektenreste und Waschkratzer den empfindlichen Klarlack erreichen.",
+    desc: "Lackschutz ab dem ersten Kilometer durch eine Keramikversiegelung, bevor Flugrost, Insektenreste und Waschkratzer den empfindlichen Klarlack erreichen.",
     image:
       "https://images.unsplash.com/photo-1571607388263-1044f9ea01dd?w=1400&q=85&auto=format&fit=crop",
   },
   {
     label: "Sportwagen & Luxus",
-    desc: "Kompromisslose Aufbereitung und Werterhalt mit dem nötigen Fingerspitzengefühl.",
+    desc: "Kompromisslose Aufbereitung und Werterhalt mit dem nötigen Fingerspitzengefühl – für Fahrzeuge, deren Wert und Erscheinungsbild zählen.",
     image:
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1400&q=85&auto=format&fit=crop",
   },
   {
     label: "Oldtimer",
-    desc: "Sammlerfahrzeuge in bester Hand — Werterhalt für Generationen.",
+    desc: "Sammlerfahrzeuge in bester Hand – Werterhalt für Generationen, mit Fingerspitzengefühl und Erfahrung.",
     image:
       "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1400&q=85&auto=format&fit=crop",
   },
   {
-    label: "Leasingrückgabe",
-    desc: "Gezielte Aufbereitung, die sichtbare Mängel reduziert und teure Nachberechnungen vermeidet.",
+    label: "Gebrauchtwagen",
+    desc: "Vor Leasingrückgabe oder Verkauf – gezielte Aufbereitung, die sichtbare Mängel reduziert und teure Nachberechnungen vermeidet.",
     image:
       "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1400&q=85&auto=format&fit=crop",
   },
@@ -94,10 +94,11 @@ export default function Vehicles() {
           <div className="col-span-12 lg:col-span-6 lg:pt-16">
             <Reveal delay={0.1}>
               <p className="text-[var(--ink-dim)] leading-relaxed">
-                Wir betreuen ausschließlich private Kundenfahrzeuge. Jede
-                Aufbereitung beginnt mit einer persönlichen Begutachtung — so
-                erhalten Sie ein realistisches Angebot statt eines
-                Pauschalversprechens.
+                Wir sind auf die Aufbereitung und den Lackschutz hochwertiger
+                Fahrzeuge spezialisiert und betreuen ausschließlich private
+                Kundenfahrzeuge. Jede Aufbereitung beginnt mit einer
+                persönlichen Begutachtung – so erhalten Sie ein realistisches
+                Angebot statt eines Pauschalversprechens.
               </p>
             </Reveal>
           </div>

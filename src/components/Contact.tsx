@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import Reveal from "./Reveal";
+import { SITE } from "@/lib/site";
 
 const services = [
   "Keramikversiegelung",
@@ -81,7 +82,7 @@ export default function Contact() {
                   Direkter Draht
                 </div>
                 <a
-                  href="tel:+4968314612 29"
+                  href={SITE.phone.href}
                   className="group flex items-center gap-5"
                 >
                   <span className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#f5e2b8] via-[#d4b483] to-[#8a6a3f] flex items-center justify-center text-[#100e0a] shrink-0 shadow-lg">
@@ -103,19 +104,19 @@ export default function Contact() {
                   </span>
                   <span className="flex flex-col">
                     <span className="text-[11px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">
-                      Anrufen — Mo–Sa
+                      Anrufen · Mo–Sa
                     </span>
                     <span className="font-display text-2xl sm:text-3xl text-chrome tracking-[-0.01em]">
-                      +49 (0) 6831 461229
+                      {SITE.phone.display}
                     </span>
                   </span>
                 </a>
                 <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between text-xs">
                   <a
-                    href="mailto:info@pb-fahrzeugpflege.de"
+                    href={`mailto:${SITE.email}`}
                     className="text-[var(--ink-dim)] hover:text-[var(--ink)]"
                   >
-                    info@pb-fahrzeugpflege.de
+                    {SITE.email}
                   </a>
                   <span className="text-[var(--ink-mute)]">Antwort in 24 h</span>
                 </div>
@@ -135,12 +136,13 @@ export default function Contact() {
               >
                 <div className="grid grid-cols-2 gap-4">
                   <label className="col-span-2 sm:col-span-1 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    Name
+                    Vorname *
                     <input
                       required
-                      name="name"
+                      name="firstname"
                       type="text"
-                      placeholder="Ihr Name"
+                      placeholder="Ihr Vorname"
+                      autoComplete="given-name"
                       className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
                     />
                   </label>
@@ -150,16 +152,18 @@ export default function Contact() {
                       name="phone"
                       type="tel"
                       placeholder="Rückrufnummer"
+                      autoComplete="tel"
                       className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
                     />
                   </label>
                   <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    E-Mail
+                    E-Mail *
                     <input
                       required
                       name="email"
                       type="email"
                       placeholder="ihre@mail.de"
+                      autoComplete="email"
                       className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
                     />
                   </label>
@@ -195,12 +199,13 @@ export default function Contact() {
                   </div>
 
                   <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    Nachricht
+                    Nachricht *
                     <textarea
+                      required
                       name="message"
-                      rows={4}
-                      placeholder="Kurzer Kontext zu Fahrzeug und Wunsch — Zustand, Ziel (Verkauf, Werterhalt, etc.)"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors resize-none"
+                      rows={6}
+                      placeholder="Kurzer Kontext zu Fahrzeug und Wunsch – Zustand, Ziel (Verkauf, Werterhalt, etc.)"
+                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors resize-y min-h-[9rem]"
                     />
                   </label>
                 </div>

@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import { SITE } from "@/lib/site";
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -66,26 +67,37 @@ export default function Hero() {
             Seit 1997 · Inhabergeführt in Ensdorf
           </motion.p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, ease: [0.2, 0.7, 0.2, 1], delay: 0.1 }}
-            className="font-display font-light text-[clamp(2.6rem,7.2vw,6.5rem)] leading-[0.98] tracking-[-0.03em] max-w-[16ch]"
+            transition={{ duration: 1.4, ease: [0.2, 0.7, 0.2, 1], delay: 0.05 }}
+            className="font-display font-light text-[clamp(2.4rem,6.4vw,5.8rem)] leading-[0.98] tracking-[-0.03em] max-w-[16ch] mb-6"
           >
             <span className="block text-chrome">The Art</span>
             <span className="block italic text-gold">of Detailing.</span>
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.3, ease: [0.2, 0.7, 0.2, 1], delay: 0.2 }}
+            className="font-display text-[clamp(1.15rem,1.9vw,1.7rem)] leading-snug tracking-[-0.01em] text-[var(--ink)] max-w-[32ch] font-normal"
+          >
+            Fahrzeugaufbereitung &amp; Keramikversiegelung in Saarlouis, dem
+            Saarland &amp; Luxemburg.
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.2, 0.7, 0.2, 1], delay: 0.3 }}
-            className="mt-8 max-w-xl text-[var(--ink-dim)] text-base sm:text-lg leading-relaxed"
+            transition={{ duration: 1.2, ease: [0.2, 0.7, 0.2, 1], delay: 0.35 }}
+            className="mt-6 max-w-xl text-[var(--ink-dim)] text-base sm:text-lg leading-relaxed"
           >
-            Premium-Fahrzeugaufbereitung und Keramikversiegelung im Saarland
-            und in Luxemburg. Für Neuwagen, Sportwagen, Luxusfahrzeuge und
-            Oldtimer — mit der Zeit und Sorgfalt, die ein perfektes Ergebnis
-            verlangt.
+            PB Fahrzeugpflege Saarlouis® ist ein auf Premium-Fahrzeugaufbereitung
+            und Keramikversiegelung spezialisierter Betrieb im Saarland – seit
+            1997. Ob Neuwagen, Sportwagen, Luxusfahrzeug oder Oldtimer: Wenn es
+            um professionelle Fahrzeugaufbereitung im Saarland und in Luxemburg
+            geht, sind Sie bei uns in den besten Händen.
           </motion.p>
 
           <motion.div
@@ -94,19 +106,19 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: [0.2, 0.7, 0.2, 1], delay: 0.5 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <Link href="#kontakt" className="btn-gold">
+            <Link href="/kontakt/" className="btn-gold">
               Jetzt anfragen
               <span aria-hidden>→</span>
             </Link>
-            <Link href="#leistungen" className="btn-glass">
+            <Link href="/leistungen/" className="btn-glass">
               Leistungen entdecken
             </Link>
             <a
-              href="tel:+4968314612 29"
+              href={SITE.phone.href}
               className="text-sm text-[var(--ink-dim)] hover:text-[var(--ink)] ml-2 inline-flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse" />
-              +49 (0) 6831 461229
+              {SITE.phone.display}
             </a>
           </motion.div>
         </div>
@@ -119,7 +131,10 @@ export default function Hero() {
       >
         <div className="mx-auto max-w-[1400px] px-6 sm:px-10 pb-6">
           <div className="glass rounded-2xl px-5 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-4 text-[11px] sm:text-xs tracking-[0.24em] uppercase text-[var(--ink-dim)]">
-            <span>⭑ 4,9 / 5 · 646 Bewertungen</span>
+            <span>
+              ⭑ {SITE.ratings.value.toString().replace(".", ",")} / {SITE.ratings.scale} ·{" "}
+              {SITE.ratings.count} Bewertungen
+            </span>
             <span className="hidden sm:inline">Q-Siegel · Deutschlands 1.</span>
             <span className="hidden md:inline">BRILA zertifiziert</span>
             <span>Kunden aus DE · LU</span>

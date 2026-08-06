@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import Reveal from "./Reveal";
 
 const faqs = [
@@ -93,6 +94,23 @@ export default function FAQ() {
             );
           })}
         </div>
+
+        <Reveal delay={0.2}>
+          <div className="mt-10 text-center">
+            <Link
+              href="/faq/"
+              className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
+            >
+              Alle Fragen &amp; Antworten ansehen
+              <span
+                aria-hidden
+                className="transition-transform group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
