@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 type Props = {
-  kicker?: string;
+  kicker?: React.ReactNode;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
   backgroundImage?: string;
