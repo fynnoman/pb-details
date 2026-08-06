@@ -118,7 +118,7 @@ export default function KeramikversiegelungPage() {
           </>
         }
         subtitle="Seit fast drei Jahrzehnten zertifizierter Fachbetrieb für Keramikversiegelung im Saarland und in Luxemburg – für Neuwagen ebenso wie für Sport-, Luxus- und gepflegte Gebrauchtfahrzeuge."
-        backgroundImage="https://images.unsplash.com/photo-1607603750909-408e193868c7?w=2400&q=85&auto=format&fit=crop"
+        backgroundImage="/images/hero/schwarzes-auto-keramikversiegelung.jpg"
       />
 
       {/* Intro-Sektion */}

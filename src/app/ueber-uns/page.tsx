@@ -30,7 +30,7 @@ export default function UeberUnsPage() {
         kicker="Über uns"
         title="Thomas Paul & Karsten Becker von PB Fahrzeugpflege Saarlouis®"
         subtitle="Inhabergeführt seit 1997. Was mit zwei Jungunternehmern begann, ist heute einer der dienstältesten und am besten bewerteten Fahrzeugaufbereiter Deutschlands."
-        backgroundImage="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=2400&q=85&auto=format&fit=crop"
+        backgroundImage="/images/team/karsten-becker-thomas-paul.jpg"
       />
 
       <section className="relative py-24 sm:py-32">

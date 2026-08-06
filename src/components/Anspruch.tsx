@@ -28,8 +28,8 @@ export default function Anspruch() {
           <div className="col-span-12 lg:col-span-6 order-2 lg:order-1">
             <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden">
               <motion.img
-                src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=85&auto=format&fit=crop"
-                alt="Detailliert aufbereiteter Sportwagen im Studio"
+                src="/images/team/karsten-becker-thomas-paul.jpg"
+                alt="Karsten Becker und Thomas Paul, Inhaber und Gründer von PB Fahrzeugpflege Saarlouis, im Betrieb in Ensdorf"
                 style={{ y: imgY, scale: imgScale }}
                 className="absolute inset-0 w-full h-full object-cover will-change-transform"
                 loading="lazy"

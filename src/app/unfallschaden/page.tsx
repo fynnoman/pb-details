@@ -106,7 +106,7 @@ export default function UnfallschadenPage() {
         kicker="Unfallschaden"
         title="Unfallschaden im Saarland – Abwicklung & Unfallinstandsetzung aus einer Hand"
         subtitle="Wir kümmern uns um alles: von der Begutachtung über die Kommunikation mit der Versicherung bis zur Karosserieinstandsetzung nach Herstellervorgaben. Alles aus einer Hand, ganz ohne Stress."
-        backgroundImage="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2400&q=85&auto=format&fit=crop"
+        backgroundImage="/images/hero/unfallschaden-werkstatt.jpg"
       />
 
       <section className="relative py-24 sm:py-32">

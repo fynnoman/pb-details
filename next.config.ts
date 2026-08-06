@@ -19,6 +19,15 @@ const nextConfig: NextConfig = {
         destination: "/datenschutzerklaerung/",
         permanent: true,
       },
+      {
+        // WordPress-Bild-URLs auf ProvenExpert-Widget-Bild umleiten,
+        // damit indexierte Google-Images-Ergebnisse nicht 404 zeigen.
+        // Genauere Ziel-Zuordnung erfolgt manuell für die Top-Bilder,
+        // sobald FTP-Zugang der Altseite verfügbar ist.
+        source: "/wp-content/uploads/:path*",
+        destination: "/images/logo/pb-fahrzeugpflege-logo-black.png",
+        permanent: false,
+      },
     ];
   },
 };
