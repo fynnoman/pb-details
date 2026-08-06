@@ -93,12 +93,54 @@ vollständige Liste.
 URLs, Meta-Daten, FAQs, Bilder und Schema-Strukturen der Altseite.
 Nie Inhalte erfinden — bei Unklarheiten dort nachsehen.
 
-## Content-Management
+## Content-Management (Payload CMS)
 
-Aktuell ist der Content in TypeScript-Dateien (`src/lib/blog.ts`,
-`src/lib/site.ts` sowie hart in den `page.tsx`) hinterlegt. In einem
-späteren Schritt wird **Payload CMS** integriert, damit der Kunde
-Inhalte selbst pflegen kann.
+Payload 3 ist integriert und läuft unter `/admin`. Voraussetzung: eine
+Postgres-Datenbank per `DATABASE_URL` in `.env.local` / Vercel Env.
+
+### Datenmodell
+
+- **Pages** – seitengenerierung aus Baukasten-Sektionen (Hero, Textblock,
+  Leistung, FAQ, Galerie, CTA, Vergleichstabelle)
+- **BlogPosts** – Blogbeiträge mit Rich-Text-Editor (Lexical), SEO-Feldern
+  und optionalem Beitragsbild
+- **Faqs** – globales FAQ-Repository (löst das Migrationsdoc-Dubletten-
+  Problem: eine Frage, eine Antwort, referenziert von mehreren Seiten)
+- **Media** – Bilder/Videos/PDFs mit Pflicht-Alt-Text (Barrierefreiheit +
+  SEO). Automatische Größen-Generierung (thumbnail, card, hero) via sharp
+- **Settings** (Global) – NAP, Öffnungszeiten, Bewertungen, Social-URLs
+  zentral pflegbar
+
+### Erster Start / Migration
+
+```bash
+# 1. Datenbank bereitstellen (Beispiel Neon)
+#    → https://neon.tech → neues Projekt → Connection-String kopieren
+#    → in .env.local eintragen: DATABASE_URL="postgresql://..."
+
+# 2. Payload-Secret generieren
+openssl rand -base64 32
+# → in .env.local als PAYLOAD_SECRET
+
+# 3. TypeScript-Types + Import-Map generieren
+npm run payload:generate:types
+npm run payload:generate:importmap
+
+# 4. Dev-Server starten
+npm run dev
+# → /admin öffnen, ersten Admin-User anlegen
+```
+
+### Bestehende Inhalte in DB migrieren
+
+Aktuell sind Blog und statische Inhalte noch in `src/lib/blog.ts` und
+den `page.tsx`-Dateien. Für die Migration in Payload gibt es zwei Wege:
+
+1. **Manuell im Admin**: neue Inhalte im Payload-Admin anlegen und die
+   `page.tsx`-Dateien so umbauen, dass sie aus Payload lesen
+2. **Seed-Script**: einmalig ein Script schreiben, das die statischen
+   Daten in die DB pushed. Kommt in einem separaten Commit, sobald der
+   Kunde die Datenbank aufgesetzt hat
 
 ## Wichtige externe Konten (für Übergabe)
 

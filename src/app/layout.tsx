@@ -1,25 +1,4 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
-import "./globals.css";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
-import JsonLd from "@/components/JsonLd";
-import CookieYes from "@/components/CookieYes";
-import GoogleTagManager from "@/components/GoogleTagManager";
-import { organizationSchema, websiteSchema } from "@/lib/schema";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["opsz", "SOFT"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.pb-fahrzeugpflege.de"),
@@ -28,33 +7,20 @@ export const metadata: Metadata = {
     template: "%s | PB Fahrzeugpflege Saarlouis",
   },
   description:
-    "Premium-Fahrzeugaufbereitung und Keramikversiegelung im Saarland und in Luxemburg. Inhabergeführt seit 1997. Sportwagen, Luxusfahrzeuge, Oldtimer.",
-  openGraph: {
-    siteName: "PB Fahrzeugpflege Saarlouis",
-    locale: "de_DE",
-    type: "website",
-  },
+    "Premium-Fahrzeugaufbereitung und Keramikversiegelung im Saarland und in Luxemburg. Inhabergeführt seit 1997.",
 };
 
+/**
+ * Root-Layout ist bewusst leer. Sowohl (frontend) als auch (payload)
+ * rendern eigenständige <html>/<body>-Bäume, damit das Payload-Admin
+ * seine eigene UI-Chrome bekommt und die öffentliche Site unangetastet
+ * bleibt. Zulässig in Next.js 15/16, wenn genau ein Layout tiefer html
+ * rendert.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="de"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
-        <CookieYes />
-        <GoogleTagManager />
-        <JsonLd data={organizationSchema} />
-        <JsonLd data={websiteSchema} />
-        <Nav />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
+  return children;
 }

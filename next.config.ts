@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 const securityHeaders = [
   {
@@ -64,4 +65,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Payload benötigt ein paar Server-Externals + Package-Bundling-Ausschlüsse.
+// withPayload macht das automatisch.
+export default withPayload(nextConfig);
