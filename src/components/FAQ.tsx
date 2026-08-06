@@ -5,7 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Reveal from "./Reveal";
 
-const faqs = [
+export type FaqItem = { q: string; a: string };
+
+const defaultFaqs: FaqItem[] = [
   {
     q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?",
     a: "PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein perfektes Ergebnis — nach dem Motto „Wir schützen Werte“. Über 600 positive Bewertungen und eine Weiterempfehlungsrate von über 95 % bestätigen das.",
@@ -28,23 +30,42 @@ const faqs = [
   },
 ];
 
-export default function FAQ() {
+type Props = {
+  faqs?: FaqItem[];
+  kicker?: string;
+  title?: React.ReactNode;
+  showAllLink?: boolean;
+  id?: string;
+};
+
+export default function FAQ({
+  faqs = defaultFaqs,
+  kicker = "Häufige Fragen",
+  title = (
+    <>
+      Antworten auf das, was Sie wissen{" "}
+      <span className="italic text-gold">wollen.</span>
+    </>
+  ),
+  showAllLink = true,
+  id = "faq",
+}: Props) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative py-32 sm:py-44 overflow-hidden">
+    <section id={id} className="relative py-32 sm:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1000px] px-6 sm:px-10">
         <div className="text-center mb-16">
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-              Häufige Fragen
+              {kicker}
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle ml-3" />
             </p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
-              Antworten auf das, was Sie wissen <span className="italic text-gold">wollen.</span>
+              {title}
             </h2>
           </Reveal>
         </div>
@@ -68,7 +89,9 @@ export default function FAQ() {
                     </span>
                     <span
                       className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-white/15 transition-transform duration-500 ${
-                        isOpen ? "rotate-45 bg-[var(--gold)] text-black border-[var(--gold)]" : ""
+                        isOpen
+                          ? "rotate-45 bg-[var(--gold)] text-black border-[var(--gold)]"
+                          : ""
                       }`}
                     >
                       <span className="text-lg leading-none">+</span>
@@ -95,22 +118,24 @@ export default function FAQ() {
           })}
         </div>
 
-        <Reveal delay={0.2}>
-          <div className="mt-10 text-center">
-            <Link
-              href="/faq/"
-              className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
-            >
-              Alle Fragen &amp; Antworten ansehen
-              <span
-                aria-hidden
-                className="transition-transform group-hover:translate-x-1"
+        {showAllLink && (
+          <Reveal delay={0.2}>
+            <div className="mt-10 text-center">
+              <Link
+                href="/faq/"
+                className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
               >
-                →
-              </span>
-            </Link>
-          </div>
-        </Reveal>
+                Alle Fragen &amp; Antworten ansehen
+                <span
+                  aria-hidden
+                  className="transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </Link>
+            </div>
+          </Reveal>
+        )}
       </div>
     </section>
   );

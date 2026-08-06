@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Nav from "@/components/Nav";
 import ScrollTopOnLoad from "@/components/ScrollTopOnLoad";
 import Hero from "@/components/Hero";
 import Anspruch from "@/components/Anspruch";
@@ -10,7 +9,6 @@ import WhyUs from "@/components/WhyUs";
 import Region from "@/components/Region";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +23,6 @@ export default function Home() {
   return (
     <>
       <ScrollTopOnLoad />
-      <Nav />
       <main className="relative">
         <Hero />
         <Anspruch />
@@ -37,7 +34,6 @@ export default function Home() {
         <FAQ />
         <Contact />
       </main>
-      <Footer />
     </>
   );
 }
