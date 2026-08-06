@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbList, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Über uns – Fahrzeugaufbereitung im Saarland" },
@@ -11,8 +13,19 @@ export const metadata: Metadata = {
 };
 
 export default function UeberUnsPage() {
+  const webPage = webPageSchema({
+    path: "/ueber-uns/",
+    name: "Über uns – Fahrzeugaufbereitung im Saarland",
+    description:
+      "Seit 1997 stehen Thomas Paul & Karsten Becker für professionelle Fahrzeugaufbereitung im Saarland.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Über uns", path: "/ueber-uns/" },
+    ]),
+  });
   return (
     <main className="relative">
+      <JsonLd data={webPage} />
       <PageHero
         kicker="Über uns"
         title="Thomas Paul & Karsten Becker von PB Fahrzeugpflege Saarlouis®"

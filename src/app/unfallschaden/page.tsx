@@ -5,6 +5,13 @@ import FAQ, { type FaqItem } from "@/components/FAQ";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbList,
+  faqPageSchema,
+  serviceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
@@ -74,8 +81,27 @@ const risiken = [
 ];
 
 export default function UnfallschadenPage() {
+  const path = "/unfallschaden/";
+  const webPage = webPageSchema({
+    path,
+    name: "Unfallschaden & Unfallinstandsetzung in Saarlouis & im Saarland",
+    description:
+      "Unfallschaden im Saarland – komplette Abwicklung aus einer Hand mit Gutachter, Anwalt, Leihwagen und fachgerechter Karosserieinstandsetzung.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Unfallschaden", path },
+    ]),
+  });
+  const service = serviceSchema({
+    name: "Unfallschadenabwicklung & Karosserieinstandsetzung",
+    description:
+      "Komplette Schadenabwicklung aus einer Hand: Gutachter, Anwalt, Leihwagen und Karosserieinstandsetzung nach Herstellervorgaben.",
+    path,
+    serviceType: "Unfallinstandsetzung",
+  });
   return (
     <main className="relative">
+      <JsonLd data={[webPage, service, faqPageSchema(faqs)]} />
       <PageHero
         kicker="Unfallschaden"
         title="Unfallschaden im Saarland – Abwicklung & Unfallinstandsetzung aus einer Hand"

@@ -5,6 +5,8 @@ import PageHero from "@/components/PageHero";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
 import { getPost, posts } from "@/lib/blog";
+import JsonLd from "@/components/JsonLd";
+import { articleSchema, breadcrumbList, webPageSchema } from "@/lib/schema";
 
 type Params = { slug: string };
 
@@ -44,8 +46,28 @@ export default async function BlogPost({
   const post = getPost(slug);
   if (!post) notFound();
 
+  const path = `/blog/${post.slug}/`;
+  const webPage = webPageSchema({
+    path,
+    name: post.title,
+    description: post.metaDescription,
+    datePublished: post.publishedIso,
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog/" },
+      { name: post.title, path },
+    ]),
+  });
+  const article = articleSchema({
+    headline: post.title,
+    description: post.metaDescription,
+    path,
+    datePublished: post.publishedIso,
+  });
+
   return (
     <main className="relative">
+      <JsonLd data={[webPage, article]} />
       <PageHero
         kicker={
           <>

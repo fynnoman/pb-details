@@ -3,6 +3,8 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbList, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Preise – Fahrzeugaufbereitung im Saarland" },
@@ -43,8 +45,19 @@ const orientierung = [
 ];
 
 export default function PreisePage() {
+  const webPage = webPageSchema({
+    path: "/preise/",
+    name: "Preise – Fahrzeugaufbereitung im Saarland",
+    description:
+      "Individuelle Preise nach Begutachtung. Orientierungswerte für Keramikversiegelung, Leihwagen und Smart Repair.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Preise", path: "/preise/" },
+    ]),
+  });
   return (
     <main className="relative">
+      <JsonLd data={webPage} />
       <PageHero
         kicker="Preise"
         title="Preise für Aufbereitung, Versiegelung & Smart Repair"

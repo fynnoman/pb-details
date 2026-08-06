@@ -4,6 +4,13 @@ import PageHero from "@/components/PageHero";
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbList,
+  faqPageSchema,
+  serviceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
@@ -73,9 +80,30 @@ const nachteile = [
   "Muss nach einiger Zeit erneuert werden",
 ];
 
+const path = "/leistungen/nanoversiegelung/";
+
 export default function NanoversiegelungPage() {
+  const webPage = webPageSchema({
+    path,
+    name: "Nanoversiegelung fürs Auto in Saarlouis & im Saarland",
+    description:
+      "Auto-Nanoversiegelung im Saarland & Luxemburg – preisbewusste Alternative zur Keramikversiegelung, Schutz bis zu 18 Monate.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Leistungen", path: "/leistungen/" },
+      { name: "Nanoversiegelung", path },
+    ]),
+  });
+  const service = serviceSchema({
+    name: "Nanoversiegelung",
+    description:
+      "1K-Nanoversiegelung mit bis zu 18 Monaten Schutz – die preisbewusste Alternative zur Keramikversiegelung.",
+    path,
+    serviceType: "Nanoversiegelung",
+  });
   return (
     <main className="relative">
+      <JsonLd data={[webPage, service, faqPageSchema(faqs)]} />
       <PageHero
         kicker="02 / Leistung · Nanoversiegelung"
         title="Nanoversiegelung fürs Auto in Saarlouis, dem Saarland & Luxemburg"

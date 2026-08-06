@@ -3,6 +3,8 @@ import PageHero from "@/components/PageHero";
 import Contact from "@/components/Contact";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbList, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
@@ -14,8 +16,18 @@ export const metadata: Metadata = {
 };
 
 export default function KontaktPage() {
+  const webPage = webPageSchema({
+    path: "/kontakt/",
+    name: "Kontakt & Anfahrt – Ensdorf | PB Fahrzeugpflege Saarlouis",
+    description: `${SITE.name}, ${SITE.address.street}, ${SITE.address.zip} ${SITE.address.city}. Telefon & WhatsApp: ${SITE.phone.display}.`,
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Kontakt", path: "/kontakt/" },
+    ]),
+  });
   return (
     <main className="relative">
+      <JsonLd data={webPage} />
       <PageHero
         kicker="Kontakt & Anfahrt"
         title="Kontakt & Anfahrt – PB Fahrzeugpflege Saarlouis in Ensdorf"

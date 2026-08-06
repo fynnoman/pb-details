@@ -3,6 +3,8 @@ import PageHero from "@/components/PageHero";
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbList, faqPageSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
@@ -69,8 +71,19 @@ const faqs: FaqItem[] = [
 ];
 
 export default function FAQPage() {
+  const webPage = webPageSchema({
+    path: "/faq/",
+    name: "FAQ Keramikversiegelung und Fahrzeugaufbereitung Saarlouis",
+    description:
+      "Häufige Fragen zu Keramikversiegelung, Fahrzeugaufbereitung, Ablauf, Pflege und Waschanlage.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "FAQ", path: "/faq/" },
+    ]),
+  });
   return (
     <main className="relative">
+      <JsonLd data={[webPage, faqPageSchema(faqs)]} />
       <PageHero
         kicker="Häufige Fragen"
         title="FAQ – Keramikversiegelung und Fahrzeugaufbereitung"

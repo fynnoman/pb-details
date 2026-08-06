@@ -4,6 +4,13 @@ import PageHero from "@/components/PageHero";
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbList,
+  faqPageSchema,
+  serviceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Fahrzeugaufbereitung in Saarlouis & im Saarland" },
@@ -73,9 +80,30 @@ const vergleich = [
   { kriterium: "Ergebnis", waesche: "Sauberkeit auf Zeit", aufbereitung: "Werterhalt & langanhaltender Schutz" },
 ];
 
+const path = "/leistungen/fahrzeugaufbereitung/";
+
 export default function FahrzeugaufbereitungPage() {
+  const webPage = webPageSchema({
+    path,
+    name: "Fahrzeugaufbereitung in Saarlouis & im Saarland",
+    description:
+      "Professionelle Fahrzeugaufbereitung innen & außen im Saarland & Luxemburg.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Leistungen", path: "/leistungen/" },
+      { name: "Fahrzeugaufbereitung", path },
+    ]),
+  });
+  const service = serviceSchema({
+    name: "Fahrzeugaufbereitung",
+    description:
+      "Mehrstufige Innen- und Außenaufbereitung – Vorwäsche, Handwäsche, Lackreinigung, Politur und Versiegelung sowie Polster-, Leder- und Kunststoffpflege.",
+    path,
+    serviceType: "Fahrzeugaufbereitung",
+  });
   return (
     <main className="relative">
+      <JsonLd data={[webPage, service, faqPageSchema(faqs)]} />
       <PageHero
         kicker="03 / Leistung · Fahrzeugaufbereitung"
         title="Fahrzeugaufbereitung in Saarlouis, dem Saarland & Luxemburg"

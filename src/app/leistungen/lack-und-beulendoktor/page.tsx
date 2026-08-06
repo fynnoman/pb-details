@@ -5,6 +5,13 @@ import FAQ, { type FaqItem } from "@/components/FAQ";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbList,
+  faqPageSchema,
+  serviceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 
 const jahreErfahrung = new Date().getFullYear() - SITE.founded;
 
@@ -74,9 +81,30 @@ const vergleich = [
   { kriterium: "Ideal für", smart: "Parkdellen, kleine Lack- & Karosserieschäden", lackierung: "Großflächige oder tiefe Schäden" },
 ];
 
+const path = "/leistungen/lack-und-beulendoktor/";
+
 export default function LackBeulendoktorPage() {
+  const webPage = webPageSchema({
+    path,
+    name: "Beulendoktor & Smart Repair in Saarlouis & im Saarland",
+    description:
+      "Beulendoktor & Smart Repair im Saarland & Luxemburg – Dellen und Lackschäden bis zu 70 % günstiger als eine klassische Lackierung.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Leistungen", path: "/leistungen/" },
+      { name: "Lack- & Beulendoktor", path },
+    ]),
+  });
+  const service = serviceSchema({
+    name: "Lack- & Beulendoktor / Smart Repair",
+    description:
+      "Punktuelle Reparatur kleiner Lack- und Karosserieschäden mit lackschadenfreier Ausbeultechnik (Paintless Dent Repair) und Smart Repair.",
+    path,
+    serviceType: "Smart Repair",
+  });
   return (
     <main className="relative">
+      <JsonLd data={[webPage, service, faqPageSchema(faqs)]} />
       <PageHero
         kicker="04 / Leistung · Lack- & Beulendoktor"
         title="Beulendoktor & Smart Repair in Saarlouis, dem Saarland & Luxemburg"

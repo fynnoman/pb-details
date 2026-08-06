@@ -3,6 +3,12 @@ import PageHero from "@/components/PageHero";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbList,
+  productAggregateRating,
+  webPageSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Referenzen & Bewertungen – Saarland" },
@@ -67,8 +73,18 @@ const jubilaeen = [
 ];
 
 export default function ReferenzenPage() {
+  const webPage = webPageSchema({
+    path: "/referenzen/",
+    name: "Referenzen & Bewertungen – Saarland",
+    description: `Über ${SITE.ratings.count} Bewertungen bei ${SITE.ratings.value.toString().replace(".", ",")} von ${SITE.ratings.scale} Sternen. Q-Siegel, BRILA und weitere Auszeichnungen.`,
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Referenzen", path: "/referenzen/" },
+    ]),
+  });
   return (
     <main className="relative">
+      <JsonLd data={[webPage, productAggregateRating]} />
       <PageHero
         kicker="Referenzen & Bewertungen"
         title="Unsere Referenzen"

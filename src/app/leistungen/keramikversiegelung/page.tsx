@@ -4,6 +4,13 @@ import PageHero from "@/components/PageHero";
 import FAQ, { type FaqItem } from "@/components/FAQ";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import {
+  breadcrumbList,
+  faqPageSchema,
+  serviceSchema,
+  webPageSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
@@ -78,9 +85,30 @@ const vergleich = [
   { kriterium: "Ideal für", keramik: "Neuwagen, Sport-, Luxus- & Wertfahrzeuge", nano: "Preisbewusste Pflege mit kürzerer Haltedauer" },
 ];
 
+const path = "/leistungen/keramikversiegelung/";
+
 export default function KeramikversiegelungPage() {
+  const webPage = webPageSchema({
+    path,
+    name: "Keramikversiegelung fürs Auto in Saarlouis & im Saarland",
+    description:
+      "Professionelle Keramikversiegelung fürs Auto im Saarland & Luxemburg – glasartiger Lackschutz in über 20 Stunden Handarbeit.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Leistungen", path: "/leistungen/" },
+      { name: "Keramikversiegelung", path },
+    ]),
+  });
+  const service = serviceSchema({
+    name: "Keramikversiegelung",
+    description:
+      "Glasartige Schutzschicht auf Basis von Siliziumoxid, in über 20 Stunden Handarbeit aufgetragen – Lackschutz für Neuwagen, Sport- und Luxusfahrzeuge.",
+    path,
+    serviceType: "Keramikversiegelung",
+  });
   return (
     <main className="relative">
+      <JsonLd data={[webPage, service, faqPageSchema(faqs)]} />
       <PageHero
         kicker="01 / Leistung · Keramikversiegelung"
         title={

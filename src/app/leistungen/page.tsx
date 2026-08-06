@@ -3,6 +3,8 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbList, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Leistungen - PB Fahrzeugpflege Saarlouis" },
@@ -39,8 +41,19 @@ const services = [
 ];
 
 export default function LeistungenPage() {
+  const webPage = webPageSchema({
+    path: "/leistungen/",
+    name: "Leistungen - PB Fahrzeugpflege Saarlouis",
+    description:
+      "Keramikversiegelung, Nanoversiegelung, Fahrzeugaufbereitung, Lack- & Beulendoktor sowie Unfallschaden-Abwicklung im Saarland & Luxemburg.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Leistungen", path: "/leistungen/" },
+    ]),
+  });
   return (
     <main className="relative">
+      <JsonLd data={webPage} />
       <PageHero
         kicker="Unsere Leistungen"
         title="Alles rund um Lackschutz, Aufbereitung und Schadenbehebung."

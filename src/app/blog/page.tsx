@@ -4,6 +4,8 @@ import PageHero from "@/components/PageHero";
 import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
 import { posts } from "@/lib/blog";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbList, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Blog – Fahrzeugpflege & Keramikversiegelung" },
@@ -13,8 +15,19 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const webPage = webPageSchema({
+    path: "/blog/",
+    name: "Blog – Fahrzeugpflege & Keramikversiegelung",
+    description:
+      "Fachbeiträge rund um Keramikversiegelung, Lackschutz und Fahrzeugaufbereitung.",
+    breadcrumb: breadcrumbList([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog/" },
+    ]),
+  });
   return (
     <main className="relative">
+      <JsonLd data={webPage} />
       <PageHero
         kicker="Fachwissen aus der Praxis"
         title="Blog"
