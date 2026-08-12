@@ -34,6 +34,27 @@ const nextConfig: NextConfig = {
         destination: "/datenschutzerklaerung/",
         permanent: true,
       },
+      // Rank-Math-Redirects aus der Altseite (301 permanent):
+      {
+        source: "/gutschein/none/",
+        destination: "/gutschein/",
+        permanent: true,
+      },
+      {
+        source: "/nano-lackversiegelung/",
+        destination: "/leistungen/nanoversiegelung/",
+        permanent: true,
+      },
+      {
+        source: "/smartrepair/",
+        destination: "/leistungen/lack-und-beulendoktor/#smart-repair",
+        permanent: true,
+      },
+      {
+        source: "/autoaufbereitung-preise/",
+        destination: "/preise/",
+        permanent: true,
+      },
       {
         // WordPress-Bild-URLs auf ProvenExpert-Widget-Bild umleiten,
         // damit indexierte Google-Images-Ergebnisse nicht 404 zeigen.

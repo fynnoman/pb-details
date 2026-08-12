@@ -108,7 +108,7 @@ export default function FahrzeugaufbereitungPage() {
         kicker="03 / Leistung · Fahrzeugaufbereitung"
         title="Fahrzeugaufbereitung in Saarlouis, dem Saarland & Luxemburg"
         subtitle="Weit mehr als eine normale Autowäsche: mehrstufige, individuell abgestimmte Aufbereitung aus Lack- und Innenraumbehandlung – in der Regel zwei bis drei Werktage."
-        backgroundImage="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=2400&q=85&auto=format&fit=crop"
+        backgroundImage="/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg"
       />
 
       <section className="relative py-24 sm:py-32">

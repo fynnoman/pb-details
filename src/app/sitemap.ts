@@ -60,6 +60,7 @@ const pages: Entry[] = [
     images: [`${SITE}/images/team/karsten-becker-thomas-paul.jpg`],
   },
   { path: "/kontakt/", lastModified: "2026-07-21", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/gutschein/", lastModified: "2026-08-12", changeFrequency: "monthly", priority: 0.7 },
   { path: "/teilnahmebedingungen-gewinnspiel/", lastModified: "2025-09-12", changeFrequency: "yearly", priority: 0.3 },
 ];
 
