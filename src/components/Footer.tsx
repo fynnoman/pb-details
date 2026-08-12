@@ -80,6 +80,19 @@ export default function Footer() {
                 {SITE.ratings.count} · {SITE.ratings.source}
               </div>
             </a>
+            <a
+              href={SITE.social.googleMaps}
+              target="_blank"
+              rel="noopener"
+              className="glass rounded-2xl p-4 block mt-3 hover:ring-1 hover:ring-[var(--gold)]/30 transition"
+            >
+              <div className="font-display text-3xl text-chrome">
+                {SITE.ratings.googleCount}
+              </div>
+              <div className="text-xs text-[var(--ink-dim)] mt-1">
+                Google-Bewertungen
+              </div>
+            </a>
           </div>
         </div>
 

@@ -88,6 +88,24 @@ const weitereSiegel = [
   { src: "/images/badges/topservice.png", alt: "TopService-Badge für PB Fahrzeugpflege" },
 ];
 
+const impressionen = [
+  {
+    src: "/images/fahrzeuge/25-jahre-jubilaeum-team.jpg",
+    alt: "25 Jahre PB Fahrzeugpflege Saarlouis – Karsten Becker und Thomas Paul feiern das Jubiläum im Betrieb, umgeben von Urkunden und Auszeichnungen",
+    caption: "25 Jahre inhabergeführt – im eigenen Betrieb in Ensdorf",
+  },
+  {
+    src: "/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg",
+    alt: "Roter Tesla Model 3 Performance nach Aufbereitung bei PB Fahrzeugpflege Saarlouis, Team-Mitglied daneben",
+    caption: "Tesla Model 3 Performance – Aufbereitung im Studio",
+  },
+  {
+    src: "/images/fahrzeuge/sponsoring-fv-09-schwalbach.jpg",
+    alt: "PB Fahrzeugpflege Saarlouis unterstützt den FV 09 Schwalbach – Übergabe eines gerahmten Vereinstrikots auf dem Sportplatz",
+    caption: "Regional verwurzelt – Sponsoring beim FV 09 Schwalbach",
+  },
+];
+
 const jubilaeen = [
   {
     text: "20. Jubiläum – Gratulation durch Ensdorfer Bürgermeister Hartwin Faust",
@@ -128,7 +146,8 @@ export default function ReferenzenPage() {
           <>
             {SITE.ratings.count} Bewertungen auf ProvenExpert bei{" "}
             {SITE.ratings.value.toString().replace(".", ",")} von{" "}
-            {SITE.ratings.scale} Sternen. Über {SITE.ratings.recommendation} %
+            {SITE.ratings.scale} Sternen · {SITE.ratings.googleCount}{" "}
+            Google-Bewertungen · über {SITE.ratings.recommendation} %
             Weiterempfehlung. Ausgezeichnet als Deutschlands erster
             Fahrzeugpflege-Betrieb mit Q-Siegel.
           </>
@@ -228,6 +247,36 @@ export default function ReferenzenPage() {
                     className="max-w-full max-h-full object-contain"
                   />
                 </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Impressionen aus dem Betrieb */}
+      <section className="relative py-24 sm:py-32 border-t border-white/5">
+        <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
+          <Reveal>
+            <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-10">
+              Aus dem Betrieb
+            </h2>
+          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {impressionen.map((im, i) => (
+              <Reveal key={im.src} delay={i * 0.05}>
+                <figure className="glass rounded-[1.5rem] overflow-hidden h-full flex flex-col">
+                  <div className="aspect-[4/5] bg-black/20 overflow-hidden">
+                    <img
+                      src={im.src}
+                      alt={im.alt}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <figcaption className="p-6 text-sm text-[var(--ink-dim)] leading-relaxed">
+                    {im.caption}
+                  </figcaption>
+                </figure>
               </Reveal>
             ))}
           </div>

@@ -133,10 +133,12 @@ export default function Hero() {
           <div className="glass rounded-2xl px-5 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-4 text-[11px] sm:text-xs tracking-[0.24em] uppercase text-[var(--ink-dim)]">
             <span>
               ⭑ {SITE.ratings.value.toString().replace(".", ",")} / {SITE.ratings.scale} ·{" "}
-              {SITE.ratings.count} Bewertungen
+              {SITE.ratings.count} ProvenExpert
             </span>
-            <span className="hidden sm:inline">Q-Siegel · Deutschlands 1.</span>
-            <span className="hidden md:inline">BRILA zertifiziert</span>
+            <span className="hidden sm:inline">
+              {SITE.ratings.googleCount} Google-Bewertungen
+            </span>
+            <span className="hidden md:inline">Q-Siegel · BRILA</span>
             <span>Kunden aus DE · LU</span>
             <span className="hidden md:inline">Seit 1997</span>
           </div>

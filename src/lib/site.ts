@@ -41,6 +41,7 @@ export const SITE = {
     scale: 5,
     source: "ProvenExpert",
     recommendation: 95,
+    googleCount: 184,
   },
 } as const;
 
