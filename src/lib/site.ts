@@ -26,6 +26,14 @@ export const SITE = {
   hours: {
     weekday: "09:00 – 12:00 · 13:00 – 17:00",
     saturday: "09:00 – 12:00",
+    /**
+     * Temporärer Feiertagshinweis. Nach dem Datum aus dem CMS/Code
+     * entfernen. Wird auf Region, Kontakt und Footer angezeigt.
+     */
+    holidayNotice: {
+      text: "Am Samstag, 15.08. geschlossen (Mariä Himmelfahrt)",
+      until: "2026-08-16",
+    },
   },
   social: {
     facebook: "https://de-de.facebook.com/pbfahrzeugpflege",
@@ -42,6 +50,8 @@ export const SITE = {
     source: "ProvenExpert",
     recommendation: 95,
     googleCount: 184,
+    wkdbCount: 445,
+    wkdbValue: 4.9,
   },
 } as const;
 

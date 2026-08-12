@@ -61,6 +61,14 @@ export default function Footer() {
                 Abweichungen möglich
               </span>
             </div>
+            {SITE.hours.holidayNotice && (
+              <div className="mt-4 rounded-xl border border-[var(--gold)]/30 bg-[var(--gold)]/[0.05] px-3 py-2 text-[11px] text-[var(--ink)] leading-snug">
+                <span className="text-[var(--gold)] font-semibold">
+                  Hinweis:
+                </span>{" "}
+                {SITE.hours.holidayNotice.text}
+              </div>
+            )}
           </div>
 
           <div className="col-span-12 md:col-span-2">
@@ -93,6 +101,14 @@ export default function Footer() {
                 Google-Bewertungen
               </div>
             </a>
+            <div className="glass rounded-2xl p-4 mt-3">
+              <div className="font-display text-3xl text-chrome">
+                {SITE.ratings.wkdbCount}
+              </div>
+              <div className="text-xs text-[var(--ink-dim)] mt-1">
+                {SITE.ratings.wkdbValue.toString().replace(".", ",")} · werkenntdenBESTEN
+              </div>
+            </div>
           </div>
         </div>
 

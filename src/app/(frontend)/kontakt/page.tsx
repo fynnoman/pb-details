@@ -119,6 +119,14 @@ export default function KontaktPage() {
                   Besuchen Sie uns ganz ohne Termin. Bei weiterer Anfahrt –
                   etwa aus Luxemburg – lohnt sich ein kurzer Anruf vorab.
                 </p>
+                {SITE.hours.holidayNotice && (
+                  <div className="mt-4 rounded-xl border border-[var(--gold)]/30 bg-[var(--gold)]/[0.05] px-3 py-2.5 text-xs text-[var(--ink)] leading-snug">
+                    <span className="text-[var(--gold)] font-semibold">
+                      Feiertagshinweis:
+                    </span>{" "}
+                    {SITE.hours.holidayNotice.text}
+                  </div>
+                )}
               </div>
             </Reveal>
           </div>

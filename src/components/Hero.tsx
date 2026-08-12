@@ -136,11 +136,13 @@ export default function Hero() {
               {SITE.ratings.count} ProvenExpert
             </span>
             <span className="hidden sm:inline">
-              {SITE.ratings.googleCount} Google-Bewertungen
+              {SITE.ratings.googleCount} Google
             </span>
-            <span className="hidden md:inline">Q-Siegel · BRILA</span>
-            <span>Kunden aus DE · LU</span>
-            <span className="hidden md:inline">Seit 1997</span>
+            <span className="hidden md:inline">
+              {SITE.ratings.wkdbCount} werkenntdenBESTEN
+            </span>
+            <span className="hidden lg:inline">Q-Siegel · BRILA</span>
+            <span>Seit 1997</span>
           </div>
         </div>
       </motion.div>

@@ -103,6 +103,14 @@ export default function Region() {
                   <div className="text-[11px] text-[var(--ink-mute)] pt-2">
                     Abweichungen möglich – bitte vorab kurz anrufen.
                   </div>
+                  {SITE.hours.holidayNotice && (
+                    <div className="mt-3 rounded-xl border border-[var(--gold)]/30 bg-[var(--gold)]/[0.05] px-3 py-2.5 text-xs text-[var(--ink)] leading-snug">
+                      <span className="text-[var(--gold)] font-semibold">
+                        Feiertagshinweis:
+                      </span>{" "}
+                      {SITE.hours.holidayNotice.text}
+                    </div>
+                  )}
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a

@@ -147,8 +147,9 @@ export default function ReferenzenPage() {
             {SITE.ratings.count} Bewertungen auf ProvenExpert bei{" "}
             {SITE.ratings.value.toString().replace(".", ",")} von{" "}
             {SITE.ratings.scale} Sternen · {SITE.ratings.googleCount}{" "}
-            Google-Bewertungen · über {SITE.ratings.recommendation} %
-            Weiterempfehlung. Ausgezeichnet als Deutschlands erster
+            Google-Bewertungen · {SITE.ratings.wkdbCount}{" "}
+            werkenntdenBESTEN-Bewertungen · über {SITE.ratings.recommendation}{" "}
+            % Weiterempfehlung. Ausgezeichnet als Deutschlands erster
             Fahrzeugpflege-Betrieb mit Q-Siegel.
           </>
         }
