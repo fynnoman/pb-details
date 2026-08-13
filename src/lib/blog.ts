@@ -34,7 +34,7 @@ export const posts: BlogPost[] = [
       "Wer sein Fahrzeug liebt, schützt es von Anfang an. Und wer schon einmal erlebt hat, wie ein perfekt versiegelter Neuwagen aussieht, wird diesen Unterschied nie wieder missen wollen.",
       "Am besten kommst du für eine kurze Sichtung einfach ohne Termin bei uns vorbei. Wir schauen uns dein Fahrzeug an und erklären dir, welche Schritte sinnvoll sind, um den Lack sofort auf das Niveau zu bringen, das er verdient.",
     ],
-    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/" },
+    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/#termin" },
   },
   {
     slug: "warum-immer-mehr-kunden-aus-luxemburg-ihre-keramikversiegelung-im-saarland-durchfuehren-lassen",
@@ -53,7 +53,7 @@ export const posts: BlogPost[] = [
       "Wer die Qualität auf Dauer sichern möchte, investiert von Anfang an richtig. Deshalb vertrauen immer mehr Luxemburger auf unsere Handarbeit. Sie fahren lieber einmal zu uns, als sich später über schlechte Ergebnisse zu ärgern.",
       "Wenn du aus Luxemburg kommst und dein Fahrzeug langfristig schützen möchtest, schauen wir uns dein Auto gerne unverbindlich an. Einfach vorbeikommen, ganz ohne Termin.",
     ],
-    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/" },
+    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/#termin" },
   },
   {
     slug: "die-haeufigsten-fehler-bei-billigen-keramikversiegelungen-und-wie-du-sie-erkennst",
@@ -72,7 +72,7 @@ export const posts: BlogPost[] = [
       "Wer langfristig ein perfektes Ergebnis möchte, sollte auf erfahrene Spezialisten setzen. Unsere Kunden kommen nicht wegen des Preises zu uns, sondern wegen der Sicherheit, dass ihr Fahrzeug exakt so behandelt wird, wie es ein hochwertiges Auto verdient. Auf diesem Niveau wird nicht experimentiert.",
       "Wenn du vermeiden möchtest, dass du nach Monaten – oder sogar schon nach der Abholung – enttäuscht bist, komm am besten vorab auf eine kurze Beratung vorbei. Wir sehen sofort, was Sache ist, und beraten dich völlig unverbindlich und ausführlich.",
     ],
-    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/" },
+    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/#termin" },
   },
   {
     slug: "warum-schwarze-fahrzeuge-hoechste-praezision-erfordern-und-wie-eine-professionelle-keramikversiegelung-sie-schuetzt",
@@ -91,7 +91,7 @@ export const posts: BlogPost[] = [
       "Viele unserer Kunden aus Luxemburg und dem Saarland legen besonderen Wert auf genau diese Perfektion. Sie wissen, dass ein schwarzes Fahrzeug schnell an Eleganz verliert, wenn es nicht fachgerecht behandelt wird. Wer einmal erlebt hat, wie ein perfekt vorbereiteter schwarzer Lack unter Licht aussieht, versteht sofort, warum diese Arbeit nicht jeder anbieten sollte.",
       "Wenn du ein schwarzes Fahrzeug besitzt und sicher sein möchtest, dass es so aussieht, wie es aussehen kann, komm einfach ohne Termin vorbei. Wir beurteilen den Zustand direkt vor Ort und erklären dir, welche Schritte sinnvoll sind.",
     ],
-    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/" },
+    cta: { label: "Jetzt unverbindlich beraten lassen", href: "/kontakt/#termin" },
   },
 ];
 

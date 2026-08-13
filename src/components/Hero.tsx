@@ -106,7 +106,7 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: [0.2, 0.7, 0.2, 1], delay: 0.5 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <Link href="/kontakt/" className="btn-gold">
+            <Link href="/kontakt/#termin" className="btn-gold">
               Jetzt anfragen
               <span aria-hidden>→</span>
             </Link>

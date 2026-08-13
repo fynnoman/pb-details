@@ -14,8 +14,8 @@ export default function CtaSection({
   kicker = "Unverbindlich anfragen",
   title,
   text,
-  primaryLabel = "Jetzt Kontakt aufnehmen",
-  primaryHref = "/kontakt/",
+  primaryLabel = "Termin online buchen",
+  primaryHref = "/kontakt/#termin",
 }: Props) {
   return (
     <section className="relative py-24 sm:py-32">

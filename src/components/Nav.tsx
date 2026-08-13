@@ -132,7 +132,7 @@ export default function Nav() {
           </ul>
 
           <Link
-            href="/kontakt/"
+            href="/kontakt/#termin"
             className="hidden sm:inline-flex btn-gold ml-auto lg:ml-2 text-[13px] py-2.5 px-5"
           >
             Jetzt anfragen
@@ -244,7 +244,7 @@ export default function Nav() {
               })}
             </ul>
             <Link
-              href="/kontakt/"
+              href="/kontakt/#termin"
               onClick={() => setOpen(false)}
               className="btn-gold w-full justify-center mt-3"
             >

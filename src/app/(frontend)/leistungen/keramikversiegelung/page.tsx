@@ -351,8 +351,8 @@ export default function KeramikversiegelungPage() {
 
             <Reveal delay={0.2}>
               <div className="flex flex-wrap gap-4 pt-4">
-                <Link href="/kontakt/" className="btn-gold">
-                  Jetzt kontaktieren
+                <Link href="/kontakt/#termin" className="btn-gold">
+                  Termin buchen
                   <span aria-hidden>→</span>
                 </Link>
                 <Link href="/preise/" className="btn-glass">

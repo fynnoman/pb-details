@@ -1,18 +1,10 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
-
-const services = [
-  "Keramikversiegelung",
-  "Nanoversiegelung",
-  "Fahrzeugaufbereitung",
-  "Lack- & Beulendoktor",
-  "Unfallschaden",
-  "Beratung",
-];
+import CalendlyEmbed from "./CalendlyEmbed";
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,11 +15,7 @@ export default function Contact() {
   const bgY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
   const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.12, 1.02, 1.12]);
 
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [service, setService] = useState<string>("Keramikversiegelung");
+  const hasCalendly = Boolean(SITE.calendly.url);
 
   return (
     <section id="kontakt" ref={ref} className="relative py-32 sm:py-44 overflow-hidden">
@@ -50,19 +38,18 @@ export default function Contact() {
             type="video/mp4"
           />
         </video>
-        {/* Weich ausblendende Ränder + dezente Abdunklung für Lesbarkeit */}
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
         <div className="absolute inset-0 bg-black/35" />
       </motion.div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left — Copy + call button */}
+          {/* Left — Copy + Direktdraht */}
           <div className="col-span-12 lg:col-span-5">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                Jetzt Anfrage stellen
+                Termin vereinbaren
               </p>
             </Reveal>
             <Reveal delay={0.05}>
@@ -72,13 +59,13 @@ export default function Contact() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-8 text-[var(--ink-dim)] leading-relaxed max-w-md">
-                Schreiben Sie uns kurz, was Sie brauchen — oder rufen Sie direkt
-                an. Eine unverbindliche Begutachtung ist auch ohne Termin
-                möglich.
+                Wählen Sie direkt einen Termin aus – oder rufen Sie an. Eine
+                unverbindliche Begutachtung ist auch ohne Termin möglich,
+                während unserer Öffnungszeiten.
               </p>
             </Reveal>
 
-            {/* Big call button */}
+            {/* Direktdraht-Block */}
             <Reveal delay={0.15}>
               <div className="mt-10 glass-strong rounded-[1.75rem] p-6 sm:p-7">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-2">
@@ -114,7 +101,15 @@ export default function Contact() {
                     </span>
                   </span>
                 </a>
-                <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between text-xs">
+                <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between gap-3 text-xs flex-wrap">
+                  <a
+                    href={SITE.whatsapp}
+                    target="_blank"
+                    rel="noopener"
+                    className="text-[var(--ink-dim)] hover:text-[var(--ink)]"
+                  >
+                    WhatsApp
+                  </a>
                   <a
                     href={`mailto:${SITE.email}`}
                     className="text-[var(--ink-dim)] hover:text-[var(--ink)]"
@@ -127,181 +122,43 @@ export default function Contact() {
             </Reveal>
           </div>
 
-          {/* Right — Form */}
-          <div className="col-span-12 lg:col-span-7">
+          {/* Right — Calendly-Widget oder Fallback */}
+          <div className="col-span-12 lg:col-span-7" id="termin">
             <Reveal delay={0.05}>
-              <form
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const form = e.currentTarget;
-                  const fd = new FormData(form);
-                  setStatus("sending");
-                  setErrorMessage(null);
-                  try {
-                    const res = await fetch("/api/contact/", {
-                      method: "POST",
-                      headers: { "content-type": "application/json" },
-                      body: JSON.stringify({
-                        firstname: fd.get("firstname"),
-                        email: fd.get("email"),
-                        phone: fd.get("phone"),
-                        vehicle: fd.get("vehicle"),
-                        service: fd.get("service"),
-                        message: fd.get("message"),
-                        website: fd.get("website"),
-                      }),
-                    });
-                    const json = (await res.json().catch(() => ({}))) as {
-                      ok?: boolean;
-                      error?: string;
-                    };
-                    if (res.ok && json.ok) {
-                      setStatus("sent");
-                      form.reset();
-                      setService("Keramikversiegelung");
-                    } else {
-                      setStatus("error");
-                      setErrorMessage(
-                        json.error ??
-                          "Es ist ein Fehler aufgetreten. Bitte rufen Sie uns direkt an.",
-                      );
-                    }
-                  } catch {
-                    setStatus("error");
-                    setErrorMessage(
-                      "Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung oder rufen Sie uns an.",
-                    );
-                  }
-                }}
-                className="glass-strong rounded-[1.75rem] p-6 sm:p-10 relative"
-              >
-                {/* Honeypot: Bots füllen dieses Feld aus, Menschen sehen es nicht */}
-                <label
-                  className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden"
-                  aria-hidden="true"
-                  tabIndex={-1}
-                >
-                  Website (bitte leer lassen)
-                  <input
-                    type="text"
-                    name="website"
-                    autoComplete="off"
-                    tabIndex={-1}
-                  />
-                </label>
-                <div className="grid grid-cols-2 gap-4">
-                  <label className="col-span-2 sm:col-span-1 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    Vorname *
-                    <input
-                      required
-                      name="firstname"
-                      type="text"
-                      placeholder="Ihr Vorname"
-                      autoComplete="given-name"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
-                    />
-                  </label>
-                  <label className="col-span-2 sm:col-span-1 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    Telefon
-                    <input
-                      name="phone"
-                      type="tel"
-                      placeholder="Rückrufnummer"
-                      autoComplete="tel"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
-                    />
-                  </label>
-                  <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    E-Mail *
-                    <input
-                      required
-                      name="email"
-                      type="email"
-                      placeholder="ihre@mail.de"
-                      autoComplete="email"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
-                    />
-                  </label>
-                  <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    Fahrzeug
-                    <input
-                      name="vehicle"
-                      type="text"
-                      placeholder="Marke, Modell, Baujahr"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
-                    />
-                  </label>
-
-                  <div className="col-span-2 flex flex-col gap-3 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    Gewünschte Leistung
-                    <div className="flex flex-wrap gap-2">
-                      {services.map((s) => (
-                        <button
-                          type="button"
-                          key={s}
-                          onClick={() => setService(s)}
-                          className={`px-4 py-2 rounded-full text-[11px] tracking-wider transition-all ${
-                            service === s
-                              ? "bg-gradient-to-b from-[#f4dcb2] to-[#a2814f] text-black border border-transparent"
-                              : "glass-flat text-[var(--ink-dim)] hover:text-[var(--ink)]"
-                          }`}
-                        >
-                          {s}
-                        </button>
-                      ))}
-                    </div>
-                    <input type="hidden" name="service" value={service} />
+              {hasCalendly ? (
+                <div className="glass-strong rounded-[1.75rem] p-4 sm:p-6">
+                  <CalendlyEmbed />
+                </div>
+              ) : (
+                <div className="glass-strong rounded-[1.75rem] p-8 sm:p-10">
+                  <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+                    Online-Terminbuchung
                   </div>
-
-                  <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
-                    Nachricht *
-                    <textarea
-                      required
-                      name="message"
-                      rows={6}
-                      placeholder="Kurzer Kontext zu Fahrzeug und Wunsch – Zustand, Ziel (Verkauf, Werterhalt, etc.)"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors resize-y min-h-[9rem]"
-                    />
-                  </label>
-                </div>
-
-                <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <p className="text-[11px] text-[var(--ink-mute)] max-w-sm leading-relaxed">
-                    Mit dem Absenden stimmen Sie unserer Datenschutzerklärung zu.
-                    Wir melden uns i. d. R. innerhalb von 24 h zurück.
+                  <h3 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.015em]">
+                    Termin direkt online reservieren
+                  </h3>
+                  <p className="mt-5 text-[var(--ink-dim)] leading-relaxed">
+                    Die Online-Terminbuchung wird in Kürze hier verfügbar
+                    sein. Bis dahin erreichen Sie uns direkt telefonisch,
+                    per WhatsApp oder besuchen uns ohne Termin während
+                    unserer Öffnungszeiten.
                   </p>
-                  <button
-                    type="submit"
-                    className="btn-gold shrink-0"
-                    disabled={status === "sending"}
-                  >
-                    {status === "sending" ? "Wird gesendet …" : "Anfrage senden"}
-                    <span aria-hidden>→</span>
-                  </button>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <a href={SITE.phone.href} className="btn-gold">
+                      Jetzt anrufen
+                      <span aria-hidden>→</span>
+                    </a>
+                    <a
+                      href={SITE.whatsapp}
+                      target="_blank"
+                      rel="noopener"
+                      className="btn-glass"
+                    >
+                      WhatsApp öffnen
+                    </a>
+                  </div>
                 </div>
-
-                {status === "sent" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-6 glass rounded-xl px-4 py-3 text-sm text-[var(--ink)] flex items-center gap-3"
-                  >
-                    <span className="w-5 h-5 rounded-full bg-[var(--gold)] flex items-center justify-center text-black text-[10px]">
-                      ✓
-                    </span>
-                    Danke für Ihre Anfrage. Wir melden uns kurzfristig zurück.
-                  </motion.div>
-                )}
-                {status === "error" && errorMessage && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-6 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-[var(--ink)]"
-                  >
-                    {errorMessage}
-                  </motion.div>
-                )}
-              </form>
+              )}
             </Reveal>
           </div>
         </div>

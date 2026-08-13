@@ -43,6 +43,14 @@ export const SITE = {
     googleProfile: "https://share.google/ctOJCy04RFzGMWZIt",
     provenExpert: "https://www.provenexpert.com/pb-fahrzeugpflege-saarlouis/",
   },
+  /**
+   * Calendly-Termin-URL. Sobald sie gesetzt ist, rendert die Contact-
+   * Sektion das Calendly-Widget. Solange leer, fällt sie auf einen
+   * einfachen Callback-Block (Telefon / WhatsApp / E-Mail) zurück.
+   */
+  calendly: {
+    url: "",
+  },
   ratings: {
     count: 648,
     value: 4.92,

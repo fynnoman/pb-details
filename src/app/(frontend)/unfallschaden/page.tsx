@@ -323,8 +323,8 @@ export default function UnfallschadenPage() {
                   WhatsApp senden
                   <span aria-hidden>→</span>
                 </a>
-                <Link href="/kontakt/" className="btn-glass">
-                  Formular
+                <Link href="/kontakt/#termin" className="btn-glass">
+                  Termin buchen
                 </Link>
                 <a href={SITE.phone.href} className="btn-glass">
                   {SITE.phone.display}

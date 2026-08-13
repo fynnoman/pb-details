@@ -170,8 +170,8 @@ export default function LackBeulendoktorPage() {
 
           <Reveal delay={0.25}>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/kontakt/" className="btn-gold">
-                Jetzt anfragen
+              <Link href="/kontakt/#termin" className="btn-gold">
+                Termin buchen
                 <span aria-hidden>→</span>
               </Link>
               <Link href="/unfallschaden/" className="btn-glass">

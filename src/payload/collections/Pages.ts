@@ -137,7 +137,7 @@ const sectionBlocks = [
         type: "text",
         defaultValue: "Jetzt Kontakt aufnehmen",
       },
-      { name: "primaryHref", type: "text", defaultValue: "/kontakt/" },
+      { name: "primaryHref", type: "text", defaultValue: "/kontakt/#termin" },
     ] as Field[],
   },
   {
