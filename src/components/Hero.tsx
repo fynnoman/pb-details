@@ -41,7 +41,7 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ y: textY, opacity, filter: `blur(var(--hero-blur, 0px))` }}
-        className="relative z-10 h-[100svh] flex flex-col justify-end pb-24 sm:pb-32 pt-32"
+        className="relative z-10 min-h-[100svh] flex flex-col justify-end pb-24 sm:pb-32 pt-36 sm:pt-44 md:pt-48"
       >
         <div className="mx-auto max-w-[1400px] w-full px-6 sm:px-10">
           <motion.p
