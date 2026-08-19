@@ -5,6 +5,9 @@ import CtaSection from "@/components/CtaSection";
 import Reveal from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbList, webPageSchema } from "@/lib/schema";
+import { getPayloadClient } from "@/lib/payload-client";
+import { mediaUrl } from "@/lib/site-data";
+import type { MediaDoc } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: { absolute: "Leistungen - PB Fahrzeugpflege Saarlouis" },
@@ -13,34 +16,26 @@ export const metadata: Metadata = {
   alternates: { canonical: "/leistungen/" },
 };
 
-const services = [
-  {
-    tag: "01",
-    title: "Keramikversiegelung",
-    href: "/leistungen/keramikversiegelung/",
-    desc: "High-End 9H-Lackschutz für Neuwagen, Sport- und Luxusfahrzeuge. Glasartige Schutzschicht auf Basis von Siliziumoxid, in über 20 Stunden Handarbeit aufgetragen.",
-  },
-  {
-    tag: "02",
-    title: "Nanoversiegelung",
-    href: "/leistungen/nanoversiegelung/",
-    desc: "Die preisbewusste Alternative zur Keramikversiegelung – hält bis zu viermal länger als Wachs und schützt bis zu 18 Monate.",
-  },
-  {
-    tag: "03",
-    title: "Fahrzeugaufbereitung",
-    href: "/leistungen/fahrzeugaufbereitung/",
-    desc: "Mehrstufige Innen- und Außenaufbereitung, auch für Leasingrückgabe und Fahrzeugverkauf – in der Regel zwei bis drei Werktage.",
-  },
-  {
-    tag: "04",
-    title: "Lack- & Beulendoktor",
-    href: "/leistungen/lack-und-beulendoktor/",
-    desc: "Smart Repair und lackschadenfreie Ausbeultechnik: Dellen und Lackschäden bis zu 70 % günstiger reparieren, ohne den Originallack zu beschädigen.",
-  },
-];
+type ServiceListItem = {
+  id: string | number;
+  slug: string;
+  title: string;
+  intro: string;
+  tagline?: string;
+  heroImage?: MediaDoc;
+  order: number;
+};
 
-export default function LeistungenPage() {
+export default async function LeistungenPage() {
+  const payload = await getPayloadClient();
+  const res = await payload.find({
+    collection: "services",
+    sort: "order",
+    depth: 1,
+    limit: 20,
+  });
+  const services = res.docs as unknown as ServiceListItem[];
+
   const webPage = webPageSchema({
     path: "/leistungen/",
     name: "Leistungen - PB Fahrzeugpflege Saarlouis",
@@ -51,75 +46,73 @@ export default function LeistungenPage() {
       { name: "Leistungen", path: "/leistungen/" },
     ]),
   });
+
   return (
     <main className="relative">
       <JsonLd data={webPage} />
       <PageHero
-        kicker="Unsere Leistungen"
-        title="Alles rund um Lackschutz, Aufbereitung und Schadenbehebung."
-        subtitle="Bei PB Fahrzeugpflege Saarlouis erhalten Sie alle Leistungen rund um Lackschutz, Aufbereitung und Schadenbehebung aus einer Hand – seit 1997 in Ensdorf bei Saarlouis."
+        kicker="Leistungen"
+        title={<>Alles rund um Lackschutz, Aufbereitung und Schadenbehebung — <span className="italic text-gold">aus einer Hand.</span></>}
+        subtitle="Seit 1997 spezialisiert auf hochwertige Fahrzeugaufbereitung, Keramikversiegelung, Smart Repair und Unfallschaden-Abwicklung im Saarland und in Luxemburg."
       />
 
-      <section className="relative py-24 sm:py-32">
-        <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {services.map((s, i) => (
-              <Reveal key={s.href} delay={i * 0.05}>
-                <Link
-                  href={s.href}
-                  className="group glass rounded-[1.75rem] p-8 sm:p-10 block h-full hover:ring-1 hover:ring-[var(--gold)]/30 transition"
-                >
-                  <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
-                    {s.tag} / Leistung
-                  </div>
-                  <h2 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.015em] group-hover:text-gold transition-colors">
-                    {s.title}
-                  </h2>
-                  <p className="mt-5 text-[var(--ink-dim)] leading-relaxed">
-                    {s.desc}
-                  </p>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm text-[var(--ink-dim)] group-hover:text-[var(--gold)] transition-colors">
-                    Mehr erfahren
-                    <span
-                      aria-hidden
-                      className="transition-transform group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
+      <section className="relative py-20 sm:py-32">
+        <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+            {services.map((s, i) => {
+              const href =
+                s.slug === "unfallschaden"
+                  ? "/unfallschaden/"
+                  : `/leistungen/${s.slug}/`;
+              const img = mediaUrl(s.heroImage, "card") || mediaUrl(s.heroImage);
+              const tag = String(i + 1).padStart(2, "0");
+              return (
+                <Reveal key={String(s.id)} delay={i * 0.05}>
+                  <Link
+                    href={href}
+                    className="group block glass rounded-[1.5rem] overflow-hidden hover:ring-1 hover:ring-[var(--gold)]/40 transition-all"
+                  >
+                    {img && (
+                      <div className="relative aspect-[16/10] overflow-hidden bg-black">
+                        <img
+                          src={img}
+                          alt={s.heroImage?.alt || s.title}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute top-5 left-5 glass rounded-full px-3 py-1 text-[10px] tracking-[0.32em] uppercase">
+                          {tag} / Leistung
+                        </div>
+                      </div>
+                    )}
+                    <div className="p-6 sm:p-8">
+                      <h2 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.015em] mb-3">
+                        {s.title}
+                      </h2>
+                      {s.tagline && (
+                        <p className="text-xs tracking-[0.22em] uppercase text-[var(--gold)] mb-3">
+                          {s.tagline}
+                        </p>
+                      )}
+                      <p className="text-sm text-[var(--ink-dim)] leading-relaxed">
+                        {s.intro}
+                      </p>
+                      <span className="mt-6 inline-flex items-center gap-2 text-sm text-[var(--ink)] group-hover:text-[var(--gold)] transition-colors">
+                        Mehr erfahren →
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
-
-          <Reveal delay={0.25}>
-            <div className="mt-10 glass-flat rounded-2xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              <div>
-                <h3 className="font-display text-xl sm:text-2xl tracking-[-0.015em]">
-                  Nach einem Unfall?
-                </h3>
-                <p className="mt-2 text-[var(--ink-dim)] text-sm sm:text-base">
-                  Wir übernehmen die komplette Schadenabwicklung – Gutachter,
-                  Anwalt, Leihwagen und Karosseriearbeiten. Aus einer Hand.
-                </p>
-              </div>
-              <Link href="/unfallschaden/" className="btn-gold shrink-0">
-                Unfallschaden
-                <span aria-hidden>→</span>
-              </Link>
-            </div>
-          </Reveal>
         </div>
       </section>
 
       <CtaSection
-        title={
-          <>
-            Nicht sicher, was zu Ihrem Fahrzeug{" "}
-            <span className="italic text-gold">passt?</span>
-          </>
-        }
-        text="Kommen Sie ohne Termin vorbei – wir sehen uns Ihr Fahrzeug direkt an und sagen ehrlich, welche Leistung sinnvoll ist. Auch bei weiterer Anfahrt aus Luxemburg lohnt sich ein kurzer Anruf vorab."
+        title={<>Sprechen wir über Ihr <span className="italic text-gold">Fahrzeug.</span></>}
+        text="Kommen Sie ohne Termin vorbei oder rufen Sie kurz an. Nach einer Begutachtung erhalten Sie ein transparentes Festpreis-Angebot."
       />
     </main>
   );

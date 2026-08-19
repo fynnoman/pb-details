@@ -20,6 +20,8 @@ import { getPayload } from "payload";
 import config from "../payload.config";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { buildLexical } from "./lib/lexical";
+import { serviceDetails } from "./seed-service-content";
 
 type Payload = Awaited<ReturnType<typeof getPayload>>;
 
@@ -338,39 +340,31 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
 
 /* ─── FAQs ──────────────────────────────────────────────────────────────── */
 
+const topicBySlug: Record<string, string> = {
+  keramikversiegelung: "keramikversiegelung",
+  nanoversiegelung: "nanoversiegelung",
+  fahrzeugaufbereitung: "fahrzeugaufbereitung",
+  "lack-und-beulendoktor": "lack-beulendoktor",
+  unfallschaden: "unfallschaden",
+};
+
 async function seedFaqs(payload: Payload) {
   const items: Array<{ q: string; a: string; topic: string; order: number }> = [
-    {
-      topic: "home",
-      order: 10,
-      q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?",
-      a: 'PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein perfektes Ergebnis – nach dem Motto „Wir schützen Werte“. Über 600 positive Bewertungen und eine Weiterempfehlungsrate von über 95 % bestätigen das.',
-    },
-    {
-      topic: "home",
-      order: 20,
-      q: "Bieten Sie auch Aufbereitung für Sportwagen, Oldtimer und Luxusfahrzeuge an?",
-      a: "Ja. Hochwertige Fahrzeuge sind unsere Spezialität – vom High-End-Lackschutz per Keramikversiegelung bis zur kompletten Innen- und Außenaufbereitung.",
-    },
-    {
-      topic: "home",
-      order: 30,
-      q: "Seit wann gibt es PB Fahrzeugpflege?",
-      a: "PB Fahrzeugpflege Saarlouis besteht seit 1997 und gehört mit über 29 Jahren Erfahrung zu den ältesten und erfahrensten Fahrzeugaufbereitern Deutschlands.",
-    },
-    {
-      topic: "home",
-      order: 40,
-      q: "Aus welchen Regionen kommen Ihre Kunden?",
-      a: "Unsere Kunden kommen aus Saarlouis und dem gesamten Saarland, aus Luxemburg sowie aus den angrenzenden Regionen. Unser Standort in Ensdorf an der B51 liegt verkehrsgünstig mit unmittelbarer Zuganbindung.",
-    },
-    {
-      topic: "home",
-      order: 50,
-      q: "Wo befindet sich PB Fahrzeugpflege?",
-      a: "Sie finden uns in der Provinzialstraße 243, 66806 Ensdorf – direkt bei Saarlouis. Begutachtung und Angebot sind auch ohne Termin möglich.",
-    },
+    // Homepage FAQs
+    { topic: "home", order: 10, q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?", a: 'PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein perfektes Ergebnis – nach dem Motto „Wir schützen Werte“. Über 600 positive Bewertungen und eine Weiterempfehlungsrate von über 95 % bestätigen das.' },
+    { topic: "home", order: 20, q: "Bieten Sie auch Aufbereitung für Sportwagen, Oldtimer und Luxusfahrzeuge an?", a: "Ja. Hochwertige Fahrzeuge sind unsere Spezialität – vom High-End-Lackschutz per Keramikversiegelung bis zur kompletten Innen- und Außenaufbereitung." },
+    { topic: "home", order: 30, q: "Seit wann gibt es PB Fahrzeugpflege?", a: "PB Fahrzeugpflege Saarlouis besteht seit 1997 und gehört mit über 29 Jahren Erfahrung zu den ältesten und erfahrensten Fahrzeugaufbereitern Deutschlands." },
+    { topic: "home", order: 40, q: "Aus welchen Regionen kommen Ihre Kunden?", a: "Unsere Kunden kommen aus Saarlouis und dem gesamten Saarland, aus Luxemburg sowie aus den angrenzenden Regionen. Unser Standort in Ensdorf an der B51 liegt verkehrsgünstig mit unmittelbarer Zuganbindung." },
+    { topic: "home", order: 50, q: "Wo befindet sich PB Fahrzeugpflege?", a: "Sie finden uns in der Provinzialstraße 243, 66806 Ensdorf – direkt bei Saarlouis. Begutachtung und Angebot sind auch ohne Termin möglich." },
   ];
+
+  // Service-spezifische FAQs aus dem Detail-Content ergänzen
+  for (const detail of serviceDetails) {
+    const topic = topicBySlug[detail.slug] || detail.slug;
+    detail.faqs.forEach((f, i) => {
+      items.push({ topic, order: (i + 1) * 10, q: f.question, a: f.answer });
+    });
+  }
 
   for (const item of items) {
     const existing = await payload.find({
@@ -604,11 +598,29 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
       where: { slug: { equals: item.slug } },
       limit: 1,
     });
+
+    // Content + related FAQs aus dem Detail-Content-File beziehen
+    const detail = serviceDetails.find((d) => d.slug === item.slug);
+    const content = detail ? buildLexical(detail.contentBlocks) : lexicalPlaceholder(item.intro);
+
+    let relatedFaqIds: Array<string | number> = [];
+    if (detail) {
+      const questions = detail.faqs.map((f) => f.question);
+      const faqRes = await payload.find({
+        collection: "faqs",
+        where: { question: { in: questions } },
+        limit: 100,
+      });
+      relatedFaqIds = faqRes.docs.map((d) => d.id);
+    }
+
     const data = {
       ...item,
-      content: lexicalPlaceholder(item.intro),
+      content,
+      relatedFaqs: relatedFaqIds,
       _status: "published",
     } as any;
+
     if (existing.docs.length) {
       await payload.update({
         collection: "services",
