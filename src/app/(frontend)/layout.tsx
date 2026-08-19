@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import CookieYes from "@/components/CookieYes";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
+import { loadFooter, loadNavigation, loadSettings } from "@/lib/site-data";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,11 +26,17 @@ const fraunces = Fraunces({
  * inkl. Site-Chrome (Nav, Footer, JSON-LD, Consent-Management).
  * Payload-Admin unter (payload)/ hat sein eigenes HTML-Dokument.
  */
-export default function FrontendLayout({
+export default async function FrontendLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [settings, navigation, footer] = await Promise.all([
+    loadSettings(),
+    loadNavigation(),
+    loadFooter(),
+  ]);
+
   return (
     <html
       lang="de"
@@ -40,9 +47,9 @@ export default function FrontendLayout({
         <GoogleTagManager />
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
-        <Nav />
+        <Nav items={navigation.items} cta={navigation.cta} />
         {children}
-        <Footer />
+        <Footer settings={settings} footer={footer} />
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import Contact from "@/components/Contact";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
+import { loadSettings } from "@/lib/site-data";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbList, webPageSchema } from "@/lib/schema";
 
@@ -16,7 +17,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/kontakt/" },
 };
 
-export default function KontaktPage() {
+export default async function KontaktPage() {
+  const settings = await loadSettings();
   const webPage = webPageSchema({
     path: "/kontakt/",
     name: "Kontakt & Anfahrt – Ensdorf | PB Fahrzeugpflege Saarlouis",
@@ -134,7 +136,7 @@ export default function KontaktPage() {
         </div>
       </section>
 
-      <Contact />
+      <Contact settings={settings} />
       <ContactForm />
     </main>
   );

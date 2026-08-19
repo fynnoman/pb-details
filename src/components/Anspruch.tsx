@@ -3,9 +3,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Reveal from "./Reveal";
-import { SITE } from "@/lib/site";
+import type { SiteSettings } from "@/lib/site-data";
 
-export default function Anspruch() {
+export default function Anspruch({ settings }: { settings: SiteSettings }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -16,6 +16,11 @@ export default function Anspruch() {
   const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.15, 1.05]);
   const badgeRotate = useTransform(scrollYProgress, [0, 1], [-8, 8]);
 
+  const totalReviews =
+    (settings.provenExpert?.count || 0) +
+    (settings.wkdb?.count || 0) +
+    (settings.google?.count || 0);
+
   return (
     <section
       id="ueber-uns"
@@ -24,7 +29,6 @@ export default function Anspruch() {
     >
       <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
         <div className="grid grid-cols-12 gap-6 lg:gap-10 items-center">
-          {/* Left column — image */}
           <div className="col-span-12 lg:col-span-6 order-2 lg:order-1">
             <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden">
               <motion.img
@@ -36,7 +40,6 @@ export default function Anspruch() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
-              {/* Floating glass badge */}
               <motion.div
                 style={{ rotate: badgeRotate }}
                 className="absolute -right-6 -bottom-6 sm:right-8 sm:bottom-8 glass-strong rounded-2xl px-5 py-4 max-w-[240px] shadow-xl"
@@ -45,17 +48,16 @@ export default function Anspruch() {
                   Weiterempfehlung
                 </div>
                 <div className="font-display text-4xl text-chrome leading-none">
-                  {SITE.ratings.recommendation}
+                  {settings.recommendation}
                   <span className="text-[var(--gold)]">%</span>
                 </div>
                 <div className="text-xs text-[var(--ink-dim)] mt-2">
-                  aus {SITE.ratings.count} verifizierten Bewertungen
+                  aus {totalReviews > 0 ? totalReviews : settings.provenExpert?.count} verifizierten Bewertungen
                 </div>
               </motion.div>
             </div>
           </div>
 
-          {/* Right column — copy */}
           <div className="col-span-12 lg:col-span-6 order-1 lg:order-2">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -84,18 +86,20 @@ export default function Anspruch() {
                 unser Motto: „Glanz oder gar nicht!"
               </p>
             </Reveal>
-            <Reveal delay={0.2}>
-              <blockquote className="mt-10 pl-6 border-l border-[var(--gold)]/40">
-                <p className="font-display italic text-2xl sm:text-3xl leading-snug text-chrome">
-                  „Für andere reicht das Erzählte,
-                  <br />
-                  für uns zählt das Erreichte.“
-                </p>
-                <footer className="mt-3 text-[11px] tracking-[0.3em] uppercase text-[var(--ink-mute)]">
-                  Thomas Paul & Karsten Becker
-                </footer>
-              </blockquote>
-            </Reveal>
+            {settings.founders && (
+              <Reveal delay={0.2}>
+                <blockquote className="mt-10 pl-6 border-l border-[var(--gold)]/40">
+                  <p className="font-display italic text-2xl sm:text-3xl leading-snug text-chrome">
+                    „Für andere reicht das Erzählte,
+                    <br />
+                    für uns zählt das Erreichte.“
+                  </p>
+                  <footer className="mt-3 text-[11px] tracking-[0.3em] uppercase text-[var(--ink-mute)]">
+                    {settings.founders}
+                  </footer>
+                </blockquote>
+              </Reveal>
+            )}
           </div>
         </div>
       </div>

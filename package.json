@@ -9,7 +9,8 @@
     "lint": "eslint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "payload:generate:types": "payload generate:types",
-    "payload:generate:importmap": "payload generate:importmap"
+    "payload:generate:importmap": "payload generate:importmap",
+    "seed": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/seed.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.87.0",

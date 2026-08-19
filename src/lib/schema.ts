@@ -161,18 +161,20 @@ export function serviceSchema(opts: {
   };
 }
 
-export function faqPageSchema(faqs: { q: string; a: string }[]) {
+type FaqInput = { q: string; a: string } | { question: string; answer: string };
+export function faqPageSchema(faqs: FaqInput[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.a,
-      },
-    })),
+    mainEntity: faqs.map((f) => {
+      const q = "question" in f ? f.question : f.q;
+      const a = "question" in f ? f.answer : f.a;
+      return {
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      };
+    }),
   };
 }
 

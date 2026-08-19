@@ -6,36 +6,47 @@ import { en } from "@payloadcms/translations/languages/en";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { Users } from "./src/payload/collections/Users";
 import { Media } from "./src/payload/collections/Media";
 import { Faqs } from "./src/payload/collections/Faqs";
 import { BlogPosts } from "./src/payload/collections/BlogPosts";
 import { Pages } from "./src/payload/collections/Pages";
+import { Services } from "./src/payload/collections/Services";
+import { Vehicles } from "./src/payload/collections/Vehicles";
+import { Awards } from "./src/payload/collections/Awards";
+import { Redirects } from "./src/payload/collections/Redirects";
+
 import { Settings } from "./src/payload/globals/Settings";
+import { Navigation } from "./src/payload/globals/Navigation";
+import { Footer } from "./src/payload/globals/Footer";
+import { Home } from "./src/payload/globals/Home";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
+const serverUrl =
+  process.env.NEXT_PUBLIC_SERVER_URL ||
+  process.env.PAYLOAD_PUBLIC_SERVER_URL ||
+  "http://localhost:3000";
+
 export default buildConfig({
+  serverURL: serverUrl,
   admin: {
-    user: "users",
+    user: Users.slug,
     meta: {
       titleSuffix: " | PB Fahrzeugpflege CMS",
     },
+    livePreview: {
+      breakpoints: [
+        { label: "Mobile", name: "mobile", width: 390, height: 844 },
+        { label: "Tablet", name: "tablet", width: 834, height: 1194 },
+        { label: "Desktop", name: "desktop", width: 1440, height: 900 },
+      ],
+    },
   },
   editor: lexicalEditor({}),
-  collections: [
-    {
-      slug: "users",
-      auth: true,
-      admin: { useAsTitle: "email" },
-      fields: [{ name: "name", type: "text" }],
-    },
-    Media,
-    Faqs,
-    BlogPosts,
-    Pages,
-  ],
-  globals: [Settings],
+  collections: [Users, Media, Pages, Services, Vehicles, Awards, Faqs, BlogPosts, Redirects],
+  globals: [Home, Settings, Navigation, Footer],
   secret: process.env.PAYLOAD_SECRET || "unsafe-development-only-change-me",
   typescript: {
     outputFile: path.resolve(dirname, "src/payload/payload-types.ts"),

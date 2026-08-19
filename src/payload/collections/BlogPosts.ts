@@ -6,12 +6,20 @@ export const BlogPosts: CollectionConfig = {
   labels: { singular: "Blogbeitrag", plural: "Blogbeiträge" },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "publishedAt", "status", "updatedAt"],
+    defaultColumns: ["title", "publishedAt", "_status", "updatedAt"],
+    group: "Inhalte",
+    livePreview: {
+      url: ({ data, req }) =>
+        `${req.protocol}://${req.host}/api/preview?path=${encodeURIComponent(
+          `/blog/${data?.slug ?? ""}/`,
+        )}`,
+    },
   },
+  versions: { drafts: { autosave: { interval: 800 } } },
   access: {
     read: ({ req: { user } }) => {
       if (user) return true;
-      return { status: { equals: "published" } };
+      return { _status: { equals: "published" } };
     },
   },
   fields: [
@@ -30,14 +38,15 @@ export const BlogPosts: CollectionConfig = {
               label: "URL-Slug (ohne / am Anfang und Ende)",
               admin: {
                 description:
-                  'z.B. „warum-neuwagen-im-rohzustand-sind-und-sofort-geschuetzt-werden-sollten"',
+                  'z. B. „warum-neuwagen-im-rohzustand-sind-und-sofort-geschuetzt-werden-sollten".',
               },
             },
             {
               name: "intro",
               type: "textarea",
               required: true,
-              label: "Intro-Text (wird in der Übersicht und oberhalb des Beitrags gezeigt)",
+              label:
+                "Intro-Text (wird in der Übersicht und oberhalb des Beitrags gezeigt)",
             },
             {
               name: "content",
@@ -66,22 +75,9 @@ export const BlogPosts: CollectionConfig = {
         {
           label: "SEO",
           fields: [
-            {
-              name: "metaTitle",
-              type: "text",
-              label: "Meta-Titel (~60 Zeichen)",
-            },
-            {
-              name: "metaDescription",
-              type: "textarea",
-              label: "Meta-Description (~155 Zeichen)",
-            },
-            {
-              name: "ogImage",
-              type: "upload",
-              relationTo: "media",
-              label: "OG-Image für Social Sharing",
-            },
+            { name: "metaTitle", type: "text", label: "Meta-Titel (~60 Zeichen)" },
+            { name: "metaDescription", type: "textarea", label: "Meta-Description (~155 Zeichen)" },
+            { name: "ogImage", type: "upload", relationTo: "media", label: "OG-Image für Social Sharing" },
           ],
         },
       ],
@@ -90,17 +86,6 @@ export const BlogPosts: CollectionConfig = {
       name: "publishedAt",
       type: "date",
       label: "Veröffentlichungsdatum",
-      admin: { position: "sidebar" },
-    },
-    {
-      name: "status",
-      type: "select",
-      required: true,
-      defaultValue: "draft",
-      options: [
-        { label: "Entwurf", value: "draft" },
-        { label: "Veröffentlicht", value: "published" },
-      ],
       admin: { position: "sidebar" },
     },
   ],

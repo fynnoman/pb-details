@@ -3,33 +3,21 @@
 import Reveal from "./Reveal";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { SITE } from "@/lib/site";
+import type { SiteSettings } from "@/lib/site-data";
 
-const reasons = [
-  { headline: "Seit 1997", body: `Inhabergeführt von ${SITE.founders}` },
-  {
-    headline: `${SITE.ratings.count}`,
-    body: "positive, verifizierte Kundenbewertungen",
-  },
-  {
-    headline: `${SITE.ratings.recommendation} %`,
-    body: "Weiterempfehlungsquote",
-  },
-  { headline: "Q-Siegel", body: "Deutschlands erster Fahrzeugpflegebetrieb mit Q-Siegel" },
-];
-
-const bullets = [
-  "Einer der dienstältesten Fahrzeugaufbereiter Deutschlands",
-  "Auszeichnungen durch Heiko Maas und Anke Rehlinger für besondere Servicequalität",
-  "BRILA zertifizierter Fachbetrieb für Keramikversiegelungen",
-  "Eigener Qualitäts-Coach",
-  "Spezialisierung auf Sportwagen, Luxusfahrzeuge und Sammlerfahrzeuge",
-  "Kunden aus dem Saarland, Luxemburg und ganz Deutschland",
-  "Ausschließlich Privatkunden statt Massenabfertigung",
-  "Bekannt aus ZDF Fernsehen, SR3 Radio sowie weiteren Medienberichten",
-];
-
-export default function WhyUs() {
+export default function WhyUs({
+  heading,
+  bullets,
+  mottoLabel = "Motto",
+  mottoText,
+  settings,
+}: {
+  heading?: string;
+  bullets?: Array<{ text: string }>;
+  mottoLabel?: string;
+  mottoText?: string;
+  settings: SiteSettings;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -37,6 +25,27 @@ export default function WhyUs() {
   });
   const imgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.02, 1.15]);
+
+  const totalReviews =
+    (settings.provenExpert?.count || 0) +
+    (settings.wkdb?.count || 0) +
+    (settings.google?.count || 0);
+
+  const reasons = [
+    { headline: `Seit ${settings.founded || 1997}`, body: `Inhabergeführt${settings.founders ? ` von ${settings.founders}` : ""}` },
+    {
+      headline: totalReviews > 0 ? String(totalReviews) : String(settings.provenExpert?.count || ""),
+      body: "positive, verifizierte Kundenbewertungen",
+    },
+    {
+      headline: `${settings.recommendation} %`,
+      body: "Weiterempfehlungsquote",
+    },
+    {
+      headline: "Q-Siegel",
+      body: "Deutschlands erster Fahrzeugpflegebetrieb mit Q-Siegel",
+    },
+  ];
 
   return (
     <section ref={ref} className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
@@ -51,15 +60,13 @@ export default function WhyUs() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.8rem)] leading-[1.02] tracking-[-0.025em] max-w-[18ch]">
-                Handwerk, das seit fast 30 Jahren <span className="italic text-gold">Vertrauen</span> schafft.
+                {heading || "Handwerk, das seit fast 30 Jahren Vertrauen schafft."}
               </h2>
             </Reveal>
           </div>
         </div>
 
-        {/* Bento */}
         <div className="grid grid-cols-12 gap-4 sm:gap-6">
-          {/* Large image */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +88,6 @@ export default function WhyUs() {
               />
             </motion.div>
 
-            {/* Zentriertes Logo */}
             <div className="absolute inset-0 flex items-center justify-center p-8">
               <motion.img
                 src="/images/logo/pb-fahrzeugpflege-logo-black.png"
@@ -93,19 +99,20 @@ export default function WhyUs() {
             </div>
 
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 p-8">
-              <div className="glass rounded-2xl px-5 py-4 inline-flex flex-col">
-                <span className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">
-                  Motto
-                </span>
-                <span className="font-display text-xl sm:text-2xl italic text-chrome mt-1">
-                  „Glanz oder gar nicht.“
-                </span>
+            {mottoText && (
+              <div className="absolute inset-x-0 bottom-0 p-8">
+                <div className="glass rounded-2xl px-5 py-4 inline-flex flex-col">
+                  <span className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">
+                    {mottoLabel}
+                  </span>
+                  <span className="font-display text-xl sm:text-2xl italic text-chrome mt-1">
+                    {mottoText}
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
           </motion.div>
 
-          {/* Metrics */}
           <div className="col-span-12 md:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 content-start">
             {reasons.map((r, i) => (
               <motion.div
@@ -126,24 +133,25 @@ export default function WhyUs() {
             ))}
           </div>
 
-          {/* Bullets — wide row */}
-          <div className="col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-2">
-            {bullets.map((b, i) => (
-              <motion.div
-                key={b}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.8, delay: i * 0.04, ease: [0.2, 0.7, 0.2, 1] }}
-                className="glass-flat rounded-2xl px-5 py-4 flex items-start gap-3 text-sm text-[var(--ink)]"
-              >
-                <span className="mt-1 shrink-0 w-4 h-4 rounded-full bg-gradient-to-br from-[#f5e2b8] to-[#8a6a3f] flex items-center justify-center text-[8px] text-black">
-                  ✓
-                </span>
-                <span className="text-[var(--ink-dim)]">{b}</span>
-              </motion.div>
-            ))}
-          </div>
+          {bullets && bullets.length > 0 && (
+            <div className="col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-2">
+              {bullets.map((b, i) => (
+                <motion.div
+                  key={b.text}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.8, delay: i * 0.04, ease: [0.2, 0.7, 0.2, 1] }}
+                  className="glass-flat rounded-2xl px-5 py-4 flex items-start gap-3 text-sm text-[var(--ink)]"
+                >
+                  <span className="mt-1 shrink-0 w-4 h-4 rounded-full bg-gradient-to-br from-[#f5e2b8] to-[#8a6a3f] flex items-center justify-center text-[8px] text-black">
+                    ✓
+                  </span>
+                  <span className="text-[var(--ink-dim)]">{b.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

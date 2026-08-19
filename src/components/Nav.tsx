@@ -2,9 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { NAV } from "@/lib/site";
 
-export default function Nav() {
+type NavChild = { label: string; href: string };
+type NavItem = { label: string; href: string; children?: NavChild[] };
+type NavCta = { label: string; shortLabel?: string; href: string };
+
+export default function Nav({
+  items,
+  cta,
+}: {
+  items: NavItem[];
+  cta: NavCta;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -57,8 +66,8 @@ export default function Nav() {
           </Link>
 
           <ul className="hidden lg:flex items-center gap-1 ml-auto text-[13px] tracking-wide">
-            {NAV.map((item) => {
-              const hasChildren = "children" in item && item.children;
+            {items.map((item) => {
+              const hasChildren = Array.isArray(item.children) && item.children.length > 0;
               if (hasChildren) {
                 return (
                   <li
@@ -99,7 +108,7 @@ export default function Nav() {
                     >
                       <div className="glass-strong rounded-2xl p-2 min-w-[240px] shadow-2xl">
                         <ul className="flex flex-col">
-                          {item.children.map((c) => (
+                          {item.children!.map((c) => (
                             <li key={c.href}>
                               <Link
                                 href={c.href}
@@ -131,11 +140,11 @@ export default function Nav() {
           </ul>
 
           <Link
-            href="/kontakt/#termin"
+            href={cta.href}
             className="hidden sm:inline-flex btn-gold ml-auto lg:ml-2 text-[12px] sm:text-[13px] py-2 sm:py-2.5 px-4 sm:px-5"
           >
-            <span className="hidden md:inline">Jetzt anfragen</span>
-            <span className="md:hidden">Termin</span>
+            <span className="hidden md:inline">{cta.label}</span>
+            <span className="md:hidden">{cta.shortLabel || cta.label}</span>
             <span aria-hidden>→</span>
           </Link>
 
@@ -172,8 +181,8 @@ export default function Nav() {
         >
           <div className="glass-strong rounded-3xl p-4">
             <ul className="flex flex-col divide-y divide-white/5">
-              {NAV.map((item) => {
-                const hasChildren = "children" in item && item.children;
+              {items.map((item) => {
+                const hasChildren = Array.isArray(item.children) && item.children.length > 0;
                 if (hasChildren) {
                   return (
                     <li key={item.href} className="flex flex-col">
@@ -214,7 +223,7 @@ export default function Nav() {
                         }`}
                       >
                         <ul className="pl-4 pb-2 flex flex-col">
-                          {item.children.map((c) => (
+                          {item.children!.map((c) => (
                             <li key={c.href}>
                               <Link
                                 href={c.href}
@@ -244,11 +253,11 @@ export default function Nav() {
               })}
             </ul>
             <Link
-              href="/kontakt/#termin"
+              href={cta.href}
               onClick={() => setOpen(false)}
               className="btn-gold w-full justify-center mt-3"
             >
-              Jetzt anfragen →
+              {cta.label} →
             </Link>
           </div>
         </div>

@@ -5,24 +5,15 @@ export const Faqs: CollectionConfig = {
   labels: { singular: "FAQ-Eintrag", plural: "FAQ-Einträge" },
   admin: {
     useAsTitle: "question",
-    defaultColumns: ["question", "topic", "updatedAt"],
+    defaultColumns: ["question", "topic", "order", "updatedAt"],
     description:
-      "Zentrales FAQ-Repository. Fragen können auf Seiten per Tag oder ID referenziert werden – so gibt es genau eine gepflegte Antwort pro Frage.",
+      "Zentrales FAQ-Repository. Fragen können auf Seiten per Thema oder direkter Auswahl referenziert werden – so gibt es genau eine gepflegte Antwort pro Frage.",
+    group: "Inhalte",
   },
   access: { read: () => true },
   fields: [
-    {
-      name: "question",
-      type: "text",
-      required: true,
-      label: "Frage",
-    },
-    {
-      name: "answer",
-      type: "textarea",
-      required: true,
-      label: "Antwort",
-    },
+    { name: "question", type: "text", required: true, label: "Frage" },
+    { name: "answer", type: "textarea", required: true, label: "Antwort" },
     {
       name: "topic",
       type: "select",
@@ -38,26 +29,6 @@ export const Faqs: CollectionConfig = {
         { label: "Allgemeine FAQ-Seite", value: "faq-general" },
       ],
     },
-    {
-      name: "order",
-      type: "number",
-      label: "Reihenfolge innerhalb des Themas",
-      defaultValue: 0,
-    },
-    {
-      name: "publishedOnPages",
-      type: "select",
-      hasMany: true,
-      label: "Auf welchen Seiten anzeigen",
-      options: [
-        { label: "Startseite", value: "/" },
-        { label: "/leistungen/keramikversiegelung/", value: "/leistungen/keramikversiegelung/" },
-        { label: "/leistungen/nanoversiegelung/", value: "/leistungen/nanoversiegelung/" },
-        { label: "/leistungen/fahrzeugaufbereitung/", value: "/leistungen/fahrzeugaufbereitung/" },
-        { label: "/leistungen/lack-und-beulendoktor/", value: "/leistungen/lack-und-beulendoktor/" },
-        { label: "/unfallschaden/", value: "/unfallschaden/" },
-        { label: "/faq/", value: "/faq/" },
-      ],
-    },
+    { name: "order", type: "number", label: "Reihenfolge innerhalb des Themas", defaultValue: 0 },
   ],
 };

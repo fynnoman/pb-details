@@ -6,11 +6,10 @@ export const Media: CollectionConfig = {
   admin: {
     useAsTitle: "alt",
     description:
-      "Alle Bilder, Videos und Dokumente. Alt-Text ist Pflicht (Barrierefreiheit + SEO).",
+      "Alle Bilder, Videos und Dokumente. Alt-Text ist Pflicht (Barrierefreiheit + SEO). Upload per Drag & Drop.",
+    group: "Medien",
   },
-  access: {
-    read: () => true,
-  },
+  access: { read: () => true },
   upload: {
     staticDir: "public/media",
     imageSizes: [
@@ -29,18 +28,10 @@ export const Media: CollectionConfig = {
       label: "Alt-Text (Bildbeschreibung)",
       admin: {
         description:
-          'Beschreibe das Bild in einem kurzen Satz. Beispiel: „Schwarzer Porsche nach Keramikversiegelung – PB Fahrzeugpflege Saarlouis".',
+          'Kurzer Satz, der beschreibt, was zu sehen ist. Beispiel: „Schwarzer Porsche nach Keramikversiegelung – PB Fahrzeugpflege Saarlouis".',
       },
     },
-    {
-      name: "caption",
-      type: "text",
-      label: "Bildunterschrift (optional)",
-    },
-    {
-      name: "credit",
-      type: "text",
-      label: "Fotograf / Quelle (optional)",
-    },
+    { name: "caption", type: "text", label: "Bildunterschrift (optional)" },
+    { name: "credit", type: "text", label: "Fotograf / Quelle (optional)" },
   ],
 };

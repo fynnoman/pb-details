@@ -5,41 +5,26 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Reveal from "./Reveal";
 
-export type FaqItem = { q: string; a: string };
-
-const defaultFaqs: FaqItem[] = [
-  {
-    q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?",
-    a: "PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein perfektes Ergebnis — nach dem Motto „Wir schützen Werte“. Über 600 positive Bewertungen und eine Weiterempfehlungsrate von über 95 % bestätigen das.",
-  },
-  {
-    q: "Bieten Sie auch Aufbereitung für Sportwagen, Oldtimer und Luxusfahrzeuge an?",
-    a: "Ja. Hochwertige Fahrzeuge sind unsere Spezialität — vom High-End-Lackschutz per Keramikversiegelung bis zur kompletten Innen- und Außenaufbereitung.",
-  },
-  {
-    q: "Seit wann gibt es PB Fahrzeugpflege?",
-    a: "PB Fahrzeugpflege Saarlouis besteht seit 1997 und gehört mit über 29 Jahren Erfahrung zu den ältesten und erfahrensten Fahrzeugaufbereitern Deutschlands.",
-  },
-  {
-    q: "Aus welchen Regionen kommen Ihre Kunden?",
-    a: "Unsere Kunden kommen aus Saarlouis und dem gesamten Saarland, aus Luxemburg sowie aus den angrenzenden Regionen. Unser Standort in Ensdorf an der B51 liegt verkehrsgünstig mit unmittelbarer Zuganbindung.",
-  },
-  {
-    q: "Wo befindet sich PB Fahrzeugpflege?",
-    a: "Sie finden uns in der Provinzialstraße 243, 66806 Ensdorf — direkt bei Saarlouis. Begutachtung und Angebot sind auch ohne Termin möglich.",
-  },
-];
+export type FaqItem =
+  | { question: string; answer: string }
+  | { q: string; a: string };
 
 type Props = {
-  faqs?: FaqItem[];
+  faqs: FaqItem[];
   kicker?: string;
   title?: React.ReactNode;
   showAllLink?: boolean;
   id?: string;
 };
 
+function normalize(item: FaqItem): { question: string; answer: string } {
+  return "question" in item
+    ? { question: item.question, answer: item.answer }
+    : { question: item.q, answer: item.a };
+}
+
 export default function FAQ({
-  faqs = defaultFaqs,
+  faqs,
   kicker = "Häufige Fragen",
   title = (
     <>
@@ -51,6 +36,8 @@ export default function FAQ({
   id = "faq",
 }: Props) {
   const [open, setOpen] = useState<number | null>(0);
+
+  if (!faqs || faqs.length === 0) return null;
 
   return (
     <section id={id} className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
@@ -71,10 +58,11 @@ export default function FAQ({
         </div>
 
         <div className="space-y-3">
-          {faqs.map((item, i) => {
+          {faqs.map((raw, i) => {
+            const item = normalize(raw);
             const isOpen = open === i;
             return (
-              <Reveal key={item.q} delay={i * 0.04}>
+              <Reveal key={item.question} delay={i * 0.04}>
                 <div
                   className={`glass rounded-2xl overflow-hidden transition-colors ${
                     isOpen ? "ring-1 ring-[var(--gold)]/30" : ""
@@ -85,7 +73,7 @@ export default function FAQ({
                     className="w-full flex items-center gap-4 px-6 sm:px-8 py-5 text-left"
                   >
                     <span className="font-display text-lg sm:text-xl leading-snug flex-1 tracking-[-0.01em]">
-                      {item.q}
+                      {item.question}
                     </span>
                     <span
                       className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-white/15 transition-transform duration-500 ${
@@ -107,7 +95,7 @@ export default function FAQ({
                         className="overflow-hidden"
                       >
                         <div className="px-6 sm:px-8 pb-6 text-[var(--ink-dim)] leading-relaxed max-w-[70ch]">
-                          {item.a}
+                          {item.answer}
                         </div>
                       </motion.div>
                     )}

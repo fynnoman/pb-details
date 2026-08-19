@@ -1,7 +1,7 @@
 import type { CollectionConfig, Field } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 
-const seoField: Field = {
+const seoTab: Field = {
   type: "tabs",
   tabs: [
     {
@@ -30,11 +30,6 @@ const seoField: Field = {
   ],
 };
 
-/**
- * Baukasten-Sektionen für den Kunden.
- * Jede Sektion ist ein "Block", der über den Payload-Admin
- * hinzugefügt, sortiert und entfernt werden kann.
- */
 const sectionBlocks = [
   {
     slug: "hero",
@@ -48,6 +43,15 @@ const sectionBlocks = [
         type: "upload",
         relationTo: "media",
         label: "Hintergrundbild",
+      },
+      {
+        name: "primaryCta",
+        type: "group",
+        label: "Primärer Button (optional)",
+        fields: [
+          { name: "label", type: "text" },
+          { name: "href", type: "text" },
+        ],
       },
     ] as Field[],
   },
@@ -86,7 +90,7 @@ const sectionBlocks = [
       {
         name: "linkHref",
         type: "text",
-        label: "Verlinkte Detail-URL (z.B. /leistungen/keramikversiegelung/)",
+        label: "Verlinkte Detail-URL (z. B. /leistungen/keramikversiegelung/)",
       },
     ] as Field[],
   },
@@ -132,11 +136,7 @@ const sectionBlocks = [
       { name: "kicker", type: "text", defaultValue: "Unverbindlich anfragen" },
       { name: "heading", type: "text", required: true, label: "Überschrift" },
       { name: "text", type: "textarea", label: "Beschreibung" },
-      {
-        name: "primaryLabel",
-        type: "text",
-        defaultValue: "Jetzt Kontakt aufnehmen",
-      },
+      { name: "primaryLabel", type: "text", defaultValue: "Jetzt Kontakt aufnehmen" },
       { name: "primaryHref", type: "text", defaultValue: "/kontakt/#termin" },
     ] as Field[],
   },
@@ -146,18 +146,8 @@ const sectionBlocks = [
     fields: [
       { name: "heading", type: "text", label: "Überschrift" },
       { name: "intro", type: "textarea", label: "Einleitungstext" },
-      {
-        name: "columnA",
-        type: "text",
-        required: true,
-        label: "Spaltenkopf A",
-      },
-      {
-        name: "columnB",
-        type: "text",
-        required: true,
-        label: "Spaltenkopf B",
-      },
+      { name: "columnA", type: "text", required: true, label: "Spaltenkopf A" },
+      { name: "columnB", type: "text", required: true, label: "Spaltenkopf B" },
       {
         name: "rows",
         type: "array",
@@ -170,6 +160,132 @@ const sectionBlocks = [
       },
     ] as Field[],
   },
+  {
+    slug: "prozess-schritte",
+    labels: { singular: "Prozess-Schritte", plural: "Prozess-Sektionen" },
+    fields: [
+      { name: "kicker", type: "text", defaultValue: "So läuft es bei uns ab" },
+      { name: "heading", type: "text", required: true },
+      {
+        name: "steps",
+        type: "array",
+        label: "Schritte",
+        minRows: 2,
+        fields: [
+          { name: "title", type: "text", required: true },
+          { name: "description", type: "textarea", required: true },
+        ],
+      },
+      { name: "footnote", type: "text", label: "Fußnote (optional)" },
+    ] as Field[],
+  },
+  {
+    slug: "preistabelle",
+    labels: { singular: "Preistabelle", plural: "Preistabellen" },
+    fields: [
+      { name: "kicker", type: "text", defaultValue: "Preise" },
+      { name: "heading", type: "text", required: true },
+      { name: "intro", type: "textarea", label: "Einleitungstext" },
+      {
+        name: "packages",
+        type: "array",
+        label: "Preispakete",
+        minRows: 1,
+        labels: { singular: "Paket", plural: "Pakete" },
+        fields: [
+          { name: "name", type: "text", required: true, label: "Paketname" },
+          { name: "price", type: "text", required: true, label: 'Preis (z. B. „ab 299 €“)' },
+          { name: "priceNote", type: "text", label: 'Zusatz zum Preis (z. B. „inkl. MwSt.“)' },
+          { name: "description", type: "textarea", label: "Kurzbeschreibung" },
+          {
+            name: "positions",
+            type: "array",
+            label: "Positionen (Bulletpoints)",
+            fields: [{ name: "text", type: "text", required: true }],
+          },
+          { name: "highlighted", type: "checkbox", defaultValue: false, label: "Als Empfehlung hervorheben" },
+          { name: "ctaLabel", type: "text", defaultValue: "Anfragen" },
+          { name: "ctaHref", type: "text", defaultValue: "/kontakt/#termin" },
+        ],
+      },
+      { name: "footnote", type: "text", label: "Fußnote (z. B. Preishinweis, Zahlungsarten)" },
+    ] as Field[],
+  },
+  {
+    slug: "why-us-bento",
+    labels: { singular: "Warum uns (Bento)", plural: "Warum-uns-Sektionen" },
+    fields: [
+      { name: "kicker", type: "text", defaultValue: "Warum PB Fahrzeugpflege" },
+      { name: "heading", type: "text", required: true },
+      {
+        name: "metrics",
+        type: "array",
+        label: "Kennzahlen-Karten",
+        minRows: 2,
+        maxRows: 6,
+        fields: [
+          { name: "headline", type: "text", required: true, label: "Große Zahl / Wort" },
+          { name: "body", type: "text", required: true, label: "Beschreibung darunter" },
+        ],
+      },
+      {
+        name: "bullets",
+        type: "array",
+        label: "Bulletpoints",
+        fields: [{ name: "text", type: "text", required: true }],
+      },
+    ] as Field[],
+  },
+  {
+    slug: "awards-marquee",
+    labels: { singular: "Auszeichnungen (Marquee)", plural: "Awards-Sektionen" },
+    fields: [
+      { name: "kicker", type: "text", defaultValue: "Ausgezeichnet" },
+      { name: "heading", type: "text", required: true },
+      {
+        name: "showStoryCards",
+        type: "checkbox",
+        defaultValue: true,
+        label: "Story-Karten unter Marquee anzeigen",
+      },
+    ] as Field[],
+  },
+  {
+    slug: "region-block",
+    labels: { singular: "Region + Karte", plural: "Region-Sektionen" },
+    fields: [
+      { name: "kicker", type: "text", defaultValue: "Einzugsgebiet" },
+      { name: "heading", type: "text", required: true },
+      { name: "text", type: "textarea", label: "Beschreibung" },
+      {
+        name: "regions",
+        type: "array",
+        label: "Regionen-Tags",
+        fields: [{ name: "label", type: "text", required: true }],
+      },
+      {
+        name: "showMap",
+        type: "checkbox",
+        defaultValue: true,
+        label: "Google-Maps-Karte anzeigen",
+      },
+    ] as Field[],
+  },
+  {
+    slug: "kontakt-block",
+    labels: { singular: "Kontakt / Termin", plural: "Kontakt-Sektionen" },
+    fields: [
+      { name: "kicker", type: "text", defaultValue: "Termin vereinbaren" },
+      { name: "heading", type: "text", required: true },
+      { name: "text", type: "textarea", label: "Beschreibung" },
+      {
+        name: "showCalendly",
+        type: "checkbox",
+        defaultValue: true,
+        label: "Calendly-Widget anzeigen (nur wenn URL in Einstellungen gesetzt)",
+      },
+    ] as Field[],
+  },
 ];
 
 export const Pages: CollectionConfig = {
@@ -177,14 +293,22 @@ export const Pages: CollectionConfig = {
   labels: { singular: "Seite", plural: "Seiten" },
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "path", "status", "updatedAt"],
+    defaultColumns: ["title", "path", "_status", "updatedAt"],
     description:
-      "Seiten werden aus einem Baukasten von Sektionen (Hero, Text, Leistung, FAQ, Galerie, CTA, Vergleich) zusammengesetzt.",
+      "Seiten werden aus einem Baukasten von Sektionen (Hero, Text, Leistung, FAQ, Galerie, CTA, Vergleich, Prozess, Preise, Awards, Region, Kontakt) zusammengesetzt.",
+    group: "Inhalte",
+    livePreview: {
+      url: ({ data, req }) =>
+        `${req.protocol}://${req.host}/api/preview?path=${encodeURIComponent(
+          (data?.path as string) || "/",
+        )}`,
+    },
   },
+  versions: { drafts: { autosave: { interval: 800 } } },
   access: {
     read: ({ req: { user } }) => {
       if (user) return true;
-      return { status: { equals: "published" } };
+      return { _status: { equals: "published" } };
     },
   },
   fields: [
@@ -194,7 +318,7 @@ export const Pages: CollectionConfig = {
       type: "text",
       required: true,
       unique: true,
-      label: "URL-Pfad (z.B. /leistungen/keramikversiegelung/)",
+      label: "URL-Pfad (z. B. /leistungen/keramikversiegelung/)",
     },
     {
       name: "sections",
@@ -202,17 +326,6 @@ export const Pages: CollectionConfig = {
       label: "Sektionen (Baukasten)",
       blocks: sectionBlocks,
     },
-    seoField,
-    {
-      name: "status",
-      type: "select",
-      required: true,
-      defaultValue: "draft",
-      options: [
-        { label: "Entwurf", value: "draft" },
-        { label: "Veröffentlicht", value: "published" },
-      ],
-      admin: { position: "sidebar" },
-    },
+    seoTab,
   ],
 };

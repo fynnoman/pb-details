@@ -17,62 +17,79 @@ import {
   productAggregateRating,
   webPageSchema,
 } from "@/lib/schema";
+import {
+  loadAwards,
+  loadFaqsByTopic,
+  loadHomeGlobal,
+  loadServicesForHome,
+  loadSettings,
+  loadVehicles,
+} from "@/lib/site-data";
 
-const homeFaqs = [
-  {
-    q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?",
-    a: 'PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein perfektes Ergebnis – nach dem Motto „Wir schützen Werte". Über 600 positive Bewertungen und eine Weiterempfehlungsrate von über 95 % bestätigen das.',
-  },
-  {
-    q: "Bieten Sie auch Aufbereitung für Sportwagen, Oldtimer und Luxusfahrzeuge an?",
-    a: "Ja. Hochwertige Fahrzeuge sind unsere Spezialität – vom High-End-Lackschutz per Keramikversiegelung bis zur kompletten Innen- und Außenaufbereitung.",
-  },
-  {
-    q: "Seit wann gibt es PB Fahrzeugpflege?",
-    a: "PB Fahrzeugpflege Saarlouis besteht seit 1997 und gehört mit über 29 Jahren Erfahrung zu den ältesten und erfahrensten Fahrzeugaufbereitern Deutschlands.",
-  },
-  {
-    q: "Aus welchen Regionen kommen Ihre Kunden?",
-    a: "Unsere Kunden kommen aus Saarlouis und dem gesamten Saarland, aus Luxemburg sowie aus den angrenzenden Regionen. Unser Standort in Ensdorf an der B51 liegt verkehrsgünstig mit unmittelbarer Zuganbindung.",
-  },
-  {
-    q: "Wo befindet sich PB Fahrzeugpflege?",
-    a: "Sie finden uns in der Provinzialstraße 243, 66806 Ensdorf – direkt bei Saarlouis. Begutachtung und Angebot sind auch ohne Termin möglich.",
-  },
-];
+export async function generateMetadata(): Promise<Metadata> {
+  const home = await loadHomeGlobal();
+  return {
+    title: {
+      absolute:
+        home.metaTitle || "Fahrzeugaufbereitung Saarlouis & Keramikversiegelung",
+    },
+    description:
+      home.metaDescription ||
+      "Premium-Fahrzeugaufbereitung & Keramikversiegelung im Saarland und Luxemburg – seit 1997.",
+    alternates: { canonical: "/" },
+  };
+}
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "Fahrzeugaufbereitung Saarlouis & Keramikversiegelung",
-  },
-  description:
-    "Premium-Fahrzeugaufbereitung & Keramikversiegelung im Saarland und Luxemburg – seit 1997. Spezialist für Neuwagen, Sportwagen & Luxusfahrzeuge. Über 648 Top-Bewertungen.",
-  alternates: { canonical: "/" },
-};
+export default async function HomePage() {
+  const [home, settings, services, vehicles, awards, faqs] = await Promise.all([
+    loadHomeGlobal(),
+    loadSettings(),
+    loadServicesForHome(),
+    loadVehicles(),
+    loadAwards(),
+    loadFaqsByTopic("home"),
+  ]);
 
-export default function Home() {
+  const homeFaqs = faqs.map((f) => ({ question: f.question, answer: f.answer }));
   const webPage = webPageSchema({
     path: "/",
-    name: "Fahrzeugaufbereitung Saarlouis & Keramikversiegelung",
-    description:
-      "Premium-Fahrzeugaufbereitung & Keramikversiegelung im Saarland und Luxemburg – seit 1997.",
+    name: home.metaTitle || home.title,
+    description: home.metaDescription || home.subtitle,
     breadcrumb: breadcrumbList([{ name: "Home", path: "/" }]),
   });
+
   return (
     <>
-      <JsonLd data={[webPage, productAggregateRating, faqPageSchema(homeFaqs)]} />
+      <JsonLd
+        data={[
+          webPage,
+          productAggregateRating,
+          faqPageSchema(homeFaqs),
+        ]}
+      />
       <ScrollTopOnLoad />
       <main className="relative">
-        <Hero />
-        <Anspruch />
-        <Services />
-        <Vehicles />
-        <Process />
-        <WhyUs />
-        <Awards />
-        <Region />
-        <FAQ />
-        <Contact />
+        <Hero home={home} settings={settings} />
+        <Anspruch settings={settings} />
+        <Services services={services} />
+        <Vehicles vehicles={vehicles} />
+        <Process
+          kicker={home.processKicker}
+          heading={home.processHeading}
+          steps={home.processSteps}
+          footnote={home.processFootnote}
+        />
+        <WhyUs
+          heading={home.whyUsHeading}
+          bullets={home.whyUsBullets}
+          mottoLabel={home.mottoLabel}
+          mottoText={home.mottoText}
+          settings={settings}
+        />
+        <Awards awards={awards} />
+        <Region home={home} settings={settings} />
+        <FAQ faqs={homeFaqs} />
+        <Contact settings={settings} />
       </main>
     </>
   );

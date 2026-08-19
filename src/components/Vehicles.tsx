@@ -3,31 +3,18 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Reveal from "./Reveal";
+import { mediaUrl } from "@/lib/site-data";
+import type { MediaDoc } from "@/lib/site-data";
 
-const vehicles = [
-  {
-    label: "Neuwagen",
-    desc: "Lackschutz ab dem ersten Kilometer durch eine Keramikversiegelung, bevor Flugrost, Insektenreste und Waschkratzer den empfindlichen Klarlack erreichen.",
-    image: "/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg",
-  },
-  {
-    label: "Sportwagen & Luxus",
-    desc: "Kompromisslose Aufbereitung und Werterhalt mit dem nötigen Fingerspitzengefühl – für Fahrzeuge, deren Wert und Erscheinungsbild zählen.",
-    image: "/images/hero/schwarzes-auto-keramikversiegelung.jpg",
-  },
-  {
-    label: "Oldtimer",
-    desc: "Sammlerfahrzeuge in bester Hand – Werterhalt für Generationen, mit Fingerspitzengefühl und Erfahrung.",
-    image: "/images/fahrzeuge/oldtimer-mercedes-300sl-werkstatt.jpg",
-  },
-  {
-    label: "Gebrauchtwagen",
-    desc: "Vor Leasingrückgabe oder Verkauf – gezielte Aufbereitung, die sichtbare Mängel reduziert und teure Nachberechnungen vermeidet.",
-    image: "/images/fahrzeuge/gebrauchtwagen-autohaus.jpg",
-  },
-];
+export type VehicleItem = {
+  id: string | number;
+  label: string;
+  description: string;
+  image: MediaDoc;
+  order: number;
+};
 
-function VehicleTile({ v, i }: { v: (typeof vehicles)[0]; i: number }) {
+function VehicleTile({ v, i }: { v: VehicleItem; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -35,6 +22,7 @@ function VehicleTile({ v, i }: { v: (typeof vehicles)[0]; i: number }) {
   });
   const y = useTransform(scrollYProgress, [0, 1], ["12%", "-12%"]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.18, 1.05, 1.18]);
+  const url = mediaUrl(v.image, "card") || mediaUrl(v.image);
 
   return (
     <motion.div
@@ -45,41 +33,16 @@ function VehicleTile({ v, i }: { v: (typeof vehicles)[0]; i: number }) {
       transition={{ duration: 1, delay: i * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
       className="group relative aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
     >
-      {v.image ? (
+      {url && (
         <>
           <motion.img
-            src={v.image}
-            alt={v.label}
+            src={url}
+            alt={v.image?.alt || v.label}
             style={{ y, scale }}
             className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-        </>
-      ) : (
-        <>
-          {/* Text-Card ohne Foto: subtile gold-radiale Textur */}
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-70"
-            style={{
-              background:
-                "radial-gradient(600px 400px at 30% 20%, rgba(212,180,131,0.16), transparent 55%), radial-gradient(500px 400px at 80% 90%, rgba(245,226,184,0.08), transparent 60%)",
-            }}
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.5) 100%)",
-            }}
-          />
-          <div className="absolute inset-0 flex items-start justify-center pt-16">
-            <div className="font-display italic text-[clamp(2.5rem,5.5vw,4.5rem)] leading-none text-chrome opacity-70 select-none pointer-events-none tracking-tighter">
-              {v.label.split(" ")[0]}
-            </div>
-          </div>
         </>
       )}
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
@@ -90,7 +53,7 @@ function VehicleTile({ v, i }: { v: (typeof vehicles)[0]; i: number }) {
           {v.label}
         </h3>
         <p className="mt-3 text-sm text-[var(--ink-dim)] leading-relaxed max-w-xs">
-          {v.desc}
+          {v.description}
         </p>
       </div>
       <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-[1.5rem] pointer-events-none" />
@@ -98,7 +61,7 @@ function VehicleTile({ v, i }: { v: (typeof vehicles)[0]; i: number }) {
   );
 }
 
-export default function Vehicles() {
+export default function Vehicles({ vehicles }: { vehicles: VehicleItem[] }) {
   return (
     <section className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
@@ -131,7 +94,7 @@ export default function Vehicles() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {vehicles.map((v, i) => (
-            <VehicleTile key={v.label} v={v} i={i} />
+            <VehicleTile key={String(v.id)} v={v} i={i} />
           ))}
         </div>
       </div>

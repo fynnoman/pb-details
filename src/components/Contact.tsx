@@ -1,15 +1,14 @@
 "use client";
 
 import Reveal from "./Reveal";
-import { SITE } from "@/lib/site";
+import type { SiteSettings } from "@/lib/site-data";
 import CalendlyEmbed from "./CalendlyEmbed";
 
-export default function Contact() {
-  const hasCalendly = Boolean(SITE.calendly.url);
+export default function Contact({ settings }: { settings: SiteSettings }) {
+  const hasCalendly = Boolean(settings.calendly?.url);
 
   return (
     <section id="kontakt" className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
-      {/* Statischer Foto-Background (kein Scroll-Handler mehr) */}
       <div aria-hidden className="absolute inset-0">
         <img
           src="/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg"
@@ -23,7 +22,6 @@ export default function Contact() {
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left — Copy + Direktdraht */}
           <div className="col-span-12 lg:col-span-5">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -44,16 +42,12 @@ export default function Contact() {
               </p>
             </Reveal>
 
-            {/* Direktdraht-Block */}
             <Reveal delay={0.15}>
               <div className="mt-10 glass-strong rounded-[1.75rem] p-6 sm:p-7">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-2">
                   Direkter Draht
                 </div>
-                <a
-                  href={SITE.phone.href}
-                  className="group flex items-center gap-5"
-                >
+                <a href={`tel:${settings.phone.e164}`} className="group flex items-center gap-5">
                   <span className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#f5e2b8] via-[#d4b483] to-[#8a6a3f] flex items-center justify-center text-[#100e0a] shrink-0 shadow-lg">
                     <span
                       className="absolute inset-0 rounded-full bg-[var(--gold)]/40 blur-md opacity-60 group-hover:opacity-100 transition-opacity"
@@ -76,24 +70,26 @@ export default function Contact() {
                       Anrufen · Mo–Sa
                     </span>
                     <span className="font-display text-2xl sm:text-3xl text-chrome tracking-[-0.01em]">
-                      {SITE.phone.display}
+                      {settings.phone.display}
                     </span>
                   </span>
                 </a>
                 <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between gap-3 text-xs flex-wrap">
+                  {settings.whatsapp && (
+                    <a
+                      href={settings.whatsapp}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-[var(--ink-dim)] hover:text-[var(--ink)]"
+                    >
+                      WhatsApp
+                    </a>
+                  )}
                   <a
-                    href={SITE.whatsapp}
-                    target="_blank"
-                    rel="noopener"
+                    href={`mailto:${settings.email}`}
                     className="text-[var(--ink-dim)] hover:text-[var(--ink)]"
                   >
-                    WhatsApp
-                  </a>
-                  <a
-                    href={`mailto:${SITE.email}`}
-                    className="text-[var(--ink-dim)] hover:text-[var(--ink)]"
-                  >
-                    {SITE.email}
+                    {settings.email}
                   </a>
                   <span className="text-[var(--ink-mute)]">Antwort in 24 h</span>
                 </div>
@@ -101,7 +97,6 @@ export default function Contact() {
             </Reveal>
           </div>
 
-          {/* Right — Calendly-Widget oder Fallback */}
           <div className="col-span-12 lg:col-span-7" id="termin">
             <Reveal delay={0.05}>
               {hasCalendly ? (
@@ -123,18 +118,20 @@ export default function Contact() {
                     unserer Öffnungszeiten.
                   </p>
                   <div className="mt-8 flex flex-wrap gap-3">
-                    <a href={SITE.phone.href} className="btn-gold">
+                    <a href={`tel:${settings.phone.e164}`} className="btn-gold">
                       Jetzt anrufen
                       <span aria-hidden>→</span>
                     </a>
-                    <a
-                      href={SITE.whatsapp}
-                      target="_blank"
-                      rel="noopener"
-                      className="btn-glass"
-                    >
-                      WhatsApp öffnen
-                    </a>
+                    {settings.whatsapp && (
+                      <a
+                        href={settings.whatsapp}
+                        target="_blank"
+                        rel="noopener"
+                        className="btn-glass"
+                      >
+                        WhatsApp öffnen
+                      </a>
+                    )}
                   </div>
                 </div>
               )}
