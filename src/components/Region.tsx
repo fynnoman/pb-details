@@ -115,6 +115,23 @@ export default function Region() {
             </Reveal>
           </div>
         </div>
+
+        {/* Google Maps Embed */}
+        <Reveal delay={0.15}>
+          <div className="mt-12 lg:mt-16 rounded-[1.75rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]">
+            <div className="relative aspect-[16/9] sm:aspect-[21/9] bg-black">
+              <iframe
+                title="Standort PB Fahrzeugpflege Saarlouis – Provinzialstraße 243, Ensdorf"
+                src="https://maps.google.com/maps?q=Provinzialstra%C3%9Fe+243,+66806+Ensdorf&hl=de&z=15&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full grayscale-[15%] contrast-[1.05]"
+                style={{ border: 0, colorScheme: "normal" }}
+              />
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
