@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 import nodemailer from "nodemailer";
 import { SITE } from "@/lib/site";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
@@ -25,7 +26,7 @@ function badRequest(message: string) {
 
 async function verifyHcaptcha(token: string | undefined): Promise<boolean> {
   const secret = process.env.HCAPTCHA_SECRET;
-  if (!secret) return true; // hCaptcha nicht konfiguriert → nicht blockieren
+  if (!secret) return true;
   if (!token) return false;
   const body = new URLSearchParams({ secret, response: token });
   const res = await fetch("https://hcaptcha.com/siteverify", {
@@ -35,6 +36,54 @@ async function verifyHcaptcha(token: string | undefined): Promise<boolean> {
   });
   const json = (await res.json()) as { success?: boolean };
   return json.success === true;
+}
+
+/**
+ * Sendet die Mail entweder via Resend (bevorzugt, wenn RESEND_API_KEY
+ * gesetzt ist) oder als Fallback via SMTP/nodemailer (Office 365 etc.).
+ * Wirft bei Fehler, damit die Route eine sinnvolle Antwort schicken kann.
+ */
+async function sendMail(opts: {
+  from: string;
+  to: string;
+  replyTo: string;
+  subject: string;
+  text: string;
+}) {
+  const resendKey = process.env.RESEND_API_KEY;
+
+  if (resendKey) {
+    const resend = new Resend(resendKey);
+    const { error } = await resend.emails.send({
+      from: opts.from,
+      to: [opts.to],
+      replyTo: opts.replyTo,
+      subject: opts.subject,
+      text: opts.text,
+    });
+    if (error) {
+      throw new Error(`Resend: ${error.message ?? "unknown error"}`);
+    }
+    return;
+  }
+
+  // Fallback: SMTP über nodemailer
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpPort = process.env.SMTP_PORT
+    ? Number(process.env.SMTP_PORT)
+    : undefined;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPassword = process.env.SMTP_PASSWORD ?? process.env.SMTP_PASS;
+  if (!smtpHost || !smtpPort || !smtpUser || !smtpPassword) {
+    throw new Error("Kein Mail-Provider konfiguriert (RESEND_API_KEY oder SMTP_*).");
+  }
+  const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpPort === 465,
+    auth: { user: smtpUser, pass: smtpPassword },
+  });
+  await transporter.sendMail(opts);
 }
 
 export async function POST(req: Request) {
@@ -62,9 +111,8 @@ export async function POST(req: Request) {
     return badRequest("Ungültige Anfrage.");
   }
 
-  // Honeypot
   if (data.website && data.website.length > 0) {
-    return NextResponse.json({ ok: true }); // Bot bestätigen, aber nichts tun
+    return NextResponse.json({ ok: true });
   }
 
   const firstname = (data.firstname ?? "").trim();
@@ -82,16 +130,11 @@ export async function POST(req: Request) {
   if (!captchaOk)
     return badRequest("Spam-Prüfung fehlgeschlagen. Bitte erneut versuchen.");
 
-  const smtpHost = process.env.SMTP_HOST;
-  const smtpPort = process.env.SMTP_PORT
-    ? Number(process.env.SMTP_PORT)
-    : undefined;
-  const smtpUser = process.env.SMTP_USER;
-  const smtpPassword = process.env.SMTP_PASSWORD;
-  const smtpFrom = process.env.SMTP_FROM ?? SITE.email;
-  const contactTo = process.env.CONTACT_TO ?? SITE.email;
+  const from = process.env.MAIL_FROM ?? process.env.SMTP_FROM ?? `no-reply@pb-fahrzeugpflege.de`;
+  const to = process.env.CONTACT_TO ?? SITE.email;
 
-  if (!smtpHost || !smtpPort || !smtpUser || !smtpPassword) {
+  const hasProvider = process.env.RESEND_API_KEY || process.env.SMTP_HOST;
+  if (!hasProvider) {
     return NextResponse.json(
       {
         ok: false,
@@ -101,13 +144,6 @@ export async function POST(req: Request) {
       { status: 503 },
     );
   }
-
-  const transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: smtpPort,
-    secure: smtpPort === 465,
-    auth: { user: smtpUser, pass: smtpPassword },
-  });
 
   const text = [
     `Neue Anfrage über die Website ${SITE.domain}`,
@@ -125,9 +161,9 @@ export async function POST(req: Request) {
     .join("\n");
 
   try {
-    await transporter.sendMail({
-      from: smtpFrom,
-      to: contactTo,
+    await sendMail({
+      from,
+      to,
       replyTo: email,
       subject: `Neue Anfrage: ${firstname}${data.service ? ` – ${data.service}` : ""}`,
       text,
@@ -135,7 +171,10 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error("[contact] sendMail failed", err);
     return NextResponse.json(
-      { ok: false, error: "Versand fehlgeschlagen. Bitte später erneut versuchen." },
+      {
+        ok: false,
+        error: "Versand fehlgeschlagen. Bitte später erneut versuchen oder direkt telefonisch.",
+      },
       { status: 500 },
     );
   }
