@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import CookieYes from "@/components/CookieYes";
 import GoogleTagManager from "@/components/GoogleTagManager";
-import { organizationSchema, websiteSchema } from "@/lib/schema";
+import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/schema";
 import { loadFooter, loadNavigation, loadSettings } from "@/lib/site-data";
 
 const inter = Inter({
@@ -45,8 +45,8 @@ export default async function FrontendLayout({
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
         <CookieYes />
         <GoogleTagManager />
-        <JsonLd data={organizationSchema} />
-        <JsonLd data={websiteSchema} />
+        <JsonLd data={buildOrganizationSchema(settings)} />
+        <JsonLd data={buildWebsiteSchema(settings)} />
         <Nav items={navigation.items} cta={navigation.cta} />
         {children}
         <Footer settings={settings} footer={footer} />

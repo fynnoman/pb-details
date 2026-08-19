@@ -181,6 +181,7 @@ export async function loadPageByPath(path: string, opts: { draft?: boolean } = {
     depth: 3,
     limit: 1,
     draft: opts.draft,
+    overrideAccess: opts.draft ?? false,
   });
   return (res.docs[0] as any) || null;
 }

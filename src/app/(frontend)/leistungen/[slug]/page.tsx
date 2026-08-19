@@ -37,13 +37,15 @@ type ServiceDoc = {
   }>;
 };
 
-async function loadService(slug: string): Promise<ServiceDoc | null> {
+async function loadService(slug: string, draft = false): Promise<ServiceDoc | null> {
   const payload = await getPayloadClient();
   const res = await payload.find({
     collection: "services",
     where: { slug: { equals: slug } },
     depth: 2,
     limit: 1,
+    draft,
+    overrideAccess: draft,
   });
   return (res.docs[0] as unknown as ServiceDoc) || null;
 }
@@ -83,8 +85,10 @@ export default async function ServiceDetailPage({
 }: {
   params: Promise<Params>;
 }) {
+  const { draftMode } = await import("next/headers");
+  const { isEnabled: draft } = await draftMode();
   const { slug } = await params;
-  const service = await loadService(slug);
+  const service = await loadService(slug, draft);
   if (!service) notFound();
 
   const path = `/leistungen/${service.slug}/`;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
-import { SITE } from "@/lib/site";
+import { loadSettings } from "@/lib/site-data";
 
 type Props = {
   kicker?: string;
@@ -10,16 +10,17 @@ type Props = {
   primaryHref?: string;
 };
 
-export default function CtaSection({
+export default async function CtaSection({
   kicker = "Unverbindlich anfragen",
   title,
   text,
   primaryLabel = "Termin online buchen",
   primaryHref = "/kontakt/#termin",
 }: Props) {
+  const settings = await loadSettings();
   return (
     <section className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
         <div className="glass-strong rounded-[1.75rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
           <div className="grid grid-cols-12 gap-8 items-center">
             <div className="col-span-12 lg:col-span-7">
@@ -44,30 +45,26 @@ export default function CtaSection({
             </div>
             <div className="col-span-12 lg:col-span-5 flex flex-col gap-3">
               <Reveal delay={0.15}>
-                <Link
-                  href={primaryHref}
-                  className="btn-gold w-full justify-center"
-                >
+                <Link href={primaryHref} className="btn-gold w-full justify-center">
                   {primaryLabel}
                   <span aria-hidden>→</span>
                 </Link>
               </Reveal>
               <Reveal delay={0.2}>
                 <a
-                  href={SITE.phone.href}
+                  href={`tel:${settings.phone.e164}`}
                   className="btn-glass w-full justify-center"
                 >
                   <span
                     className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse"
                     aria-hidden
                   />
-                  {SITE.phone.display}
+                  {settings.phone.display}
                 </a>
               </Reveal>
               <Reveal delay={0.25}>
                 <p className="text-[11px] text-[var(--ink-mute)] text-center leading-relaxed mt-2">
-                  Auch ohne Termin – während unserer Öffnungszeiten in der
-                  Provinzialstraße 243, Ensdorf.
+                  Auch ohne Termin – während unserer Öffnungszeiten in {settings.address.street}, {settings.address.city}.
                 </p>
               </Reveal>
             </div>

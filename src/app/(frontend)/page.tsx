@@ -13,8 +13,8 @@ import Contact from "@/components/Contact";
 import JsonLd from "@/components/JsonLd";
 import {
   breadcrumbList,
+  buildProductAggregateRating,
   faqPageSchema,
-  productAggregateRating,
   webPageSchema,
 } from "@/lib/schema";
 import {
@@ -41,8 +41,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
+  const { draftMode } = await import("next/headers");
+  const { isEnabled: draft } = await draftMode();
   const [home, settings, services, vehicles, awards, faqs] = await Promise.all([
-    loadHomeGlobal(),
+    loadHomeGlobal({ draft }),
     loadSettings(),
     loadServicesForHome(),
     loadVehicles(),
@@ -63,7 +65,7 @@ export default async function HomePage() {
       <JsonLd
         data={[
           webPage,
-          productAggregateRating,
+          buildProductAggregateRating(settings),
           faqPageSchema(homeFaqs),
         ]}
       />

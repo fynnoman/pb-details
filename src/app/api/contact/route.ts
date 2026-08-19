@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import nodemailer from "nodemailer";
-import { SITE } from "@/lib/site";
+import { loadSettings } from "@/lib/site-data";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -59,7 +59,11 @@ type MailContent = {
  *   2. Resend (verifizierte Absender-Domain nötig)
  *   3. SMTP/nodemailer (Office 365, Postmark etc.)
  */
-async function sendMail(mc: MailContent, originUrl: string) {
+async function sendMail(
+  mc: MailContent,
+  originUrl: string,
+  ctx: { email: string; domain: string },
+) {
   const formsubmitEmail = process.env.FORMSUBMIT_EMAIL;
   const resendKey = process.env.RESEND_API_KEY;
   const smtpHost = process.env.SMTP_HOST;
@@ -102,9 +106,9 @@ async function sendMail(mc: MailContent, originUrl: string) {
     return;
   }
 
-  const to = process.env.CONTACT_TO ?? SITE.email;
+  const to = process.env.CONTACT_TO ?? ctx.email;
   const from =
-    process.env.MAIL_FROM ?? process.env.SMTP_FROM ?? `no-reply@${new URL(SITE.domain).hostname}`;
+    process.env.MAIL_FROM ?? process.env.SMTP_FROM ?? `no-reply@${new URL(ctx.domain).hostname}`;
 
   // 2. Resend
   if (resendKey) {
@@ -212,8 +216,12 @@ export async function POST(req: Request) {
   const vehicle = (data.vehicle ?? "").trim();
   const service = (data.service ?? "").trim();
 
+  const settings = await loadSettings();
+  const siteEmail = settings.email;
+  const siteDomain = settings.domain;
+
   const text = [
-    `Neue Anfrage über die Website ${SITE.domain}`,
+    `Neue Anfrage über die Website ${siteDomain}`,
     "",
     `Vorname: ${firstname}`,
     `E-Mail: ${email}`,
@@ -228,7 +236,7 @@ export async function POST(req: Request) {
     .join("\n");
 
   const originHeader = req.headers.get("origin") ?? req.headers.get("referer");
-  const originUrl = originHeader ?? SITE.domain;
+  const originUrl = originHeader ?? siteDomain;
 
   try {
     await sendMail(
@@ -247,6 +255,7 @@ export async function POST(req: Request) {
         },
       },
       originUrl,
+      { email: siteEmail, domain: siteDomain },
     );
   } catch (err) {
     console.error("[contact] sendMail failed", err);

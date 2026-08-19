@@ -1,19 +1,14 @@
 "use client";
 
 import Script from "next/script";
-import { SITE } from "@/lib/site";
 
 type Props = {
+  url: string;
   /** Höhe des Widgets. */
   height?: number;
 };
 
-/**
- * Calendly Inline-Widget. Rendert nichts, solange SITE.calendly.url
- * leer ist – dann übernimmt die aufrufende Sektion den Fallback.
- */
-export default function CalendlyEmbed({ height = 720 }: Props) {
-  const url = SITE.calendly.url;
+export default function CalendlyEmbed({ url, height = 720 }: Props) {
   if (!url) return null;
   return (
     <>

@@ -101,7 +101,7 @@ export default function Contact({ settings }: { settings: SiteSettings }) {
             <Reveal delay={0.05}>
               {hasCalendly ? (
                 <div className="glass-strong rounded-[1.75rem] p-4 sm:p-6">
-                  <CalendlyEmbed />
+                  <CalendlyEmbed url={settings.calendly!.url!} />
                 </div>
               ) : (
                 <div className="glass-strong rounded-[1.75rem] p-8 sm:p-10">

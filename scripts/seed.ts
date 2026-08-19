@@ -22,6 +22,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { buildLexical } from "./lib/lexical";
 import { serviceDetails } from "./seed-service-content";
+import { pageContent } from "./seed-page-content";
 
 type Payload = Awaited<ReturnType<typeof getPayload>>;
 
@@ -362,6 +363,20 @@ async function seedFaqs(payload: Payload) {
   for (const detail of serviceDetails) {
     const topic = topicBySlug[detail.slug] || detail.slug;
     detail.faqs.forEach((f, i) => {
+      items.push({ topic, order: (i + 1) * 10, q: f.question, a: f.answer });
+    });
+  }
+
+  // Page-FAQs (unfallschaden, faq-general)
+  const pageFaqTopic: Record<string, string> = {
+    "/unfallschaden/": "unfallschaden",
+    "/faq/": "faq-general",
+  };
+  for (const page of pageContent) {
+    if (!page.faqs) continue;
+    const topic = pageFaqTopic[page.path];
+    if (!topic) continue;
+    page.faqs.forEach((f, i) => {
       items.push({ topic, order: (i + 1) * 10, q: f.question, a: f.answer });
     });
   }
@@ -993,12 +1008,41 @@ async function seedPages(payload: Payload) {
       where: { path: { equals: p.path } },
       limit: 1,
     });
+
+    // Content aus pageContent (falls vorhanden) als Text-Block anhängen
+    const extra = pageContent.find((pc) => pc.path === p.path);
+    const sections = [...(p.sections || [])];
+    if (extra) {
+      sections.push({
+        blockType: "text",
+        body: buildLexical(extra.contentBlocks),
+      });
+
+      // FAQ-Block mit relatedFaqs hinzufügen wenn FAQs vorhanden
+      if (extra.faqs && extra.faqs.length > 0) {
+        const questions = extra.faqs.map((f) => f.question);
+        const faqRes = await payload.find({
+          collection: "faqs",
+          where: { question: { in: questions } },
+          limit: 100,
+        });
+        if (faqRes.docs.length > 0) {
+          sections.push({
+            blockType: "faq-block",
+            kicker: "Häufige Fragen",
+            heading: "Antworten auf häufige Fragen",
+            faqs: faqRes.docs.map((d) => d.id),
+          });
+        }
+      }
+    }
+
     const data = {
       title: p.title,
       path: p.path,
       metaTitle: p.metaTitle,
       metaDescription: p.metaDescription,
-      sections: p.sections,
+      sections,
       _status: "published",
     } as any;
     if (existing.docs.length) {
