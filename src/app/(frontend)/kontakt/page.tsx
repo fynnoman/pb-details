@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Contact from "@/components/Contact";
+import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/lib/site";
 import JsonLd from "@/components/JsonLd";
@@ -134,6 +135,7 @@ export default function KontaktPage() {
       </section>
 
       <Contact />
+      <ContactForm />
     </main>
   );
 }
