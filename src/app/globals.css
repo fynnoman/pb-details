@@ -38,6 +38,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Mobile: verhindert horizontale Scroll-Schnitzer durch Elemente
+   die knapp aus dem Viewport rausragen (z.B. absolut positionierte
+   Ghost-Numerals oder overflow-Motion). */
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  /* iOS Safari: verhindert dass sich Text bei manchen Orientierungen
+     unerwartet vergrößert. */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Touch-Targets: alle Links/Buttons in Nav/CTAs sollen mind. 44x44
+   sein (iOS HIG). Wo nicht explicit gesetzt, hilft padding-min. */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 html {
   background: var(--bg);
   color: var(--ink);

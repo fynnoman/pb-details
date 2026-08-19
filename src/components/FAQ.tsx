@@ -53,9 +53,9 @@ export default function FAQ({
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id={id} className="relative py-32 sm:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1000px] px-6 sm:px-10">
-        <div className="text-center mb-16">
+    <section id={id} className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
+      <div className="mx-auto max-w-[1000px] px-5 sm:px-10">
+        <div className="text-center mb-12 sm:mb-16">
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />

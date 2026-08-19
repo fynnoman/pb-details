@@ -38,9 +38,9 @@ export default function Awards() {
   const marqueeBadges = [...badges, ...badges];
 
   return (
-    <section className="relative py-32 sm:py-40 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-16 items-end">
+    <section className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-12 sm:mb-16 items-end">
           <div className="col-span-12 lg:col-span-8">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -72,11 +72,11 @@ export default function Awards() {
         {/* CSS-Marquee - läuft off-main-thread, deutlich smoother als
             Framer Motion animate={{ x }} das auf requestAnimationFrame
             im main thread läuft. */}
-        <div className="marquee-track flex gap-8 sm:gap-14 items-center">
+        <div className="marquee-track flex gap-6 sm:gap-10 md:gap-14 items-center">
           {marqueeBadges.map((b, i) => (
             <div
               key={`${b.src}-${i}`}
-              className="glass-flat rounded-2xl aspect-square h-28 sm:h-36 shrink-0 flex items-center justify-center p-4 sm:p-5"
+              className="glass-flat rounded-2xl aspect-square h-24 sm:h-32 md:h-36 shrink-0 flex items-center justify-center p-3 sm:p-4 md:p-5"
             >
               <img
                 src={b.src}
@@ -90,7 +90,7 @@ export default function Awards() {
       </div>
 
       {/* Story-Cards */}
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10 mt-20 sm:mt-28">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-10 mt-16 sm:mt-24 md:mt-28">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {stories.map((s, i) => (
             <Reveal key={s.src} delay={i * 0.06}>

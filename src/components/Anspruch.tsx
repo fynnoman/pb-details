@@ -20,9 +20,9 @@ export default function Anspruch() {
     <section
       id="ueber-uns"
       ref={ref}
-      className="relative py-32 sm:py-44 overflow-hidden"
+      className="relative py-20 sm:py-32 lg:py-44 overflow-hidden"
     >
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
         <div className="grid grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* Left column — image */}
           <div className="col-span-12 lg:col-span-6 order-2 lg:order-1">

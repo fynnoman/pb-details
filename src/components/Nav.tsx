@@ -47,7 +47,7 @@ export default function Nav() {
             <img
               src="/images/logo/pb-fahrzeugpflege-logo-black.png"
               alt="PB Fahrzeugpflege Saarlouis"
-              className="h-10 sm:h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(212,180,131,0.25)]"
+              className="h-8 sm:h-10 md:h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(212,180,131,0.25)]"
             />
             <span className="hidden md:flex flex-col leading-tight ml-1">
               <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--ink-mute)]">
@@ -132,9 +132,10 @@ export default function Nav() {
 
           <Link
             href="/kontakt/#termin"
-            className="hidden sm:inline-flex btn-gold ml-auto lg:ml-2 text-[13px] py-2.5 px-5"
+            className="hidden sm:inline-flex btn-gold ml-auto lg:ml-2 text-[12px] sm:text-[13px] py-2 sm:py-2.5 px-4 sm:px-5"
           >
-            Jetzt anfragen
+            <span className="hidden md:inline">Jetzt anfragen</span>
+            <span className="md:hidden">Termin</span>
             <span aria-hidden>→</span>
           </Link>
 

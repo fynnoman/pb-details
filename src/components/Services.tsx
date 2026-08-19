@@ -68,7 +68,7 @@ function ServiceCard({
   return (
     <div
       ref={ref}
-      className={`grid grid-cols-12 gap-6 lg:gap-16 items-center py-16 sm:py-24 ${
+      className={`grid grid-cols-12 gap-6 lg:gap-16 items-center py-12 sm:py-20 lg:py-24 ${
         !isEven ? "lg:[&>*:first-child]:order-2" : ""
       }`}
     >
@@ -175,9 +175,9 @@ function ServiceCard({
 
 export default function Services() {
   return (
-    <section id="leistungen" className="relative py-32 sm:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
-        <div className="max-w-3xl mb-20">
+    <section id="leistungen" className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+        <div className="max-w-3xl mb-12 sm:mb-20">
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />

@@ -23,7 +23,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="relative py-32 sm:py-44 overflow-hidden">
+    <section className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
       {/* Statischer Dark-Gradient-Backdrop (kein Scroll-Handler mehr —
           spart Main-Thread-Arbeit auf jedem Frame). */}
       <div
@@ -35,8 +35,8 @@ export default function Process() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
-        <div className="max-w-3xl mb-16">
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-10">
+        <div className="max-w-3xl mb-12 sm:mb-16">
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />

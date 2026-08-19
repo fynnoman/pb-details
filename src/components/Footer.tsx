@@ -4,14 +4,14 @@ import { SITE } from "@/lib/site";
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-white/5 pt-20 pb-10 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
-        <div className="grid grid-cols-12 gap-8 mb-16">
+    <footer className="relative border-t border-white/5 pt-14 sm:pt-20 pb-10 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+        <div className="grid grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="col-span-12 md:col-span-5">
             <img
               src="/images/logo/pb-fahrzeugpflege-logo-black.png"
               alt="PB Fahrzeugpflege Saarlouis"
-              className="h-24 sm:h-28 w-auto object-contain mb-6 drop-shadow-[0_2px_12px_rgba(212,180,131,0.25)]"
+              className="h-20 sm:h-24 md:h-28 w-auto object-contain mb-6 drop-shadow-[0_2px_12px_rgba(212,180,131,0.25)]"
             />
             <p className="mt-2 text-sm text-[var(--ink-dim)] max-w-sm leading-relaxed">
               The Art of Detailing. Premium-Fahrzeugaufbereitung und

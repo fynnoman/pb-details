@@ -39,9 +39,9 @@ export default function WhyUs() {
   const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.02, 1.15]);
 
   return (
-    <section ref={ref} className="relative py-32 sm:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-16 items-end">
+    <section ref={ref} className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-12 sm:mb-16 items-end">
           <div className="col-span-12 lg:col-span-8">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">

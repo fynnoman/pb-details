@@ -16,7 +16,7 @@ const regions = [
 
 export default function Region() {
   return (
-    <section className="relative py-32 sm:py-40 overflow-hidden">
+    <section className="relative py-20 sm:py-28 lg:py-40 overflow-hidden">
       {/* Statischer Gradient-Backdrop */}
       <div
         aria-hidden
@@ -27,7 +27,7 @@ export default function Region() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-10">
         <div className="grid grid-cols-12 gap-8 items-center">
           <div className="col-span-12 lg:col-span-6">
             <Reveal>

@@ -8,7 +8,7 @@ export default function Contact() {
   const hasCalendly = Boolean(SITE.calendly.url);
 
   return (
-    <section id="kontakt" className="relative py-32 sm:py-44 overflow-hidden">
+    <section id="kontakt" className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
       {/* Statischer Foto-Background (kein Scroll-Handler mehr) */}
       <div aria-hidden className="absolute inset-0">
         <img
@@ -21,7 +21,7 @@ export default function Contact() {
         <div className="absolute inset-0 bg-black/35" />
       </div>
 
-      <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left — Copy + Direktdraht */}
           <div className="col-span-12 lg:col-span-5">

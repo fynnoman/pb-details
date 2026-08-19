@@ -100,9 +100,9 @@ function VehicleTile({ v, i }: { v: (typeof vehicles)[0]; i: number }) {
 
 export default function Vehicles() {
   return (
-    <section className="relative py-32 sm:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
-        <div className="grid grid-cols-12 gap-8 mb-16">
+    <section className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+        <div className="grid grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="col-span-12 lg:col-span-6">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -129,7 +129,7 @@ export default function Vehicles() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {vehicles.map((v, i) => (
             <VehicleTile key={v.label} v={v} i={i} />
           ))}
