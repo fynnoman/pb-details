@@ -6,6 +6,7 @@ import Services from "@/components/Services";
 import Vehicles from "@/components/Vehicles";
 import Process from "@/components/Process";
 import WhyUs from "@/components/WhyUs";
+import Awards from "@/components/Awards";
 import Region from "@/components/Region";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
@@ -68,6 +69,7 @@ export default function Home() {
         <Vehicles />
         <Process />
         <WhyUs />
+        <Awards />
         <Region />
         <FAQ />
         <Contact />

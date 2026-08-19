@@ -109,7 +109,6 @@ export default function LackBeulendoktorPage() {
         kicker="04 / Leistung · Lack- & Beulendoktor"
         title="Beulendoktor & Smart Repair in Saarlouis, dem Saarland & Luxemburg"
         subtitle="Lackschäden und Beulen am Fahrzeug schnell, effektiv und kostengünstig reparieren – mit Verfahren, die den Originallack Ihres Fahrzeugs erhalten."
-        backgroundImage="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=2400&q=85&auto=format&fit=crop"
       />
 
       <section className="relative py-24 sm:py-32">

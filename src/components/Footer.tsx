@@ -8,11 +8,12 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
         <div className="grid grid-cols-12 gap-8 mb-16">
           <div className="col-span-12 md:col-span-5">
-            <div className="font-display text-3xl sm:text-4xl leading-[1.05] tracking-[-0.02em] max-w-md">
-              <span className="text-chrome">PB Fahrzeugpflege</span>{" "}
-              <span className="italic text-gold">Saarlouis®</span>
-            </div>
-            <p className="mt-5 text-sm text-[var(--ink-dim)] max-w-sm leading-relaxed">
+            <img
+              src="/images/logo/pb-fahrzeugpflege-logo-black.png"
+              alt="PB Fahrzeugpflege Saarlouis"
+              className="h-24 sm:h-28 w-auto object-contain mb-6 drop-shadow-[0_2px_12px_rgba(212,180,131,0.25)]"
+            />
+            <p className="mt-2 text-sm text-[var(--ink-dim)] max-w-sm leading-relaxed">
               The Art of Detailing. Premium-Fahrzeugaufbereitung und
               Keramikversiegelung – inhabergeführt seit {SITE.founded}.
             </p>
@@ -136,6 +137,12 @@ export default function Footer() {
               AGB
             </Link>
           </div>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-white/5 text-center">
+          <p className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)]/70 leading-relaxed">
+            Diese Website wurde mit Unterstützung von Künstlicher Intelligenz erstellt.
+          </p>
         </div>
       </div>
     </footer>

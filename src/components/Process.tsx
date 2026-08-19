@@ -33,19 +33,19 @@ export default function Process() {
 
   return (
     <section ref={ref} className="relative py-32 sm:py-44 overflow-hidden">
-      {/* Background image with strong parallax */}
+      {/* Dark gradient backdrop with subtle motion */}
       <motion.div
         style={{ y, scale }}
+        aria-hidden
         className="absolute inset-0 will-change-transform"
       >
-        <img
-          src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?w=2000&q=85&auto=format&fit=crop"
-          alt=""
-          className="w-full h-full object-cover"
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(1400px 900px at 30% 20%, rgba(212,180,131,0.10), transparent 55%), radial-gradient(1000px 700px at 80% 90%, rgba(245,226,184,0.06), transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0a0906 55%, var(--bg) 100%)",
+          }}
         />
-        {/* Weich ausblendende Ränder + dezente Abdunklung für Lesbarkeit */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
-        <div className="absolute inset-0 bg-black/35" />
       </motion.div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">

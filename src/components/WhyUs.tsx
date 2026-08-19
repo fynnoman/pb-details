@@ -65,16 +65,34 @@ export default function WhyUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 1.1, ease: [0.2, 0.7, 0.2, 1] }}
-            className="col-span-12 md:col-span-7 relative aspect-[16/12] rounded-[1.75rem] overflow-hidden"
+            className="col-span-12 md:col-span-7 relative aspect-[16/12] rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
           >
-            <motion.img
-              src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1800&q=85&auto=format&fit=crop"
-              alt="Detailliert aufbereiteter Wagen"
+            <motion.div
+              aria-hidden
               style={{ y: imgY, scale: imgScale }}
-              className="absolute inset-0 w-full h-full object-cover will-change-transform"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+              className="absolute inset-0 will-change-transform"
+            >
+              <div
+                className="absolute inset-0 opacity-90"
+                style={{
+                  background:
+                    "radial-gradient(900px 600px at 50% 40%, rgba(212,180,131,0.28), transparent 55%), radial-gradient(700px 500px at 80% 80%, rgba(245,226,184,0.12), transparent 60%)",
+                }}
+              />
+            </motion.div>
+
+            {/* Zentriertes Logo */}
+            <div className="absolute inset-0 flex items-center justify-center p-8">
+              <motion.img
+                src="/images/logo/pb-fahrzeugpflege-logo-black.png"
+                alt="PB Fahrzeugpflege Saarlouis – seit 1997"
+                style={{ scale: imgScale }}
+                className="max-h-[70%] max-w-[60%] w-auto object-contain drop-shadow-[0_10px_40px_rgba(212,180,131,0.30)]"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 p-8">
               <div className="glass rounded-2xl px-5 py-4 inline-flex flex-col">
                 <span className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">

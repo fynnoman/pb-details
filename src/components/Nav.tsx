@@ -44,13 +44,12 @@ export default function Nav() {
             className="flex items-center gap-2 shrink-0 mr-2"
             aria-label="PB Fahrzeugpflege Saarlouis"
           >
-            <span className="relative flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-[#f5e2b8] via-[#d4b483] to-[#8a6a3f] text-[#100e0a] font-display font-bold text-lg shadow-inner">
-              PB
-            </span>
-            <span className="hidden sm:flex flex-col leading-tight">
-              <span className="text-[13px] font-medium tracking-[0.14em] uppercase text-chrome">
-                PB Fahrzeugpflege
-              </span>
+            <img
+              src="/images/logo/pb-fahrzeugpflege-logo-black.png"
+              alt="PB Fahrzeugpflege Saarlouis"
+              className="h-10 sm:h-11 w-auto object-contain drop-shadow-[0_2px_8px_rgba(212,180,131,0.25)]"
+            />
+            <span className="hidden md:flex flex-col leading-tight ml-1">
               <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--ink-mute)]">
                 The Art of Detailing
               </span>

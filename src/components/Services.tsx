@@ -11,8 +11,7 @@ const services = [
     title: "Keramikversiegelung",
     href: "/leistungen/keramikversiegelung/",
     desc: "High-End 9H-Lackschutz für Neuwagen, Sport- und Luxusfahrzeuge. Glasartige Schutzschicht auf Basis von Siliziumoxid, in über 20 Stunden Handarbeit aufgetragen.",
-    image:
-      "https://images.unsplash.com/photo-1607603750909-408e193868c7?w=1600&q=85&auto=format&fit=crop",
+    image: "/images/hero/schwarzes-auto-keramikversiegelung.jpg",
     features: ["Bis zu mehrere Jahre Schutz", "BRILA zertifiziert", "Ideal für Neuwagen ab Kilometer 0"],
   },
   {
@@ -20,8 +19,7 @@ const services = [
     title: "Nanoversiegelung",
     href: "/leistungen/nanoversiegelung/",
     desc: "Die preisbewusste Alternative zur Keramikversiegelung – 1K-Nanoversiegelung, die sich fest mit dem Lack verbindet und bis zu viermal länger hält als Wachs.",
-    image:
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?w=1600&q=85&auto=format&fit=crop",
+    image: "/images/hero/nanoversiegelung-abperleffekt.png",
     features: ["Schutz bis zu 18 Monate", "Easy-to-Clean-Effekt", "Günstiger Einstieg"],
   },
   {
@@ -29,8 +27,7 @@ const services = [
     title: "Fahrzeugaufbereitung",
     href: "/leistungen/fahrzeugaufbereitung/",
     desc: "Mehrstufige Innen- und Außenaufbereitung – von Vorwäsche über Lackkorrektur bis zur Versiegelung. Auch gezielt für Leasingrückgabe und Fahrzeugverkauf.",
-    image:
-      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&q=85&auto=format&fit=crop",
+    image: "/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg",
     features: ["Innen & Außen", "In der Regel 2–3 Werktage", "Werterhalt & Wertsteigerung"],
   },
   {
@@ -38,8 +35,7 @@ const services = [
     title: "Lack- & Beulendoktor",
     href: "/leistungen/lack-und-beulendoktor/",
     desc: "Smart Repair und lackschadenfreie Ausbeultechnik: Dellen und Lackschäden bis zu 70 % günstiger als eine klassische Lackierung reparieren – der Originallack bleibt erhalten.",
-    image:
-      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1600&q=85&auto=format&fit=crop",
+    image: "/images/hero/beulendoktor-smart-repair.png",
     features: ["Bis zu 70 % günstiger", "Paintless Dent Repair", "Werterhaltend"],
   },
   {
@@ -47,8 +43,7 @@ const services = [
     title: "Unfallschaden",
     href: "/unfallschaden/",
     desc: "Komplette Schadenabwicklung aus einer Hand – Gutachter, Anwalt, Leihwagen und Karosserieinstandsetzung nach Herstellervorgaben. Freie Werkstattwahl, ohne Termin.",
-    image:
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=85&auto=format&fit=crop",
+    image: "/images/hero/unfallschaden-werkstatt.jpg",
     features: ["Kostenlos bei Haftpflichtschäden*", "Ein Ansprechpartner", "Werterhalt bei Premium-Fahrzeugen"],
   },
 ];
@@ -80,16 +75,45 @@ function ServiceCard({
       <div className="col-span-12 lg:col-span-7">
         <Link
           href={service.href}
-          className="block relative aspect-[16/11] rounded-[1.8rem] overflow-hidden group"
+          className="block relative aspect-[16/11] rounded-[1.8rem] overflow-hidden group bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
         >
-          <motion.img
-            src={service.image}
-            alt={service.title}
-            style={{ y, scale }}
-            className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20 pointer-events-none" />
+          {service.image ? (
+            <>
+              <motion.img
+                src={service.image}
+                alt={service.title}
+                style={{ y, scale }}
+                className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20 pointer-events-none" />
+            </>
+          ) : (
+            <>
+              {/* Text-focused Card ohne Foto: subtile gold-radiale Textur */}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-70"
+                style={{
+                  background:
+                    "radial-gradient(1200px 600px at 20% 20%, rgba(212,180,131,0.14), transparent 55%), radial-gradient(900px 500px at 80% 80%, rgba(245,226,184,0.08), transparent 60%)",
+                }}
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 40%, rgba(212,180,131,0.05) 100%)",
+                }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="font-display italic text-[clamp(3rem,7vw,6rem)] leading-none text-chrome opacity-80 select-none pointer-events-none tracking-tighter">
+                  {service.title.split(" ")[0]}
+                </div>
+              </div>
+            </>
+          )}
           <div className="absolute top-6 left-6 glass rounded-full px-4 py-1.5 text-[10px] tracking-[0.32em] uppercase">
             {service.tag} / Leistung
           </div>

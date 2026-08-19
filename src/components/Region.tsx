@@ -29,16 +29,16 @@ export default function Region() {
     <section ref={ref} className="relative py-32 sm:py-40 overflow-hidden">
       <motion.div
         style={{ y: bgY, scale: bgScale }}
+        aria-hidden
         className="absolute inset-0 will-change-transform"
       >
-        <img
-          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=2000&q=85&auto=format&fit=crop"
-          alt=""
-          className="w-full h-full object-cover"
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(1200px 800px at 70% 30%, rgba(212,180,131,0.08), transparent 55%), radial-gradient(900px 700px at 20% 80%, rgba(245,226,184,0.05), transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0a0906 55%, var(--bg) 100%)",
+          }}
         />
-        {/* Weich ausblendende Ränder + dezente Abdunklung für Lesbarkeit */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
-        <div className="absolute inset-0 bg-black/35" />
       </motion.div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">

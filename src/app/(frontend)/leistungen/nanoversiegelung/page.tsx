@@ -108,7 +108,6 @@ export default function NanoversiegelungPage() {
         kicker="02 / Leistung · Nanoversiegelung"
         title="Nanoversiegelung fürs Auto in Saarlouis, dem Saarland & Luxemburg"
         subtitle="Die preisbewusste Alternative zur Keramikversiegelung – eine hochwertige 1K-Nanoversiegelung, die sich fest mit dem Autolack verbindet und bis zu viermal länger hält als eine herkömmliche Wachsversiegelung."
-        backgroundImage="https://images.unsplash.com/photo-1493238792000-8113da705763?w=2400&q=85&auto=format&fit=crop"
       />
 
       <section className="relative py-24 sm:py-32">
