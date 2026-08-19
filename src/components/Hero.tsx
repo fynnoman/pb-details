@@ -24,29 +24,16 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[100svh] w-full overflow-hidden grain vignette"
     >
-      {/* Background video */}
+      {/* Background image (Video-Fallback wegen Pexels-Hotlink-Block) */}
       <motion.div
         style={{ y, scale }}
         className="absolute inset-0 will-change-transform"
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=2400&q=85&auto=format&fit=crop"
+        <img
+          src="/images/hero/schwarzes-auto-keramikversiegelung.jpg"
+          alt=""
           className="w-full h-full object-cover"
-        >
-          <source
-            src="https://videos.pexels.com/video-files/6873975/6873975-uhd_2560_1440_25fps.mp4"
-            type="video/mp4"
-          />
-          <source
-            src="https://videos.pexels.com/video-files/3843433/3843433-hd_1920_1080_24fps.mp4"
-            type="video/mp4"
-          />
-        </video>
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-[var(--bg)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_0%,rgba(0,0,0,0.55)_70%)]" />
       </motion.div>

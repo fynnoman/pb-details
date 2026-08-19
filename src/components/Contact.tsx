@@ -19,25 +19,16 @@ export default function Contact() {
 
   return (
     <section id="kontakt" ref={ref} className="relative py-32 sm:py-44 overflow-hidden">
-      {/* Background video */}
+      {/* Background image (Video-Fallback wegen Pexels-Hotlink-Block) */}
       <motion.div
         style={{ y: bgY, scale: bgScale }}
         className="absolute inset-0 will-change-transform"
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="https://images.unsplash.com/photo-1493238792000-8113da705763?w=2000&q=85&auto=format&fit=crop"
+        <img
+          src="/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg"
+          alt=""
           className="w-full h-full object-cover"
-        >
-          <source
-            src="https://videos.pexels.com/video-files/3843433/3843433-hd_1920_1080_24fps.mp4"
-            type="video/mp4"
-          />
-        </video>
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
         <div className="absolute inset-0 bg-black/35" />
       </motion.div>
