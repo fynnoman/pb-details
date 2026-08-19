@@ -1,7 +1,5 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
 
@@ -17,29 +15,17 @@ const regions = [
 ];
 
 export default function Region() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.02, 1.1]);
-
   return (
-    <section ref={ref} className="relative py-32 sm:py-40 overflow-hidden">
-      <motion.div
-        style={{ y: bgY, scale: bgScale }}
+    <section className="relative py-32 sm:py-40 overflow-hidden">
+      {/* Statischer Gradient-Backdrop */}
+      <div
         aria-hidden
-        className="absolute inset-0 will-change-transform"
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(1200px 800px at 70% 30%, rgba(212,180,131,0.08), transparent 55%), radial-gradient(900px 700px at 20% 80%, rgba(245,226,184,0.05), transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0a0906 55%, var(--bg) 100%)",
-          }}
-        />
-      </motion.div>
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(1200px 800px at 70% 30%, rgba(212,180,131,0.08), transparent 55%), radial-gradient(900px 700px at 20% 80%, rgba(245,226,184,0.05), transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0a0906 55%, var(--bg) 100%)",
+        }}
+      />
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
         <div className="grid grid-cols-12 gap-8 items-center">

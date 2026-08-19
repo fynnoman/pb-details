@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 
 const steps = [
@@ -23,30 +22,18 @@ const steps = [
 ];
 
 export default function Process() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.02, 1.1]);
-
   return (
-    <section ref={ref} className="relative py-32 sm:py-44 overflow-hidden">
-      {/* Dark gradient backdrop with subtle motion */}
-      <motion.div
-        style={{ y, scale }}
+    <section className="relative py-32 sm:py-44 overflow-hidden">
+      {/* Statischer Dark-Gradient-Backdrop (kein Scroll-Handler mehr —
+          spart Main-Thread-Arbeit auf jedem Frame). */}
+      <div
         aria-hidden
-        className="absolute inset-0 will-change-transform"
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(1400px 900px at 30% 20%, rgba(212,180,131,0.10), transparent 55%), radial-gradient(1000px 700px at 80% 90%, rgba(245,226,184,0.06), transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0a0906 55%, var(--bg) 100%)",
-          }}
-        />
-      </motion.div>
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(1400px 900px at 30% 20%, rgba(212,180,131,0.10), transparent 55%), radial-gradient(1000px 700px at 80% 90%, rgba(245,226,184,0.06), transparent 60%), linear-gradient(180deg, var(--bg) 0%, #0a0906 55%, var(--bg) 100%)",
+        }}
+      />
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
         <div className="max-w-3xl mb-16">

@@ -19,7 +19,7 @@ const services = [
     title: "Nanoversiegelung",
     href: "/leistungen/nanoversiegelung/",
     desc: "Die preisbewusste Alternative zur Keramikversiegelung – 1K-Nanoversiegelung, die sich fest mit dem Lack verbindet und bis zu viermal länger hält als Wachs.",
-    image: "/images/hero/nanoversiegelung-abperleffekt.png",
+    image: "/images/hero/nanoversiegelung-abperleffekt.jpg",
     features: ["Schutz bis zu 18 Monate", "Easy-to-Clean-Effekt", "Günstiger Einstieg"],
   },
   {
@@ -35,7 +35,7 @@ const services = [
     title: "Lack- & Beulendoktor",
     href: "/leistungen/lack-und-beulendoktor/",
     desc: "Smart Repair und lackschadenfreie Ausbeultechnik: Dellen und Lackschäden bis zu 70 % günstiger als eine klassische Lackierung reparieren – der Originallack bleibt erhalten.",
-    image: "/images/hero/beulendoktor-smart-repair.png",
+    image: "/images/hero/beulendoktor-smart-repair.jpg",
     features: ["Bis zu 70 % günstiger", "Paintless Dent Repair", "Werterhaltend"],
   },
   {

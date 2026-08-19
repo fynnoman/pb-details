@@ -195,8 +195,21 @@ body {
     0 24px 60px -12px rgba(200, 150, 70, 0.55);
 }
 
+/* CSS-Marquee für Awards. Läuft off-main-thread und dropped keine
+   Frames beim Scrollen. Verdoppeltes Array + translate3d(-50%, 0, 0)
+   ergibt nahtlose Endlos-Schleife. */
+@keyframes marquee-slide {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee-slide 50s linear infinite;
+  will-change: transform;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   html { scroll-behavior: auto; }
+  .marquee-track { animation: none; }
 }

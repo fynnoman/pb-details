@@ -1,37 +1,25 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/site";
 import CalendlyEmbed from "./CalendlyEmbed";
 
 export default function Contact() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.12, 1.02, 1.12]);
-
   const hasCalendly = Boolean(SITE.calendly.url);
 
   return (
-    <section id="kontakt" ref={ref} className="relative py-32 sm:py-44 overflow-hidden">
-      {/* Background image (Video-Fallback wegen Pexels-Hotlink-Block) */}
-      <motion.div
-        style={{ y: bgY, scale: bgScale }}
-        className="absolute inset-0 will-change-transform"
-      >
+    <section id="kontakt" className="relative py-32 sm:py-44 overflow-hidden">
+      {/* Statischer Foto-Background (kein Scroll-Handler mehr) */}
+      <div aria-hidden className="absolute inset-0">
         <img
           src="/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg"
           alt=""
+          loading="lazy"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-transparent to-[var(--bg)]" />
         <div className="absolute inset-0 bg-black/35" />
-      </motion.div>
+      </div>
 
       <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">

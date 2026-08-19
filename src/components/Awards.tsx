@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Reveal from "./Reveal";
 
@@ -70,15 +69,10 @@ export default function Awards() {
           className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 sm:w-40 bg-gradient-to-l from-[var(--bg)] to-transparent"
         />
 
-        <motion.div
-          className="flex gap-8 sm:gap-14 items-center will-change-transform"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            duration: 50,
-            ease: "linear",
-            repeat: Infinity,
-          }}
-        >
+        {/* CSS-Marquee - läuft off-main-thread, deutlich smoother als
+            Framer Motion animate={{ x }} das auf requestAnimationFrame
+            im main thread läuft. */}
+        <div className="marquee-track flex gap-8 sm:gap-14 items-center">
           {marqueeBadges.map((b, i) => (
             <div
               key={`${b.src}-${i}`}
@@ -92,7 +86,7 @@ export default function Awards() {
               />
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Story-Cards */}

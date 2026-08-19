@@ -18,12 +18,12 @@ const vehicles = [
   {
     label: "Oldtimer",
     desc: "Sammlerfahrzeuge in bester Hand – Werterhalt für Generationen, mit Fingerspitzengefühl und Erfahrung.",
-    image: "/images/fahrzeuge/oldtimer-mercedes-300sl-werkstatt.png",
+    image: "/images/fahrzeuge/oldtimer-mercedes-300sl-werkstatt.jpg",
   },
   {
     label: "Gebrauchtwagen",
     desc: "Vor Leasingrückgabe oder Verkauf – gezielte Aufbereitung, die sichtbare Mängel reduziert und teure Nachberechnungen vermeidet.",
-    image: "/images/fahrzeuge/gebrauchtwagen-autohaus.png",
+    image: "/images/fahrzeuge/gebrauchtwagen-autohaus.jpg",
   },
 ];
 
