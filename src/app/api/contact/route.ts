@@ -68,42 +68,46 @@ async function sendMail(
   const resendKey = process.env.RESEND_API_KEY;
   const smtpHost = process.env.SMTP_HOST;
 
-  // 1. Formsubmit (bevorzugt, wenn gesetzt)
+  // 1. Formsubmit (bevorzugt, wenn gesetzt) — mit Fallback auf SMTP/Resend
+  //    wenn Formsubmit z. B. wegen Cloudflare-Challenge blockt.
   if (formsubmitEmail) {
-    const res = await fetch(
-      `https://formsubmit.co/ajax/${encodeURIComponent(formsubmitEmail)}`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          accept: "application/json",
-          origin: originUrl,
-          referer: originUrl,
+    try {
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(formsubmitEmail)}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            accept: "application/json",
+            origin: originUrl,
+            referer: originUrl,
+          },
+          body: JSON.stringify({
+            _subject: mc.subject,
+            _replyto: mc.replyTo,
+            _template: "table",
+            _captcha: "false",
+            _url: originUrl,
+            ...mc.fields,
+          }),
         },
-        body: JSON.stringify({
-          _subject: mc.subject,
-          _replyto: mc.replyTo,
-          _template: "table",
-          _captcha: "false",
-          _url: originUrl,
-          ...mc.fields,
-        }),
-      },
-    );
-    if (!res.ok) {
-      const body = await res.text().catch(() => "");
-      throw new Error(`Formsubmit HTTP ${res.status}: ${body}`);
-    }
-    const json = (await res.json().catch(() => ({}))) as {
-      success?: boolean | string;
-      message?: string;
-    };
-    if (json.success !== true && json.success !== "true") {
-      throw new Error(
-        `Formsubmit: ${json.message ?? "unbekannter Fehler (evtl. Aktivierung fehlt)"}`,
       );
+      if (!res.ok) {
+        const body = await res.text().catch(() => "");
+        throw new Error(`Formsubmit HTTP ${res.status}: ${body.slice(0, 200)}`);
+      }
+      const json = (await res.json().catch(() => ({}))) as {
+        success?: boolean | string;
+        message?: string;
+      };
+      if (json.success !== true && json.success !== "true") {
+        throw new Error(`Formsubmit: ${json.message ?? "unbekannter Fehler"}`);
+      }
+      return;
+    } catch (err) {
+      console.warn("[contact] Formsubmit failed, trying next provider:", err);
+      // durchfallen zum nächsten Provider (SMTP/Resend)
     }
-    return;
   }
 
   const to = process.env.CONTACT_TO ?? ctx.email;
