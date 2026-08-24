@@ -42,5 +42,6 @@ yarn-error.log*
 next-env.d.ts
 
 # Payload CMS
-/public/media
+# /public/media wurde ins Repo aufgenommen: Vercel-Filesystem ist read-only,
+# ohne Commit fehlen die geseedeten Bilder auf Prod.
 src/payload/payload-types.ts
