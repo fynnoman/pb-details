@@ -68,8 +68,30 @@ async function sendMail(
   const resendKey = process.env.RESEND_API_KEY;
   const smtpHost = process.env.SMTP_HOST;
 
-  // 1. Formsubmit (bevorzugt, wenn gesetzt) — mit Fallback auf SMTP/Resend
-  //    wenn Formsubmit z. B. wegen Cloudflare-Challenge blockt.
+  const to = process.env.CONTACT_TO ?? ctx.email;
+  const from =
+    process.env.MAIL_FROM ?? process.env.SMTP_FROM ?? `no-reply@${new URL(ctx.domain).hostname}`;
+
+  // 1. Resend (API-basiert, zuverlässiger als Formsubmit + Office365-SMTP)
+  if (resendKey) {
+    try {
+      const resend = new Resend(resendKey);
+      const { error } = await resend.emails.send({
+        from,
+        to: [to],
+        replyTo: mc.replyTo,
+        subject: mc.subject,
+        text: mc.text,
+      });
+      if (error) throw new Error(`Resend: ${error.message ?? "unknown error"}`);
+      return;
+    } catch (err) {
+      console.warn("[contact] Resend failed, trying next provider:", err);
+    }
+  }
+
+  // 2. Formsubmit — mit Fallback auf SMTP wenn Formsubmit z. B. wegen
+  //    Cloudflare-Challenge blockt.
   if (formsubmitEmail) {
     try {
       const res = await fetch(
@@ -108,24 +130,6 @@ async function sendMail(
       console.warn("[contact] Formsubmit failed, trying next provider:", err);
       // durchfallen zum nächsten Provider (SMTP/Resend)
     }
-  }
-
-  const to = process.env.CONTACT_TO ?? ctx.email;
-  const from =
-    process.env.MAIL_FROM ?? process.env.SMTP_FROM ?? `no-reply@${new URL(ctx.domain).hostname}`;
-
-  // 2. Resend
-  if (resendKey) {
-    const resend = new Resend(resendKey);
-    const { error } = await resend.emails.send({
-      from,
-      to: [to],
-      replyTo: mc.replyTo,
-      subject: mc.subject,
-      text: mc.text,
-    });
-    if (error) throw new Error(`Resend: ${error.message ?? "unknown error"}`);
-    return;
   }
 
   // 3. SMTP-Fallback
