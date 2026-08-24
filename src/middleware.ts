@@ -25,7 +25,11 @@ export function middleware(req: NextRequest) {
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
     pathname.startsWith("/favicon") ||
-    pathname.startsWith("/maintenance");
+    pathname.startsWith("/maintenance") ||
+    // Pflichtangaben müssen auch während der Umbauphase erreichbar bleiben
+    pathname.startsWith("/impressum") ||
+    pathname.startsWith("/datenschutzerklaerung") ||
+    pathname.startsWith("/allgemeine-geschaeftsbedingungen");
   if (passThrough) return NextResponse.next();
 
   const url = req.nextUrl.clone();

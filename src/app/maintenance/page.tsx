@@ -133,6 +133,35 @@ export default function MaintenancePage() {
             <br />
             Mo–Fr 09–12 · 13–17 · Sa 09–12
           </div>
+
+          <div
+            style={{
+              marginTop: 18,
+              display: "flex",
+              gap: 20,
+              justifyContent: "center",
+              fontSize: 12,
+            }}
+          >
+            <a
+              href="/impressum/"
+              style={{ color: "#928c81", textDecoration: "none" }}
+            >
+              Impressum
+            </a>
+            <a
+              href="/datenschutzerklaerung/"
+              style={{ color: "#928c81", textDecoration: "none" }}
+            >
+              Datenschutz
+            </a>
+            <a
+              href="/allgemeine-geschaeftsbedingungen/"
+              style={{ color: "#928c81", textDecoration: "none" }}
+            >
+              AGB
+            </a>
+          </div>
         </main>
       </body>
     </html>
