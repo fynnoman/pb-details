@@ -3,7 +3,8 @@
 import Reveal from "./Reveal";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import type { SiteSettings } from "@/lib/site-data";
+import type { HomeData, SiteSettings } from "@/lib/site-types";
+import EditableText from "./edit/EditableText";
 
 export default function WhyUs({
   heading,
@@ -11,13 +12,19 @@ export default function WhyUs({
   mottoLabel = "Motto",
   mottoText,
   settings,
+  home,
 }: {
   heading?: string;
   bullets?: Array<{ text: string }>;
   mottoLabel?: string;
   mottoText?: string;
   settings: SiteSettings;
+  home?: HomeData;
 }) {
+  const kickerText = home?.whyUs?.kicker || "Warum PB Fahrzeugpflege";
+  const headingText = heading || "Handwerk, das seit fast 30 Jahren Vertrauen schafft.";
+  const mottoLabelText = mottoLabel || "Motto";
+  const mottoTextText = mottoText || "";
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -55,12 +62,12 @@ export default function WhyUs({
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                Warum PB Fahrzeugpflege
+                <EditableText globalSlug="home" path="whyUs.kicker" value={kickerText} />
               </p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.8rem)] leading-[1.02] tracking-[-0.025em] max-w-[18ch]">
-                {heading || "Handwerk, das seit fast 30 Jahren Vertrauen schafft."}
+                <EditableText globalSlug="home" path="whyUsHeading" value={headingText} multiline />
               </h2>
             </Reveal>
           </div>
@@ -99,18 +106,16 @@ export default function WhyUs({
             </div>
 
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-            {mottoText && (
-              <div className="absolute inset-x-0 bottom-0 p-8">
-                <div className="glass rounded-2xl px-5 py-4 inline-flex flex-col">
-                  <span className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">
-                    {mottoLabel}
-                  </span>
-                  <span className="font-display text-xl sm:text-2xl italic text-chrome mt-1">
-                    {mottoText}
-                  </span>
-                </div>
+            <div className="absolute inset-x-0 bottom-0 p-8">
+              <div className="glass rounded-2xl px-5 py-4 inline-flex flex-col">
+                <span className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">
+                  <EditableText globalSlug="home" path="mottoLabel" value={mottoLabelText} />
+                </span>
+                <span className="font-display text-xl sm:text-2xl italic text-chrome mt-1">
+                  <EditableText globalSlug="home" path="mottoText" value={mottoTextText} />
+                </span>
               </div>
-            )}
+            </div>
           </motion.div>
 
           <div className="col-span-12 md:col-span-5 grid grid-cols-2 gap-4 sm:gap-6 content-start">
@@ -137,7 +142,7 @@ export default function WhyUs({
             <div className="col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-2">
               {bullets.map((b, i) => (
                 <motion.div
-                  key={b.text}
+                  key={i}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
@@ -147,7 +152,13 @@ export default function WhyUs({
                   <span className="mt-1 shrink-0 w-4 h-4 rounded-full bg-gradient-to-br from-[#f5e2b8] to-[#8a6a3f] flex items-center justify-center text-[8px] text-black">
                     ✓
                   </span>
-                  <span className="text-[var(--ink-dim)]">{b.text}</span>
+                  <span className="text-[var(--ink-dim)]">
+                    <EditableText
+                      globalSlug="home"
+                      path={`whyUsBullets.${i}.text`}
+                      value={b.text}
+                    />
+                  </span>
                 </motion.div>
               ))}
             </div>

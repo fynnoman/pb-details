@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
+import EditableText from "./edit/EditableText";
 
 export type ProcessStep = { title: string; description: string };
 
@@ -17,6 +18,9 @@ export default function Process({
   footnote?: string;
 }) {
   const items = steps && steps.length > 0 ? steps : [];
+  const kickerText = kicker || "So läuft es bei uns ab";
+  const headingText = heading || "In drei Schritten zu Ihrem Ergebnis.";
+  const footnoteText = footnote || "";
 
   return (
     <section className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
@@ -34,12 +38,12 @@ export default function Process({
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-              {kicker || "So läuft es bei uns ab"}
+              <EditableText globalSlug="home" path="processKicker" value={kickerText} />
             </p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
-              {heading || "In drei Schritten zu Ihrem Ergebnis."}
+              <EditableText globalSlug="home" path="processHeading" value={headingText} />
             </h2>
           </Reveal>
         </div>
@@ -47,7 +51,7 @@ export default function Process({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {items.map((s, i) => (
             <motion.div
-              key={s.title}
+              key={i}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -61,18 +65,29 @@ export default function Process({
                 Schritt {String(i + 1).padStart(2, "0")}
               </div>
               <h3 className="font-display text-3xl leading-tight tracking-[-0.02em]">
-                {s.title}
+                <EditableText
+                  globalSlug="home"
+                  path={`processSteps.${i}.title`}
+                  value={s.title}
+                />
               </h3>
-              <p className="mt-4 text-[var(--ink-dim)] leading-relaxed">{s.description}</p>
+              <p className="mt-4 text-[var(--ink-dim)] leading-relaxed">
+                <EditableText
+                  globalSlug="home"
+                  path={`processSteps.${i}.description`}
+                  value={s.description}
+                  multiline
+                />
+              </p>
             </motion.div>
           ))}
         </div>
 
-        {footnote && (
-          <Reveal delay={0.3}>
-            <p className="mt-12 text-center text-sm text-[var(--ink-mute)]">{footnote}</p>
-          </Reveal>
-        )}
+        <Reveal delay={0.3}>
+          <p className="mt-12 text-center text-sm text-[var(--ink-mute)]">
+            <EditableText globalSlug="home" path="processFootnote" value={footnoteText} multiline />
+          </p>
+        </Reveal>
       </div>
     </section>
   );

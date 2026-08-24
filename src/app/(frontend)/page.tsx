@@ -52,7 +52,7 @@ export default async function HomePage() {
     loadFaqsByTopic("home"),
   ]);
 
-  const homeFaqs = faqs.map((f) => ({ question: f.question, answer: f.answer }));
+  const homeFaqs = faqs.map((f) => ({ id: f.id, question: f.question, answer: f.answer }));
   const webPage = webPageSchema({
     path: "/",
     name: home.metaTitle || home.title,
@@ -72,9 +72,9 @@ export default async function HomePage() {
       <ScrollTopOnLoad />
       <main className="relative">
         <Hero home={home} settings={settings} />
-        <Anspruch settings={settings} />
-        <Services services={services} />
-        <Vehicles vehicles={vehicles} />
+        <Anspruch settings={settings} home={home} />
+        <Services services={services} home={home} />
+        <Vehicles vehicles={vehicles} home={home} />
         <Process
           kicker={home.processKicker}
           heading={home.processHeading}
@@ -88,10 +88,10 @@ export default async function HomePage() {
           mottoText={home.mottoText}
           settings={settings}
         />
-        <Awards awards={awards} />
+        <Awards awards={awards} home={home} />
         <Region home={home} settings={settings} />
-        <FAQ faqs={homeFaqs} />
-        <Contact settings={settings} />
+        <FAQ faqs={homeFaqs} home={home} />
+        <Contact settings={settings} home={home} />
       </main>
     </>
   );

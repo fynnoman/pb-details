@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { SiteSettings, FooterData } from "@/lib/site-data";
+import type { SiteSettings, FooterData } from "@/lib/site-types";
+import EditableText from "./edit/EditableText";
 
 export default function Footer({
   settings,
@@ -24,16 +25,12 @@ export default function Footer({
               alt="PB Fahrzeugpflege Saarlouis"
               className="h-20 sm:h-24 md:h-28 w-auto object-contain mb-6 drop-shadow-[0_2px_12px_rgba(212,180,131,0.25)]"
             />
-            {footer.intro && (
-              <p className="mt-2 text-sm text-[var(--ink-dim)] max-w-sm leading-relaxed">
-                {footer.intro}
-              </p>
-            )}
-            {footer.motto && (
-              <div className="mt-8 text-xs tracking-[0.32em] uppercase text-[var(--gold)]">
-                {footer.motto}
-              </div>
-            )}
+            <p className="mt-2 text-sm text-[var(--ink-dim)] max-w-sm leading-relaxed">
+              <EditableText globalSlug="footer" path="intro" value={footer.intro || ""} multiline />
+            </p>
+            <div className="mt-8 text-xs tracking-[0.32em] uppercase text-[var(--gold)]">
+              <EditableText globalSlug="footer" path="motto" value={footer.motto || ""} />
+            </div>
           </div>
 
           <div className="col-span-6 md:col-span-3">
@@ -140,25 +137,23 @@ export default function Footer({
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[var(--ink-mute)]">
           <div>© {year} {settings.name} ® — Alle Rechte vorbehalten.</div>
           <div className="flex gap-6">
-            {footer.legalLinks.map((l) => (
+            {footer.legalLinks.map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
                 className="hover:text-[var(--ink)] transition-colors"
               >
-                {l.label}
+                <EditableText globalSlug="footer" path={`legalLinks.${i}.label`} value={l.label} />
               </Link>
             ))}
           </div>
         </div>
 
-        {footer.aiNote && (
-          <div className="mt-8 pt-6 border-t border-white/5 text-center">
-            <p className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)]/70 leading-relaxed">
-              {footer.aiNote}
-            </p>
-          </div>
-        )}
+        <div className="mt-8 pt-6 border-t border-white/5 text-center">
+          <p className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)]/70 leading-relaxed">
+            <EditableText globalSlug="footer" path="aiNote" value={footer.aiNote || ""} multiline />
+          </p>
+        </div>
       </div>
     </footer>
   );

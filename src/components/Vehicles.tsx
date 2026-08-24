@@ -3,8 +3,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Reveal from "./Reveal";
-import { mediaUrl } from "@/lib/site-data";
-import type { MediaDoc } from "@/lib/site-data";
+import { mediaUrl } from "@/lib/media";
+import type { MediaDoc } from "@/lib/media";
+import EditableImage from "./edit/EditableImage";
+import EditableText from "./edit/EditableText";
 
 export type VehicleItem = {
   id: string | number;
@@ -35,13 +37,15 @@ function VehicleTile({ v, i }: { v: VehicleItem; i: number }) {
     >
       {url && (
         <>
-          <motion.img
-            src={url}
-            alt={v.image?.alt || v.label}
-            style={{ y, scale }}
-            className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
-            loading="lazy"
-          />
+          <EditableImage collection="vehicles" docId={v.id} path="image" className="absolute inset-0">
+            <motion.img
+              src={url}
+              alt={v.image?.alt || v.label}
+              style={{ y, scale }}
+              className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
+              loading="lazy"
+            />
+          </EditableImage>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         </>
       )}
@@ -50,10 +54,10 @@ function VehicleTile({ v, i }: { v: VehicleItem; i: number }) {
           {String(i + 1).padStart(2, "0")}
         </div>
         <h3 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.02em]">
-          {v.label}
+          <EditableText collection="vehicles" docId={v.id} path="label" value={v.label} />
         </h3>
         <p className="mt-3 text-sm text-[var(--ink-dim)] leading-relaxed max-w-xs">
-          {v.description}
+          <EditableText collection="vehicles" docId={v.id} path="description" value={v.description} multiline />
         </p>
       </div>
       <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-[1.5rem] pointer-events-none" />
@@ -61,7 +65,18 @@ function VehicleTile({ v, i }: { v: VehicleItem; i: number }) {
   );
 }
 
-export default function Vehicles({ vehicles }: { vehicles: VehicleItem[] }) {
+export default function Vehicles({
+  vehicles,
+  home,
+}: {
+  vehicles: VehicleItem[];
+  home?: import("@/lib/site-types").HomeData;
+}) {
+  const t = home?.vehicles || {};
+  const kicker = t.kicker || "Spezialisierung";
+  const title = t.title || "Auf welche Fahrzeuge wir";
+  const titleHighlight = t.titleHighlight || "spezialisiert sind.";
+  const intro = t.intro || "Wir sind auf die Aufbereitung und den Lackschutz hochwertiger Fahrzeuge spezialisiert und betreuen ausschließlich private Kundenfahrzeuge. Jede Aufbereitung beginnt mit einer persönlichen Begutachtung – so erhalten Sie ein realistisches Angebot statt eines Pauschalversprechens.";
   return (
     <section className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
@@ -70,23 +85,28 @@ export default function Vehicles({ vehicles }: { vehicles: VehicleItem[] }) {
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                Spezialisierung
+                <EditableText globalSlug="home" path="vehicles.kicker" value={kicker} />
               </p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
-                Auf welche Fahrzeuge wir <span className="italic text-gold">spezialisiert</span> sind.
+                <EditableText
+                  globalSlug="home"
+                  path="vehicles.title"
+                  value={title}
+                  render={(v) => (
+                    <>
+                      {v} <span className="italic text-gold">{titleHighlight}</span>
+                    </>
+                  )}
+                />
               </h2>
             </Reveal>
           </div>
           <div className="col-span-12 lg:col-span-6 lg:pt-16">
             <Reveal delay={0.1}>
               <p className="text-[var(--ink-dim)] leading-relaxed">
-                Wir sind auf die Aufbereitung und den Lackschutz hochwertiger
-                Fahrzeuge spezialisiert und betreuen ausschließlich private
-                Kundenfahrzeuge. Jede Aufbereitung beginnt mit einer
-                persönlichen Begutachtung – so erhalten Sie ein realistisches
-                Angebot statt eines Pauschalversprechens.
+                <EditableText globalSlug="home" path="vehicles.intro" value={intro} multiline />
               </p>
             </Reveal>
           </div>

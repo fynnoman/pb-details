@@ -1,0 +1,251 @@
+/**
+ * Edit-Mode-Styles. Wird global geladen, greift aber nur wenn <html> die
+ * Klasse `.edit-mode` trägt (gesetzt durch EditModeSetup).
+ */
+
+:root {
+  --edit-accent: #a37b3f;
+  --edit-accent-soft: #c9a25c;
+  --edit-accent-tint: rgba(163, 123, 63, 0.15);
+  --edit-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ── Nav im Edit-Modus ausblenden, damit sie mit Bild-Buttons nicht kollidiert */
+
+.edit-mode header[class*="fixed"] {
+  display: none !important;
+}
+
+/* Hero-Content-Padding bleibt gleich, weil hero pt-32/pt-44 ausreicht
+   und die Nav nur die Position ändert. */
+
+/* ── Toolbar (fixed top) ────────────────────────────────────────── */
+
+.edit-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: rgba(20, 18, 14, 0.94);
+  color: #f4f2ee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  font-family: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.4);
+}
+
+.edit-toolbar__inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 56px;
+}
+
+.edit-toolbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.edit-toolbar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--edit-accent-soft);
+  box-shadow: 0 0 0 3px rgba(201, 162, 92, 0.25);
+  animation: edit-pulse 2.4s ease-in-out infinite;
+}
+@keyframes edit-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(201, 162, 92, 0.25); }
+  50%      { box-shadow: 0 0 0 6px rgba(201, 162, 92, 0.15); }
+}
+
+.edit-toolbar__title { font-weight: 600; letter-spacing: -0.005em; }
+.edit-toolbar__sub {
+  font-size: 11px;
+  color: #a09b91;
+  letter-spacing: 0.02em;
+}
+
+.edit-toolbar__status {
+  flex: 1;
+  color: #d6d1c6;
+}
+.edit-toolbar__status strong {
+  color: var(--edit-accent-soft);
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.edit-toolbar__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.edit-btn {
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    transform 160ms var(--edit-ease),
+    background 180ms var(--edit-ease),
+    opacity 180ms var(--edit-ease);
+  border: none;
+  font-family: inherit;
+  letter-spacing: -0.005em;
+}
+.edit-btn:active:not(:disabled) { transform: scale(0.97); }
+.edit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.edit-btn--primary {
+  background: linear-gradient(180deg, var(--edit-accent-soft), var(--edit-accent));
+  color: #14120d;
+}
+.edit-btn--primary:hover:not(:disabled) { filter: brightness(1.05); }
+
+.edit-btn--ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f4f2ee;
+}
+.edit-btn--ghost:hover:not(:disabled) { background: rgba(255, 255, 255, 0.14); }
+
+.edit-btn--link {
+  background: transparent;
+  color: #a09b91;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-size: 12px;
+}
+.edit-btn--link:hover { color: #f4f2ee; }
+
+/* ── Bild-Drop-Zone im Edit-Modus ───────────────────────────────── */
+
+.edit-mode .edit-image {
+  position: relative;
+  outline: 2px dashed transparent;
+  outline-offset: -6px;
+  transition: outline-color 180ms var(--edit-ease);
+}
+.edit-mode .edit-image--drag {
+  outline-color: var(--edit-accent);
+}
+.edit-mode .edit-image--drag::after {
+  content: "Loslassen zum Ersetzen";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(163, 123, 63, 0.4);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  z-index: 5;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+
+.edit-mode .edit-image__badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 15;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--edit-accent-soft), var(--edit-accent));
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 8px 24px -8px rgba(163, 123, 63, 0.55),
+    0 2px 6px -1px rgba(0, 0, 0, 0.2);
+  transition:
+    background 180ms var(--edit-ease),
+    transform 160ms var(--edit-ease),
+    filter 180ms var(--edit-ease);
+  opacity: 1;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+}
+.edit-mode .edit-image__badge::before {
+  content: "📷";
+  font-size: 14px;
+  filter: grayscale(0);
+}
+.edit-mode .edit-image__badge:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.edit-mode .edit-image__badge:active { transform: scale(0.97); }
+
+/* ── Text-Editor (contentEditable) ──────────────────────────────── */
+
+.edit-mode .edit-text {
+  position: relative;
+  cursor: text;
+  transition:
+    background 180ms var(--edit-ease),
+    box-shadow 180ms var(--edit-ease);
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: -2px -6px;
+  outline: none;
+  caret-color: #000000 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .edit-mode .edit-text:hover {
+    background: var(--edit-accent-tint);
+    box-shadow: 0 0 0 1px var(--edit-accent-soft);
+  }
+}
+
+/* Aktiv-Zustand: WEISSER Kartenhintergrund + Gold-Rand + SCHWARZER Text.
+   Wichtig: gradient-text (.text-chrome/.text-gold nutzen
+   -webkit-text-fill-color: transparent) muss überschrieben werden, sonst
+   sieht man weder Text noch Cursor. */
+.edit-mode .edit-text:focus {
+  background: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  box-shadow:
+    0 0 0 3px var(--edit-accent),
+    0 12px 32px -12px rgba(0, 0, 0, 0.45);
+  caret-color: #000000 !important;
+  font-style: normal !important;
+}
+.edit-mode .edit-text:focus * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background: transparent !important;
+  background-image: none !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  text-shadow: none !important;
+  filter: none !important;
+  font-style: normal !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edit-text, .edit-btn { transition: none !important; }
+  .edit-toolbar__dot { animation: none; }
+}

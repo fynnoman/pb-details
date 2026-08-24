@@ -4,8 +4,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import Reveal from "./Reveal";
-import { mediaUrl } from "@/lib/site-data";
-import type { MediaDoc } from "@/lib/site-data";
+import { mediaUrl } from "@/lib/media";
+import type { MediaDoc } from "@/lib/media";
+import EditableImage from "./edit/EditableImage";
+import EditableText from "./edit/EditableText";
 
 export type ServiceItem = {
   id: string | number;
@@ -49,13 +51,15 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
         >
           {imageUrl && (
             <>
-              <motion.img
-                src={imageUrl}
-                alt={service.heroImage?.alt || service.title}
-                style={{ y, scale }}
-                className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
-                loading="lazy"
-              />
+              <EditableImage collection="services" docId={service.id} path="heroImage" className="absolute inset-0">
+                <motion.img
+                  src={imageUrl}
+                  alt={service.heroImage?.alt || service.title}
+                  style={{ y, scale }}
+                  className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
+                  loading="lazy"
+                />
+              </EditableImage>
               <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20 pointer-events-none" />
             </>
           )}
@@ -73,26 +77,45 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
         </Reveal>
         <Reveal>
           <h3 className="font-display text-[clamp(1.8rem,3.5vw,3rem)] leading-[1.05] tracking-[-0.02em]">
-            <Link href={href} className="hover:text-gold transition-colors">
-              {service.title}
-            </Link>
+            <EditableText
+              collection="services"
+              docId={service.id}
+              path="title"
+              value={service.title}
+              render={(v) => (
+                <Link href={href} className="hover:text-gold transition-colors">
+                  {v}
+                </Link>
+              )}
+            />
           </h3>
         </Reveal>
         <Reveal delay={0.05}>
           <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-md">
-            {service.intro}
+            <EditableText
+              collection="services"
+              docId={service.id}
+              path="intro"
+              value={service.intro}
+              multiline
+            />
           </p>
         </Reveal>
         {service.features && service.features.length > 0 && (
           <Reveal delay={0.1}>
             <ul className="mt-8 space-y-2">
-              {service.features.map((f) => (
+              {service.features.map((f, fi) => (
                 <li
-                  key={f.text}
+                  key={fi}
                   className="flex items-center gap-3 text-sm text-[var(--ink)]"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
-                  {f.text}
+                  <EditableText
+                    collection="services"
+                    docId={service.id}
+                    path={`features.${fi}.text`}
+                    value={f.text}
+                  />
                 </li>
               ))}
             </ul>
@@ -117,7 +140,18 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
   );
 }
 
-export default function Services({ services }: { services: ServiceItem[] }) {
+export default function Services({
+  services,
+  home,
+}: {
+  services: ServiceItem[];
+  home?: import("@/lib/site-types").HomeData;
+}) {
+  const t = home?.services || {};
+  const kicker = t.kicker || "Unsere Leistungen";
+  const title = t.title || "Alles rund um Lackschutz, Aufbereitung und Schadenbehebung";
+  const titleHighlight = t.titleHighlight || " — aus einer Hand.";
+  const intro = t.intro || "Bei PB Fahrzeugpflege Saarlouis erhalten Sie alle Leistungen rund um Lackschutz, Aufbereitung und Schadenbehebung aus einer Hand – seit 1997 in Ensdorf bei Saarlouis.";
   return (
     <section id="leistungen" className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
@@ -125,20 +159,27 @@ export default function Services({ services }: { services: ServiceItem[] }) {
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-              Unsere Leistungen
+              <EditableText globalSlug="home" path="services.kicker" value={kicker} />
             </p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-display text-[clamp(2.2rem,5vw,4.2rem)] leading-[1.02] tracking-[-0.025em]">
-              Alles rund um Lackschutz, Aufbereitung und Schadenbehebung
-              <span className="italic text-gold"> — aus einer Hand.</span>
+              <EditableText
+                globalSlug="home"
+                path="services.title"
+                value={title}
+                render={(v) => (
+                  <>
+                    {v}
+                    <span className="italic text-gold">{titleHighlight}</span>
+                  </>
+                )}
+              />
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-xl">
-              Bei PB Fahrzeugpflege Saarlouis erhalten Sie alle Leistungen rund
-              um Lackschutz, Aufbereitung und Schadenbehebung aus einer Hand –
-              seit 1997 in Ensdorf bei Saarlouis.
+              <EditableText globalSlug="home" path="services.intro" value={intro} multiline />
             </p>
           </Reveal>
         </div>

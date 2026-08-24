@@ -1,11 +1,26 @@
 "use client";
 
 import Reveal from "./Reveal";
-import type { SiteSettings } from "@/lib/site-data";
+import type { HomeData, SiteSettings } from "@/lib/site-types";
 import CalendlyEmbed from "./CalendlyEmbed";
+import EditableText from "./edit/EditableText";
 
-export default function Contact({ settings }: { settings: SiteSettings }) {
+export default function Contact({
+  settings,
+  home,
+}: {
+  settings: SiteSettings;
+  home?: HomeData;
+}) {
   const hasCalendly = Boolean(settings.calendly?.url);
+  const t = home?.contact || {};
+  const kicker = t.kicker || "Termin vereinbaren";
+  const title = t.title || "Sprechen wir über Ihr";
+  const titleHighlight = t.titleHighlight || "Fahrzeug.";
+  const intro = t.intro || "Wählen Sie direkt einen Termin aus – oder rufen Sie an. Eine unverbindliche Begutachtung ist auch ohne Termin möglich, während unserer Öffnungszeiten.";
+  const directLabel = t.directLabel || "Direkter Draht";
+  const callAt = t.callAt || "Anrufen · Mo–Sa";
+  const response = t.response || "Antwort in 24 h";
 
   return (
     <section id="kontakt" className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
@@ -26,26 +41,33 @@ export default function Contact({ settings }: { settings: SiteSettings }) {
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                Termin vereinbaren
+                <EditableText globalSlug="home" path="contact.kicker" value={kicker} />
               </p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="font-display text-[clamp(2.2rem,5vw,4.2rem)] leading-[1.0] tracking-[-0.03em]">
-                Sprechen wir über Ihr <span className="italic text-gold">Fahrzeug.</span>
+                <EditableText
+                  globalSlug="home"
+                  path="contact.title"
+                  value={title}
+                  render={(v) => (
+                    <>
+                      {v} <span className="italic text-gold">{titleHighlight}</span>
+                    </>
+                  )}
+                />
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-8 text-[var(--ink-dim)] leading-relaxed max-w-md">
-                Wählen Sie direkt einen Termin aus – oder rufen Sie an. Eine
-                unverbindliche Begutachtung ist auch ohne Termin möglich,
-                während unserer Öffnungszeiten.
+                <EditableText globalSlug="home" path="contact.intro" value={intro} multiline />
               </p>
             </Reveal>
 
             <Reveal delay={0.15}>
               <div className="mt-10 glass-strong rounded-[1.75rem] p-6 sm:p-7">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-2">
-                  Direkter Draht
+                  <EditableText globalSlug="home" path="contact.directLabel" value={directLabel} />
                 </div>
                 <a href={`tel:${settings.phone.e164}`} className="group flex items-center gap-5">
                   <span className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#f5e2b8] via-[#d4b483] to-[#8a6a3f] flex items-center justify-center text-[#100e0a] shrink-0 shadow-lg">
@@ -67,10 +89,10 @@ export default function Contact({ settings }: { settings: SiteSettings }) {
                   </span>
                   <span className="flex flex-col">
                     <span className="text-[11px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">
-                      Anrufen · Mo–Sa
+                      <EditableText globalSlug="home" path="contact.callAt" value={callAt} />
                     </span>
                     <span className="font-display text-2xl sm:text-3xl text-chrome tracking-[-0.01em]">
-                      {settings.phone.display}
+                      <EditableText globalSlug="settings" path="phone.display" value={settings.phone.display} />
                     </span>
                   </span>
                 </a>
@@ -89,9 +111,11 @@ export default function Contact({ settings }: { settings: SiteSettings }) {
                     href={`mailto:${settings.email}`}
                     className="text-[var(--ink-dim)] hover:text-[var(--ink)]"
                   >
-                    {settings.email}
+                    <EditableText globalSlug="settings" path="email" value={settings.email} />
                   </a>
-                  <span className="text-[var(--ink-mute)]">Antwort in 24 h</span>
+                  <span className="text-[var(--ink-mute)]">
+                    <EditableText globalSlug="home" path="contact.response" value={response} />
+                  </span>
                 </div>
               </div>
             </Reveal>

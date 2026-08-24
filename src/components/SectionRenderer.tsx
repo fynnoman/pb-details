@@ -10,9 +10,9 @@ import {
   loadFaqsByTopic,
   loadSettings,
   loadHomeGlobal,
-  mediaUrl,
 } from "@/lib/site-data";
-import type { MediaDoc } from "@/lib/site-data";
+import { mediaUrl } from "@/lib/media";
+import type { MediaDoc } from "@/lib/media";
 
 type BaseBlock<T extends string, D = Record<string, unknown>> = {
   blockType: T;

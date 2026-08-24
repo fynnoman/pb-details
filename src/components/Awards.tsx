@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import Reveal from "./Reveal";
-import { mediaUrl } from "@/lib/site-data";
-import type { MediaDoc } from "@/lib/site-data";
+import { mediaUrl } from "@/lib/media";
+import type { MediaDoc } from "@/lib/media";
+import EditableImage from "./edit/EditableImage";
+import EditableText from "./edit/EditableText";
 
 export type AwardItem = {
   id: string | number;
@@ -18,13 +20,20 @@ export type AwardItem = {
 export default function Awards({
   awards,
   showStoryCards = true,
+  home,
 }: {
   awards: AwardItem[];
   showStoryCards?: boolean;
+  home?: import("@/lib/site-types").HomeData;
 }) {
   const badges = awards.filter((a) => a.type === "badge");
   const stories = awards.filter((a) => a.type === "story");
   const marqueeBadges = [...badges, ...badges];
+  const t = home?.awards || {};
+  const kicker = t.kicker || "Ausgezeichnet";
+  const title = t.title || "Mehrfach zertifiziert, jährlich";
+  const titleHighlight = t.titleHighlight || "bestätigt.";
+  const linkLabel = t.linkLabel || "Alle Auszeichnungen & Referenzen ansehen";
 
   return (
     <section className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
@@ -34,13 +43,22 @@ export default function Awards({
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                Ausgezeichnet
+                <EditableText globalSlug="home" path="awards.kicker" value={kicker} />
               </p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.8rem)] leading-[1.02] tracking-[-0.025em] max-w-[22ch]">
-                Mehrfach zertifiziert, jährlich{" "}
-                <span className="italic text-gold">bestätigt.</span>
+                <EditableText
+                  globalSlug="home"
+                  path="awards.title"
+                  value={title}
+                  render={(v) => (
+                    <>
+                      {v}{" "}
+                      <span className="italic text-gold">{titleHighlight}</span>
+                    </>
+                  )}
+                />
               </h2>
             </Reveal>
           </div>
@@ -66,12 +84,14 @@ export default function Awards({
                   className="glass-flat rounded-2xl aspect-square h-24 sm:h-32 md:h-36 shrink-0 flex items-center justify-center p-3 sm:p-4 md:p-5"
                 >
                   {url && (
-                    <img
-                      src={url}
-                      alt={b.image?.alt || b.title}
-                      loading="lazy"
-                      className="max-w-full max-h-full object-contain"
-                    />
+                    <EditableImage collection="awards" docId={b.id} path="image" className="w-full h-full flex items-center justify-center">
+                      <img
+                        src={url}
+                        alt={b.image?.alt || b.title}
+                        loading="lazy"
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </EditableImage>
                   )}
                 </div>
               );
@@ -90,24 +110,35 @@ export default function Awards({
                   <figure className="glass rounded-[1.5rem] overflow-hidden h-full flex flex-col group">
                     <div className="relative aspect-[4/3] overflow-hidden bg-black">
                       {url && (
-                        <img
-                          src={url}
-                          alt={s.image?.alt || s.title}
-                          loading="lazy"
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
+                        <EditableImage collection="awards" docId={s.id} path="image" className="absolute inset-0">
+                          <img
+                            src={url}
+                            alt={s.image?.alt || s.title}
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </EditableImage>
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                     </div>
                     <figcaption className="p-6 flex-1 flex flex-col">
                       <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-3">
-                        {s.storyLabel || s.title}
+                        <EditableText
+                          collection="awards"
+                          docId={s.id}
+                          path="storyLabel"
+                          value={s.storyLabel || s.title}
+                        />
                       </div>
-                      {s.storyText && (
-                        <p className="text-sm text-[var(--ink-dim)] leading-relaxed">
-                          {s.storyText}
-                        </p>
-                      )}
+                      <p className="text-sm text-[var(--ink-dim)] leading-relaxed">
+                        <EditableText
+                          collection="awards"
+                          docId={s.id}
+                          path="storyText"
+                          value={s.storyText || ""}
+                          multiline
+                        />
+                      </p>
                     </figcaption>
                   </figure>
                 </Reveal>
@@ -121,7 +152,7 @@ export default function Awards({
                 href="/referenzen/"
                 className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
               >
-                Alle Auszeichnungen &amp; Referenzen ansehen
+                <EditableText globalSlug="home" path="awards.linkLabel" value={linkLabel} />
                 <span
                   aria-hidden
                   className="transition-transform group-hover:translate-x-1"

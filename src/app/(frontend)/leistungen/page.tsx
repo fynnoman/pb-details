@@ -6,8 +6,8 @@ import Reveal from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbList, webPageSchema } from "@/lib/schema";
 import { getPayloadClient } from "@/lib/payload-client";
-import { mediaUrl } from "@/lib/site-data";
-import type { MediaDoc } from "@/lib/site-data";
+import { mediaUrl } from "@/lib/media";
+import type { MediaDoc } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: { absolute: "Leistungen - PB Fahrzeugpflege Saarlouis" },

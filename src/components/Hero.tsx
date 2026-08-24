@@ -3,8 +3,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import type { HomeData, SiteSettings } from "@/lib/site-data";
-import { mediaUrl } from "@/lib/site-data";
+import type { HomeData, SiteSettings } from "@/lib/site-types";
+import { mediaUrl } from "@/lib/media";
+import EditableText from "./edit/EditableText";
+import EditableImage from "./edit/EditableImage";
 
 export default function Hero({
   home,
@@ -35,7 +37,9 @@ export default function Hero({
       className="relative min-h-[100svh] w-full overflow-hidden grain vignette"
     >
       <motion.div style={{ y, scale }} className="absolute inset-0 will-change-transform">
-        <img src={bgUrl} alt="" className="w-full h-full object-cover" />
+        <EditableImage globalSlug="home" path="backgroundImage" className="w-full h-full">
+          <img src={bgUrl} alt="" className="w-full h-full object-cover" />
+        </EditableImage>
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-[var(--bg)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_0%,rgba(0,0,0,0.55)_70%)]" />
       </motion.div>
@@ -45,17 +49,15 @@ export default function Hero({
         className="relative z-10 min-h-[100svh] flex flex-col justify-end pb-16 sm:pb-32 pt-32 sm:pt-44 md:pt-48"
       >
         <div className="mx-auto max-w-[1400px] w-full px-5 sm:px-10">
-          {home.kicker && (
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: [0.2, 0.7, 0.2, 1] }}
-              className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6 sm:mb-8"
-            >
-              <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-              {home.kicker}
-            </motion.p>
-          )}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.2, 0.7, 0.2, 1] }}
+            className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6 sm:mb-8"
+          >
+            <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
+            <EditableText globalSlug="home" path="kicker" value={home.kicker || ""} />
+          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -63,26 +65,36 @@ export default function Hero({
             transition={{ duration: 1.4, ease: [0.2, 0.7, 0.2, 1], delay: 0.05 }}
             className="font-display font-light text-[clamp(2rem,10vw,5.8rem)] leading-[0.98] tracking-[-0.03em] max-w-[16ch] mb-6"
           >
-            {home.title.split(" ").map((word, i, arr) => (
-              <span
-                key={i}
-                className={`block ${i === arr.length - 1 ? "italic text-gold" : "text-chrome"}`}
-              >
-                {word}
-              </span>
-            ))}
+            <EditableText
+              globalSlug="home"
+              path="title"
+              value={home.title}
+              render={(v) =>
+                v.split(" ").map((word, i, arr) => (
+                  <span
+                    key={i}
+                    className={`block ${i === arr.length - 1 ? "italic text-gold" : "text-chrome"}`}
+                  >
+                    {word}
+                  </span>
+                ))
+              }
+            />
           </motion.p>
 
-          {home.subtitle && (
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.3, ease: [0.2, 0.7, 0.2, 1], delay: 0.2 }}
-              className="font-display text-[clamp(1rem,3.5vw,1.7rem)] leading-snug tracking-[-0.01em] text-[var(--ink)] max-w-[32ch] font-normal"
-            >
-              {home.subtitle}
-            </motion.h1>
-          )}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.3, ease: [0.2, 0.7, 0.2, 1], delay: 0.2 }}
+            className="font-display text-[clamp(1rem,3.5vw,1.7rem)] leading-snug tracking-[-0.01em] text-[var(--ink)] max-w-[32ch] font-normal"
+          >
+            <EditableText
+              globalSlug="home"
+              path="subtitle"
+              value={home.subtitle || ""}
+              multiline
+            />
+          </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}

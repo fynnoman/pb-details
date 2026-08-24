@@ -162,6 +162,104 @@ export const Home: GlobalConfig = {
           ],
         },
         {
+          label: "Sektions-Texte",
+          description:
+            "Kicker, Überschriften und feste Texte der einzelnen Homepage-Sektionen.",
+          fields: [
+            {
+              type: "group",
+              name: "anspruch",
+              label: "Sektion: Unser Anspruch",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Unser Anspruch" },
+                { name: "title", type: "text", defaultValue: "Kompromisslose Qualität bis ins Detail." },
+                { name: "titleHighlight", type: "text", label: "Betontes Wort am Ende", defaultValue: "bis ins Detail." },
+                { name: "para1", type: "textarea", defaultValue: "Unser Qualitäts- und Leistungsanspruch beginnt dort, wo andere ihre Arbeit bereits als beendet ansehen. Wir nehmen uns die Zeit, die eine perfekte Aufbereitung braucht, und hören erst auf, wenn das Ergebnis stimmt." },
+                { name: "para2", type: "textarea", defaultValue: "Da wir ausschließlich private Kundenfahrzeuge betreuen – darunter viele Sportwagen, Oldtimer und Luxusfahrzeuge – ist Ihr Fahrzeug bei uns in besten Händen. Billig kann jeder – deshalb lautet unser Motto: „Glanz oder gar nicht!\"" },
+                { name: "quoteText", type: "textarea", defaultValue: "„Für andere reicht das Erzählte,\nfür uns zählt das Erreichte.\"" },
+                { name: "badgeLabel", type: "text", defaultValue: "Weiterempfehlung" },
+              ],
+            },
+            {
+              type: "group",
+              name: "services",
+              label: "Sektion: Leistungen",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Unsere Leistungen" },
+                { name: "title", type: "text", defaultValue: "Alles rund um Lackschutz, Aufbereitung und Schadenbehebung" },
+                { name: "titleHighlight", type: "text", defaultValue: " — aus einer Hand." },
+                { name: "intro", type: "textarea", defaultValue: "Bei PB Fahrzeugpflege Saarlouis erhalten Sie alle Leistungen rund um Lackschutz, Aufbereitung und Schadenbehebung aus einer Hand – seit 1997 in Ensdorf bei Saarlouis." },
+              ],
+            },
+            {
+              type: "group",
+              name: "vehicles",
+              label: "Sektion: Fahrzeuge (Spezialisierung)",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Spezialisierung" },
+                { name: "title", type: "text", defaultValue: "Auf welche Fahrzeuge wir" },
+                { name: "titleHighlight", type: "text", defaultValue: "spezialisiert sind." },
+                { name: "intro", type: "textarea", defaultValue: "Wir sind auf die Aufbereitung und den Lackschutz hochwertiger Fahrzeuge spezialisiert und betreuen ausschließlich private Kundenfahrzeuge. Jede Aufbereitung beginnt mit einer persönlichen Begutachtung – so erhalten Sie ein realistisches Angebot statt eines Pauschalversprechens." },
+              ],
+            },
+            {
+              type: "group",
+              name: "whyUs",
+              label: "Sektion: Warum PB Fahrzeugpflege",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Warum PB Fahrzeugpflege" },
+              ],
+            },
+            {
+              type: "group",
+              name: "awards",
+              label: "Sektion: Auszeichnungen (Marquee)",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Ausgezeichnet" },
+                { name: "title", type: "text", defaultValue: "Mehrfach zertifiziert, jährlich" },
+                { name: "titleHighlight", type: "text", defaultValue: "bestätigt." },
+                { name: "linkLabel", type: "text", defaultValue: "Alle Auszeichnungen & Referenzen ansehen" },
+              ],
+            },
+            {
+              type: "group",
+              name: "region",
+              label: "Sektion: Region / Standort",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Einzugsgebiet" },
+                { name: "standortLabel", type: "text", defaultValue: "Standort" },
+                { name: "openMapsLabel", type: "text", defaultValue: "In Karten öffnen →" },
+                { name: "callLabel", type: "text", defaultValue: "Anrufen" },
+              ],
+            },
+            {
+              type: "group",
+              name: "faq",
+              label: "Sektion: FAQ",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Häufige Fragen" },
+                { name: "title", type: "text", defaultValue: "Antworten auf das, was Sie wissen" },
+                { name: "titleHighlight", type: "text", defaultValue: "wollen." },
+                { name: "linkLabel", type: "text", defaultValue: "Alle Fragen & Antworten ansehen" },
+              ],
+            },
+            {
+              type: "group",
+              name: "contact",
+              label: "Sektion: Kontakt",
+              fields: [
+                { name: "kicker", type: "text", defaultValue: "Termin vereinbaren" },
+                { name: "title", type: "text", defaultValue: "Sprechen wir über Ihr" },
+                { name: "titleHighlight", type: "text", defaultValue: "Fahrzeug." },
+                { name: "intro", type: "textarea", defaultValue: "Wählen Sie direkt einen Termin aus – oder rufen Sie an. Eine unverbindliche Begutachtung ist auch ohne Termin möglich, während unserer Öffnungszeiten." },
+                { name: "directLabel", type: "text", defaultValue: "Direkter Draht" },
+                { name: "callAt", type: "text", defaultValue: "Anrufen · Mo–Sa" },
+                { name: "response", type: "text", defaultValue: "Antwort in 24 h" },
+              ],
+            },
+          ],
+        },
+        {
           label: "SEO",
           fields: [
             { name: "metaTitle", type: "text", label: "Meta-Titel" },

@@ -1,4 +1,4 @@
-import type { SiteSettings } from "./site-data";
+import type { SiteSettings } from "./site-types";
 
 /**
  * JSON-LD-Schemas. Statische Schemas werden zur Laufzeit aus dem Payload-Global

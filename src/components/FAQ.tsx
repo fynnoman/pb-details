@@ -4,10 +4,11 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Reveal from "./Reveal";
+import EditableText from "./edit/EditableText";
 
 export type FaqItem =
-  | { question: string; answer: string }
-  | { q: string; a: string };
+  | { id?: string | number; question: string; answer: string }
+  | { id?: string | number; q: string; a: string };
 
 type Props = {
   faqs: FaqItem[];
@@ -15,27 +16,29 @@ type Props = {
   title?: React.ReactNode;
   showAllLink?: boolean;
   id?: string;
+  home?: import("@/lib/site-types").HomeData;
 };
 
-function normalize(item: FaqItem): { question: string; answer: string } {
+function normalize(item: FaqItem): { id?: string | number; question: string; answer: string } {
   return "question" in item
-    ? { question: item.question, answer: item.answer }
-    : { question: item.q, answer: item.a };
+    ? { id: item.id, question: item.question, answer: item.answer }
+    : { id: item.id, question: item.q, answer: item.a };
 }
 
 export default function FAQ({
   faqs,
-  kicker = "Häufige Fragen",
-  title = (
-    <>
-      Antworten auf das, was Sie wissen{" "}
-      <span className="italic text-gold">wollen.</span>
-    </>
-  ),
+  kicker,
+  title,
   showAllLink = true,
   id = "faq",
+  home,
 }: Props) {
   const [open, setOpen] = useState<number | null>(0);
+  const t = home?.faq || {};
+  const kickerText = kicker || t.kicker || "Häufige Fragen";
+  const titleText = t.title || "Antworten auf das, was Sie wissen";
+  const titleHighlight = t.titleHighlight || "wollen.";
+  const linkLabel = t.linkLabel || "Alle Fragen & Antworten ansehen";
 
   if (!faqs || faqs.length === 0) return null;
 
@@ -46,13 +49,26 @@ export default function FAQ({
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-              {kicker}
+              <EditableText globalSlug="home" path="faq.kicker" value={kickerText} />
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle ml-3" />
             </p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
-              {title}
+              {title ? (
+                title
+              ) : (
+                <EditableText
+                  globalSlug="home"
+                  path="faq.title"
+                  value={titleText}
+                  render={(v) => (
+                    <>
+                      {v} <span className="italic text-gold">{titleHighlight}</span>
+                    </>
+                  )}
+                />
+              )}
             </h2>
           </Reveal>
         </div>
@@ -73,7 +89,16 @@ export default function FAQ({
                     className="w-full flex items-center gap-4 px-6 sm:px-8 py-5 text-left"
                   >
                     <span className="font-display text-lg sm:text-xl leading-snug flex-1 tracking-[-0.01em]">
-                      {item.question}
+                      {item.id !== undefined ? (
+                        <EditableText
+                          collection="faqs"
+                          docId={item.id}
+                          path="question"
+                          value={item.question}
+                        />
+                      ) : (
+                        item.question
+                      )}
                     </span>
                     <span
                       className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-white/15 transition-transform duration-500 ${
@@ -95,7 +120,17 @@ export default function FAQ({
                         className="overflow-hidden"
                       >
                         <div className="px-6 sm:px-8 pb-6 text-[var(--ink-dim)] leading-relaxed max-w-[70ch]">
-                          {item.answer}
+                          {item.id !== undefined ? (
+                            <EditableText
+                              collection="faqs"
+                              docId={item.id}
+                              path="answer"
+                              value={item.answer}
+                              multiline
+                            />
+                          ) : (
+                            item.answer
+                          )}
                         </div>
                       </motion.div>
                     )}
@@ -113,7 +148,7 @@ export default function FAQ({
                 href="/faq/"
                 className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
               >
-                Alle Fragen &amp; Antworten ansehen
+                <EditableText globalSlug="home" path="faq.linkLabel" value={linkLabel} />
                 <span
                   aria-hidden
                   className="transition-transform group-hover:translate-x-1"

@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import SectionRenderer from "./SectionRenderer";
 import JsonLd from "./JsonLd";
 import { breadcrumbList, webPageSchema } from "@/lib/schema";
-import { loadPageByPath, mediaUrl } from "@/lib/site-data";
+import { loadPageByPath } from "@/lib/site-data";
+import { mediaUrl } from "@/lib/media";
 
 export async function pageMetadata(path: string, fallbackTitle: string): Promise<Metadata> {
   const page = await loadPageByPath(path);

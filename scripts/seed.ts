@@ -28,9 +28,12 @@ type Payload = Awaited<ReturnType<typeof getPayload>>;
 
 const PUBLIC_IMAGES_DIR = path.resolve(process.cwd(), "public/images");
 
-async function main() {
-  const payload = await getPayload({ config });
-
+/**
+ * Führt alle Seeds nacheinander aus. Kann sowohl vom CLI (main() unten)
+ * als auch von einer Next-API-Route aufgerufen werden — letzteres umgeht
+ * den `payload run`/tsx-CLI-Bug unter aktuellem Node.
+ */
+export async function runSeed(payload: Payload) {
   await seedAdminUser(payload);
   const mediaMap = await seedMedia(payload);
   await seedGlobals(payload, mediaMap);
@@ -41,7 +44,11 @@ async function main() {
   await seedRedirects(payload);
   await seedBlogPosts(payload, mediaMap);
   await seedPages(payload);
+}
 
+async function main() {
+  const payload = await getPayload({ config });
+  await runSeed(payload);
   console.log("\n✓ Seed done.");
   process.exit(0);
 }
@@ -85,10 +92,18 @@ async function seedAdminUser(payload: Payload) {
 
 /* ─── Media ─────────────────────────────────────────────────────────────── */
 
-type MediaMap = Record<string, string>; // relativer Pfad → Payload-ID
+type MediaMap = Record<string, string | number>; // relativer Pfad → Payload-ID
 
 async function seedMedia(payload: Payload): Promise<MediaMap> {
-  const files = await walk(PUBLIC_IMAGES_DIR);
+  console.log("[seed] cwd:", process.cwd(), "PUBLIC_IMAGES_DIR:", PUBLIC_IMAGES_DIR);
+  let files: string[] = [];
+  try {
+    files = await walk(PUBLIC_IMAGES_DIR);
+  } catch (err) {
+    console.error("[seed] walk failed:", err);
+    throw err;
+  }
+  console.log(`[seed] Found ${files.length} files in ${PUBLIC_IMAGES_DIR}`);
   const map: MediaMap = {};
 
   for (const file of files) {
@@ -104,7 +119,7 @@ async function seedMedia(payload: Payload): Promise<MediaMap> {
     });
 
     if (existing.docs.length) {
-      map[relPath] = String(existing.docs[0].id);
+      map[relPath] = existing.docs[0].id;
       continue;
     }
 
@@ -124,11 +139,14 @@ async function seedMedia(payload: Payload): Promise<MediaMap> {
       },
     });
 
-    map[relPath] = String(created.id);
+    map[relPath] = created.id;
     console.log(`  ↑ media: ${relPath}`);
   }
 
   console.log(`✓ Medien importiert (${Object.keys(map).length} Dateien)`);
+  console.log("[seed] mediaMap total:", Object.keys(map).length);
+  const heroKey = "/images/hero/schwarzes-auto-keramikversiegelung.jpg";
+  console.log("[seed] mediaMap[heroKey]:", map[heroKey]);
   return map;
 }
 
@@ -1058,7 +1076,11 @@ async function seedPages(payload: Payload) {
   console.log(`✓ Pages (${pages.length})`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Nur auto-run wenn das Skript direkt via `payload run` / node ausgeführt wird,
+// nicht wenn es von einer Next-Route importiert wird.
+if (typeof process !== "undefined" && process.argv[1]?.endsWith("scripts/seed.ts")) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

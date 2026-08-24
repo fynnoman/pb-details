@@ -8,8 +8,8 @@ import LexicalRenderer from "@/components/LexicalRenderer";
 import JsonLd from "@/components/JsonLd";
 import { articleSchema, breadcrumbList, webPageSchema } from "@/lib/schema";
 import { getPayloadClient } from "@/lib/payload-client";
-import { mediaUrl } from "@/lib/site-data";
-import type { MediaDoc } from "@/lib/site-data";
+import { mediaUrl } from "@/lib/media";
+import type { MediaDoc } from "@/lib/media";
 
 type Params = { slug: string };
 

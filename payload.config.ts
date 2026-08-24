@@ -34,7 +34,24 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     meta: {
-      titleSuffix: " | PB Fahrzeugpflege CMS",
+      title: "PB Fahrzeugpflege CMS",
+      titleSuffix: " · PB Fahrzeugpflege",
+      description:
+        "Redaktions-Bereich für die Website von PB Fahrzeugpflege Saarlouis.",
+      icons: [
+        {
+          rel: "icon",
+          type: "image/png",
+          url: "/images/logo/pb-fahrzeugpflege-logo-black.png",
+        },
+      ],
+    },
+    components: {
+      graphics: {
+        Logo: "/src/payload/components/Logo#default",
+        Icon: "/src/payload/components/Icon#default",
+      },
+      beforeDashboard: ["/src/payload/components/BeforeDashboard#default"],
     },
     livePreview: {
       breakpoints: [

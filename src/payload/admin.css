@@ -1,0 +1,457 @@
+/**
+ * PB Fahrzeugpflege — Admin Theme (helles, ruhiges Apple-Vibe)
+ *
+ * Prinzipien (Emil-Kowalski-Style):
+ * - Viel Weißraum, klare Hierarchie
+ * - Custom easing: cubic-bezier(0.23, 1, 0.32, 1) für alle UI-Übergänge
+ * - transform + opacity only, keine transition:all
+ * - Press-Feedback via scale(0.97), unter 200 ms
+ * - Hover-Effekte nur auf echten Zeigern
+ * - Sanfte, kalibrierte Schatten statt harter Ränder
+ */
+
+:root,
+html[data-theme="dark"],
+html[data-theme="light"] {
+  /* ── Palette (helles Warm-Weiß + gedämpftes Gold) ─────────────── */
+  --pb-bg:            #f6f4f0;
+  --pb-surface:       #ffffff;
+  --pb-surface-2:     #fbfaf7;
+  --pb-surface-3:     #f2efe8;
+  --pb-border:        rgba(20, 15, 5, 0.07);
+  --pb-border-strong: rgba(20, 15, 5, 0.14);
+  --pb-ink:           #14120d;
+  --pb-ink-dim:       #5a564d;
+  --pb-ink-mute:      #928c81;
+  --pb-gold:          #a37b3f;
+  --pb-gold-soft:     #c9a25c;
+  --pb-gold-tint:     rgba(163, 123, 63, 0.10);
+  --pb-gold-tint-2:   rgba(163, 123, 63, 0.18);
+
+  /* Easings + Radii */
+  --pb-ease:          cubic-bezier(0.23, 1, 0.32, 1);
+  --pb-ease-in-out:   cubic-bezier(0.77, 0, 0.175, 1);
+  --pb-r-s: 10px;
+  --pb-r-m: 14px;
+  --pb-r-l: 20px;
+
+  /* Shadows (Apple-like: mehrschichtig, weich) */
+  --pb-shadow-1: 0 1px 2px rgba(20,15,5,0.04), 0 2px 6px -2px rgba(20,15,5,0.04);
+  --pb-shadow-2: 0 1px 2px rgba(20,15,5,0.05), 0 12px 30px -14px rgba(20,15,5,0.10);
+  --pb-shadow-3: 0 2px 4px rgba(20,15,5,0.06), 0 24px 60px -20px rgba(20,15,5,0.14);
+
+  /* ── Payload-Tokens überschreiben ─────────────────────────────── */
+  --theme-bg:            var(--pb-bg);
+  --theme-input-bg:      var(--pb-surface);
+  --theme-elevation-0:   var(--pb-bg);
+  --theme-elevation-50:  var(--pb-surface-2);
+  --theme-elevation-100: var(--pb-surface);
+  --theme-elevation-150: var(--pb-surface);
+  --theme-elevation-200: var(--pb-surface-3);
+  --theme-elevation-250: var(--pb-surface-3);
+  --theme-elevation-300: #e9e4d9;
+  --theme-elevation-400: #d6cfbf;
+  --theme-elevation-500: var(--pb-ink-mute);
+  --theme-elevation-600: var(--pb-ink-dim);
+  --theme-elevation-700: var(--pb-ink);
+  --theme-elevation-800: var(--pb-ink);
+  --theme-elevation-1000: #000000;
+
+  --theme-text: var(--pb-ink);
+  --theme-baseline: 22px;
+
+  --color-base-0:    var(--pb-bg);
+  --color-base-50:   var(--pb-surface-2);
+  --color-base-100:  var(--pb-surface);
+  --color-base-150:  var(--pb-surface-3);
+  --color-base-200:  #ede8dc;
+  --color-base-300:  #d6cfbf;
+  --color-base-400:  #b3ac9c;
+  --color-base-500:  var(--pb-ink-mute);
+  --color-base-600:  var(--pb-ink-dim);
+  --color-base-700:  #2c2a24;
+  --color-base-800:  var(--pb-ink);
+  --color-base-900:  #050403;
+  --color-base-1000: #000000;
+
+  --color-success-500: var(--pb-gold);
+  --color-success-750: #7a5a2c;
+  --color-warning-500: #c88b1f;
+  --color-error-500:   #b8523d;
+
+  --font-body:  -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --font-serif: "Fraunces", "New York", "Times New Roman", serif;
+
+  --style-radius-s: var(--pb-r-s);
+  --style-radius-m: var(--pb-r-m);
+  --style-radius-l: var(--pb-r-l);
+
+  color-scheme: light;
+}
+
+html { color-scheme: light; }
+
+/* ── Basis-Chrome ───────────────────────────────────────────────── */
+
+body,
+.payload__wrapper {
+  background: var(--pb-bg);
+  color: var(--pb-ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sanfte Serif-Töne nur für große Titel */
+h1, h2,
+.dashboard__label,
+.doc-header__title,
+.step-nav__title,
+.list-header__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--pb-ink);
+}
+
+/* Große Section-Titel bekommen leichtes Serif-Flair, aber sparsam */
+h1 { font-size: 28px; line-height: 1.15; }
+h2 { font-size: 20px; line-height: 1.25; }
+
+/* ── App-Header (top-bar) ───────────────────────────────────────── */
+
+.app-header,
+.app-header--collapsed {
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--pb-border);
+  box-shadow: none;
+}
+
+/* ── Seitenleiste ───────────────────────────────────────────────── */
+
+.nav {
+  background: var(--pb-surface-2);
+  border-right: 1px solid var(--pb-border);
+}
+.nav__wrap { padding-block: 20px 30px; }
+
+.nav-group__label,
+.nav-group-label,
+.nav__group-label,
+.nav__label {
+  color: var(--pb-ink-mute);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 22px 18px 8px;
+}
+
+.nav__link {
+  border-radius: var(--pb-r-m);
+  margin: 2px 10px;
+  padding: 9px 12px;
+  color: var(--pb-ink-dim);
+  transition: background 180ms var(--pb-ease), color 180ms var(--pb-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav__link:hover {
+    background: var(--pb-surface-3);
+    color: var(--pb-ink);
+  }
+}
+.nav__link:active { transform: scale(0.98); }
+
+.nav__link--active,
+.nav__link[data-active="true"] {
+  background: var(--pb-gold-tint);
+  color: #6f5222;
+  font-weight: 500;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────── */
+
+.btn {
+  border-radius: 999px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  font-family: var(--font-body);
+  padding: 9px 18px;
+  transition: transform 160ms var(--pb-ease),
+              background 180ms var(--pb-ease),
+              box-shadow 200ms var(--pb-ease),
+              border-color 180ms var(--pb-ease);
+}
+.btn:active { transform: scale(0.97); }
+
+.btn--style-primary {
+  background: linear-gradient(180deg, #b98d4b 0%, var(--pb-gold) 100%);
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 1px 2px rgba(20, 15, 5, 0.10),
+    0 6px 18px -8px rgba(163, 123, 63, 0.55);
+}
+.btn--style-primary:hover { filter: brightness(1.03); }
+
+.btn--style-secondary {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-border-strong);
+  color: var(--pb-ink);
+  box-shadow: var(--pb-shadow-1);
+}
+.btn--style-secondary:hover {
+  background: var(--pb-surface-2);
+  border-color: var(--pb-gold);
+}
+
+/* Ikon-Buttons in Toolbars */
+.btn--icon-style-without-border {
+  padding: 8px;
+  border-radius: var(--pb-r-s);
+  color: var(--pb-ink-dim);
+}
+.btn--icon-style-without-border:hover {
+  background: var(--pb-surface-3);
+  color: var(--pb-ink);
+}
+
+/* ── Formular-Inputs ────────────────────────────────────────────── */
+
+.field-type input:not([type="checkbox"]):not([type="radio"]),
+.field-type textarea,
+.field-type select,
+.react-select .rs__control,
+.rs__control {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-border-strong);
+  border-radius: var(--pb-r-m);
+  color: var(--pb-ink);
+  transition: border-color 180ms var(--pb-ease),
+              box-shadow 200ms var(--pb-ease);
+  box-shadow: none;
+}
+
+.field-type input:focus,
+.field-type textarea:focus,
+.field-type select:focus,
+.react-select .rs__control--is-focused,
+.rs__control--is-focused {
+  border-color: var(--pb-gold) !important;
+  box-shadow: 0 0 0 4px var(--pb-gold-tint) !important;
+  outline: none;
+}
+
+.field-label,
+label.field-label {
+  color: var(--pb-ink);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.005em;
+  margin-bottom: 6px;
+}
+
+.field-description {
+  color: var(--pb-ink-mute);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Checkbox + Radio: subtiler Rahmen, warmes Gold-Filled */
+.checkbox-input__icon,
+.checkbox-input__input {
+  border-radius: 6px;
+}
+
+/* ── Karten / Container ─────────────────────────────────────────── */
+
+.card,
+.dashboard__card,
+.list__wrap,
+.collapsible__content,
+.doc-controls,
+.tabs-field__tabs,
+.tabs-field__content-wrap,
+.block__header,
+.rich-text-lexical__editor,
+.render-fields--margins-small,
+.render-fields--margins-medium {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--pb-r-l);
+  box-shadow: var(--pb-shadow-1);
+}
+
+/* Payload-Default-Dashboard-Cards */
+.dashboard__card {
+  padding: 20px 22px;
+  transition: transform 200ms var(--pb-ease),
+              box-shadow 220ms var(--pb-ease),
+              border-color 200ms var(--pb-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .dashboard__card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--pb-shadow-2);
+    border-color: var(--pb-border-strong);
+  }
+}
+.dashboard__card:active { transform: translateY(0) scale(0.995); }
+
+.dashboard__card a { color: var(--pb-ink); }
+.dashboard__card a:hover { color: var(--pb-gold); }
+
+/* Dashboard-Label über den Karten */
+.dashboard__label,
+.dashboard h2 {
+  color: var(--pb-ink-mute);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 40px 0 14px;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────── */
+
+.tabs-field__tabs-wrap {
+  padding: 4px;
+  background: var(--pb-surface-3);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 2px;
+}
+.tabs-field__tab {
+  color: var(--pb-ink-dim);
+  border-radius: 999px;
+  padding: 6px 14px;
+  transition: color 180ms var(--pb-ease), background 180ms var(--pb-ease);
+}
+.tabs-field__tab:hover { color: var(--pb-ink); }
+.tabs-field__tab--active {
+  background: var(--pb-surface);
+  color: var(--pb-ink);
+  box-shadow: var(--pb-shadow-1);
+}
+
+/* ── Tabellen / Listen ──────────────────────────────────────────── */
+
+.list__thead,
+.table thead th {
+  background: transparent;
+  color: var(--pb-ink-mute);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--pb-border);
+}
+.table tbody tr {
+  transition: background 140ms var(--pb-ease);
+}
+.table tbody tr:hover {
+  background: var(--pb-gold-tint);
+}
+.table td { border-color: var(--pb-border); }
+
+/* ── Login / Create-First-User ──────────────────────────────────── */
+
+.template-default--minimal,
+.login,
+.forgot-password,
+.reset-password,
+.create-first-user {
+  background:
+    radial-gradient(900px 500px at 78% -10%, var(--pb-gold-tint-2), transparent 55%),
+    radial-gradient(700px 500px at 5% 105%, rgba(163, 123, 63, 0.08), transparent 60%),
+    var(--pb-bg);
+}
+.login .app-header,
+.create-first-user .app-header {
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+}
+.login__wrap,
+.create-first-user__wrap {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-border);
+  border-radius: 24px;
+  padding: 40px 36px 34px;
+  box-shadow: var(--pb-shadow-3);
+  max-width: 460px;
+}
+
+/* Logo-Zentrierung auf Auth-Screens */
+.login__brand,
+.create-first-user__brand {
+  margin-inline: auto;
+  margin-bottom: 8px;
+}
+
+/* ── Popovers / Menus ───────────────────────────────────────────── */
+
+.popup,
+.popup__scroll-container,
+.dropdown-list,
+.dropdown-list-content {
+  background: var(--pb-surface);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--pb-r-m);
+  box-shadow: var(--pb-shadow-3);
+  transform-origin: var(--radix-popover-content-transform-origin, top);
+}
+
+/* ── Doc-Controls (Sidebar rechts beim Editieren) ───────────────── */
+
+.doc-controls {
+  padding: 16px;
+  border-radius: var(--pb-r-l);
+}
+.doc-controls__controls .btn--style-primary {
+  padding: 11px 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── Rich-Text (Lexical) ────────────────────────────────────────── */
+
+.rich-text-lexical__editor {
+  padding: 22px 24px;
+  min-height: 200px;
+}
+.rich-text-lexical__toolbar-buttons {
+  border-bottom: 1px solid var(--pb-border);
+  padding: 8px 10px;
+}
+
+/* ── Upload-Cell / Media-Preview ────────────────────────────────── */
+
+.upload__dropzone {
+  background: var(--pb-surface-2);
+  border: 1.5px dashed var(--pb-border-strong);
+  border-radius: var(--pb-r-l);
+  transition: border-color 200ms var(--pb-ease),
+              background 200ms var(--pb-ease);
+}
+.upload__dropzone:hover,
+.upload__dropzone--drag-active {
+  border-color: var(--pb-gold);
+  background: var(--pb-gold-tint);
+}
+
+/* ── Reduced Motion ─────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .dashboard__card, .table tbody tr,
+  .nav__link, .tabs-field__tab, .upload__dropzone {
+    transition: none !important;
+    transform: none !important;
+  }
+}

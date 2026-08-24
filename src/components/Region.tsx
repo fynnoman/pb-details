@@ -1,7 +1,8 @@
 "use client";
 
 import Reveal from "./Reveal";
-import type { HomeData, SiteSettings } from "@/lib/site-data";
+import type { HomeData, SiteSettings } from "@/lib/site-types";
+import EditableText from "./edit/EditableText";
 
 export default function Region({
   home,
@@ -12,7 +13,11 @@ export default function Region({
 }) {
   const regions = home.regionTags?.map((r) => r.label) || [];
   const heading = home.regionHeading || "Saarland & Luxemburg.";
-  const text = home.regionText;
+  const text = home.regionText || "Sie finden uns in der Provinzialstraße 243 in 66806 Ensdorf – direkt bei Saarlouis.";
+  const kicker = home.region?.kicker || "Einzugsgebiet";
+  const standortLabel = home.region?.standortLabel || "Standort";
+  const openMapsLabel = home.region?.openMapsLabel || "In Karten öffnen →";
+  const callLabel = home.region?.callLabel || "Anrufen";
 
   const holidayActive =
     settings.holidayNotice?.text &&
@@ -40,19 +45,19 @@ export default function Region({
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                Einzugsgebiet
+                <EditableText globalSlug="home" path="region.kicker" value={kicker} />
               </p>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
-                {heading}
+                <EditableText globalSlug="home" path="regionHeading" value={heading} />
               </h2>
             </Reveal>
-            {text && (
-              <Reveal delay={0.1}>
-                <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-lg">{text}</p>
-              </Reveal>
-            )}
+            <Reveal delay={0.1}>
+              <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-lg">
+                <EditableText globalSlug="home" path="regionText" value={text} multiline />
+              </p>
+            </Reveal>
             {regions.length > 0 && (
               <Reveal delay={0.15}>
                 <div className="mt-8 flex flex-wrap gap-2">
@@ -73,13 +78,17 @@ export default function Region({
             <Reveal delay={0.1}>
               <div className="glass-strong rounded-[1.75rem] p-8">
                 <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
-                  Standort
+                  <EditableText globalSlug="home" path="region.standortLabel" value={standortLabel} />
                 </div>
-                <div className="font-display text-2xl leading-tight">{settings.name}</div>
+                <div className="font-display text-2xl leading-tight">
+                  <EditableText globalSlug="settings" path="name" value={settings.name} />
+                </div>
                 <div className="mt-3 text-[var(--ink-dim)] leading-relaxed">
-                  {settings.address.street}
+                  <EditableText globalSlug="settings" path="address.street" value={settings.address.street} />
                   <br />
-                  {settings.address.zip} {settings.address.city}
+                  <EditableText globalSlug="settings" path="address.zip" value={settings.address.zip} />
+                  {" "}
+                  <EditableText globalSlug="settings" path="address.city" value={settings.address.city} />
                 </div>
                 <div className="mt-6 pt-6 border-t border-white/10 space-y-2 text-sm">
                   <div className="flex justify-between">
