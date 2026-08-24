@@ -158,7 +158,7 @@ async function sendMail(
 }
 
 export async function POST(req: Request) {
-  const limit = rateLimit(clientKey(req), 5, 60 * 60 * 1000);
+  const limit = rateLimit(clientKey(req), 30, 60 * 60 * 1000);
   if (!limit.ok) {
     return NextResponse.json(
       {
