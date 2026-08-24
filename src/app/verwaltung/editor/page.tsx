@@ -260,7 +260,6 @@ export default function EditorPage() {
             ...data.awards.map((a) => ({ collection: "awards", id: a.id, data: stripDoc(a) })),
             ...data.faqs.map((f) => ({ collection: "faqs", id: f.id, data: stripDoc(f) })),
             ...data.posts.map((p) => ({ collection: "blog-posts", id: p.id, data: stripDoc(p) })),
-            ...data.pages.map((p) => ({ collection: "pages", id: p.id, data: stripPage(p) })),
           ],
         }),
       });
@@ -700,25 +699,6 @@ export default function EditorPage() {
               </div>
             ))}
           </div>
-        </SectionCard>
-
-        {/* CONTENT PAGES (Legal + Über uns + Preise etc.) */}
-        <SectionCard title={`Weitere Seiten (${data.pages.length})`} icon="📃">
-          <p style={{ fontSize: 13, color: "#928c81", marginTop: 0, marginBottom: 16 }}>
-            Diese Seiten haben komplexere Sektionen (Text-Blöcke, Preistabellen, Vergleiche).
-            Hier bearbeitest du die Meta-Angaben und den internen Titel; für den Fließtext-Inhalt
-            der Sektionen den Voll-Editor unter <code style={{ background: "#f2efe8", padding: "2px 6px", borderRadius: 4, fontFamily: "ui-monospace, monospace", fontSize: 12 }}>/admin</code> nutzen.
-          </p>
-          {data.pages.map((p, i) => (
-            <div key={p.id} style={{ background: "#fbfaf7", border: "1px solid #ebe6da", borderRadius: 12, padding: 16, marginBottom: 12 }}>
-              <p style={{ fontSize: 11, fontWeight: 600, color: "#a37b3f", textTransform: "uppercase", letterSpacing: "0.14em", margin: "0 0 8px" }}>
-                {p.path}
-              </p>
-              <Field label="Interner Titel" value={p.title || ""} onChange={(v) => setPage(i, { title: v })} />
-              <Field label="Meta-Titel (Browser-Tab)" value={p.metaTitle || ""} onChange={(v) => setPage(i, { metaTitle: v })} />
-              <Field label="Meta-Description (Google-Snippet)" value={p.metaDescription || ""} onChange={(v) => setPage(i, { metaDescription: v })} multiline />
-            </div>
-          ))}
         </SectionCard>
 
         {/* BLOG POSTS */}
