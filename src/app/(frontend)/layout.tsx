@@ -4,7 +4,7 @@ import "@/styles/edit.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
-import CookieYes from "@/components/CookieYes";
+import CookieBanner from "@/components/CookieBanner";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/schema";
 import { loadFooter, loadNavigation, loadSettings } from "@/lib/site-data";
@@ -44,7 +44,7 @@ export default async function FrontendLayout({
       className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
-        <CookieYes />
+        <CookieBanner />
         <GoogleTagManager />
         <JsonLd data={buildOrganizationSchema(settings)} />
         <JsonLd data={buildWebsiteSchema(settings)} />

@@ -136,7 +136,7 @@ export default function Footer({
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[var(--ink-mute)]">
           <div>© {year} {settings.name} ® — Alle Rechte vorbehalten.</div>
-          <div className="flex gap-6">
+          <div className="flex gap-6 flex-wrap">
             {footer.legalLinks.map((l, i) => (
               <Link
                 key={l.href}
@@ -146,6 +146,17 @@ export default function Footer({
                 <EditableText globalSlug="footer" path={`legalLinks.${i}.label`} value={l.label} />
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("pb-open-consent"));
+                }
+              }}
+              className="hover:text-[var(--ink)] transition-colors underline-offset-4 hover:underline"
+            >
+              Cookie-Einstellungen
+            </button>
           </div>
         </div>
 
