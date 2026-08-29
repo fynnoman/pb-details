@@ -31,35 +31,12 @@ const serverUrl =
 
 export default buildConfig({
   serverURL: serverUrl,
+  // Admin-UI komplett deaktiviert: die Redaktion nutzt ausschließlich
+  // den eigenen Editor unter /verwaltung. Payload läuft weiterhin als
+  // Backend (Local API in /api/verwaltung/*), aber ohne Admin-Routen.
   admin: {
     user: Users.slug,
-    meta: {
-      title: "PB Fahrzeugpflege CMS",
-      titleSuffix: " · PB Fahrzeugpflege",
-      description:
-        "Redaktions-Bereich für die Website von PB Fahrzeugpflege Saarlouis.",
-      icons: [
-        {
-          rel: "icon",
-          type: "image/png",
-          url: "/images/logo/pb-fahrzeugpflege-logo-black.png",
-        },
-      ],
-    },
-    components: {
-      graphics: {
-        Logo: "/src/payload/components/Logo#default",
-        Icon: "/src/payload/components/Icon#default",
-      },
-      beforeDashboard: ["/src/payload/components/BeforeDashboard#default"],
-    },
-    livePreview: {
-      breakpoints: [
-        { label: "Mobile", name: "mobile", width: 390, height: 844 },
-        { label: "Tablet", name: "tablet", width: 834, height: 1194 },
-        { label: "Desktop", name: "desktop", width: 1440, height: 900 },
-      ],
-    },
+    disable: true,
   },
   editor: lexicalEditor({}),
   collections: [Users, Media, Pages, Services, Vehicles, Awards, Faqs, BlogPosts, Redirects],

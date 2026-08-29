@@ -217,6 +217,7 @@ export default function EditorPage() {
   const [password, setPassword] = useState("");
   const [data, setData] = useState<Snapshot | null>(null);
   const [saveState, setSaveState] = useState<SaveState>("idle");
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -243,37 +244,63 @@ export default function EditorPage() {
   const save = async () => {
     if (!data) return;
     setSaveState("saving");
+    setSaveError(null);
+    const payload = {
+      password,
+      globals: {
+        home: stripDoc(data.home),
+        settings: stripDoc(data.settings),
+        footer: stripDoc(data.footer),
+        navigation: stripDoc(data.navigation),
+      },
+      docs: [
+        ...data.services.map((s) => ({ collection: "services", id: s.id, data: stripDoc(s) })),
+        ...data.vehicles.map((v) => ({ collection: "vehicles", id: v.id, data: stripDoc(v) })),
+        ...data.awards.map((a) => ({ collection: "awards", id: a.id, data: stripDoc(a) })),
+        ...data.faqs.map((f) => ({ collection: "faqs", id: f.id, data: stripDoc(f) })),
+        ...data.posts.map((p) => ({ collection: "blog-posts", id: p.id, data: stripDoc(p) })),
+      ],
+    };
+    // Debug-Log: erlaubt uns bei Problemen sofort zu sehen, was raus geht.
+    // eslint-disable-next-line no-console
+    console.log("[verwaltung] Speichere Snapshot", {
+      docs: payload.docs.length,
+      globals: Object.keys(payload.globals),
+    });
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 45_000);
       const res = await fetch("/api/verwaltung/save", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          password,
-          globals: {
-            home: stripDoc(data.home),
-            settings: stripDoc(data.settings),
-            footer: stripDoc(data.footer),
-            navigation: stripDoc(data.navigation),
-          },
-          docs: [
-            ...data.services.map((s) => ({ collection: "services", id: s.id, data: stripDoc(s) })),
-            ...data.vehicles.map((v) => ({ collection: "vehicles", id: v.id, data: stripDoc(v) })),
-            ...data.awards.map((a) => ({ collection: "awards", id: a.id, data: stripDoc(a) })),
-            ...data.faqs.map((f) => ({ collection: "faqs", id: f.id, data: stripDoc(f) })),
-            ...data.posts.map((p) => ({ collection: "blog-posts", id: p.id, data: stripDoc(p) })),
-          ],
-        }),
+        body: JSON.stringify(payload),
+        signal: controller.signal,
       });
-      if (!res.ok) {
-        const b = await res.json().catch(() => ({}));
-        throw new Error(b.error || `HTTP ${res.status}`);
+      clearTimeout(timeout);
+      const b = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        errors?: string[];
+      };
+      if (!res.ok || !b.ok) {
+        const msg =
+          (b.errors && b.errors.join("\n")) ||
+          b.error ||
+          `HTTP ${res.status}`;
+        // eslint-disable-next-line no-console
+        console.error("[verwaltung] Save fehlgeschlagen:", msg, b);
+        throw new Error(msg);
       }
+      // eslint-disable-next-line no-console
+      console.log("[verwaltung] Save erfolgreich");
       setSaveState("saved");
       setTimeout(() => setSaveState("idle"), 4000);
     } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      // eslint-disable-next-line no-console
+      console.error("[verwaltung] Save Exception:", err);
       setSaveState("error");
-      alert("Speichern fehlgeschlagen: " + (err instanceof Error ? err.message : String(err)));
-      setTimeout(() => setSaveState("idle"), 4000);
+      setSaveError(msg);
     }
   };
 
@@ -425,6 +452,43 @@ export default function EditorPage() {
       </header>
 
       <main style={{ maxWidth: 800, margin: "0 auto", padding: "24px clamp(12px, 3vw, 20px) 80px" }}>
+        {saveError && (
+          <div
+            style={{
+              background: "#fdecea",
+              border: "1px solid #f5c2b8",
+              borderRadius: 12,
+              padding: "14px 16px",
+              marginBottom: 20,
+              color: "#8f2b1d",
+              fontSize: 13,
+              whiteSpace: "pre-wrap",
+              lineHeight: 1.5,
+            }}
+          >
+            <strong style={{ display: "block", marginBottom: 6 }}>
+              Speichern fehlgeschlagen
+            </strong>
+            {saveError}
+            <button
+              type="button"
+              onClick={() => setSaveError(null)}
+              style={{
+                marginTop: 10,
+                background: "none",
+                border: "1px solid rgba(143,43,29,0.3)",
+                borderRadius: 8,
+                padding: "6px 12px",
+                color: "#8f2b1d",
+                cursor: "pointer",
+                fontSize: 12,
+                fontFamily: "inherit",
+              }}
+            >
+              Ausblenden
+            </button>
+          </div>
+        )}
         <div style={{ background: "#eef3fb", border: "1px solid #d6e4f5", borderRadius: 12, padding: "12px 16px", marginBottom: 20, color: "#3b5878", fontSize: 13 }}>
           <strong>Hinweis:</strong> Nach dem Klick auf „Speichern & Veröffentlichen" sind alle Änderungen sofort auf der Website sichtbar.
         </div>

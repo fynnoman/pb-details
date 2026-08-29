@@ -5,7 +5,31 @@ import { getPayloadClient } from "@/lib/payload-client";
  * Liefert einen Snapshot aller editierbaren Inhalte fürs Editor-Formular.
  * Kein Passwort nötig (Read-only, gleiche Daten wie das public Frontend
  * ohnehin ausliefert), aber Draft-Content wird nicht ausgeliefert.
+ *
+ * Wichtig: alle Media-URLs werden von `/api/media/file/...` auf `/media/...`
+ * umgeschrieben, weil Payloads Serverless-Media-Endpoint auf Vercel nicht
+ * greift. Public-Verzeichnis wird stattdessen als statisches CDN benutzt.
  */
+function rewriteMediaUrls<T>(input: T): T {
+  if (!input || typeof input !== "object") return input;
+  if (Array.isArray(input)) {
+    return input.map(rewriteMediaUrls) as any;
+  }
+  const out: any = Array.isArray(input) ? [] : {};
+  for (const [k, v] of Object.entries(input as any)) {
+    if (k === "url" && typeof v === "string") {
+      out[k] = v
+        .replace(/^https?:\/\/[^/]+/, "")
+        .replace(/^\/api\/media\/file\//, "/media/");
+    } else if (v && typeof v === "object") {
+      out[k] = rewriteMediaUrls(v);
+    } else {
+      out[k] = v;
+    }
+  }
+  return out;
+}
+
 export async function GET() {
   const payload = await getPayloadClient();
   const [home, settings, footer, navigation, services, vehicles, awards, faqs, posts, pages] =
@@ -21,16 +45,18 @@ export async function GET() {
       payload.find({ collection: "blog-posts", limit: 50, depth: 1, sort: "-publishedAt" }),
       payload.find({ collection: "pages", limit: 30, depth: 0, sort: "path" }),
     ]);
-  return NextResponse.json({
-    home,
-    settings,
-    footer,
-    navigation,
-    services: services.docs,
-    vehicles: vehicles.docs,
-    awards: awards.docs,
-    faqs: faqs.docs,
-    posts: posts.docs,
-    pages: pages.docs,
-  });
+  return NextResponse.json(
+    rewriteMediaUrls({
+      home,
+      settings,
+      footer,
+      navigation,
+      services: services.docs,
+      vehicles: vehicles.docs,
+      awards: awards.docs,
+      faqs: faqs.docs,
+      posts: posts.docs,
+      pages: pages.docs,
+    }),
+  );
 }
