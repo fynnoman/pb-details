@@ -216,8 +216,10 @@ export default function EditorPage() {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [data, setData] = useState<Snapshot | null>(null);
+  const originalRef = useRef<Snapshot | null>(null);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [saveInfo, setSaveInfo] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -232,7 +234,12 @@ export default function EditorPage() {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
       })
-      .then(setData)
+      .then((d: Snapshot) => {
+        setData(d);
+        // Deep clone der Original-Daten, um beim Speichern zu wissen,
+        // was sich geaendert hat.
+        originalRef.current = JSON.parse(JSON.stringify(d));
+      })
       .catch((err) => setLoadError(err instanceof Error ? err.message : String(err)));
   }, [router]);
 
@@ -245,31 +252,60 @@ export default function EditorPage() {
     if (!data) return;
     setSaveState("saving");
     setSaveError(null);
-    const payload = {
-      password,
-      globals: {
-        home: stripDoc(data.home),
-        settings: stripDoc(data.settings),
-        footer: stripDoc(data.footer),
-        navigation: stripDoc(data.navigation),
-      },
-      docs: [
-        ...data.services.map((s) => ({ collection: "services", id: s.id, data: stripDoc(s) })),
-        ...data.vehicles.map((v) => ({ collection: "vehicles", id: v.id, data: stripDoc(v) })),
-        ...data.awards.map((a) => ({ collection: "awards", id: a.id, data: stripDoc(a) })),
-        ...data.faqs.map((f) => ({ collection: "faqs", id: f.id, data: stripDoc(f) })),
-        ...data.posts.map((p) => ({ collection: "blog-posts", id: p.id, data: stripDoc(p) })),
-      ],
-    };
-    // Debug-Log: erlaubt uns bei Problemen sofort zu sehen, was raus geht.
-    // eslint-disable-next-line no-console
-    console.log("[verwaltung] Speichere Snapshot", {
-      docs: payload.docs.length,
-      globals: Object.keys(payload.globals),
+    setSaveInfo(null);
+
+    const original = originalRef.current;
+    const diffGlobals: Record<string, any> = {};
+    const diffDocs: Array<{ collection: string; id: string | number; data: any }> = [];
+
+    const stableStringify = (v: any) => JSON.stringify(stripDoc(v));
+
+    (["home", "settings", "footer", "navigation"] as const).forEach((slug) => {
+      const current = (data as any)[slug];
+      const before = original ? (original as any)[slug] : undefined;
+      if (!before || stableStringify(current) !== stableStringify(before)) {
+        diffGlobals[slug] = stripDoc(current);
+      }
     });
+
+    const collectDocDiffs = (
+      currList: any[],
+      origList: any[] | undefined,
+      collection: string,
+    ) => {
+      currList.forEach((doc) => {
+        const before = (origList || []).find((o) => o.id === doc.id);
+        if (!before || stableStringify(doc) !== stableStringify(before)) {
+          diffDocs.push({ collection, id: doc.id, data: stripDoc(doc) });
+        }
+      });
+    };
+    collectDocDiffs(data.services, original?.services, "services");
+    collectDocDiffs(data.vehicles, original?.vehicles, "vehicles");
+    collectDocDiffs(data.awards, original?.awards, "awards");
+    collectDocDiffs(data.faqs, original?.faqs, "faqs");
+    collectDocDiffs(data.posts, original?.posts, "blog-posts");
+
+    const totalChanges = Object.keys(diffGlobals).length + diffDocs.length;
+
+    if (totalChanges === 0) {
+      setSaveState("saved");
+      setSaveInfo("Keine Änderungen zu speichern.");
+      setTimeout(() => setSaveState("idle"), 3000);
+      return;
+    }
+
+    const payload = { password, globals: diffGlobals, docs: diffDocs };
+    // eslint-disable-next-line no-console
+    console.log("[verwaltung] Speichere nur geaenderte Inhalte", {
+      globals: Object.keys(diffGlobals),
+      docs: diffDocs.map((d) => `${d.collection}#${d.id}`),
+    });
+
+    const started = Date.now();
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 45_000);
+      const timeout = setTimeout(() => controller.abort(), 60_000);
       const res = await fetch("/api/verwaltung/save", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -281,6 +317,7 @@ export default function EditorPage() {
         ok?: boolean;
         error?: string;
         errors?: string[];
+        ms?: number;
       };
       if (!res.ok || !b.ok) {
         const msg =
@@ -291,9 +328,16 @@ export default function EditorPage() {
         console.error("[verwaltung] Save fehlgeschlagen:", msg, b);
         throw new Error(msg);
       }
+      const clientMs = Date.now() - started;
       // eslint-disable-next-line no-console
-      console.log("[verwaltung] Save erfolgreich");
+      console.log("[verwaltung] Save erfolgreich", { clientMs, serverMs: b.ms });
+      // Original-Snapshot nachziehen, damit der naechste Save wieder
+      // nur echte Aenderungen sendet.
+      originalRef.current = JSON.parse(JSON.stringify(data));
       setSaveState("saved");
+      setSaveInfo(
+        `${totalChanges} Änderung${totalChanges === 1 ? "" : "en"} gespeichert (${(clientMs / 1000).toFixed(1)} s).`,
+      );
       setTimeout(() => setSaveState("idle"), 4000);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -452,6 +496,21 @@ export default function EditorPage() {
       </header>
 
       <main style={{ maxWidth: 800, margin: "0 auto", padding: "24px clamp(12px, 3vw, 20px) 80px" }}>
+        {saveInfo && saveState === "saved" && (
+          <div
+            style={{
+              background: "#eafaf0",
+              border: "1px solid #b8e3c8",
+              borderRadius: 12,
+              padding: "12px 16px",
+              marginBottom: 20,
+              color: "#1e5731",
+              fontSize: 13,
+            }}
+          >
+            ✓ {saveInfo}
+          </div>
+        )}
         {saveError && (
           <div
             style={{

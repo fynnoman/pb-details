@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { getPayloadClient } from "@/lib/payload-client";
 
 /**
- * Speichert den kompletten Editor-Zustand ab. Bekommt das Passwort im
- * Body mit; validiert es gegen ENV; splittet die Daten in Global-Updates
- * und Collection-Doc-Updates.
+ * Speichert nur die tatsaechlich geaenderten Inhalte. Globals + Docs
+ * werden parallel geschrieben, damit wir nicht in die Vercel-Timeouts
+ * laufen (Neon Postgres schafft die parallelen Writes locker).
  *
  * Body:
  *   {
@@ -13,7 +13,10 @@ import { getPayloadClient } from "@/lib/payload-client";
  *     docs: [ { collection: "services", id, data: {...} }, ... ]
  *   }
  */
+export const maxDuration = 60;
+
 export async function POST(req: Request) {
+  const t0 = Date.now();
   const expected = process.env.ADMIN_PASSWORD;
   if (!expected) {
     return NextResponse.json(
@@ -39,19 +42,9 @@ export async function POST(req: Request) {
 
   const payload = await getPayloadClient();
   const errors: string[] = [];
+  const timings: Record<string, number> = {};
 
-  // Globals
   const allowedGlobals = new Set(["home", "settings", "footer", "navigation"]);
-  for (const [slug, data] of Object.entries(body.globals || {})) {
-    if (!allowedGlobals.has(slug)) continue;
-    try {
-      await payload.updateGlobal({ slug: slug as any, data, overrideAccess: true });
-    } catch (err) {
-      errors.push(`global ${slug}: ${err instanceof Error ? err.message : String(err)}`);
-    }
-  }
-
-  // Docs
   const allowedCollections = new Set([
     "services",
     "vehicles",
@@ -60,27 +53,57 @@ export async function POST(req: Request) {
     "faqs",
     "pages",
   ]);
-  for (const d of body.docs || []) {
-    if (!allowedCollections.has(d.collection)) continue;
-    try {
-      await payload.update({
-        collection: d.collection as any,
-        id: d.id as any,
-        data: d.data,
-        overrideAccess: true,
-      });
-    } catch (err) {
-      errors.push(
-        `${d.collection}#${d.id}: ${err instanceof Error ? err.message : String(err)}`,
-      );
-    }
-  }
+
+  const globalJobs = Object.entries(body.globals || {})
+    .filter(([slug]) => allowedGlobals.has(slug))
+    .map(async ([slug, data]) => {
+      const start = Date.now();
+      try {
+        await payload.updateGlobal({ slug: slug as any, data, overrideAccess: true });
+        timings[`global:${slug}`] = Date.now() - start;
+      } catch (err) {
+        errors.push(`global ${slug}: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    });
+
+  const docJobs = (body.docs || [])
+    .filter((d) => allowedCollections.has(d.collection))
+    .map(async (d) => {
+      const start = Date.now();
+      try {
+        await payload.update({
+          collection: d.collection as any,
+          id: d.id as any,
+          data: d.data,
+          overrideAccess: true,
+        });
+        timings[`${d.collection}#${d.id}`] = Date.now() - start;
+      } catch (err) {
+        errors.push(
+          `${d.collection}#${d.id}: ${err instanceof Error ? err.message : String(err)}`,
+        );
+      }
+    });
+
+  await Promise.all([...globalJobs, ...docJobs]);
+
+  const totalMs = Date.now() - t0;
+  // eslint-disable-next-line no-console
+  console.log("[verwaltung/save]", {
+    totalMs,
+    docsWritten: docJobs.length,
+    globalsWritten: globalJobs.length,
+    slowest: Object.entries(timings)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5),
+    errors: errors.length,
+  });
 
   if (errors.length > 0) {
     return NextResponse.json(
-      { ok: false, error: errors.join(" · "), errors },
+      { ok: false, error: errors.join(" · "), errors, ms: totalMs },
       { status: 500 },
     );
   }
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, ms: totalMs });
 }
