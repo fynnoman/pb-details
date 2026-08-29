@@ -38,15 +38,30 @@ export default function WhyUs({
     (settings.wkdb?.count || 0) +
     (settings.google?.count || 0);
 
-  const reasons = [
-    { headline: `Seit ${settings.founded || 1997}`, body: `Inhabergeführt${settings.founders ? ` von ${settings.founders}` : ""}` },
+  const googleReviewsUrl =
+    settings.google?.url || settings.google?.mapsUrl || undefined;
+
+  const reasons: Array<{
+    headline: string;
+    body: string;
+    href?: string;
+    hint?: string;
+  }> = [
+    {
+      headline: `Seit ${settings.founded || 1997}`,
+      body: `Inhabergeführt${settings.founders ? ` von ${settings.founders}` : ""}`,
+    },
     {
       headline: totalReviews > 0 ? String(totalReviews) : String(settings.provenExpert?.count || ""),
       body: "positive, verifizierte Kundenbewertungen",
+      href: googleReviewsUrl,
+      hint: "Auf Google ansehen",
     },
     {
       headline: `${settings.recommendation} %`,
       body: "Weiterempfehlungsquote",
+      href: googleReviewsUrl,
+      hint: "Auf Google ansehen",
     },
     {
       headline: "Q-Siegel",
@@ -120,23 +135,56 @@ export default function WhyUs({
 
           <div className="col-span-12 md:col-span-5 flex flex-col gap-4 sm:gap-6">
             <div className="grid grid-cols-2 gap-4 sm:gap-6 content-start">
-              {reasons.map((r, i) => (
-                <motion.div
-                  key={r.headline}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.9, delay: i * 0.06, ease: [0.2, 0.7, 0.2, 1] }}
-                  className="glass rounded-[1.25rem] p-5 sm:p-6 min-h-[130px] flex flex-col justify-between"
-                >
-                  <div className="font-display text-2xl sm:text-4xl leading-none text-chrome break-words">
-                    {r.headline}
-                  </div>
-                  <div className="text-xs text-[var(--ink-dim)] mt-3 leading-relaxed">
-                    {r.body}
-                  </div>
-                </motion.div>
-              ))}
+              {reasons.map((r, i) => {
+                const Comp = r.href ? motion.a : motion.div;
+                const linkProps = r.href
+                  ? {
+                      href: r.href,
+                      target: "_blank",
+                      rel: "noopener",
+                      "aria-label": `${r.headline} – ${r.body}. ${r.hint || "Details ansehen"}.`,
+                    }
+                  : {};
+                return (
+                  <Comp
+                    key={r.headline}
+                    {...linkProps}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.9, delay: i * 0.06, ease: [0.2, 0.7, 0.2, 1] }}
+                    className={`glass rounded-[1.25rem] p-5 sm:p-6 min-h-[130px] flex flex-col justify-between ${
+                      r.href
+                        ? "hover:ring-1 hover:ring-[var(--gold)]/40 transition-all group cursor-pointer"
+                        : ""
+                    }`}
+                  >
+                    <div className="font-display text-2xl sm:text-4xl leading-none text-chrome break-words">
+                      {r.headline}
+                    </div>
+                    <div className="text-xs text-[var(--ink-dim)] mt-3 leading-relaxed">
+                      {r.body}
+                    </div>
+                    {r.href && (
+                      <div className="mt-3 flex items-center gap-1.5 text-[10px] tracking-[0.24em] uppercase text-[var(--gold)]/80 group-hover:text-[var(--gold)] transition-colors">
+                        <svg viewBox="0 0 24 24" className="w-3 h-3" aria-hidden>
+                          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.15-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                          <path fill="#FBBC05" d="M5.85 14.1c-.22-.66-.34-1.36-.34-2.1s.12-1.44.34-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.67-2.84z"/>
+                          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.67 2.84C6.71 7.31 9.14 5.38 12 5.38z"/>
+                        </svg>
+                        <span>Google</span>
+                        <span
+                          aria-hidden
+                          className="ml-auto transition-transform group-hover:translate-x-0.5"
+                        >
+                          →
+                        </span>
+                      </div>
+                    )}
+                  </Comp>
+                );
+              })}
             </div>
 
             {settings.google && (
