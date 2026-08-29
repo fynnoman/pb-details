@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SiteSettings, FooterData } from "@/lib/site-types";
 import EditableText from "./edit/EditableText";
+import CookieSettingsButton from "./CookieSettingsButton";
 
 export default function Footer({
   settings,
@@ -146,17 +147,7 @@ export default function Footer({
                 <EditableText globalSlug="footer" path={`legalLinks.${i}.label`} value={l.label} />
               </Link>
             ))}
-            <button
-              type="button"
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.dispatchEvent(new CustomEvent("pb-open-consent"));
-                }
-              }}
-              className="hover:text-[var(--ink)] transition-colors underline-offset-4 hover:underline"
-            >
-              Cookie-Einstellungen
-            </button>
+            <CookieSettingsButton />
           </div>
         </div>
 
