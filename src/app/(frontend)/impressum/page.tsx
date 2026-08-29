@@ -25,7 +25,10 @@ function H2({ children }: { children: React.ReactNode }) {
 export default async function ImpressumPage() {
   const settings = await loadSettings();
   const owner = settings.owner || "Thomas Paul-Mohm";
-  const vatId = settings.vatId || "DE268106468";
+  // Von Fynn/Karsten bestaetigt: die einzig korrekte USt-IdNr.
+  // Bewusst hardcoded, damit Aenderungen im CMS nichts Legales
+  // ueberschreiben koennen.
+  const vatId = "DE268106468";
   const fax = settings.fax;
   const webPage = webPageSchema({
     path: PATH,
