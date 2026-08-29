@@ -6,6 +6,7 @@ import Services from "@/components/Services";
 import Vehicles from "@/components/Vehicles";
 import Process from "@/components/Process";
 import WhyUs from "@/components/WhyUs";
+import Reviews from "@/components/Reviews";
 import Awards from "@/components/Awards";
 import Region from "@/components/Region";
 import FAQ from "@/components/FAQ";
@@ -88,6 +89,7 @@ export default async function HomePage() {
           mottoText={home.mottoText}
           settings={settings}
         />
+        <Reviews settings={settings} />
         <Awards awards={awards} home={home} />
         <Region home={home} settings={settings} />
         <FAQ faqs={homeFaqs} home={home} />

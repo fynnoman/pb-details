@@ -44,7 +44,7 @@ export default async function KontaktPage() {
         <div className="mx-auto max-w-[1100px] px-4 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Reveal>
-              <div className="glass rounded-[1.5rem] p-8 h-full">
+              <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   Adresse
                 </div>
@@ -75,7 +75,7 @@ export default async function KontaktPage() {
               </div>
             </Reveal>
             <Reveal delay={0.05}>
-              <div className="glass rounded-[1.5rem] p-8 h-full">
+              <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   Direkter Draht
                 </div>
@@ -106,7 +106,7 @@ export default async function KontaktPage() {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="glass rounded-[1.5rem] p-8 h-full">
+              <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   Öffnungszeiten
                 </div>

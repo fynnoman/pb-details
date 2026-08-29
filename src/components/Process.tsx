@@ -56,15 +56,15 @@ export default function Process({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 1, delay: i * 0.12, ease: [0.2, 0.7, 0.2, 1] }}
-              className="glass rounded-[1.75rem] p-8 sm:p-10 relative overflow-hidden"
+              className="glass rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-8 lg:p-10 relative overflow-hidden"
             >
-              <div className="font-display text-[7rem] leading-none text-[var(--ink)]/[0.18] absolute -top-4 -right-2 select-none pointer-events-none">
+              <div className="font-display text-[5rem] sm:text-[7rem] leading-none text-[var(--ink)]/[0.18] absolute -top-2 sm:-top-4 -right-1 sm:-right-2 select-none pointer-events-none">
                 {String(i + 1).padStart(2, "0")}
               </div>
               <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                 Schritt {String(i + 1).padStart(2, "0")}
               </div>
-              <h3 className="font-display text-3xl leading-tight tracking-[-0.02em]">
+              <h3 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.02em]">
                 <EditableText
                   globalSlug="home"
                   path={`processSteps.${i}.title`}
