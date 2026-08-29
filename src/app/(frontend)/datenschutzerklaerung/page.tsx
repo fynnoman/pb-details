@@ -40,7 +40,7 @@ function UL({ children }: { children: React.ReactNode }) {
 
 export default async function DatenschutzPage() {
   const settings = await loadSettings();
-  const founders = settings.founders || "Thomas Paul & Karsten Becker";
+  const owner = settings.owner || "Thomas Paul-Mohm";
   const webPage = webPageSchema({
     path: PATH,
     name: "Datenschutzerklärung | PB Fahrzeugpflege Saarlouis",
@@ -71,7 +71,7 @@ export default async function DatenschutzPage() {
             <P>
               {settings.name}
               <br />
-              Inhaber: {founders}
+              Inhaber: {owner}
               <br />
               {settings.address.street}
               <br />

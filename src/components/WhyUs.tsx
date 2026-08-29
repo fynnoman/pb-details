@@ -53,9 +53,7 @@ export default function WhyUs({
     },
     {
       headline: totalReviews > 0 ? String(totalReviews) : String(settings.provenExpert?.count || ""),
-      body: "positive, verifizierte Kundenbewertungen",
-      href: googleReviewsUrl,
-      hint: "Auf Google ansehen",
+      body: "positive, verifizierte Kundenbewertungen aus ProvenExpert, Google und werkenntdenBESTEN",
     },
     {
       headline: `${settings.recommendation} %`,

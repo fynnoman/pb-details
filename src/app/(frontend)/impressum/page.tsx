@@ -24,7 +24,7 @@ function H2({ children }: { children: React.ReactNode }) {
 
 export default async function ImpressumPage() {
   const settings = await loadSettings();
-  const founders = settings.founders || "Thomas Paul & Karsten Becker";
+  const owner = settings.owner || "Thomas Paul-Mohm";
   const vatId = settings.vatId || "DE268106468";
   const fax = settings.fax;
   const webPage = webPageSchema({
@@ -59,7 +59,7 @@ export default async function ImpressumPage() {
 
           <Reveal>
             <H2>Vertreten durch</H2>
-            <p>{founders} (Inhaber)</p>
+            <p>Inhaber: {owner}</p>
           </Reveal>
 
           <Reveal>
@@ -91,7 +91,7 @@ export default async function ImpressumPage() {
           <Reveal>
             <H2>Redaktionell verantwortlich (§ 18 Abs. 2 MStV)</H2>
             <p>
-              {founders}
+              {owner}
               <br />
               Anschrift wie oben.
             </p>
