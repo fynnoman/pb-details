@@ -1,6 +1,14 @@
-import { Inter, Fraunces } from "next/font/google";
+import type { Viewport } from "next";
+import localFont from "next/font/local";
 import "../globals.css";
 import "@/styles/edit.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0d0c0a",
+};
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
@@ -9,17 +17,21 @@ import GoogleTagManager from "@/components/GoogleTagManager";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/schema";
 import { loadFooter, loadNavigation, loadSettings } from "@/lib/site-data";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const roboto = localFont({
+  src: [
+    {
+      path: "../../fonts/Roboto-Variable.ttf",
+      style: "normal",
+      weight: "100 900",
+    },
+    {
+      path: "../../fonts/Roboto-Italic-Variable.ttf",
+      style: "italic",
+      weight: "100 900",
+    },
+  ],
+  variable: "--font-roboto",
   display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["opsz", "SOFT"],
 });
 
 /**
@@ -41,7 +53,7 @@ export default async function FrontendLayout({
   return (
     <html
       lang="de"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${roboto.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
         <CookieBanner />

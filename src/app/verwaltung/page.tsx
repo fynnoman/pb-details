@@ -66,7 +66,7 @@ export default function VerwaltungLogin() {
             background: "#ffffff",
             border: "1px solid #ebe6da",
             borderRadius: 22,
-            padding: 32,
+            padding: "clamp(20px, 5vw, 32px)",
             boxShadow: "0 20px 60px -30px rgba(0,0,0,0.15)",
           }}
         >
@@ -81,10 +81,11 @@ export default function VerwaltungLogin() {
             autoFocus
             style={{
               width: "100%",
-              padding: "12px 14px",
+              padding: "14px 14px",
+              minHeight: 48,
               border: "1px solid #d6d0c1",
               borderRadius: 12,
-              fontSize: 15,
+              fontSize: 16,
               color: "#14120d",
               background: "#fbfaf7",
               boxSizing: "border-box",
@@ -109,7 +110,8 @@ export default function VerwaltungLogin() {
             disabled={loading || !password}
             style={{
               width: "100%",
-              padding: "12px",
+              padding: "14px",
+              minHeight: 48,
               background: loading || !password ? "#d6cfbf" : "linear-gradient(180deg, #c9a25c, #a37b3f)",
               color: "#ffffff",
               border: "none",

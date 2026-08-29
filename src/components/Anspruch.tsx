@@ -46,29 +46,29 @@ export default function Anspruch({
     <section
       id="ueber-uns"
       ref={ref}
-      className="relative py-20 sm:py-32 lg:py-44 overflow-hidden"
+      className="relative py-16 sm:py-24 lg:py-44 overflow-hidden"
     >
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 items-center">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
+        <div className="grid grid-cols-12 gap-8 lg:gap-10 items-center">
           <div className="col-span-12 lg:col-span-6 order-2 lg:order-1">
-            <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden">
+            <div className="relative aspect-[4/5] sm:aspect-[4/5] rounded-2xl sm:rounded-[2rem] overflow-hidden">
               <motion.img
-                src="/images/team/karsten-becker-thomas-paul.jpg"
-                alt="Karsten Becker und Thomas Paul, Inhaber und Gründer von PB Fahrzeugpflege Saarlouis, im Betrieb in Ensdorf"
+                src="/images/team/karsten-thomas-empfang.jpg"
+                alt="Karsten Becker und Thomas Paul, Inhaber und Gründer von PB Fahrzeugpflege Saarlouis, am Empfang vor Zertifikatswand in Ensdorf"
                 style={{ y: imgY, scale: imgScale }}
-                className="absolute inset-0 w-full h-full object-cover will-change-transform"
+                className="absolute inset-0 w-full h-full object-cover object-top will-change-transform"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
               <motion.div
                 style={{ rotate: badgeRotate }}
-                className="absolute -right-6 -bottom-6 sm:right-8 sm:bottom-8 glass-strong rounded-2xl px-5 py-4 max-w-[240px] shadow-xl"
+                className="absolute right-3 bottom-3 sm:right-8 sm:bottom-8 glass-strong rounded-2xl px-4 py-3 sm:px-5 sm:py-4 max-w-[200px] sm:max-w-[240px] shadow-xl"
               >
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-1">
                   <EditableText globalSlug="home" path="anspruch.badgeLabel" value={badgeLabel} />
                 </div>
-                <div className="font-display text-4xl text-chrome leading-none">
+                <div className="font-display text-3xl sm:text-4xl text-chrome leading-none">
                   {settings.recommendation}
                   <span className="text-[var(--gold)]">%</span>
                 </div>
@@ -87,7 +87,7 @@ export default function Anspruch({
               </p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.02em] max-w-[18ch]">
+              <h2 className="font-display text-[clamp(1.75rem,7vw,3.6rem)] leading-[1.05] tracking-[-0.02em] max-w-[18ch]">
                 <EditableText
                   globalSlug="home"
                   path="anspruch.title"
@@ -101,7 +101,7 @@ export default function Anspruch({
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-8 text-[var(--ink-dim)] text-lg leading-relaxed max-w-xl">
+              <p className="mt-6 sm:mt-8 text-[var(--ink-dim)] text-base sm:text-lg leading-relaxed max-w-xl">
                 <EditableText globalSlug="home" path="anspruch.para1" value={para1} multiline />
               </p>
             </Reveal>

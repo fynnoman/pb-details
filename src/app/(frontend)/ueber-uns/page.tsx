@@ -33,8 +33,8 @@ export default function UeberUnsPage() {
         backgroundImage="/images/team/karsten-becker-thomas-paul.jpg"
       />
 
-      <section className="relative py-24 sm:py-32">
-        <div className="mx-auto max-w-[820px] px-6 sm:px-10">
+      <section className="relative py-16 sm:py-24">
+        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
           <Reveal>
             <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
               Im Jahr 1997 …
@@ -73,8 +73,8 @@ export default function UeberUnsPage() {
         </div>
       </section>
 
-      <section className="relative py-24 sm:py-32 border-t border-white/5">
-        <div className="mx-auto max-w-[820px] px-6 sm:px-10">
+      <section className="relative py-16 sm:py-24 border-t border-white/5">
+        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
           <Reveal>
             <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
               Erfahrung, die Vertrauen schafft
@@ -93,8 +93,8 @@ export default function UeberUnsPage() {
         </div>
       </section>
 
-      <section className="relative py-24 sm:py-32 border-t border-white/5">
-        <div className="mx-auto max-w-[820px] px-6 sm:px-10">
+      <section className="relative py-16 sm:py-24 border-t border-white/5">
+        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
           <Reveal>
             <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
               Warum PB Fahrzeugpflege Saarlouis®?

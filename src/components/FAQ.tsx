@@ -43,8 +43,8 @@ export default function FAQ({
   if (!faqs || faqs.length === 0) return null;
 
   return (
-    <section id={id} className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1000px] px-5 sm:px-10">
+    <section id={id} className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
+      <div className="mx-auto max-w-[1000px] px-4 sm:px-8 lg:px-10">
         <div className="text-center mb-12 sm:mb-16">
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -54,7 +54,7 @@ export default function FAQ({
             </p>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
+            <h2 className="font-display text-[clamp(1.75rem,7vw,3.6rem)] leading-[1.05] tracking-[-0.025em]">
               {title ? (
                 title
               ) : (

@@ -127,8 +127,8 @@ export default async function ServiceDetailPage({
         backgroundImage={heroImg}
       />
 
-      <section className="relative py-20 sm:py-32">
-        <div className="mx-auto max-w-[820px] px-5 sm:px-10">
+      <section className="relative py-16 sm:py-24">
+        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
           <LexicalRenderer data={service.content} />
 
           <Reveal delay={0.1}>

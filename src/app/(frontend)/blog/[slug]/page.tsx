@@ -135,7 +135,7 @@ export default async function BlogPostPage({
       />
 
       <article className="relative pb-24 sm:pb-32 pt-16">
-        <div className="mx-auto max-w-[720px] px-5 sm:px-10 space-y-6 text-[var(--ink-dim)] leading-relaxed text-base sm:text-lg">
+        <div className="mx-auto max-w-[720px] px-4 sm:px-8 lg:px-10 space-y-6 text-[var(--ink-dim)] leading-relaxed text-base sm:text-lg">
           <Reveal>
             <p className="text-[var(--ink)]">{post.intro}</p>
           </Reveal>
@@ -155,7 +155,7 @@ export default async function BlogPostPage({
 
       {otherPosts.length > 0 && (
         <section className="relative py-16 border-t border-white/5">
-          <div className="mx-auto max-w-[1000px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[1000px] px-4 sm:px-8 lg:px-10">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-8">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />

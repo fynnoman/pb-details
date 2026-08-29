@@ -23,7 +23,7 @@ export default function Contact({
   const response = t.response || "Antwort in 24 h";
 
   return (
-    <section id="kontakt" className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
+    <section id="kontakt" className="relative py-16 sm:py-24 lg:py-44 overflow-hidden">
       <div aria-hidden className="absolute inset-0">
         <img
           src="/images/fahrzeuge/roter-tesla-model-3-aufbereitung.jpg"
@@ -35,7 +35,7 @@ export default function Contact({
         <div className="absolute inset-0 bg-black/35" />
       </div>
 
-      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-10">
+      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="col-span-12 lg:col-span-5">
             <Reveal>
@@ -45,7 +45,7 @@ export default function Contact({
               </p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="font-display text-[clamp(2.2rem,5vw,4.2rem)] leading-[1.0] tracking-[-0.03em]">
+              <h2 className="font-display text-[clamp(1.9rem,8vw,4.2rem)] leading-[1.05] tracking-[-0.03em]">
                 <EditableText
                   globalSlug="home"
                   path="contact.title"
@@ -59,13 +59,13 @@ export default function Contact({
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-8 text-[var(--ink-dim)] leading-relaxed max-w-md">
+              <p className="mt-6 sm:mt-8 text-[var(--ink-dim)] leading-relaxed max-w-md">
                 <EditableText globalSlug="home" path="contact.intro" value={intro} multiline />
               </p>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="mt-10 glass-strong rounded-[1.75rem] p-6 sm:p-7">
+              <div className="mt-8 sm:mt-10 glass-strong rounded-2xl sm:rounded-[1.75rem] p-5 sm:p-7">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-2">
                   <EditableText globalSlug="home" path="contact.directLabel" value={directLabel} />
                 </div>
@@ -124,11 +124,11 @@ export default function Contact({
           <div className="col-span-12 lg:col-span-7" id="termin">
             <Reveal delay={0.05}>
               {hasCalendly ? (
-                <div className="glass-strong rounded-[1.75rem] p-4 sm:p-6">
+                <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-3 sm:p-6">
                   <CalendlyEmbed url={settings.calendly!.url!} />
                 </div>
               ) : (
-                <div className="glass-strong rounded-[1.75rem] p-8 sm:p-10">
+                <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-10">
                   <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                     Online-Terminbuchung
                   </div>
@@ -141,8 +141,11 @@ export default function Contact({
                     per WhatsApp oder besuchen uns ohne Termin während
                     unserer Öffnungszeiten.
                   </p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <a href={`tel:${settings.phone.e164}`} className="btn-gold">
+                  <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
+                    <a
+                      href={`tel:${settings.phone.e164}`}
+                      className="btn-gold min-h-[48px] w-full sm:w-auto justify-center"
+                    >
                       Jetzt anrufen
                       <span aria-hidden>→</span>
                     </a>
@@ -151,7 +154,7 @@ export default function Contact({
                         href={settings.whatsapp}
                         target="_blank"
                         rel="noopener"
-                        className="btn-glass"
+                        className="btn-glass min-h-[48px] w-full sm:w-auto justify-center"
                       >
                         WhatsApp öffnen
                       </a>

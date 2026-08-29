@@ -37,10 +37,11 @@ function Field({
 }) {
   const commonStyle: React.CSSProperties = {
     width: "100%",
-    padding: "10px 12px",
+    padding: "12px 14px",
+    minHeight: multiline ? undefined : 44,
     border: "1px solid #d6d0c1",
     borderRadius: 10,
-    fontSize: 14,
+    fontSize: 16,
     color: "#14120d",
     background: "#fbfaf7",
     fontFamily: "inherit",
@@ -102,7 +103,7 @@ function SectionCard({ title, icon, children }: { title: string; icon: string; c
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "16px 22px",
+          padding: "16px clamp(14px, 3vw, 22px)",
           background: "#fbfaf7",
           border: "none",
           borderBottom: open ? "1px solid #ebe6da" : "none",
@@ -116,7 +117,7 @@ function SectionCard({ title, icon, children }: { title: string; icon: string; c
         </span>
         <span style={{ color: "#a09b91", fontSize: 12 }}>{open ? "▲" : "▼"}</span>
       </button>
-      {open && <div style={{ padding: 22 }}>{children}</div>}
+      {open && <div style={{ padding: "18px clamp(14px, 3vw, 22px)" }}>{children}</div>}
     </div>
   );
 }
@@ -354,25 +355,27 @@ export default function EditorPage() {
           zIndex: 50,
           background: "#ffffff",
           borderBottom: "1px solid #ebe6da",
-          padding: "12px 20px",
+          padding: "12px clamp(12px, 3vw, 20px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           boxShadow: "0 1px 3px rgba(0,0,0,0.03)",
+          gap: 8,
+          flexWrap: "wrap",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
           <img src="/images/logo/pb-fahrzeugpflege-logo-black.png" alt="" style={{ height: 32 }} />
-          <div>
+          <div style={{ minWidth: 0 }}>
             <p style={{ margin: 0, fontSize: 14, fontWeight: 500, color: "#14120d" }}>
               Website-Verwaltung
             </p>
-            <p style={{ margin: 0, fontSize: 12, color: "#928c81" }}>
+            <p style={{ margin: 0, fontSize: 12, color: "#928c81" }} className="pb-adm-sub">
               Änderungen werden nach dem Speichern sofort live
             </p>
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
           <a
             href="/"
             target="_blank"
@@ -385,7 +388,8 @@ export default function EditorPage() {
             onClick={save}
             disabled={saveState === "saving"}
             style={{
-              padding: "10px 20px",
+              padding: "10px 16px",
+              minHeight: 44,
               borderRadius: 12,
               fontSize: 14,
               fontWeight: 500,
@@ -420,7 +424,7 @@ export default function EditorPage() {
         </div>
       </header>
 
-      <main style={{ maxWidth: 800, margin: "0 auto", padding: "32px 20px 80px" }}>
+      <main style={{ maxWidth: 800, margin: "0 auto", padding: "24px clamp(12px, 3vw, 20px) 80px" }}>
         <div style={{ background: "#eef3fb", border: "1px solid #d6e4f5", borderRadius: 12, padding: "12px 16px", marginBottom: 20, color: "#3b5878", fontSize: 13 }}>
           <strong>Hinweis:</strong> Nach dem Klick auf „Speichern & Veröffentlichen" sind alle Änderungen sofort auf der Website sichtbar.
         </div>

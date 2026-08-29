@@ -153,8 +153,8 @@ export default function Services({
   const titleHighlight = t.titleHighlight || " — aus einer Hand.";
   const intro = t.intro || "Bei PB Fahrzeugpflege Saarlouis erhalten Sie alle Leistungen rund um Lackschutz, Aufbereitung und Schadenbehebung aus einer Hand – seit 1997 in Ensdorf bei Saarlouis.";
   return (
-    <section id="leistungen" className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+    <section id="leistungen" className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         <div className="max-w-3xl mb-12 sm:mb-20">
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -163,7 +163,7 @@ export default function Services({
             </p>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="font-display text-[clamp(2.2rem,5vw,4.2rem)] leading-[1.02] tracking-[-0.025em]">
+            <h2 className="font-display text-[clamp(1.9rem,8vw,4.2rem)] leading-[1.05] tracking-[-0.025em]">
               <EditableText
                 globalSlug="home"
                 path="services.title"

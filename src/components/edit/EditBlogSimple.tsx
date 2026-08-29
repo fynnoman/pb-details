@@ -76,7 +76,7 @@ export default function EditBlogSimple({ post }: { post: PostDoc }) {
 
       <style>{`
         html.edit-mode, html.edit-mode body { background: #ffffff !important; }
-        .edit-canvas { background: #ffffff; color: #14120d; min-height: 100vh; font-family: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif; padding-top: 56px; }
+        .edit-canvas { background: #ffffff; color: #14120d; min-height: 100vh; font-family: var(--font-roboto), -apple-system, "SF Pro Text", system-ui, sans-serif; padding-top: 56px; }
         .edit-canvas__inner { max-width: 900px; margin: 0 auto; padding: 32px 24px 100px; }
         .edit-canvas__spacer { height: 60px; }
         .edit-canvas__note {

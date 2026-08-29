@@ -52,8 +52,8 @@ export default async function BlogPage() {
         subtitle="Was wir aus über 29 Jahren Fahrzeugaufbereitung gelernt haben – konkret, ehrlich und praxisnah."
       />
 
-      <section className="relative py-24 sm:py-32">
-        <div className="mx-auto max-w-[1000px] px-5 sm:px-10">
+      <section className="relative py-16 sm:py-24">
+        <div className="mx-auto max-w-[1000px] px-4 sm:px-8 lg:px-10">
           <div className="space-y-6">
             {posts.map((post, i) => {
               const dateLabel = post.publishedAt

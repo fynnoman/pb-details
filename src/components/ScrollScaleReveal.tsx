@@ -109,7 +109,7 @@ export default function ScrollScaleReveal({
                 ? { opacity: 1 }
                 : { opacity: contentOpacity, y: contentY }
             }
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-10 text-center"
+            className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-8 lg:px-10 text-center"
           >
             {kicker && (
               <p className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6 sm:mb-8">
@@ -119,7 +119,7 @@ export default function ScrollScaleReveal({
               </p>
             )}
 
-            <h2 className="font-display font-light text-[clamp(2.8rem,7.5vw,7rem)] leading-[0.98] tracking-[-0.03em] max-w-[18ch]">
+            <h2 className="font-display font-light text-[clamp(2rem,9vw,7rem)] leading-[1.02] tracking-[-0.03em] max-w-[18ch]">
               {title}
             </h2>
 

@@ -78,8 +78,8 @@ export default function Vehicles({
   const titleHighlight = t.titleHighlight || "spezialisiert sind.";
   const intro = t.intro || "Wir sind auf die Aufbereitung und den Lackschutz hochwertiger Fahrzeuge spezialisiert und betreuen ausschließlich private Kundenfahrzeuge. Jede Aufbereitung beginnt mit einer persönlichen Begutachtung – so erhalten Sie ein realistisches Angebot statt eines Pauschalversprechens.";
   return (
-    <section className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+    <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         <div className="grid grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="col-span-12 lg:col-span-6">
             <Reveal>
@@ -89,7 +89,7 @@ export default function Vehicles({
               </p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
+              <h2 className="font-display text-[clamp(1.75rem,7vw,3.6rem)] leading-[1.05] tracking-[-0.025em]">
                 <EditableText
                   globalSlug="home"
                   path="vehicles.title"

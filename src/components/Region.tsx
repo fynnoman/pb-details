@@ -29,7 +29,7 @@ export default function Region({
   );
 
   return (
-    <section className="relative py-20 sm:py-28 lg:py-40 overflow-hidden">
+    <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0"
@@ -39,7 +39,7 @@ export default function Region({
         }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-10">
+      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         <div className="grid grid-cols-12 gap-8 items-center">
           <div className="col-span-12 lg:col-span-6">
             <Reveal>
@@ -49,7 +49,7 @@ export default function Region({
               </p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
+              <h2 className="font-display text-[clamp(1.75rem,7vw,3.6rem)] leading-[1.05] tracking-[-0.025em]">
                 <EditableText globalSlug="home" path="regionHeading" value={heading} />
               </h2>
             </Reveal>
@@ -76,7 +76,7 @@ export default function Region({
 
           <div className="col-span-12 lg:col-span-6">
             <Reveal delay={0.1}>
-              <div className="glass-strong rounded-[1.75rem] p-8">
+              <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-8">
                 <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   <EditableText globalSlug="home" path="region.standortLabel" value={standortLabel} />
                 </div>
@@ -113,20 +113,20 @@ export default function Region({
                     </div>
                   )}
                 </div>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 flex flex-col sm:flex-row flex-wrap gap-3">
                   {settings.google?.mapsUrl && (
                     <a
                       href={settings.google.mapsUrl}
                       target="_blank"
                       rel="noopener"
-                      className="btn-glass text-sm py-2.5 px-4"
+                      className="btn-glass text-sm py-3 px-4 justify-center min-h-[48px] w-full sm:w-auto"
                     >
                       In Karten öffnen →
                     </a>
                   )}
                   <a
                     href={`tel:${settings.phone.e164}`}
-                    className="btn-gold text-sm py-2.5 px-4"
+                    className="btn-gold text-sm py-3 px-4 justify-center min-h-[48px] w-full sm:w-auto"
                   >
                     Anrufen
                   </a>
@@ -137,8 +137,8 @@ export default function Region({
         </div>
 
         <Reveal delay={0.15}>
-          <div className="mt-12 lg:mt-16 rounded-[1.75rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]">
-            <div className="relative aspect-[16/9] sm:aspect-[21/9] bg-black">
+          <div className="mt-10 sm:mt-12 lg:mt-16 rounded-2xl sm:rounded-[1.75rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]">
+            <div className="relative aspect-[4/3] sm:aspect-[21/9] bg-black">
               <iframe
                 title={`Standort ${settings.name} – ${settings.address.street}, ${settings.address.city}`}
                 src={`https://maps.google.com/maps?q=${mapsQuery}&hl=de&z=15&output=embed`}

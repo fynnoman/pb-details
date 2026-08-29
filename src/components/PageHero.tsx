@@ -16,7 +16,7 @@ export default function PageHero({
   backgroundImage,
 }: Props) {
   return (
-    <section className="relative min-h-[70svh] w-full overflow-hidden grain vignette flex items-end pt-32 pb-16 sm:pb-24">
+    <section className="relative min-h-[70svh] w-full overflow-hidden grain vignette flex items-end pt-28 sm:pt-32 pb-12 sm:pb-24">
       {backgroundImage && (
         <div className="absolute inset-0">
           <img
@@ -30,7 +30,7 @@ export default function PageHero({
       )}
 
       <div className="relative z-10 w-full">
-        <div className="mx-auto max-w-[1400px] w-full px-6 sm:px-10">
+        <div className="mx-auto max-w-[1400px] w-full px-4 sm:px-8 lg:px-10">
           {kicker && (
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ export default function PageHero({
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.2, 0.7, 0.2, 1], delay: 0.1 }}
-            className="font-display font-light text-[clamp(2.2rem,5.4vw,4.6rem)] leading-[1.02] tracking-[-0.028em] max-w-[22ch] text-chrome"
+            className="font-display font-light text-[clamp(1.9rem,8vw,4.6rem)] leading-[1.05] tracking-[-0.028em] max-w-[22ch] text-chrome"
           >
             {title}
           </motion.h1>

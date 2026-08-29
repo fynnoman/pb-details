@@ -46,14 +46,14 @@ export default function Hero({
 
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 min-h-[100svh] flex flex-col justify-end pb-16 sm:pb-32 pt-32 sm:pt-44 md:pt-48"
+        className="relative z-10 min-h-[100svh] flex flex-col justify-end pb-24 sm:pb-32 pt-28 sm:pt-44 md:pt-48"
       >
-        <div className="mx-auto max-w-[1400px] w-full px-5 sm:px-10">
+        <div className="mx-auto max-w-[1400px] w-full px-4 sm:px-8 lg:px-10">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease: [0.2, 0.7, 0.2, 1] }}
-            className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6 sm:mb-8"
+            className="text-[10px] sm:text-xs tracking-[0.32em] sm:tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-4 sm:mb-8"
           >
             <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
             <EditableText globalSlug="home" path="kicker" value={home.kicker || ""} />
@@ -63,7 +63,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease: [0.2, 0.7, 0.2, 1], delay: 0.05 }}
-            className="font-display font-light text-[clamp(2rem,10vw,5.8rem)] leading-[0.98] tracking-[-0.03em] max-w-[16ch] mb-6"
+            className="font-display font-light text-[clamp(1.9rem,9vw,5.8rem)] leading-[0.98] tracking-[-0.03em] max-w-[16ch] mb-4 sm:mb-6"
           >
             <EditableText
               globalSlug="home"
@@ -86,7 +86,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.3, ease: [0.2, 0.7, 0.2, 1], delay: 0.2 }}
-            className="font-display text-[clamp(1rem,3.5vw,1.7rem)] leading-snug tracking-[-0.01em] text-[var(--ink)] max-w-[32ch] font-normal"
+            className="font-display text-[clamp(0.95rem,3.2vw,1.7rem)] leading-snug tracking-[-0.01em] text-[var(--ink)] max-w-[32ch] font-normal"
           >
             <EditableText
               globalSlug="home"
@@ -100,22 +100,28 @@ export default function Hero({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.2, 0.7, 0.2, 1], delay: 0.5 }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-6 sm:mt-10 flex flex-wrap items-center gap-3 sm:gap-4"
           >
             {home.primaryCta?.href && (
-              <Link href={home.primaryCta.href} className="btn-gold">
+              <Link
+                href={home.primaryCta.href}
+                className="btn-gold min-h-[48px] w-full sm:w-auto justify-center"
+              >
                 {home.primaryCta.label || "Jetzt anfragen"}
                 <span aria-hidden>→</span>
               </Link>
             )}
             {home.secondaryCta?.href && (
-              <Link href={home.secondaryCta.href} className="btn-glass">
+              <Link
+                href={home.secondaryCta.href}
+                className="btn-glass min-h-[48px] w-full sm:w-auto justify-center"
+              >
                 {home.secondaryCta.label || "Leistungen ansehen"}
               </Link>
             )}
             <a
               href={`tel:${settings.phone.e164}`}
-              className="text-sm text-[var(--ink-dim)] hover:text-[var(--ink)] ml-2 inline-flex items-center gap-2"
+              className="text-sm text-[var(--ink-dim)] hover:text-[var(--ink)] w-full sm:w-auto sm:ml-2 inline-flex items-center gap-2 min-h-[44px]"
             >
               <span className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse" />
               {settings.phone.display}
@@ -124,8 +130,8 @@ export default function Hero({
         </div>
       </motion.div>
 
-      <motion.div style={{ opacity }} className="absolute bottom-0 inset-x-0 z-10">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-10 pb-4 sm:pb-6">
+      <motion.div style={{ opacity }} className="absolute bottom-0 inset-x-0 z-10 hidden sm:block">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10 pb-4 sm:pb-6">
           <div className="glass rounded-2xl px-4 sm:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3 sm:gap-4 text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.24em] uppercase text-[var(--ink-dim)]">
             {settings.provenExpert && (
               <span>
@@ -151,7 +157,7 @@ export default function Hero({
 
       <motion.div
         style={{ opacity }}
-        className="absolute bottom-32 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-[10px] tracking-[0.4em] uppercase text-[var(--ink-mute)]"
+        className="hidden md:flex absolute bottom-32 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 text-[10px] tracking-[0.4em] uppercase text-[var(--ink-mute)]"
       >
         <span>Scroll</span>
         <span className="w-px h-8 bg-gradient-to-b from-[var(--gold)] to-transparent" />

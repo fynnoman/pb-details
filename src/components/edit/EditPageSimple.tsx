@@ -82,7 +82,7 @@ export default function EditPageSimple({ page }: { page: PageDoc }) {
           background: #ffffff;
           color: #14120d;
           min-height: 100vh;
-          font-family: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+          font-family: var(--font-roboto), -apple-system, "SF Pro Text", system-ui, sans-serif;
           padding-top: 56px;
         }
         .edit-canvas__inner {

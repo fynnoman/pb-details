@@ -36,9 +36,9 @@ export default function Awards({
   const linkLabel = t.linkLabel || "Alle Auszeichnungen & Referenzen ansehen";
 
   return (
-    <section className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-12 sm:mb-16 items-end">
+    <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
+        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-10 sm:mb-16 items-end">
           <div className="col-span-12 lg:col-span-8">
             <Reveal>
               <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -47,7 +47,7 @@ export default function Awards({
               </p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="font-display text-[clamp(2rem,4.5vw,3.8rem)] leading-[1.02] tracking-[-0.025em] max-w-[22ch]">
+              <h2 className="font-display text-[clamp(1.75rem,7vw,3.8rem)] leading-[1.05] tracking-[-0.025em] max-w-[22ch]">
                 <EditableText
                   globalSlug="home"
                   path="awards.title"
@@ -75,13 +75,13 @@ export default function Awards({
             aria-hidden
             className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 sm:w-40 bg-gradient-to-l from-[var(--bg)] to-transparent"
           />
-          <div className="marquee-track flex gap-6 sm:gap-10 md:gap-14 items-center">
+          <div className="marquee-track flex gap-4 sm:gap-10 md:gap-14 items-center">
             {marqueeBadges.map((b, i) => {
               const url = mediaUrl(b.image, "thumbnail") || mediaUrl(b.image);
               return (
                 <div
                   key={`${String(b.id)}-${i}`}
-                  className="glass-flat rounded-2xl aspect-square h-24 sm:h-32 md:h-36 shrink-0 flex items-center justify-center p-3 sm:p-4 md:p-5"
+                  className="glass-flat rounded-xl sm:rounded-2xl aspect-square h-20 sm:h-32 md:h-36 shrink-0 flex items-center justify-center p-2.5 sm:p-4 md:p-5"
                 >
                   {url && (
                     <EditableImage collection="awards" docId={b.id} path="image" className="w-full h-full flex items-center justify-center">
@@ -101,8 +101,8 @@ export default function Awards({
       )}
 
       {showStoryCards && stories.length > 0 && (
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-10 mt-16 sm:mt-24 md:mt-28">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10 mt-12 sm:mt-24 md:mt-28">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {stories.map((s, i) => {
               const url = mediaUrl(s.image, "card") || mediaUrl(s.image);
               return (
@@ -121,7 +121,7 @@ export default function Awards({
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                     </div>
-                    <figcaption className="p-6 flex-1 flex flex-col">
+                    <figcaption className="p-5 sm:p-6 flex-1 flex flex-col">
                       <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-3">
                         <EditableText
                           collection="awards"
@@ -147,10 +147,10 @@ export default function Awards({
           </div>
 
           <Reveal delay={0.3}>
-            <div className="mt-14 text-center">
+            <div className="mt-10 sm:mt-14 text-center">
               <Link
                 href="/referenzen/"
-                className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
+                className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group min-h-[44px]"
               >
                 <EditableText globalSlug="home" path="awards.linkLabel" value={linkLabel} />
                 <span

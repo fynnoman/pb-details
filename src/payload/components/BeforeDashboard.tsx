@@ -99,7 +99,7 @@ export default function BeforeDashboard() {
           margin-bottom: 14px;
         }
         .pb-welcome__title {
-          font-family: var(--font-serif, "Fraunces", serif);
+          font-family: var(--font-serif, var(--font-roboto), system-ui, sans-serif);
           font-weight: 400;
           font-size: clamp(1.9rem, 3vw, 2.6rem);
           line-height: 1.08;

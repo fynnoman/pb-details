@@ -40,8 +40,8 @@ export default async function KontaktPage() {
         subtitle="Lassen Sie uns über Ihr Fahrzeug sprechen. In einem persönlichen Gespräch nehmen wir uns Zeit für Ihr Anliegen und erstellen Ihnen ein individuelles Konzept für Ihr Fahrzeug."
       />
 
-      <section className="relative py-24 sm:py-32">
-        <div className="mx-auto max-w-[1100px] px-5 sm:px-10">
+      <section className="relative py-16 sm:py-24">
+        <div className="mx-auto max-w-[1100px] px-4 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Reveal>
               <div className="glass rounded-[1.5rem] p-8 h-full">

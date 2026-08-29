@@ -55,8 +55,8 @@ export default function WhyUs({
   ];
 
   return (
-    <section ref={ref} className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+    <section ref={ref} className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-12 sm:mb-16 items-end">
           <div className="col-span-12 lg:col-span-8">
             <Reveal>
@@ -66,7 +66,7 @@ export default function WhyUs({
               </p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="font-display text-[clamp(2rem,4.5vw,3.8rem)] leading-[1.02] tracking-[-0.025em] max-w-[18ch]">
+              <h2 className="font-display text-[clamp(1.75rem,7vw,3.8rem)] leading-[1.05] tracking-[-0.025em] max-w-[18ch]">
                 <EditableText globalSlug="home" path="whyUsHeading" value={headingText} multiline />
               </h2>
             </Reveal>

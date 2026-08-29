@@ -32,7 +32,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: saturate(160%) blur(16px);
   -webkit-backdrop-filter: saturate(160%) blur(16px);
-  font-family: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+  font-family: var(--font-roboto), -apple-system, "SF Pro Text", system-ui, sans-serif;
   font-size: 13px;
   box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.4);
 }
@@ -183,7 +183,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+  font-family: var(--font-roboto), -apple-system, "SF Pro Text", system-ui, sans-serif;
 }
 .edit-mode .edit-image__badge::before {
   content: "📷";

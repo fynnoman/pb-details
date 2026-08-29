@@ -18,7 +18,7 @@ export default function Footer({
 
   return (
     <footer className="relative border-t border-white/5 pt-14 sm:pt-20 pb-10 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-10">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         <div className="grid grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <div className="col-span-12 md:col-span-5">
             <img

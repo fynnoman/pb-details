@@ -29,8 +29,13 @@
   --color-ink-mute: var(--ink-mute);
   --color-gold: var(--gold);
   --color-champagne: var(--champagne);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-roboto);
+  --font-serif: var(--font-roboto);
+}
+
+:root {
+  --font-inter: var(--font-roboto);
+  --font-fraunces: var(--font-roboto);
 }
 
 * {
@@ -68,8 +73,7 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  font-family: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
   letter-spacing: -0.005em;
   overflow-x: hidden;
 }
@@ -80,8 +84,7 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
-  font-feature-settings: "ss01", "ss02", "ss03";
+  font-family: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
   letter-spacing: -0.03em;
 }
 
@@ -226,6 +229,9 @@ body {
 .marquee-track {
   animation: marquee-slide 50s linear infinite;
   will-change: transform;
+}
+@media (max-width: 640px) {
+  .marquee-track { animation-duration: 32s; }
 }
 
 /* Reduced motion */

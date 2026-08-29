@@ -60,14 +60,14 @@ async function RenderSection({ section, index }: { section: Section; index: numb
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-[var(--bg)]" />
             </div>
           )}
-          <div className="relative z-10 mx-auto max-w-[1200px] w-full px-5 sm:px-10">
+          <div className="relative z-10 mx-auto max-w-[1200px] w-full px-4 sm:px-8 lg:px-10">
             {section.kicker && (
               <p className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 {section.kicker}
               </p>
             )}
-            <h1 className="font-display text-[clamp(2rem,5vw,4.2rem)] leading-[1.02] tracking-[-0.025em] max-w-[22ch]">
+            <h1 className="font-display text-[clamp(1.9rem,8vw,4.2rem)] leading-[1.05] tracking-[-0.025em] max-w-[22ch]">
               {section.title}
             </h1>
             {section.subtitle && (
@@ -91,7 +91,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
     case "text": {
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[820px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
             {section.heading && (
               <Reveal>
                 <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
@@ -143,7 +143,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
       );
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
             <Reveal delay={index * 0.04}>
               {section.linkHref ? <Link href={section.linkHref}>{inner}</Link> : inner}
             </Reveal>
@@ -176,7 +176,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
       if (items.length === 0) return null;
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
             {section.heading && (
               <Reveal>
                 <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-10">
@@ -211,7 +211,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
     case "cta": {
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[900px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[900px] px-4 sm:px-8 lg:px-10">
             <div className="glass-strong rounded-[1.75rem] p-8 sm:p-12 text-center">
               {section.kicker && (
                 <p className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
@@ -243,7 +243,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
     case "vergleichstabelle": {
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[1100px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[1100px] px-4 sm:px-8 lg:px-10">
             {section.heading && (
               <Reveal>
                 <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-6">
@@ -295,7 +295,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
     case "prozess-schritte": {
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
             {section.kicker && (
               <Reveal>
                 <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -338,7 +338,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
       const packages = section.packages || [];
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
             {section.kicker && (
               <Reveal>
                 <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -417,7 +417,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
     case "why-us-bento": {
       return (
         <section className="relative py-16 sm:py-24">
-          <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
             {section.kicker && (
               <Reveal>
                 <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">

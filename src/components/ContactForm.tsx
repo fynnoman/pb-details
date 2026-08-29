@@ -58,8 +58,8 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="nachricht" className="relative py-24 sm:py-32 border-t border-white/5">
-      <div className="mx-auto max-w-[1000px] px-6 sm:px-10">
+    <section id="nachricht" className="relative py-16 sm:py-24 lg:py-32 border-t border-white/5">
+      <div className="mx-auto max-w-[1000px] px-4 sm:px-8 lg:px-10">
         <div className="grid grid-cols-12 gap-8 items-start">
           <div className="col-span-12 lg:col-span-5">
             <Reveal>
@@ -101,7 +101,7 @@ export default function ContactForm() {
               <form
                 ref={formRef}
                 onSubmit={onSubmit}
-                className="glass-strong rounded-[1.75rem] p-6 sm:p-10 relative"
+                className="glass-strong rounded-[1.75rem] p-5 sm:p-8 lg:p-10 relative"
               >
                 {/* Honeypot: für Menschen unsichtbar */}
                 <label
@@ -127,7 +127,7 @@ export default function ContactForm() {
                       type="text"
                       placeholder="Ihr Vorname"
                       autoComplete="given-name"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
+                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-base sm:text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors min-h-[48px]"
                     />
                   </label>
                   <label className="col-span-2 sm:col-span-1 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
@@ -137,7 +137,7 @@ export default function ContactForm() {
                       type="tel"
                       placeholder="Rückrufnummer"
                       autoComplete="tel"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
+                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-base sm:text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors min-h-[48px]"
                     />
                   </label>
                   <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
@@ -148,7 +148,7 @@ export default function ContactForm() {
                       type="email"
                       placeholder="ihre@mail.de"
                       autoComplete="email"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
+                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-base sm:text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors min-h-[48px]"
                     />
                   </label>
                   <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
@@ -157,7 +157,7 @@ export default function ContactForm() {
                       name="vehicle"
                       type="text"
                       placeholder="Marke, Modell, Baujahr"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors"
+                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-base sm:text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors min-h-[48px]"
                     />
                   </label>
                   <label className="col-span-2 flex flex-col gap-2 text-xs tracking-[0.24em] uppercase text-[var(--ink-mute)]">
@@ -167,7 +167,7 @@ export default function ContactForm() {
                       name="message"
                       rows={6}
                       placeholder="Kurzer Kontext zu Fahrzeug und Wunsch – Zustand, Ziel (Verkauf, Werterhalt, etc.)"
-                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors resize-y min-h-[9rem]"
+                      className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-base sm:text-sm text-[var(--ink)] placeholder:text-[var(--ink-mute)] focus:outline-none focus:border-[var(--gold)]/50 transition-colors resize-y min-h-[10rem]"
                     />
                   </label>
                 </div>
@@ -179,7 +179,7 @@ export default function ContactForm() {
                   </p>
                   <button
                     type="submit"
-                    className="btn-gold shrink-0"
+                    className="btn-gold shrink-0 w-full sm:w-auto justify-center min-h-[48px]"
                     disabled={status === "sending"}
                   >
                     {status === "sending" ? "Wird gesendet …" : "Anfrage senden"}

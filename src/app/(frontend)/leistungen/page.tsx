@@ -56,8 +56,8 @@ export default async function LeistungenPage() {
         subtitle="Seit 1997 spezialisiert auf hochwertige Fahrzeugaufbereitung, Keramikversiegelung, Smart Repair und Unfallschaden-Abwicklung im Saarland und in Luxemburg."
       />
 
-      <section className="relative py-20 sm:py-32">
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+      <section className="relative py-16 sm:py-24">
+        <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
             {services.map((s, i) => {
               const href =

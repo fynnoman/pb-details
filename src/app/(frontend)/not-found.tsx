@@ -19,8 +19,8 @@ const suggestions = [
 
 export default function NotFound() {
   return (
-    <main className="relative min-h-[80svh] flex items-center py-24 sm:py-32">
-      <div className="mx-auto max-w-[720px] w-full px-6 sm:px-10 text-center">
+    <main className="relative min-h-[80svh] flex items-center py-16 sm:py-24">
+      <div className="mx-auto max-w-[720px] w-full px-4 sm:px-8 lg:px-10 text-center">
         <Reveal>
           <p className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6 sm:mb-8">
             <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />

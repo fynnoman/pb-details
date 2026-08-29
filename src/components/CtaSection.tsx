@@ -19,8 +19,8 @@ export default async function CtaSection({
 }: Props) {
   const settings = await loadSettings();
   return (
-    <section className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-10">
+    <section className="relative py-16 sm:py-24">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
         <div className="glass-strong rounded-[1.75rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
           <div className="grid grid-cols-12 gap-8 items-center">
             <div className="col-span-12 lg:col-span-7">

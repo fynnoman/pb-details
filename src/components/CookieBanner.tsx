@@ -135,7 +135,7 @@ export default function CookieBanner() {
         padding: 16,
         pointerEvents: "auto",
         fontFamily:
-          "-apple-system, 'SF Pro Text', 'Inter', system-ui, sans-serif",
+          "var(--font-roboto), -apple-system, 'SF Pro Text', system-ui, sans-serif",
       }}
     >
       <div
@@ -145,17 +145,19 @@ export default function CookieBanner() {
           maxWidth: 640,
           width: "100%",
           borderRadius: 20,
-          padding: 26,
+          padding: "20px clamp(18px, 4vw, 26px)",
           boxShadow: "0 24px 60px -20px rgba(0,0,0,0.5)",
           border: "1px solid rgba(20,15,5,0.08)",
+          maxHeight: "calc(100dvh - 32px)",
+          overflowY: "auto",
         }}
       >
         <h2
           id="pb-cookie-title"
           style={{
             fontFamily:
-              '"Fraunces", "New York", "Times New Roman", serif',
-            fontWeight: 400,
+              'var(--font-roboto), -apple-system, "SF Pro Text", system-ui, sans-serif',
+            fontWeight: 500,
             fontSize: "clamp(1.3rem, 3vw, 1.7rem)",
             lineHeight: 1.15,
             letterSpacing: "-0.02em",
@@ -318,9 +320,10 @@ function CategoryRow({
 }
 
 const btnGhost: React.CSSProperties = {
-  padding: "10px 18px",
+  padding: "12px 18px",
+  minHeight: 44,
   borderRadius: 999,
-  fontSize: 13,
+  fontSize: 14,
   fontWeight: 500,
   cursor: "pointer",
   border: "1px solid rgba(20,15,5,0.12)",
@@ -328,12 +331,15 @@ const btnGhost: React.CSSProperties = {
   color: "#14120d",
   fontFamily: "inherit",
   transition: "background 160ms cubic-bezier(0.23,1,0.32,1)",
+  flex: "1 1 auto",
+  minWidth: 0,
 };
 
 const btnPrimary: React.CSSProperties = {
-  padding: "10px 22px",
+  padding: "12px 22px",
+  minHeight: 44,
   borderRadius: 999,
-  fontSize: 13,
+  fontSize: 14,
   fontWeight: 500,
   cursor: "pointer",
   border: "none",
@@ -341,4 +347,6 @@ const btnPrimary: React.CSSProperties = {
   color: "#ffffff",
   fontFamily: "inherit",
   transition: "filter 160ms cubic-bezier(0.23,1,0.32,1)",
+  flex: "1 1 auto",
+  minWidth: 0,
 };

@@ -23,7 +23,7 @@ export default function Process({
   const footnoteText = footnote || "";
 
   return (
-    <section className="relative py-20 sm:py-32 lg:py-44 overflow-hidden">
+    <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0"
@@ -33,7 +33,7 @@ export default function Process({
         }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-10">
+      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
         <div className="max-w-3xl mb-12 sm:mb-16">
           <Reveal>
             <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
@@ -42,7 +42,7 @@ export default function Process({
             </p>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="font-display text-[clamp(2rem,4.5vw,3.6rem)] leading-[1.02] tracking-[-0.025em]">
+            <h2 className="font-display text-[clamp(1.75rem,7vw,3.6rem)] leading-[1.05] tracking-[-0.025em]">
               <EditableText globalSlug="home" path="processHeading" value={headingText} />
             </h2>
           </Reveal>
