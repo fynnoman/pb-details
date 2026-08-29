@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getPayloadClient } from "@/lib/payload-client";
 
 /**
@@ -86,6 +87,15 @@ export async function POST(req: Request) {
     });
 
   await Promise.all([...globalJobs, ...docJobs]);
+
+  // Nach dem Save alle Frontend-Seiten invalidieren, damit Next.js
+  // das statische Rendering neu triggert und Aenderungen sofort live
+  // sind. "layout" hebelt den gesamten (frontend)-Baum aus.
+  try {
+    revalidatePath("/", "layout");
+  } catch (err) {
+    console.warn("[verwaltung/save] revalidate warn:", err);
+  }
 
   const totalMs = Date.now() - t0;
   // eslint-disable-next-line no-console
