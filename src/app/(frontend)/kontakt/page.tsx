@@ -42,13 +42,13 @@ export default async function KontaktPage() {
 
       <section className="relative py-16 sm:py-24">
         <div className="mx-auto max-w-[1100px] px-4 sm:px-8 lg:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <Reveal>
               <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   Adresse
                 </div>
-                <div className="font-display text-xl leading-snug tracking-[-0.015em]">
+                <div className="font-display text-lg sm:text-xl leading-snug tracking-[-0.015em]">
                   {settings.name}
                 </div>
                 <address className="not-italic mt-3 text-[var(--ink-dim)] leading-relaxed">
@@ -61,7 +61,7 @@ export default async function KontaktPage() {
                     href={settings.google.mapsUrl}
                     target="_blank"
                     rel="noopener"
-                    className="mt-6 inline-flex items-center gap-2 text-sm text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
+                    className="mt-6 inline-flex items-center gap-2 text-sm text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group min-h-[44px]"
                   >
                     In Karten öffnen
                     <span
@@ -81,7 +81,7 @@ export default async function KontaktPage() {
                 </div>
                 <a
                   href={`tel:${settings.phone.e164}`}
-                  className="font-display text-xl leading-snug tracking-[-0.015em] text-chrome hover:text-gold transition-colors block"
+                  className="font-display text-lg sm:text-xl leading-snug tracking-[-0.015em] text-chrome hover:text-gold transition-colors block min-h-[32px]"
                 >
                   {settings.phone.display}
                 </a>
@@ -91,14 +91,14 @@ export default async function KontaktPage() {
                       href={settings.whatsapp}
                       target="_blank"
                       rel="noopener"
-                      className="block hover:text-[var(--ink)] transition-colors"
+                      className="block hover:text-[var(--ink)] transition-colors min-h-[32px]"
                     >
                       WhatsApp: {settings.phone.display}
                     </a>
                   )}
                   <a
                     href={`mailto:${settings.email}`}
-                    className="block hover:text-[var(--ink)] transition-colors"
+                    className="block hover:text-[var(--ink)] transition-colors break-all min-h-[32px]"
                   >
                     {settings.email}
                   </a>

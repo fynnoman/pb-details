@@ -22,37 +22,37 @@ export default function NotFound() {
     <main className="relative min-h-[80svh] flex items-center py-16 sm:py-24">
       <div className="mx-auto max-w-[720px] w-full px-4 sm:px-8 lg:px-10 text-center">
         <Reveal>
-          <p className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6 sm:mb-8">
+          <p className="text-[10px] sm:text-xs tracking-[0.32em] sm:tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-4 sm:mb-8">
             <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
             Fehler 404
             <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle ml-3" />
           </p>
         </Reveal>
         <Reveal delay={0.05}>
-          <p className="font-display font-light text-[clamp(4rem,10vw,8rem)] leading-none tracking-[-0.03em] mb-4">
+          <p className="font-display font-light text-[clamp(3rem,18vw,8rem)] leading-none tracking-[-0.03em] mb-4">
             <span className="block text-chrome">404</span>
           </p>
         </Reveal>
         <Reveal delay={0.15}>
-          <h1 className="font-display text-2xl sm:text-3xl leading-snug tracking-[-0.015em] max-w-[24ch] mx-auto">
+          <h1 className="font-display text-xl sm:text-2xl md:text-3xl leading-snug tracking-[-0.015em] max-w-[24ch] mx-auto">
             Diese Seite konnten wir nicht{" "}
             <span className="italic text-gold">finden.</span>
           </h1>
         </Reveal>
         <Reveal delay={0.25}>
-          <p className="mt-6 text-[var(--ink-dim)] leading-relaxed">
+          <p className="mt-5 sm:mt-6 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed">
             Der Link ist vielleicht veraltet oder falsch geschrieben. Nutzen
             Sie die Navigation oder springen Sie direkt zu einer der
             wichtigsten Seiten:
           </p>
         </Reveal>
         <Reveal delay={0.35}>
-          <div className="mt-10 flex flex-wrap justify-center gap-2">
+          <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-2">
             {suggestions.map((s) => (
               <Link
                 key={s.href}
                 href={s.href}
-                className="glass-flat rounded-full px-5 py-2.5 text-sm text-[var(--ink-dim)] hover:text-[var(--ink)] hover:ring-1 hover:ring-[var(--gold)]/30 transition"
+                className="glass-flat rounded-full px-4 sm:px-5 py-2.5 text-sm text-[var(--ink-dim)] hover:text-[var(--ink)] hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[40px] inline-flex items-center"
               >
                 {s.label}
               </Link>
@@ -60,8 +60,8 @@ export default function NotFound() {
           </div>
         </Reveal>
         <Reveal delay={0.45}>
-          <div className="mt-12">
-            <Link href="/" className="btn-gold">
+          <div className="mt-10 sm:mt-12">
+            <Link href="/" className="btn-gold min-h-[48px] justify-center w-full sm:w-auto">
               Zur Startseite
               <span aria-hidden>→</span>
             </Link>

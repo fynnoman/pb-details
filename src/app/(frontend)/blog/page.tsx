@@ -67,20 +67,20 @@ export default async function BlogPage() {
                 <Reveal key={String(post.id)} delay={i * 0.05}>
                   <Link
                     href={`/blog/${post.slug}/`}
-                    className="glass rounded-[1.5rem] p-8 sm:p-10 block group hover:ring-1 hover:ring-[var(--gold)]/30 transition"
+                    className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-10 block group hover:ring-1 hover:ring-[var(--gold)]/30 transition"
                   >
                     {dateLabel && (
-                      <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+                      <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-3 sm:mb-4">
                         {dateLabel}
                       </div>
                     )}
-                    <h2 className="font-display text-2xl sm:text-3xl leading-snug tracking-[-0.015em] group-hover:text-gold transition-colors">
+                    <h2 className="font-display text-xl sm:text-2xl md:text-3xl leading-snug tracking-[-0.015em] group-hover:text-gold transition-colors">
                       {post.title}
                     </h2>
-                    <p className="mt-5 text-[var(--ink-dim)] leading-relaxed">
+                    <p className="mt-4 sm:mt-5 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed">
                       {post.intro}
                     </p>
-                    <span className="mt-8 inline-flex items-center gap-2 text-sm text-[var(--ink-dim)] group-hover:text-[var(--gold)] transition-colors">
+                    <span className="mt-6 sm:mt-8 inline-flex items-center gap-2 text-sm text-[var(--ink-dim)] group-hover:text-[var(--gold)] transition-colors min-h-[36px]">
                       Weiterlesen
                       <span aria-hidden className="transition-transform group-hover:translate-x-1">
                         →

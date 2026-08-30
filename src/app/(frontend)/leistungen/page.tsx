@@ -70,7 +70,7 @@ export default async function LeistungenPage() {
                 <Reveal key={String(s.id)} delay={i * 0.05}>
                   <Link
                     href={href}
-                    className="group block glass rounded-[1.5rem] overflow-hidden hover:ring-1 hover:ring-[var(--gold)]/40 transition-all"
+                    className="group block glass rounded-2xl sm:rounded-[1.5rem] overflow-hidden hover:ring-1 hover:ring-[var(--gold)]/40 transition-all h-full"
                   >
                     {img && (
                       <div className="relative aspect-[16/10] overflow-hidden bg-black">
@@ -81,24 +81,24 @@ export default async function LeistungenPage() {
                           loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        <div className="absolute top-5 left-5 glass rounded-full px-3 py-1 text-[10px] tracking-[0.32em] uppercase">
+                        <div className="absolute top-4 left-4 sm:top-5 sm:left-5 glass rounded-full px-3 py-1 text-[10px] tracking-[0.28em] sm:tracking-[0.32em] uppercase">
                           {tag} / Leistung
                         </div>
                       </div>
                     )}
-                    <div className="p-6 sm:p-8">
-                      <h2 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.015em] mb-3">
+                    <div className="p-5 sm:p-8">
+                      <h2 className="font-display text-xl sm:text-2xl md:text-3xl leading-tight tracking-[-0.015em] mb-3">
                         {s.title}
                       </h2>
                       {s.tagline && (
-                        <p className="text-xs tracking-[0.22em] uppercase text-[var(--gold)] mb-3">
+                        <p className="text-[10px] sm:text-xs tracking-[0.22em] uppercase text-[var(--gold)] mb-3">
                           {s.tagline}
                         </p>
                       )}
                       <p className="text-sm text-[var(--ink-dim)] leading-relaxed">
                         {s.intro}
                       </p>
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm text-[var(--ink)] group-hover:text-[var(--gold)] transition-colors">
+                      <span className="mt-5 sm:mt-6 inline-flex items-center gap-2 text-sm text-[var(--ink)] group-hover:text-[var(--gold)] transition-colors min-h-[36px]">
                         Mehr erfahren →
                       </span>
                     </div>

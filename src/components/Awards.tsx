@@ -41,7 +41,7 @@ export default function Awards({
         <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-10 sm:mb-16 items-end">
           <div className="col-span-12 lg:col-span-8">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 <EditableText globalSlug="home" path="awards.kicker" value={kicker} />
               </p>
@@ -69,11 +69,11 @@ export default function Awards({
         <div className="relative">
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 sm:w-40 bg-gradient-to-r from-[var(--bg)] to-transparent"
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 sm:w-40 bg-gradient-to-r from-[var(--bg)] to-transparent"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 sm:w-40 bg-gradient-to-l from-[var(--bg)] to-transparent"
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 sm:w-40 bg-gradient-to-l from-[var(--bg)] to-transparent"
           />
           <div className="marquee-track flex gap-4 sm:gap-10 md:gap-14 items-center">
             {marqueeBadges.map((b, i) => {
@@ -107,7 +107,7 @@ export default function Awards({
               const url = mediaUrl(s.image, "card") || mediaUrl(s.image);
               return (
                 <Reveal key={String(s.id)} delay={i * 0.06}>
-                  <figure className="glass rounded-[1.5rem] overflow-hidden h-full flex flex-col group">
+                  <figure className="glass rounded-2xl sm:rounded-[1.5rem] overflow-hidden h-full flex flex-col group">
                     <div className="relative aspect-[4/3] overflow-hidden bg-black">
                       {url && (
                         <EditableImage collection="awards" docId={s.id} path="image" className="absolute inset-0">

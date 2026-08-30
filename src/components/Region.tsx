@@ -43,7 +43,7 @@ export default function Region({
         <div className="grid grid-cols-12 gap-8 items-center">
           <div className="col-span-12 lg:col-span-6">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 <EditableText globalSlug="home" path="region.kicker" value={kicker} />
               </p>
@@ -54,17 +54,17 @@ export default function Region({
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-lg">
+              <p className="mt-5 sm:mt-6 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed max-w-lg">
                 <EditableText globalSlug="home" path="regionText" value={text} multiline />
               </p>
             </Reveal>
             {regions.length > 0 && (
               <Reveal delay={0.15}>
-                <div className="mt-8 flex flex-wrap gap-2">
+                <div className="mt-6 sm:mt-8 flex flex-wrap gap-2">
                   {regions.map((r) => (
                     <span
                       key={r}
-                      className="glass-flat rounded-full px-4 py-1.5 text-xs tracking-wide text-[var(--ink-dim)]"
+                      className="glass-flat rounded-full px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs tracking-wide text-[var(--ink-dim)]"
                     >
                       {r}
                     </span>
@@ -77,10 +77,10 @@ export default function Region({
           <div className="col-span-12 lg:col-span-6">
             <Reveal delay={0.1}>
               <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-8">
-                <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+                <div className="text-[11px] sm:text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-3 sm:mb-4">
                   <EditableText globalSlug="home" path="region.standortLabel" value={standortLabel} />
                 </div>
-                <div className="font-display text-2xl leading-tight">
+                <div className="font-display text-xl sm:text-2xl leading-tight">
                   <EditableText globalSlug="settings" path="name" value={settings.name} />
                 </div>
                 <div className="mt-3 text-[var(--ink-dim)] leading-relaxed">

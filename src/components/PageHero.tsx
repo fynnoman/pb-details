@@ -16,7 +16,7 @@ export default function PageHero({
   backgroundImage,
 }: Props) {
   return (
-    <section className="relative min-h-[70svh] w-full overflow-hidden grain vignette flex items-end pt-28 sm:pt-32 pb-12 sm:pb-24">
+    <section className="relative min-h-[55svh] sm:min-h-[70svh] w-full overflow-hidden grain vignette flex items-end pt-24 sm:pt-32 pb-10 sm:pb-24">
       {backgroundImage && (
         <div className="absolute inset-0">
           <img
@@ -36,7 +36,7 @@ export default function PageHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.2, 0.7, 0.2, 1] }}
-              className="text-[11px] sm:text-xs tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-6 sm:mb-8"
+              className="text-[10px] sm:text-xs tracking-[0.32em] sm:tracking-[0.42em] uppercase text-[var(--ink-dim)] mb-4 sm:mb-8"
             >
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
               {kicker}
@@ -57,7 +57,7 @@ export default function PageHero({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, ease: [0.2, 0.7, 0.2, 1], delay: 0.25 }}
-              className="mt-6 max-w-2xl text-[var(--ink-dim)] text-base sm:text-lg leading-relaxed"
+              className="mt-5 sm:mt-6 max-w-2xl text-[var(--ink-dim)] text-sm sm:text-lg leading-relaxed"
             >
               {subtitle}
             </motion.p>

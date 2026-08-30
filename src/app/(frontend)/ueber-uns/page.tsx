@@ -36,11 +36,11 @@ export default function UeberUnsPage() {
       <section className="relative py-16 sm:py-24">
         <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
           <Reveal>
-            <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
+            <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-6 sm:mb-8">
               Im Jahr 1997 …
             </h2>
           </Reveal>
-          <div className="space-y-6 text-[var(--ink-dim)] leading-relaxed text-base sm:text-lg">
+          <div className="space-y-5 sm:space-y-6 text-[var(--ink-dim)] leading-relaxed text-sm sm:text-base md:text-lg">
             <Reveal delay={0.05}>
               <p>
                 … als junge und ambitionierte Unternehmer im Alter von 18 und
@@ -52,7 +52,7 @@ export default function UeberUnsPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="font-display text-xl sm:text-2xl leading-snug italic text-chrome not-italic">
+              <p className="font-display text-lg sm:text-xl md:text-2xl leading-snug italic text-chrome not-italic">
                 Wir wollten der beste Fahrzeugaufbereiter im Saarland werden,
                 mit einem klaren Fokus auf den Privatkunden.
               </p>
@@ -76,12 +76,12 @@ export default function UeberUnsPage() {
       <section className="relative py-16 sm:py-24 border-t border-white/5">
         <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
           <Reveal>
-            <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
+            <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-6 sm:mb-8">
               Erfahrung, die Vertrauen schafft
             </h2>
           </Reveal>
           <Reveal delay={0.05}>
-            <p className="text-[var(--ink-dim)] leading-relaxed text-lg">
+            <p className="text-[var(--ink-dim)] leading-relaxed text-sm sm:text-base md:text-lg">
               In den vergangenen Jahrzehnten haben wir nicht nur unser Handwerk
               perfektioniert, sondern auch ein tiefes Verständnis für die
               Bedürfnisse unserer Kunden entwickelt. Unsere Geschichte ist
@@ -96,11 +96,11 @@ export default function UeberUnsPage() {
       <section className="relative py-16 sm:py-24 border-t border-white/5">
         <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
           <Reveal>
-            <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
+            <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-6 sm:mb-8">
               Warum PB Fahrzeugpflege Saarlouis®?
             </h2>
           </Reveal>
-          <div className="space-y-6 text-[var(--ink-dim)] leading-relaxed text-base sm:text-lg">
+          <div className="space-y-5 sm:space-y-6 text-[var(--ink-dim)] leading-relaxed text-sm sm:text-base md:text-lg">
             <Reveal delay={0.05}>
               <p>
                 Unsere Expertise und unser kompromissloser Qualitätsanspruch

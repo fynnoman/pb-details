@@ -39,7 +39,7 @@ export default function Contact({
         <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="col-span-12 lg:col-span-5">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 <EditableText globalSlug="home" path="contact.kicker" value={kicker} />
               </p>
@@ -59,7 +59,7 @@ export default function Contact({
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-6 sm:mt-8 text-[var(--ink-dim)] leading-relaxed max-w-md">
+              <p className="mt-5 sm:mt-8 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed max-w-md">
                 <EditableText globalSlug="home" path="contact.intro" value={intro} multiline />
               </p>
             </Reveal>
@@ -69,15 +69,15 @@ export default function Contact({
                 <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-2">
                   <EditableText globalSlug="home" path="contact.directLabel" value={directLabel} />
                 </div>
-                <a href={`tel:${settings.phone.e164}`} className="group flex items-center gap-5">
-                  <span className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#f5e2b8] via-[#d4b483] to-[#8a6a3f] flex items-center justify-center text-[#100e0a] shrink-0 shadow-lg">
+                <a href={`tel:${settings.phone.e164}`} className="group flex items-center gap-4 sm:gap-5 min-h-[56px]">
+                  <span className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#f5e2b8] via-[#d4b483] to-[#8a6a3f] flex items-center justify-center text-[#100e0a] shrink-0 shadow-lg">
                     <span
                       className="absolute inset-0 rounded-full bg-[var(--gold)]/40 blur-md opacity-60 group-hover:opacity-100 transition-opacity"
                       aria-hidden
                     />
                     <svg
                       viewBox="0 0 24 24"
-                      className="relative w-6 h-6"
+                      className="relative w-5 h-5 sm:w-6 sm:h-6"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="1.6"
@@ -87,11 +87,11 @@ export default function Contact({
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.33 1.76.63 2.6a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.48-1.48a2 2 0 0 1 2.11-.45c.84.3 1.71.51 2.6.63A2 2 0 0 1 22 16.92z" />
                     </svg>
                   </span>
-                  <span className="flex flex-col">
-                    <span className="text-[11px] tracking-[0.32em] uppercase text-[var(--ink-mute)]">
+                  <span className="flex flex-col min-w-0">
+                    <span className="text-[10px] sm:text-[11px] tracking-[0.28em] sm:tracking-[0.32em] uppercase text-[var(--ink-mute)]">
                       <EditableText globalSlug="home" path="contact.callAt" value={callAt} />
                     </span>
-                    <span className="font-display text-2xl sm:text-3xl text-chrome tracking-[-0.01em]">
+                    <span className="font-display text-xl sm:text-2xl md:text-3xl text-chrome tracking-[-0.01em] truncate">
                       <EditableText globalSlug="settings" path="phone.display" value={settings.phone.display} />
                     </span>
                   </span>

@@ -72,10 +72,10 @@ export default function WhyUs({
   return (
     <section ref={ref} className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-12 sm:mb-16 items-end">
+        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-8 sm:mb-16 items-end">
           <div className="col-span-12 lg:col-span-8">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 <EditableText globalSlug="home" path="whyUs.kicker" value={kickerText} />
               </p>
@@ -153,16 +153,16 @@ export default function WhyUs({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{ duration: 0.9, delay: i * 0.06, ease: [0.2, 0.7, 0.2, 1] }}
-                    className={`glass rounded-[1.25rem] p-5 sm:p-6 min-h-[130px] flex flex-col justify-between ${
+                    className={`glass rounded-2xl sm:rounded-[1.25rem] p-4 sm:p-6 min-h-[120px] sm:min-h-[130px] h-full flex flex-col justify-between ${
                       r.href
                         ? "hover:ring-1 hover:ring-[var(--gold)]/40 transition-all group cursor-pointer"
                         : ""
                     }`}
                   >
-                    <div className="font-display text-2xl sm:text-4xl leading-none text-chrome break-words">
+                    <div className="font-display text-xl sm:text-4xl leading-none text-chrome break-words">
                       {r.headline}
                     </div>
-                    <div className="text-xs text-[var(--ink-dim)] mt-3 leading-relaxed">
+                    <div className="text-[11px] sm:text-xs text-[var(--ink-dim)] mt-2 sm:mt-3 leading-relaxed">
                       {r.body}
                     </div>
                     {r.href && (

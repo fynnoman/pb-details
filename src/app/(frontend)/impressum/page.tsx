@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.01em] mt-12 mb-4 text-[var(--ink)]">
+    <h2 className="font-display text-xl sm:text-2xl md:text-3xl leading-tight tracking-[-0.01em] mt-10 sm:mt-12 mb-3 sm:mb-4 text-[var(--ink)]">
       {children}
     </h2>
   );
@@ -45,8 +45,8 @@ export default async function ImpressumPage() {
       <JsonLd data={webPage} />
       <PageHero kicker="Rechtliches" title="Impressum" />
 
-      <section className="relative py-16 sm:py-24">
-        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10 text-[var(--ink-dim)] leading-relaxed">
+      <section className="relative py-12 sm:py-24">
+        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed break-words">
           <Reveal>
             <H2>Angaben gemäß § 5 TMG</H2>
             <p>

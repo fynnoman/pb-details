@@ -134,16 +134,16 @@ export default async function BlogPostPage({
         {...(heroBg ? { backgroundImage: heroBg } : {})}
       />
 
-      <article className="relative pb-24 sm:pb-32 pt-16">
-        <div className="mx-auto max-w-[720px] px-4 sm:px-8 lg:px-10 space-y-6 text-[var(--ink-dim)] leading-relaxed text-base sm:text-lg">
+      <article className="relative pb-16 sm:pb-24 lg:pb-32 pt-12 sm:pt-16">
+        <div className="mx-auto max-w-[720px] px-4 sm:px-8 lg:px-10 space-y-5 sm:space-y-6 text-[var(--ink-dim)] leading-relaxed text-sm sm:text-base md:text-lg">
           <Reveal>
             <p className="text-[var(--ink)]">{post.intro}</p>
           </Reveal>
           <LexicalRenderer data={post.content} />
           {post.cta?.href && (
             <Reveal delay={0.3}>
-              <div className="pt-8">
-                <Link href={post.cta.href} className="btn-gold">
+              <div className="pt-6 sm:pt-8">
+                <Link href={post.cta.href} className="btn-gold min-h-[48px] w-full sm:w-auto justify-center">
                   {post.cta.label || "Mehr erfahren"}
                   <span aria-hidden>→</span>
                 </Link>
@@ -154,10 +154,10 @@ export default async function BlogPostPage({
       </article>
 
       {otherPosts.length > 0 && (
-        <section className="relative py-16 border-t border-white/5">
+        <section className="relative py-12 sm:py-16 border-t border-white/5">
           <div className="mx-auto max-w-[1000px] px-4 sm:px-8 lg:px-10">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-8">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6 sm:mb-8">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 Weitere Beiträge
               </p>

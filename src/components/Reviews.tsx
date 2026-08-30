@@ -97,12 +97,12 @@ function ReviewCard({ review, i }: { review: Review; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.9, delay: (i % 3) * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
-      className="glass rounded-2xl sm:rounded-[1.5rem] p-5 sm:p-6 flex flex-col snap-start shrink-0 w-[85%] sm:w-auto"
+      className="glass rounded-2xl sm:rounded-[1.5rem] p-5 sm:p-6 flex flex-col snap-start shrink-0 w-[88%] sm:w-auto h-full"
     >
-      <header className="flex items-center gap-3 mb-4">
+      <header className="flex items-start gap-3 mb-4">
         <Initials name={review.author} />
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm text-[var(--ink)] font-medium truncate">
               {review.author}
             </span>
@@ -116,7 +116,7 @@ function ReviewCard({ review, i }: { review: Review; i: number }) {
         </div>
       </header>
       <Stars />
-      <p className="mt-4 text-sm text-[var(--ink-dim)] leading-relaxed whitespace-pre-line">
+      <p className="mt-4 text-sm text-[var(--ink-dim)] leading-relaxed whitespace-pre-line flex-1">
         {review.text}
       </p>
     </motion.article>
@@ -133,10 +133,10 @@ export default function Reviews({ settings }: { settings: SiteSettings }) {
       className="relative py-16 sm:py-24 lg:py-32 overflow-hidden border-t border-white/5"
     >
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-10 sm:mb-14 items-end">
+        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-8 sm:mb-14 lg:items-end">
           <div className="col-span-12 lg:col-span-8">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 Original-Rezensionen von Google
               </p>
@@ -150,17 +150,17 @@ export default function Reviews({ settings }: { settings: SiteSettings }) {
           </div>
           <div className="col-span-12 lg:col-span-4">
             <Reveal delay={0.1}>
-              <div className="flex items-center gap-4 sm:justify-end">
+              <div className="glass-flat rounded-2xl px-4 py-3 sm:px-5 sm:py-4 inline-flex items-center gap-3 sm:gap-4 lg:justify-end lg:w-full">
                 <Stars />
-                <div>
-                  <div className="font-display text-2xl sm:text-3xl leading-none text-chrome">
+                <div className="min-w-0">
+                  <div className="font-display text-xl sm:text-2xl lg:text-3xl leading-none text-chrome">
                     {settings.google?.count ?? ""}
-                    <span className="text-[var(--ink-mute)] text-base sm:text-lg font-normal">
+                    <span className="text-[var(--ink-mute)] text-sm sm:text-base lg:text-lg font-normal">
                       {" "}
                       Bewertungen
                     </span>
                   </div>
-                  <div className="text-[11px] tracking-[0.24em] uppercase text-[var(--ink-mute)] mt-1">
+                  <div className="text-[10px] sm:text-[11px] tracking-[0.24em] uppercase text-[var(--ink-mute)] mt-0.5 sm:mt-1">
                     Google
                   </div>
                 </div>
@@ -169,7 +169,7 @@ export default function Reviews({ settings }: { settings: SiteSettings }) {
           </div>
         </div>
 
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible pb-4 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch overflow-x-auto snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible pb-4 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {REVIEWS.map((r, i) => (
             <ReviewCard key={r.author} review={r} i={i} />
           ))}

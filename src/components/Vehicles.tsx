@@ -33,7 +33,7 @@ function VehicleTile({ v, i }: { v: VehicleItem; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 1, delay: i * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
-      className="group relative aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
+      className="group relative aspect-[4/5] rounded-2xl sm:rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
     >
       {url && (
         <>
@@ -49,18 +49,18 @@ function VehicleTile({ v, i }: { v: VehicleItem; i: number }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         </>
       )}
-      <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6">
         <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-2">
           {String(i + 1).padStart(2, "0")}
         </div>
-        <h3 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.02em]">
+        <h3 className="font-display text-xl sm:text-2xl md:text-3xl leading-tight tracking-[-0.02em]">
           <EditableText collection="vehicles" docId={v.id} path="label" value={v.label} />
         </h3>
-        <p className="mt-3 text-sm text-[var(--ink-dim)] leading-relaxed max-w-xs">
+        <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-[var(--ink-dim)] leading-relaxed max-w-xs">
           <EditableText collection="vehicles" docId={v.id} path="description" value={v.description} multiline />
         </p>
       </div>
-      <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-[1.5rem] pointer-events-none" />
+      <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-2xl sm:rounded-[1.5rem] pointer-events-none" />
     </motion.div>
   );
 }
@@ -80,10 +80,10 @@ export default function Vehicles({
   return (
     <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
+        <div className="grid grid-cols-12 gap-6 sm:gap-8 mb-10 sm:mb-16">
           <div className="col-span-12 lg:col-span-6">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 <EditableText globalSlug="home" path="vehicles.kicker" value={kicker} />
               </p>
@@ -105,7 +105,7 @@ export default function Vehicles({
           </div>
           <div className="col-span-12 lg:col-span-6 lg:pt-16">
             <Reveal delay={0.1}>
-              <p className="text-[var(--ink-dim)] leading-relaxed">
+              <p className="text-[var(--ink-dim)] leading-relaxed text-sm sm:text-base">
                 <EditableText globalSlug="home" path="vehicles.intro" value={intro} multiline />
               </p>
             </Reveal>

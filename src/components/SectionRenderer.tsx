@@ -94,7 +94,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
           <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10">
             {section.heading && (
               <Reveal>
-                <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8">
+                <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-6 sm:mb-8">
                   {section.heading}
                 </h2>
               </Reveal>
@@ -121,8 +121,8 @@ async function RenderSection({ section, index }: { section: Section; index: numb
               />
             </div>
           )}
-          <div className="p-8 sm:p-10 flex flex-col justify-center">
-            <h3 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.015em] mb-4">
+          <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+            <h3 className="font-display text-xl sm:text-2xl lg:text-3xl leading-tight tracking-[-0.015em] mb-4">
               {section.heading}
             </h3>
             {section.description && (
@@ -179,7 +179,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
           <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
             {section.heading && (
               <Reveal>
-                <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-10">
+                <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-8 sm:mb-10">
                   {section.heading}
                 </h2>
               </Reveal>
@@ -212,13 +212,13 @@ async function RenderSection({ section, index }: { section: Section; index: numb
       return (
         <section className="relative py-16 sm:py-24">
           <div className="mx-auto max-w-[900px] px-4 sm:px-8 lg:px-10">
-            <div className="glass-strong rounded-[1.75rem] p-8 sm:p-12 text-center">
+            <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-10 lg:p-12 text-center">
               {section.kicker && (
                 <p className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   {section.kicker}
                 </p>
               )}
-              <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em]">
+              <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em]">
                 {section.heading}
               </h2>
               {section.text && (
@@ -228,7 +228,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
               )}
               {section.primaryHref && (
                 <div className="mt-8">
-                  <Link href={section.primaryHref} className="btn-gold">
+                  <Link href={section.primaryHref} className="btn-gold min-h-[48px] w-full sm:w-auto justify-center">
                     {section.primaryLabel || "Kontakt aufnehmen"}
                     <span aria-hidden>→</span>
                   </Link>
@@ -246,7 +246,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
           <div className="mx-auto max-w-[1100px] px-4 sm:px-8 lg:px-10">
             {section.heading && (
               <Reveal>
-                <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-6">
+                <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] mb-6">
                   {section.heading}
                 </h2>
               </Reveal>
@@ -259,28 +259,53 @@ async function RenderSection({ section, index }: { section: Section; index: numb
               </Reveal>
             )}
             <Reveal delay={0.1}>
-              <div className="glass rounded-[1.5rem] overflow-hidden">
-                <div className="grid grid-cols-12 gap-0 text-[11px] tracking-[0.28em] uppercase text-[var(--ink-mute)] px-6 sm:px-8 py-5 border-b border-white/5">
-                  <div className="col-span-12 sm:col-span-4">Kriterium</div>
-                  <div className="col-span-6 sm:col-span-4 text-[var(--gold)]">
+              <div className="glass rounded-2xl sm:rounded-[1.5rem] overflow-hidden">
+                <div className="hidden sm:grid grid-cols-12 gap-0 text-[11px] tracking-[0.28em] uppercase text-[var(--ink-mute)] px-6 sm:px-8 py-5 border-b border-white/5">
+                  <div className="col-span-4">Kriterium</div>
+                  <div className="col-span-4 text-[var(--gold)]">
                     {section.columnA}
                   </div>
-                  <div className="col-span-6 sm:col-span-4">{section.columnB}</div>
+                  <div className="col-span-4">{section.columnB}</div>
                 </div>
                 <ul className="divide-y divide-white/5">
                   {(section.rows || []).map((row) => (
                     <li
                       key={row.kriterium}
-                      className="grid grid-cols-12 gap-4 px-6 sm:px-8 py-5 text-sm sm:text-base"
+                      className="px-5 sm:px-8 py-5"
                     >
-                      <div className="col-span-12 sm:col-span-4 font-medium text-[var(--ink)]">
-                        {row.kriterium}
+                      <div className="hidden sm:grid grid-cols-12 gap-4 text-sm sm:text-base">
+                        <div className="col-span-4 font-medium text-[var(--ink)]">
+                          {row.kriterium}
+                        </div>
+                        <div className="col-span-4 text-[var(--ink-dim)]">
+                          {row.valueA}
+                        </div>
+                        <div className="col-span-4 text-[var(--ink-dim)]">
+                          {row.valueB}
+                        </div>
                       </div>
-                      <div className="col-span-6 sm:col-span-4 text-[var(--ink-dim)]">
-                        {row.valueA}
-                      </div>
-                      <div className="col-span-6 sm:col-span-4 text-[var(--ink-dim)]">
-                        {row.valueB}
+                      <div className="sm:hidden">
+                        <div className="font-medium text-[var(--ink)] mb-3">
+                          {row.kriterium}
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 text-sm">
+                          <div>
+                            <div className="text-[10px] tracking-[0.24em] uppercase text-[var(--gold)] mb-1">
+                              {section.columnA}
+                            </div>
+                            <div className="text-[var(--ink-dim)]">
+                              {row.valueA}
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)] mb-1">
+                              {section.columnB}
+                            </div>
+                            <div className="text-[var(--ink-dim)]">
+                              {row.valueB}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </li>
                   ))}
@@ -312,11 +337,11 @@ async function RenderSection({ section, index }: { section: Section; index: numb
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
               {(section.steps || []).map((s, i) => (
                 <Reveal key={s.title} delay={0.1 + i * 0.05}>
-                  <div className="glass rounded-[1.5rem] p-8 h-full">
-                    <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+                  <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
+                    <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-3 sm:mb-4">
                       Schritt {String(i + 1).padStart(2, "0")}
                     </div>
-                    <h3 className="font-display text-2xl leading-tight mb-3">{s.title}</h3>
+                    <h3 className="font-display text-xl sm:text-2xl leading-tight mb-3">{s.title}</h3>
                     <p className="text-[var(--ink-dim)] leading-relaxed">{s.description}</p>
                   </div>
                 </Reveal>
@@ -363,13 +388,13 @@ async function RenderSection({ section, index }: { section: Section; index: numb
               {packages.map((p, i) => (
                 <Reveal key={p.name} delay={i * 0.05}>
                   <div
-                    className={`glass rounded-[1.5rem] p-8 h-full flex flex-col ${
+                    className={`glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full flex flex-col ${
                       p.highlighted ? "ring-1 ring-[var(--gold)]" : ""
                     }`}
                   >
-                    <h3 className="font-display text-2xl leading-tight tracking-[-0.015em]">{p.name}</h3>
-                    <div className="mt-4 flex items-baseline gap-2">
-                      <span className="font-display text-3xl text-chrome">{p.price}</span>
+                    <h3 className="font-display text-xl sm:text-2xl leading-tight tracking-[-0.015em]">{p.name}</h3>
+                    <div className="mt-3 sm:mt-4 flex items-baseline gap-2 flex-wrap">
+                      <span className="font-display text-2xl sm:text-3xl text-chrome">{p.price}</span>
                       {p.priceNote && (
                         <span className="text-xs text-[var(--ink-mute)]">{p.priceNote}</span>
                       )}
@@ -380,7 +405,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
                       </p>
                     )}
                     {p.positions && (
-                      <ul className="mt-6 space-y-2 flex-1">
+                      <ul className="mt-5 sm:mt-6 space-y-2 flex-1">
                         {p.positions.map((pos) => (
                           <li key={pos.text} className="flex items-start gap-3 text-sm text-[var(--ink-dim)]">
                             <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[var(--gold)] shrink-0" />
@@ -392,7 +417,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
                     {p.ctaHref && (
                       <Link
                         href={p.ctaHref}
-                        className={`mt-8 ${p.highlighted ? "btn-gold" : "btn-glass"} justify-center`}
+                        className={`mt-6 sm:mt-8 ${p.highlighted ? "btn-gold" : "btn-glass"} justify-center min-h-[48px]`}
                       >
                         {p.ctaLabel || "Anfragen"}
                         <span aria-hidden>→</span>
@@ -432,11 +457,11 @@ async function RenderSection({ section, index }: { section: Section; index: numb
               </h2>
             </Reveal>
             {section.metrics && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-10 sm:mb-12">
                 {section.metrics.map((m, i) => (
                   <Reveal key={m.headline} delay={0.1 + i * 0.05}>
-                    <div className="glass rounded-[1.25rem] p-6 min-h-[130px] flex flex-col justify-between">
-                      <div className="font-display text-3xl sm:text-4xl leading-none text-chrome">
+                    <div className="glass rounded-2xl sm:rounded-[1.25rem] p-5 sm:p-6 min-h-[120px] sm:min-h-[130px] h-full flex flex-col justify-between">
+                      <div className="font-display text-2xl sm:text-4xl leading-none text-chrome break-words">
                         {m.headline}
                       </div>
                       <div className="text-xs text-[var(--ink-dim)] mt-3 leading-relaxed">

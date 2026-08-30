@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.01em] mt-12 mb-4 text-[var(--ink)]">
+    <h2 className="font-display text-xl sm:text-2xl md:text-3xl leading-tight tracking-[-0.01em] mt-10 sm:mt-12 mb-3 sm:mb-4 text-[var(--ink)]">
       {children}
     </h2>
   );
@@ -24,7 +24,7 @@ function H2({ children }: { children: React.ReactNode }) {
 
 function H3({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-display text-lg sm:text-xl leading-snug tracking-[-0.01em] mt-8 mb-3 text-[var(--ink)]">
+    <h3 className="font-display text-base sm:text-lg md:text-xl leading-snug tracking-[-0.01em] mt-6 sm:mt-8 mb-3 text-[var(--ink)]">
       {children}
     </h3>
   );
@@ -60,8 +60,8 @@ export default async function DatenschutzPage() {
         subtitle="Informationen zur Verarbeitung Ihrer personenbezogenen Daten beim Besuch dieser Website – nach Art. 13 DSGVO."
       />
 
-      <section className="relative py-16 sm:py-24">
-        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10 text-[var(--ink-dim)] leading-relaxed">
+      <section className="relative py-12 sm:py-24">
+        <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed break-words">
           <Reveal>
             <H2>1. Verantwortliche Stelle</H2>
             <P>

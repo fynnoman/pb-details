@@ -34,9 +34,9 @@ export default function Process({
       />
 
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        <div className="max-w-3xl mb-12 sm:mb-16">
+        <div className="max-w-3xl mb-10 sm:mb-16">
           <Reveal>
-            <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+            <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
               <EditableText globalSlug="home" path="processKicker" value={kickerText} />
             </p>
@@ -61,17 +61,17 @@ export default function Process({
               <div className="font-display text-[5rem] sm:text-[7rem] leading-none text-[var(--ink)]/[0.18] absolute -top-2 sm:-top-4 -right-1 sm:-right-2 select-none pointer-events-none">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+              <div className="text-[11px] sm:text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-3 sm:mb-4 relative z-10">
                 Schritt {String(i + 1).padStart(2, "0")}
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.02em]">
+              <h3 className="font-display text-xl sm:text-2xl md:text-3xl leading-tight tracking-[-0.02em] relative z-10">
                 <EditableText
                   globalSlug="home"
                   path={`processSteps.${i}.title`}
                   value={s.title}
                 />
               </h3>
-              <p className="mt-4 text-[var(--ink-dim)] leading-relaxed">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed relative z-10">
                 <EditableText
                   globalSlug="home"
                   path={`processSteps.${i}.description`}
@@ -84,7 +84,7 @@ export default function Process({
         </div>
 
         <Reveal delay={0.3}>
-          <p className="mt-12 text-center text-sm text-[var(--ink-mute)]">
+          <p className="mt-10 sm:mt-12 text-center text-xs sm:text-sm text-[var(--ink-mute)] px-4">
             <EditableText globalSlug="home" path="processFootnote" value={footnoteText} multiline />
           </p>
         </Reveal>

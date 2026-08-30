@@ -17,7 +17,7 @@ export default function Nav({
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [mobileSubOpen, setMobileSubOpen] = useState(false);
+  const [mobileSubOpen, setMobileSubOpen] = useState<Record<string, boolean>>({});
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -141,7 +141,7 @@ export default function Nav({
 
           <Link
             href={cta.href}
-            className="hidden sm:inline-flex btn-gold ml-auto lg:ml-2 text-[12px] sm:text-[13px] py-2 sm:py-2.5 px-4 sm:px-5"
+            className="hidden sm:inline-flex btn-gold ml-auto lg:ml-2 text-[12px] sm:text-[13px] py-2 sm:py-2.5 px-3 sm:px-5"
           >
             <span className="hidden md:inline">{cta.label}</span>
             <span className="md:hidden">{cta.shortLabel || cta.label}</span>
@@ -184,26 +184,33 @@ export default function Nav({
               {items.map((item) => {
                 const hasChildren = Array.isArray(item.children) && item.children.length > 0;
                 if (hasChildren) {
+                  const isOpen = !!mobileSubOpen[item.href];
                   return (
                     <li key={item.href} className="flex flex-col">
                       <div className="flex items-center">
                         <Link
                           href={item.href}
                           onClick={() => setOpen(false)}
-                          className="flex-1 py-3 px-2 text-[var(--ink-dim)] hover:text-[var(--ink)] text-sm tracking-wide"
+                          className="flex-1 py-3.5 px-2 text-[var(--ink-dim)] hover:text-[var(--ink)] text-sm tracking-wide min-h-[48px] flex items-center"
                         >
                           {item.label}
                         </Link>
                         <button
                           type="button"
                           aria-label="Untermenü öffnen"
-                          onClick={() => setMobileSubOpen((v) => !v)}
-                          className="w-10 h-10 rounded-full flex items-center justify-center text-[var(--ink-mute)]"
+                          aria-expanded={isOpen}
+                          onClick={() =>
+                            setMobileSubOpen((prev) => ({
+                              ...prev,
+                              [item.href]: !prev[item.href],
+                            }))
+                          }
+                          className="w-11 h-11 rounded-full flex items-center justify-center text-[var(--ink-mute)]"
                         >
                           <svg
                             viewBox="0 0 10 6"
                             className={`w-3 h-2 transition-transform duration-300 ${
-                              mobileSubOpen ? "rotate-180" : ""
+                              isOpen ? "rotate-180" : ""
                             }`}
                           >
                             <path
@@ -219,7 +226,7 @@ export default function Nav({
                       </div>
                       <div
                         className={`overflow-hidden transition-all duration-400 ${
-                          mobileSubOpen ? "max-h-72" : "max-h-0"
+                          isOpen ? "max-h-96" : "max-h-0"
                         }`}
                       >
                         <ul className="pl-4 pb-2 flex flex-col">
@@ -228,7 +235,7 @@ export default function Nav({
                               <Link
                                 href={c.href}
                                 onClick={() => setOpen(false)}
-                                className="block py-2.5 px-2 text-[13px] text-[var(--ink-mute)] hover:text-[var(--ink)]"
+                                className="block py-3 px-2 text-[13px] text-[var(--ink-mute)] hover:text-[var(--ink)] min-h-[44px] flex items-center"
                               >
                                 {c.label}
                               </Link>
@@ -244,7 +251,7 @@ export default function Nav({
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="block py-3 px-2 text-[var(--ink-dim)] hover:text-[var(--ink)] text-sm tracking-wide"
+                      className="block py-3.5 px-2 text-[var(--ink-dim)] hover:text-[var(--ink)] text-sm tracking-wide min-h-[48px] flex items-center"
                     >
                       {item.label}
                     </Link>

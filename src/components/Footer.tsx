@@ -17,24 +17,24 @@ export default function Footer({
       new Date(settings.holidayNotice.until) >= new Date());
 
   return (
-    <footer className="relative border-t border-white/5 pt-14 sm:pt-20 pb-10 overflow-hidden">
+    <footer className="relative border-t border-white/5 pt-12 sm:pt-20 pb-10 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 sm:gap-8 mb-12 sm:mb-16">
+        <div className="grid grid-cols-12 gap-8 sm:gap-8 mb-10 sm:mb-16">
           <div className="col-span-12 md:col-span-5">
             <img
               src="/images/logo/pb-fahrzeugpflege-logo-black.png"
               alt="PB Fahrzeugpflege Saarlouis"
-              className="h-20 sm:h-24 md:h-28 w-auto object-contain mb-6 drop-shadow-[0_2px_12px_rgba(212,180,131,0.25)]"
+              className="h-16 sm:h-24 md:h-28 w-auto object-contain mb-5 sm:mb-6 drop-shadow-[0_2px_12px_rgba(212,180,131,0.25)]"
             />
             <p className="mt-2 text-sm text-[var(--ink-dim)] max-w-sm leading-relaxed">
               <EditableText globalSlug="footer" path="intro" value={footer.intro || ""} multiline />
             </p>
-            <div className="mt-8 text-xs tracking-[0.32em] uppercase text-[var(--gold)]">
+            <div className="mt-6 sm:mt-8 text-xs tracking-[0.32em] uppercase text-[var(--gold)]">
               <EditableText globalSlug="footer" path="motto" value={footer.motto || ""} />
             </div>
           </div>
 
-          <div className="col-span-6 md:col-span-3">
+          <div className="col-span-12 sm:col-span-6 md:col-span-3">
             <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-4">
               Kontakt
             </div>
@@ -46,21 +46,21 @@ export default function Footer({
               <br />
               <a
                 href={`tel:${settings.phone.e164}`}
-                className="text-[var(--ink)] hover:text-[var(--gold)] transition-colors"
+                className="text-[var(--ink)] hover:text-[var(--gold)] transition-colors inline-block min-h-[24px]"
               >
                 {settings.phone.display}
               </a>
               <br />
               <a
                 href={`mailto:${settings.email}`}
-                className="text-[var(--ink)] hover:text-[var(--gold)] transition-colors"
+                className="text-[var(--ink)] hover:text-[var(--gold)] transition-colors break-all inline-block min-h-[24px]"
               >
                 {settings.email}
               </a>
             </address>
           </div>
 
-          <div className="col-span-6 md:col-span-2">
+          <div className="col-span-12 sm:col-span-6 md:col-span-2">
             <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-4">
               Öffnungszeiten
             </div>
@@ -90,59 +90,61 @@ export default function Footer({
             <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-4">
               Bewertungen
             </div>
-            {settings.provenExpert && (
-              <a
-                href={settings.provenExpert.url || "#"}
-                target="_blank"
-                rel="noopener"
-                className="glass rounded-2xl p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition"
-              >
-                <div className="font-display text-3xl text-chrome">
-                  {settings.provenExpert.value.toString().replace(".", ",")}
+            <div className="grid grid-cols-3 md:grid-cols-1 gap-3">
+              {settings.provenExpert && (
+                <a
+                  href={settings.provenExpert.url || "#"}
+                  target="_blank"
+                  rel="noopener"
+                  className="glass rounded-2xl p-3 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
+                >
+                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
+                    {settings.provenExpert.value.toString().replace(".", ",")}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
+                    {settings.provenExpert.count} · ProvenExpert
+                  </div>
+                </a>
+              )}
+              {settings.google && (
+                <a
+                  href={settings.google.mapsUrl || settings.google.url || "#"}
+                  target="_blank"
+                  rel="noopener"
+                  className="glass rounded-2xl p-3 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
+                >
+                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
+                    {settings.google.count}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
+                    Google-Bewertungen
+                  </div>
+                </a>
+              )}
+              {settings.wkdb && (
+                <div className="glass rounded-2xl p-3 sm:p-4 min-h-[48px]">
+                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
+                    {settings.wkdb.count}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
+                    {settings.wkdb.value.toString().replace(".", ",")} · WKDB
+                  </div>
                 </div>
-                <div className="text-xs text-[var(--ink-dim)] mt-1">
-                  {settings.provenExpert.count} · ProvenExpert
-                </div>
-              </a>
-            )}
-            {settings.google && (
-              <a
-                href={settings.google.mapsUrl || settings.google.url || "#"}
-                target="_blank"
-                rel="noopener"
-                className="glass rounded-2xl p-4 block mt-3 hover:ring-1 hover:ring-[var(--gold)]/30 transition"
-              >
-                <div className="font-display text-3xl text-chrome">
-                  {settings.google.count}
-                </div>
-                <div className="text-xs text-[var(--ink-dim)] mt-1">
-                  Google-Bewertungen
-                </div>
-              </a>
-            )}
-            {settings.wkdb && (
-              <div className="glass rounded-2xl p-4 mt-3">
-                <div className="font-display text-3xl text-chrome">
-                  {settings.wkdb.count}
-                </div>
-                <div className="text-xs text-[var(--ink-dim)] mt-1">
-                  {settings.wkdb.value.toString().replace(".", ",")} · werkenntdenBESTEN
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
 
         <div className="hairline mb-8" />
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[var(--ink-mute)]">
-          <div>© {year} {settings.name} ® — Alle Rechte vorbehalten.</div>
-          <div className="flex gap-6 flex-wrap">
+          <div className="leading-relaxed">© {year} {settings.name} ® — Alle Rechte vorbehalten.</div>
+          <div className="flex gap-x-5 gap-y-2 flex-wrap">
             {footer.legalLinks.map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className="hover:text-[var(--ink)] transition-colors"
+                className="hover:text-[var(--ink)] transition-colors min-h-[32px] inline-flex items-center"
               >
                 <EditableText globalSlug="footer" path={`legalLinks.${i}.label`} value={l.label} />
               </Link>

@@ -21,23 +21,23 @@ export default async function CtaSection({
   return (
     <section className="relative py-16 sm:py-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
-        <div className="glass-strong rounded-[1.75rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
-          <div className="grid grid-cols-12 gap-8 items-center">
+        <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-10 lg:p-16 relative overflow-hidden">
+          <div className="grid grid-cols-12 gap-6 sm:gap-8 items-center">
             <div className="col-span-12 lg:col-span-7">
               <Reveal>
-                <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+                <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                   <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                   {kicker}
                 </p>
               </Reveal>
               <Reveal delay={0.05}>
-                <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] tracking-[-0.02em]">
+                <h2 className="font-display text-[clamp(1.6rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em]">
                   {title}
                 </h2>
               </Reveal>
               {text && (
                 <Reveal delay={0.1}>
-                  <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-xl">
+                  <p className="mt-5 sm:mt-6 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed max-w-xl">
                     {text}
                   </p>
                 </Reveal>
@@ -45,7 +45,7 @@ export default async function CtaSection({
             </div>
             <div className="col-span-12 lg:col-span-5 flex flex-col gap-3">
               <Reveal delay={0.15}>
-                <Link href={primaryHref} className="btn-gold w-full justify-center">
+                <Link href={primaryHref} className="btn-gold w-full justify-center min-h-[48px]">
                   {primaryLabel}
                   <span aria-hidden>→</span>
                 </Link>
@@ -53,7 +53,7 @@ export default async function CtaSection({
               <Reveal delay={0.2}>
                 <a
                   href={`tel:${settings.phone.e164}`}
-                  className="btn-glass w-full justify-center"
+                  className="btn-glass w-full justify-center min-h-[48px]"
                 >
                   <span
                     className="w-2 h-2 rounded-full bg-[var(--gold)] animate-pulse"

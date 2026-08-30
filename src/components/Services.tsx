@@ -40,14 +40,14 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
   return (
     <div
       ref={ref}
-      className={`grid grid-cols-12 gap-6 lg:gap-16 items-center py-12 sm:py-20 lg:py-24 ${
+      className={`grid grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-center py-10 sm:py-16 lg:py-24 ${
         !isEven ? "lg:[&>*:first-child]:order-2" : ""
       }`}
     >
       <div className="col-span-12 lg:col-span-7">
         <Link
           href={href}
-          className="block relative aspect-[16/11] rounded-[1.8rem] overflow-hidden group bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
+          className="block relative aspect-[16/11] rounded-2xl sm:rounded-[1.8rem] overflow-hidden group bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
         >
           {imageUrl && (
             <>
@@ -63,7 +63,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
               <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20 pointer-events-none" />
             </>
           )}
-          <div className="absolute top-6 left-6 glass rounded-full px-4 py-1.5 text-[10px] tracking-[0.32em] uppercase">
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 glass rounded-full px-3 py-1.5 sm:px-4 text-[10px] tracking-[0.28em] sm:tracking-[0.32em] uppercase">
             {tag} / Leistung
           </div>
         </Link>
@@ -76,7 +76,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
           </div>
         </Reveal>
         <Reveal>
-          <h3 className="font-display text-[clamp(1.8rem,3.5vw,3rem)] leading-[1.05] tracking-[-0.02em]">
+          <h3 className="font-display text-[clamp(1.6rem,7vw,3rem)] leading-[1.05] tracking-[-0.02em]">
             <EditableText
               collection="services"
               docId={service.id}
@@ -91,7 +91,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
           </h3>
         </Reveal>
         <Reveal delay={0.05}>
-          <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-md">
+          <p className="mt-5 sm:mt-6 text-[var(--ink-dim)] leading-relaxed max-w-md">
             <EditableText
               collection="services"
               docId={service.id}
@@ -103,13 +103,13 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
         </Reveal>
         {service.features && service.features.length > 0 && (
           <Reveal delay={0.1}>
-            <ul className="mt-8 space-y-2">
+            <ul className="mt-6 sm:mt-8 space-y-2">
               {service.features.map((f, fi) => (
                 <li
                   key={fi}
-                  className="flex items-center gap-3 text-sm text-[var(--ink)]"
+                  className="flex items-start gap-3 text-sm text-[var(--ink)]"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />
+                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                   <EditableText
                     collection="services"
                     docId={service.id}
@@ -124,7 +124,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
         <Reveal delay={0.15}>
           <Link
             href={href}
-            className="mt-8 inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group"
+            className="mt-6 sm:mt-8 inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group min-h-[44px]"
           >
             Mehr erfahren
             <span
@@ -155,9 +155,9 @@ export default function Services({
   return (
     <section id="leistungen" className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        <div className="max-w-3xl mb-12 sm:mb-20">
+        <div className="max-w-3xl mb-10 sm:mb-20">
           <Reveal>
-            <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+            <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
               <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
               <EditableText globalSlug="home" path="services.kicker" value={kicker} />
             </p>
@@ -178,7 +178,7 @@ export default function Services({
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-6 text-[var(--ink-dim)] leading-relaxed max-w-xl">
+            <p className="mt-5 sm:mt-6 text-[var(--ink-dim)] leading-relaxed max-w-xl">
               <EditableText globalSlug="home" path="services.intro" value={intro} multiline />
             </p>
           </Reveal>

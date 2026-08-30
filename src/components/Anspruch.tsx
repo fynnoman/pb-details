@@ -81,7 +81,7 @@ export default function Anspruch({
 
           <div className="col-span-12 lg:col-span-6 order-1 lg:order-2">
             <Reveal>
-              <p className="text-[11px] tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-6">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
                 <EditableText globalSlug="home" path="anspruch.kicker" value={kicker} />
               </p>
@@ -106,14 +106,14 @@ export default function Anspruch({
               </p>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="mt-4 text-[var(--ink-dim)] leading-relaxed max-w-xl">
+              <p className="mt-4 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed max-w-xl">
                 <EditableText globalSlug="home" path="anspruch.para2" value={para2} multiline />
               </p>
             </Reveal>
             {settings.founders && (
               <Reveal delay={0.2}>
-                <blockquote className="mt-10 pl-6 border-l border-[var(--gold)]/40">
-                  <p className="font-display italic text-2xl sm:text-3xl leading-snug text-chrome">
+                <blockquote className="mt-8 sm:mt-10 pl-5 sm:pl-6 border-l border-[var(--gold)]/40">
+                  <p className="font-display italic text-lg sm:text-2xl md:text-3xl leading-snug text-chrome">
                     <EditableText
                       globalSlug="home"
                       path="anspruch.quoteText"
