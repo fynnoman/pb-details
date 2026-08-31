@@ -112,7 +112,7 @@ export default async function DatenschutzPage() {
               Rechtsgrundlagen der Verarbeitung sind Art. 6 Abs. 1 DSGVO
               (insbesondere Buchstabe a – Einwilligung, b – Vertrag/
               vorvertragliche Maßnahmen und f – berechtigtes Interesse) sowie
-              § 25 TTDSG für den Zugriff auf Endgeräte.
+              § 25 TDDDG für den Zugriff auf Endgeräte.
             </P>
           </Reveal>
 
@@ -173,17 +173,17 @@ export default async function DatenschutzPage() {
               <li>
                 <strong className="text-[var(--ink)]">Notwendig</strong> –
                 technisch erforderliche Cookies (z. B. Consent-Speicherung,
-                Sicherheit, Formular). Rechtsgrundlage: § 25 Abs. 2 TTDSG.
+                Sicherheit, Formular). Rechtsgrundlage: § 25 Abs. 2 TDDDG.
               </li>
               <li>
                 <strong className="text-[var(--ink)]">Analyse</strong> –
                 anonymisierte Reichweitenmessung. Rechtsgrundlage: § 25 Abs. 1
-                TTDSG i. V. m. Art. 6 Abs. 1 lit. a DSGVO.
+                TDDDG i. V. m. Art. 6 Abs. 1 lit. a DSGVO.
               </li>
               <li>
                 <strong className="text-[var(--ink)]">Marketing</strong> –
                 Wiedererkennung für Kampagnenoptimierung. Rechtsgrundlage:
-                § 25 Abs. 1 TTDSG i. V. m. Art. 6 Abs. 1 lit. a DSGVO.
+                § 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1 lit. a DSGVO.
               </li>
             </UL>
             <P>
@@ -262,17 +262,20 @@ export default async function DatenschutzPage() {
           <Reveal>
             <H2>8. Google Maps</H2>
             <P>
-              Auf unserer Startseite und Kontaktseite binden wir eine
+              Auf unserer Startseite binden wir – ausschließlich nach Ihrer
+              Einwilligung in die Kategorie „Marketing" – eine
               Google-Maps-Karte zur Darstellung unseres Standorts ein.
               Anbieter ist die Google Ireland Limited, Gordon House, Barrow
-              Street, Dublin 4, Irland. Beim Laden der Karte wird eine
-              Verbindung zu Google-Servern aufgebaut und Ihre IP-Adresse an
-              Google übertragen. Diese kann von Google in den USA verarbeitet
-              werden.
+              Street, Dublin 4, Irland. Ohne Ihre Einwilligung wird die Karte
+              nicht geladen und es findet keine Verbindung zu Google-Servern
+              statt. Erst nach Einwilligung wird die Karte nachgeladen; dabei
+              wird Ihre IP-Adresse an Google übertragen und kann von Google
+              in den USA verarbeitet werden.
             </P>
             <P>
-              Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
-              Interesse an einer leicht auffindbaren Standortdarstellung).
+              Rechtsgrundlage ist § 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1
+              lit. a DSGVO (Einwilligung). Sie können Ihre Einwilligung
+              jederzeit über die Cookie-Einstellungen im Footer widerrufen.
               Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in
               der Datenschutzerklärung von Google:{" "}
               <a
@@ -298,7 +301,7 @@ export default async function DatenschutzPage() {
               der Tag Manager nicht geladen.
             </P>
             <P>
-              Rechtsgrundlage: § 25 Abs. 1 TTDSG i. V. m. Art. 6 Abs. 1 lit. a
+              Rechtsgrundlage: § 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1 lit. a
               DSGVO. Sie können Ihre Einwilligung jederzeit über die
               Cookie-Einstellungen im Footer widerrufen.
             </P>

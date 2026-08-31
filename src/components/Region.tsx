@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Reveal from "./Reveal";
 import type { HomeData, SiteSettings } from "@/lib/site-types";
 import EditableText from "./edit/EditableText";
+import { hasConsent } from "./CookieBanner";
 
 export default function Region({
   home,
@@ -27,6 +29,16 @@ export default function Region({
   const mapsQuery = encodeURIComponent(
     `${settings.address.street}, ${settings.address.zip} ${settings.address.city}`,
   );
+
+  // Google Maps lädt erst nach Marketing-Einwilligung — vorher wird
+  // keine Verbindung zu Google-Servern aufgebaut (IP-Übertragung).
+  const [mapsAllowed, setMapsAllowed] = useState(false);
+  useEffect(() => {
+    setMapsAllowed(hasConsent("marketing"));
+    const onChange = () => setMapsAllowed(hasConsent("marketing"));
+    window.addEventListener("pb-consent-changed", onChange);
+    return () => window.removeEventListener("pb-consent-changed", onChange);
+  }, []);
 
   return (
     <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
@@ -136,21 +148,23 @@ export default function Region({
           </div>
         </div>
 
-        <Reveal delay={0.15}>
-          <div className="mt-10 sm:mt-12 lg:mt-16 rounded-2xl sm:rounded-[1.75rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]">
-            <div className="relative aspect-[4/3] sm:aspect-[21/9] bg-black">
-              <iframe
-                title={`Standort ${settings.name} – ${settings.address.street}, ${settings.address.city}`}
-                src={`https://maps.google.com/maps?q=${mapsQuery}&hl=de&z=15&output=embed`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full grayscale-[15%] contrast-[1.05]"
-                style={{ border: 0, colorScheme: "normal" }}
-              />
+        {mapsAllowed && (
+          <Reveal delay={0.15}>
+            <div className="mt-10 sm:mt-12 lg:mt-16 rounded-2xl sm:rounded-[1.75rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]">
+              <div className="relative aspect-[4/3] sm:aspect-[21/9] bg-black">
+                <iframe
+                  title={`Standort ${settings.name} – ${settings.address.street}, ${settings.address.city}`}
+                  src={`https://maps.google.com/maps?q=${mapsQuery}&hl=de&z=15&output=embed`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full grayscale-[15%] contrast-[1.05]"
+                  style={{ border: 0, colorScheme: "normal" }}
+                />
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        )}
       </div>
     </section>
   );

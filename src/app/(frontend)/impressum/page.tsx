@@ -10,7 +10,7 @@ const PATH = "/impressum/";
 export const metadata: Metadata = {
   title: { absolute: "Impressum | PB Fahrzeugpflege Saarlouis" },
   description:
-    "Impressum und rechtliche Angaben gemäß § 5 TMG von PB Fahrzeugpflege Saarlouis in Ensdorf.",
+    "Impressum und rechtliche Angaben gemäß § 5 DDG von PB Fahrzeugpflege Saarlouis in Ensdorf.",
   alternates: { canonical: PATH },
 };
 
@@ -34,7 +34,7 @@ export default async function ImpressumPage() {
     path: PATH,
     name: "Impressum | PB Fahrzeugpflege Saarlouis",
     description:
-      "Rechtliche Angaben nach § 5 TMG und § 18 Abs. 2 MStV von PB Fahrzeugpflege Saarlouis.",
+      "Rechtliche Angaben nach § 5 DDG und § 18 Abs. 2 MStV von PB Fahrzeugpflege Saarlouis.",
     breadcrumb: breadcrumbList([
       { name: "Home", path: "/" },
       { name: "Impressum", path: PATH },
@@ -48,7 +48,7 @@ export default async function ImpressumPage() {
       <section className="relative py-12 sm:py-24">
         <div className="mx-auto max-w-[820px] px-4 sm:px-8 lg:px-10 text-sm sm:text-base text-[var(--ink-dim)] leading-relaxed break-words">
           <Reveal>
-            <H2>Angaben gemäß § 5 TMG</H2>
+            <H2>Angaben gemäß § 5 DDG</H2>
             <p>
               {settings.name}
               <br />
@@ -101,23 +101,6 @@ export default async function ImpressumPage() {
           </Reveal>
 
           <Reveal>
-            <H2>EU-Streitschlichtung</H2>
-            <p>
-              Die Europäische Kommission stellt eine Plattform zur
-              Online-Streitbeilegung (OS) bereit:{" "}
-              <a
-                href="https://ec.europa.eu/consumers/odr/"
-                target="_blank"
-                rel="noopener"
-                className="text-[var(--ink)] hover:text-[var(--gold)] underline underline-offset-4"
-              >
-                https://ec.europa.eu/consumers/odr/
-              </a>
-              . Unsere E-Mail-Adresse finden Sie oben im Impressum.
-            </p>
-          </Reveal>
-
-          <Reveal>
             <H2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</H2>
             <p>
               Wir sind nicht bereit oder verpflichtet, an
@@ -129,9 +112,9 @@ export default async function ImpressumPage() {
           <Reveal>
             <H2>Haftung für Inhalte</H2>
             <p>
-              Als Diensteanbieter sind wir gemäß § 7 Absatz 1 TMG für eigene
+              Als Diensteanbieter sind wir gemäß § 7 Absatz 1 DDG für eigene
               Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
-              verantwortlich. Nach den §§ 8 bis 10 TMG sind wir als
+              verantwortlich. Nach den §§ 8 bis 10 DDG sind wir als
               Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
               gespeicherte fremde Informationen zu überwachen oder nach
               Umständen zu forschen, die auf eine rechtswidrige Tätigkeit

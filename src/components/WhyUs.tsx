@@ -51,7 +51,7 @@ export default function WhyUs({
   }> = [
     {
       headline: `Seit ${settings.founded || 1997}`,
-      body: `Inhabergeführt${settings.founders ? ` von ${settings.founders}` : ""}`,
+      body: `Inhabergeführt${settings.founders ? ` — gegründet von ${settings.founders}` : ""}`,
     },
     {
       headline: totalReviews > 0 ? String(totalReviews) : String(settings.provenExpert?.count || ""),

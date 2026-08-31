@@ -174,8 +174,9 @@ export default function ContactForm() {
 
                 <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <p className="text-[11px] text-[var(--ink-mute)] max-w-sm leading-relaxed">
-                    Mit dem Absenden stimmen Sie unserer Datenschutzerklärung
-                    zu. Wir melden uns i. d. R. innerhalb von 24 h zurück.
+                    Informationen zur Verarbeitung Ihrer Daten finden Sie in
+                    unserer Datenschutzerklärung. Wir melden uns i. d. R.
+                    innerhalb von 24 h zurück.
                   </p>
                   <button
                     type="submit"
