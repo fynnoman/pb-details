@@ -111,6 +111,18 @@ export async function loadFaqsByTopic(topic: string) {
   }>;
 }
 
+export type LegalSection = { heading?: string; body?: string };
+export type LegalPagesData = {
+  impressum?: { sections?: LegalSection[] };
+  datenschutz?: { sections?: LegalSection[] };
+  agb?: { sections?: LegalSection[] };
+};
+
+export async function loadLegalPages(): Promise<LegalPagesData> {
+  const payload = await getPayloadClient();
+  return payload.findGlobal({ slug: "legal", depth: 0 }) as unknown as LegalPagesData;
+}
+
 export async function loadPageByPath(path: string, opts: { draft?: boolean } = {}) {
   const payload = await getPayloadClient();
   const res = await payload.find({

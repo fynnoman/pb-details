@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
+import LegalSectionRenderer from "@/components/LegalSectionRenderer";
 import { breadcrumbList, webPageSchema } from "@/lib/schema";
-import { loadSettings } from "@/lib/site-data";
+import { loadLegalPages, loadSettings } from "@/lib/site-data";
 
 const PATH = "/impressum/";
 
@@ -23,8 +24,12 @@ function H2({ children }: { children: React.ReactNode }) {
 }
 
 export default async function ImpressumPage() {
-  const settings = await loadSettings();
+  const [settings, legal] = await Promise.all([loadSettings(), loadLegalPages()]);
   const owner = settings.owner || "Thomas Paul-Mohm";
+  const cmsSections = legal?.impressum?.sections || [];
+  const hasCmsSections = cmsSections.some(
+    (s) => (s.heading && s.heading.trim()) || (s.body && s.body.trim()),
+  );
   // Von Fynn/Karsten bestaetigt: die einzig korrekte USt-IdNr.
   // Bewusst hardcoded, damit Aenderungen im CMS nichts Legales
   // ueberschreiben koennen.
@@ -100,87 +105,93 @@ export default async function ImpressumPage() {
             </p>
           </Reveal>
 
-          <Reveal>
-            <H2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</H2>
-            <p>
-              Wir sind nicht bereit oder verpflichtet, an
-              Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
-              teilzunehmen.
-            </p>
-          </Reveal>
+          {hasCmsSections ? (
+            <LegalSectionRenderer sections={cmsSections} />
+          ) : (
+            <>
+              <Reveal>
+                <H2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</H2>
+                <p>
+                  Wir sind nicht bereit oder verpflichtet, an
+                  Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+                  teilzunehmen.
+                </p>
+              </Reveal>
 
-          <Reveal>
-            <H2>Haftung für Inhalte</H2>
-            <p>
-              Als Diensteanbieter sind wir gemäß § 7 Absatz 1 DDG für eigene
-              Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
-              verantwortlich. Nach den §§ 8 bis 10 DDG sind wir als
-              Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
-              gespeicherte fremde Informationen zu überwachen oder nach
-              Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
-              hinweisen.
-            </p>
-            <p className="mt-4">
-              Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
-              Informationen nach den allgemeinen Gesetzen bleiben hiervon
-              unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem
-              Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.
-              Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden
-              wir diese Inhalte umgehend entfernen.
-            </p>
-          </Reveal>
+              <Reveal>
+                <H2>Haftung für Inhalte</H2>
+                <p>
+                  Als Diensteanbieter sind wir gemäß § 7 Absatz 1 DDG für eigene
+                  Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+                  verantwortlich. Nach den §§ 8 bis 10 DDG sind wir als
+                  Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
+                  gespeicherte fremde Informationen zu überwachen oder nach
+                  Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
+                  hinweisen.
+                </p>
+                <p className="mt-4">
+                  Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
+                  Informationen nach den allgemeinen Gesetzen bleiben hiervon
+                  unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem
+                  Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.
+                  Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden
+                  wir diese Inhalte umgehend entfernen.
+                </p>
+              </Reveal>
 
-          <Reveal>
-            <H2>Haftung für Links</H2>
-            <p>
-              Unser Angebot enthält Links zu externen Websites Dritter, auf
-              deren Inhalte wir keinen Einfluss haben. Deshalb können wir für
-              diese fremden Inhalte auch keine Gewähr übernehmen. Für die
-              Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
-              oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten
-              wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße
-              überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der
-              Verlinkung nicht erkennbar.
-            </p>
-            <p className="mt-4">
-              Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist
-              jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht
-              zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir
-              derartige Links umgehend entfernen.
-            </p>
-          </Reveal>
+              <Reveal>
+                <H2>Haftung für Links</H2>
+                <p>
+                  Unser Angebot enthält Links zu externen Websites Dritter, auf
+                  deren Inhalte wir keinen Einfluss haben. Deshalb können wir für
+                  diese fremden Inhalte auch keine Gewähr übernehmen. Für die
+                  Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+                  oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten
+                  wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße
+                  überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der
+                  Verlinkung nicht erkennbar.
+                </p>
+                <p className="mt-4">
+                  Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist
+                  jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht
+                  zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir
+                  derartige Links umgehend entfernen.
+                </p>
+              </Reveal>
 
-          <Reveal>
-            <H2>Urheberrecht</H2>
-            <p>
-              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf
-              diesen Seiten unterliegen dem deutschen Urheberrecht. Die
-              Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
-              Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der
-              schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
-              Downloads und Kopien dieser Seite sind nur für den privaten,
-              nicht kommerziellen Gebrauch gestattet.
-            </p>
-            <p className="mt-4">
-              Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt
-              wurden, werden die Urheberrechte Dritter beachtet. Insbesondere
-              werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie
-              trotzdem auf eine Urheberrechtsverletzung aufmerksam werden,
-              bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden
-              von Rechtsverletzungen werden wir derartige Inhalte umgehend
-              entfernen.
-            </p>
-          </Reveal>
+              <Reveal>
+                <H2>Urheberrecht</H2>
+                <p>
+                  Die durch die Seitenbetreiber erstellten Inhalte und Werke auf
+                  diesen Seiten unterliegen dem deutschen Urheberrecht. Die
+                  Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
+                  Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der
+                  schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+                  Downloads und Kopien dieser Seite sind nur für den privaten,
+                  nicht kommerziellen Gebrauch gestattet.
+                </p>
+                <p className="mt-4">
+                  Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt
+                  wurden, werden die Urheberrechte Dritter beachtet. Insbesondere
+                  werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie
+                  trotzdem auf eine Urheberrechtsverletzung aufmerksam werden,
+                  bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden
+                  von Rechtsverletzungen werden wir derartige Inhalte umgehend
+                  entfernen.
+                </p>
+              </Reveal>
 
-          <Reveal>
-            <H2>Bildnachweise</H2>
-            <p>
-              Sofern nicht anders gekennzeichnet, liegen die Bildrechte bei
-              {" "}
-              {settings.name}. Weitere Nutzungen bedürfen der schriftlichen
-              Zustimmung.
-            </p>
-          </Reveal>
+              <Reveal>
+                <H2>Bildnachweise</H2>
+                <p>
+                  Sofern nicht anders gekennzeichnet, liegen die Bildrechte bei
+                  {" "}
+                  {settings.name}. Weitere Nutzungen bedürfen der schriftlichen
+                  Zustimmung.
+                </p>
+              </Reveal>
+            </>
+          )}
 
           <Reveal>
             <H2>Datenschutz</H2>

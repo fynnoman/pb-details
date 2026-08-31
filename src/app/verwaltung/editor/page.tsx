@@ -10,12 +10,34 @@ type Snapshot = {
   settings: any;
   footer: any;
   navigation: any;
+  legal: any;
   services: any[];
   vehicles: any[];
   awards: any[];
   faqs: any[];
   posts: any[];
   pages: any[];
+};
+
+type LegalSection = { heading?: string; body?: string };
+type LegalTab = "impressum" | "datenschutz" | "agb";
+
+const LEGAL_TAB_META: Record<LegalTab, { label: string; hint: string }> = {
+  impressum: {
+    label: "Impressum",
+    hint:
+      "Wird auf /impressum unterhalb von § 5 DDG, Kontakt, USt-IdNr. und redaktionell verantwortlich eingesetzt. Firmen-, Kontakt- und Steuerdaten kommen weiter aus den Betriebsdaten und sind bewusst hier NICHT editierbar.",
+  },
+  datenschutz: {
+    label: "Datenschutzerklärung",
+    hint:
+      "Wird auf /datenschutzerklaerung unterhalb von § 1 Verantwortliche Stelle eingesetzt. Sobald hier auch nur ein Abschnitt gepflegt ist, ersetzt die Liste die kompletten §§ 2–18 auf der Seite.",
+  },
+  agb: {
+    label: "AGB",
+    hint:
+      "Wird auf /allgemeine-geschaeftsbedingungen eingesetzt. Solange hier nichts gepflegt ist, bleibt der aktuelle Platzhalter aktiv.",
+  },
 };
 
 type SaveState = "idle" | "saving" | "saved" | "error";
@@ -260,7 +282,7 @@ export default function EditorPage() {
 
     const stableStringify = (v: any) => JSON.stringify(stripDoc(v));
 
-    (["home", "settings", "footer", "navigation"] as const).forEach((slug) => {
+    (["home", "settings", "footer", "navigation", "legal"] as const).forEach((slug) => {
       const current = (data as any)[slug];
       const before = original ? (original as any)[slug] : undefined;
       if (!before || stableStringify(current) !== stableStringify(before)) {
@@ -399,6 +421,16 @@ export default function EditorPage() {
   };
   const setNav = (patch: any) =>
     setData({ ...data, navigation: { ...data.navigation, ...patch } });
+  const setLegalSections = (tab: LegalTab, sections: LegalSection[]) =>
+    setData({
+      ...data,
+      legal: {
+        ...(data.legal || {}),
+        [tab]: { ...((data.legal || {})[tab] || {}), sections },
+      },
+    });
+  const legalSectionsOf = (tab: LegalTab): LegalSection[] =>
+    (data.legal?.[tab]?.sections as LegalSection[] | undefined) || [];
   const setNavItem = (idx: number, patch: any) => {
     const items = [...(data.navigation?.items || [])];
     items[idx] = { ...items[idx], ...patch };
@@ -826,6 +858,182 @@ export default function EditorPage() {
               </div>
             ))}
           </div>
+        </SectionCard>
+
+        {/* RECHTSTEXTE */}
+        <SectionCard title="Rechtstexte (Impressum · Datenschutz · AGB)" icon="⚖️">
+          <p style={{ fontSize: 13, color: "#928c81", marginTop: 0, marginBottom: 16, lineHeight: 1.5 }}>
+            Hier bearbeitet Karsten Impressum, Datenschutzerklärung und AGB. Jeder Abschnitt hat eine
+            Überschrift und einen Text. Absätze im Text werden durch eine Leerzeile getrennt.
+            E-Mail-Adressen und https-Links werden automatisch verlinkt.
+          </p>
+          {(["impressum", "datenschutz", "agb"] as LegalTab[]).map((tab) => {
+            const sections = legalSectionsOf(tab);
+            const meta = LEGAL_TAB_META[tab];
+            return (
+              <div
+                key={tab}
+                style={{
+                  background: "#fbfaf7",
+                  border: "1px solid #ebe6da",
+                  borderRadius: 12,
+                  padding: 16,
+                  marginBottom: 16,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 8, flexWrap: "wrap" }}>
+                  <p style={{ margin: 0, fontSize: 14, fontWeight: 500, color: "#14120d" }}>{meta.label}</p>
+                  <span style={{ fontSize: 12, color: "#a09b91" }}>{sections.length} Abschnitt{sections.length === 1 ? "" : "e"}</span>
+                </div>
+                <p style={{ fontSize: 12, color: "#928c81", margin: "0 0 14px", lineHeight: 1.5 }}>{meta.hint}</p>
+
+                {sections.length === 0 && (
+                  <div
+                    style={{
+                      border: "1px dashed #d6d0c1",
+                      borderRadius: 10,
+                      padding: 14,
+                      textAlign: "center",
+                      color: "#928c81",
+                      fontSize: 13,
+                      marginBottom: 12,
+                      background: "#ffffff",
+                    }}
+                  >
+                    Noch keine Abschnitte gepflegt. Solange dieser Bereich leer ist, bleiben die aktuellen Standard-Texte aktiv.
+                  </div>
+                )}
+
+                {sections.map((s, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      background: "#ffffff",
+                      border: "1px solid #ebe6da",
+                      borderRadius: 10,
+                      padding: 14,
+                      marginBottom: 10,
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 8 }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: "#a37b3f", textTransform: "uppercase", letterSpacing: "0.14em" }}>
+                        Abschnitt {i + 1}
+                      </span>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (i === 0) return;
+                            const next = [...sections];
+                            [next[i - 1], next[i]] = [next[i], next[i - 1]];
+                            setLegalSections(tab, next);
+                          }}
+                          disabled={i === 0}
+                          title="Nach oben"
+                          style={{
+                            padding: "4px 10px",
+                            fontSize: 12,
+                            border: "1px solid #d6d0c1",
+                            borderRadius: 6,
+                            background: i === 0 ? "#f0ece2" : "#fbfaf7",
+                            color: "#55524d",
+                            cursor: i === 0 ? "not-allowed" : "pointer",
+                            fontFamily: "inherit",
+                          }}
+                        >
+                          ↑
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (i === sections.length - 1) return;
+                            const next = [...sections];
+                            [next[i + 1], next[i]] = [next[i], next[i + 1]];
+                            setLegalSections(tab, next);
+                          }}
+                          disabled={i === sections.length - 1}
+                          title="Nach unten"
+                          style={{
+                            padding: "4px 10px",
+                            fontSize: 12,
+                            border: "1px solid #d6d0c1",
+                            borderRadius: 6,
+                            background: i === sections.length - 1 ? "#f0ece2" : "#fbfaf7",
+                            color: "#55524d",
+                            cursor: i === sections.length - 1 ? "not-allowed" : "pointer",
+                            fontFamily: "inherit",
+                          }}
+                        >
+                          ↓
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (!confirm(`Abschnitt „${s.heading || "ohne Titel"}" wirklich löschen?`)) return;
+                            const next = sections.filter((_, idx) => idx !== i);
+                            setLegalSections(tab, next);
+                          }}
+                          title="Löschen"
+                          style={{
+                            padding: "4px 10px",
+                            fontSize: 12,
+                            border: "1px solid #e6c6c0",
+                            borderRadius: 6,
+                            background: "#fdecea",
+                            color: "#8f2b1d",
+                            cursor: "pointer",
+                            fontFamily: "inherit",
+                          }}
+                        >
+                          Löschen
+                        </button>
+                      </div>
+                    </div>
+                    <Field
+                      label="Überschrift (H2)"
+                      value={s.heading || ""}
+                      onChange={(v) => {
+                        const next = [...sections];
+                        next[i] = { ...next[i], heading: v };
+                        setLegalSections(tab, next);
+                      }}
+                    />
+                    <Field
+                      label="Text (Absätze durch Leerzeile trennen)"
+                      value={s.body || ""}
+                      multiline
+                      onChange={(v) => {
+                        const next = [...sections];
+                        next[i] = { ...next[i], body: v };
+                        setLegalSections(tab, next);
+                      }}
+                    />
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() => setLegalSections(tab, [...sections, { heading: "", body: "" }])}
+                  style={{
+                    marginTop: 4,
+                    padding: "10px 14px",
+                    minHeight: 40,
+                    borderRadius: 10,
+                    fontSize: 13,
+                    fontWeight: 500,
+                    border: "1px dashed #a37b3f",
+                    background: "#ffffff",
+                    color: "#a37b3f",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    width: "100%",
+                  }}
+                >
+                  + Neuen Abschnitt hinzufügen
+                </button>
+              </div>
+            );
+          })}
         </SectionCard>
 
         {/* BLOG POSTS */}

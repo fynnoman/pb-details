@@ -45,7 +45,7 @@ export async function POST(req: Request) {
   const errors: string[] = [];
   const timings: Record<string, number> = {};
 
-  const allowedGlobals = new Set(["home", "settings", "footer", "navigation"]);
+  const allowedGlobals = new Set(["home", "settings", "footer", "navigation", "legal"]);
   const allowedCollections = new Set([
     "services",
     "vehicles",

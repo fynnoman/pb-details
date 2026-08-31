@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import JsonLd from "@/components/JsonLd";
+import LegalSectionRenderer from "@/components/LegalSectionRenderer";
 import { breadcrumbList, webPageSchema } from "@/lib/schema";
-import { loadSettings } from "@/lib/site-data";
+import { loadLegalPages, loadSettings } from "@/lib/site-data";
 
 const PATH = "/datenschutzerklaerung/";
 
@@ -39,8 +40,12 @@ function UL({ children }: { children: React.ReactNode }) {
 }
 
 export default async function DatenschutzPage() {
-  const settings = await loadSettings();
+  const [settings, legal] = await Promise.all([loadSettings(), loadLegalPages()]);
   const owner = settings.owner || "Thomas Paul-Mohm";
+  const cmsSections = legal?.datenschutz?.sections || [];
+  const hasCmsSections = cmsSections.some(
+    (s) => (s.heading && s.heading.trim()) || (s.body && s.body.trim()),
+  );
   const webPage = webPageSchema({
     path: PATH,
     name: "Datenschutzerklärung | PB Fahrzeugpflege Saarlouis",
@@ -97,6 +102,10 @@ export default async function DatenschutzPage() {
             </P>
           </Reveal>
 
+          {hasCmsSections ? (
+            <LegalSectionRenderer sections={cmsSections} />
+          ) : (
+          <>
           <Reveal>
             <H2>2. Allgemeine Hinweise</H2>
             <P>
@@ -440,6 +449,8 @@ export default async function DatenschutzPage() {
               Stand: August 2026
             </p>
           </Reveal>
+          </>
+          )}
         </div>
       </section>
     </main>

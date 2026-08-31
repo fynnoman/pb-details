@@ -20,6 +20,7 @@ import { Settings } from "./src/payload/globals/Settings";
 import { Navigation } from "./src/payload/globals/Navigation";
 import { Footer } from "./src/payload/globals/Footer";
 import { Home } from "./src/payload/globals/Home";
+import { LegalPages } from "./src/payload/globals/LegalPages";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -40,7 +41,7 @@ export default buildConfig({
   },
   editor: lexicalEditor({}),
   collections: [Users, Media, Pages, Services, Vehicles, Awards, Faqs, BlogPosts, Redirects],
-  globals: [Home, Settings, Navigation, Footer],
+  globals: [Home, Settings, Navigation, Footer, LegalPages],
   secret: process.env.PAYLOAD_SECRET || "unsafe-development-only-change-me",
   typescript: {
     outputFile: path.resolve(dirname, "src/payload/payload-types.ts"),

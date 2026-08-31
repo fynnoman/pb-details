@@ -32,12 +32,13 @@ function rewriteMediaUrls<T>(input: T): T {
 
 export async function GET() {
   const payload = await getPayloadClient();
-  const [home, settings, footer, navigation, services, vehicles, awards, faqs, posts, pages] =
+  const [home, settings, footer, navigation, legal, services, vehicles, awards, faqs, posts, pages] =
     await Promise.all([
       payload.findGlobal({ slug: "home", depth: 2 }),
       payload.findGlobal({ slug: "settings", depth: 1 }),
       payload.findGlobal({ slug: "footer", depth: 0 }),
       payload.findGlobal({ slug: "navigation", depth: 0 }),
+      payload.findGlobal({ slug: "legal", depth: 0 }),
       payload.find({ collection: "services", limit: 20, depth: 1, sort: "order" }),
       payload.find({ collection: "vehicles", limit: 20, depth: 1, sort: "order" }),
       payload.find({ collection: "awards", limit: 50, depth: 1, sort: "order" }),
@@ -51,6 +52,7 @@ export async function GET() {
       settings,
       footer,
       navigation,
+      legal,
       services: services.docs,
       vehicles: vehicles.docs,
       awards: awards.docs,
