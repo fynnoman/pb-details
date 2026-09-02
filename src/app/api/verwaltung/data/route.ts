@@ -32,13 +32,25 @@ function rewriteMediaUrls<T>(input: T): T {
 
 export async function GET() {
   const payload = await getPayloadClient();
+  // Defensiv: `legal` kann fehlen, solange die DB-Tabelle noch nicht
+  // angelegt ist (Payload legt sie erst beim ersten Write an). Damit
+  // /verwaltung/editor nicht kippt, faengt wir diesen Fall einzeln ab.
+  const safeLegal = payload
+    .findGlobal({ slug: "legal", depth: 0 })
+    .catch((err: unknown) => {
+      console.warn(
+        "[api/verwaltung/data] legal-Global nicht verfuegbar, nutze leeren Fallback:",
+        err instanceof Error ? err.message : err,
+      );
+      return {} as any;
+    });
   const [home, settings, footer, navigation, legal, services, vehicles, awards, faqs, posts, pages] =
     await Promise.all([
       payload.findGlobal({ slug: "home", depth: 2 }),
       payload.findGlobal({ slug: "settings", depth: 1 }),
       payload.findGlobal({ slug: "footer", depth: 0 }),
       payload.findGlobal({ slug: "navigation", depth: 0 }),
-      payload.findGlobal({ slug: "legal", depth: 0 }),
+      safeLegal,
       payload.find({ collection: "services", limit: 20, depth: 1, sort: "order" }),
       payload.find({ collection: "vehicles", limit: 20, depth: 1, sort: "order" }),
       payload.find({ collection: "awards", limit: 50, depth: 1, sort: "order" }),
