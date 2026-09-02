@@ -12,6 +12,9 @@ import type { LegalSection } from "@/lib/site-data";
  */
 
 const URL_RE = /(https?:\/\/[^\s<>()]+|mailto:[^\s<>()]+)/g;
+// Satz-Punktuation am Ende einer erkannten URL abstreifen, damit z. B.
+// "https://example.com/x." nicht den Punkt in den Link zieht.
+const TRAILING_PUNCT_RE = /[.,;:!?)]+$/;
 
 function renderInline(text: string) {
   const parts: (string | React.ReactElement)[] = [];
@@ -20,7 +23,13 @@ function renderInline(text: string) {
   URL_RE.lastIndex = 0;
   while ((match = URL_RE.exec(text)) !== null) {
     if (match.index > lastIdx) parts.push(text.slice(lastIdx, match.index));
-    const href = match[0];
+    let href = match[0];
+    let trailing = "";
+    const tp = href.match(TRAILING_PUNCT_RE);
+    if (tp) {
+      trailing = tp[0];
+      href = href.slice(0, -trailing.length);
+    }
     const label = href.replace(/^https?:\/\//, "").replace(/^mailto:/, "");
     parts.push(
       <a
@@ -33,7 +42,8 @@ function renderInline(text: string) {
         {label}
       </a>,
     );
-    lastIdx = match.index + href.length;
+    if (trailing) parts.push(trailing);
+    lastIdx = match.index + match[0].length;
   }
   if (lastIdx < text.length) parts.push(text.slice(lastIdx));
   return parts;
