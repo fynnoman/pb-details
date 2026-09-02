@@ -114,7 +114,7 @@ function Field({
 }
 
 function SectionCard({ title, icon, children }: { title: string; icon: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <div style={{ background: "#ffffff", border: "1px solid #ebe6da", borderRadius: 18, marginBottom: 16, overflow: "hidden" }}>
       <button
