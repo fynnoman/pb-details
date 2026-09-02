@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getPayloadClient } from "@/lib/payload-client";
+import { withLegalDefaults } from "@/lib/legal-defaults";
 
 /**
  * Liefert einen Snapshot aller editierbaren Inhalte fürs Editor-Formular.
@@ -58,13 +59,19 @@ export async function GET() {
       payload.find({ collection: "blog-posts", limit: 50, depth: 1, sort: "-publishedAt" }),
       payload.find({ collection: "pages", limit: 30, depth: 0, sort: "path" }),
     ]);
+  // Rechtstexte mit aktuellen Vorlagen anreichern, damit Karsten im
+  // Editor die bestehende Fassung sieht und direkt bearbeiten kann.
+  // Sobald ein Tab bereits eigene Sections in der DB hat, bleibt der
+  // Tab unangetastet.
+  const legalWithDefaults = withLegalDefaults(legal as any, settings as any);
+
   return NextResponse.json(
     rewriteMediaUrls({
       home,
       settings,
       footer,
       navigation,
-      legal,
+      legal: legalWithDefaults,
       services: services.docs,
       vehicles: vehicles.docs,
       awards: awards.docs,

@@ -53,6 +53,47 @@ function Paragraph({ text, first }: { text: string; first: boolean }) {
   );
 }
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="list-disc pl-5 mt-3 space-y-1.5">
+      {items.map((it, i) => (
+        <li key={i}>{renderInline(it)}</li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * Splittet einen Section-Body in Bloecke:
+ * - aufeinanderfolgende Zeilen, die mit "- ", "– " oder "• " beginnen,
+ *   werden zu einer Bullet-Liste zusammengefasst
+ * - alles andere wird ein Absatz (getrennt durch Leerzeilen)
+ */
+function splitBlocks(body: string): Array<
+  { type: "paragraph"; text: string } | { type: "list"; items: string[] }
+> {
+  const paragraphs = body
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const blocks: Array<
+    { type: "paragraph"; text: string } | { type: "list"; items: string[] }
+  > = [];
+  for (const para of paragraphs) {
+    const lines = para.split(/\n/);
+    const allBullets = lines.every((l) => /^\s*[-–•]\s+/.test(l));
+    if (allBullets && lines.length > 0) {
+      blocks.push({
+        type: "list",
+        items: lines.map((l) => l.replace(/^\s*[-–•]\s+/, "")),
+      });
+    } else {
+      blocks.push({ type: "paragraph", text: para });
+    }
+  }
+  return blocks;
+}
+
 export default function LegalSectionRenderer({
   sections,
 }: {
@@ -64,10 +105,8 @@ export default function LegalSectionRenderer({
       {sections
         .filter((s) => (s.heading && s.heading.trim()) || (s.body && s.body.trim()))
         .map((s, idx) => {
-          const paragraphs = (s.body || "")
-            .split(/\n{2,}/)
-            .map((p) => p.trim())
-            .filter(Boolean);
+          const blocks = splitBlocks(s.body || "");
+          let firstParaShown = false;
           return (
             <Reveal key={idx}>
               {s.heading && s.heading.trim() ? (
@@ -75,9 +114,12 @@ export default function LegalSectionRenderer({
                   {s.heading}
                 </h2>
               ) : null}
-              {paragraphs.map((p, i) => (
-                <Paragraph key={i} text={p} first={i === 0} />
-              ))}
+              {blocks.map((b, i) => {
+                if (b.type === "list") return <BulletList key={i} items={b.items} />;
+                const isFirst = !firstParaShown;
+                firstParaShown = true;
+                return <Paragraph key={i} text={b.text} first={isFirst} />;
+              })}
             </Reveal>
           );
         })}
