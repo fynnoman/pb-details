@@ -157,23 +157,15 @@ export default function Footer({
           <p className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)]/70 leading-relaxed">
             <EditableText globalSlug="footer" path="aiNote" value={footer.aiNote || ""} multiline />
           </p>
-          <p className="mt-3 text-[10px] text-[var(--ink-mute)]/60 leading-none">
+          <p className="mt-4 text-xs text-[var(--ink-mute)] leading-none">
+            Erstellt von{" "}
             <a
               href="https://fylumarketing.de"
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-1.5 hover:text-[var(--ink)] transition-colors"
+              className="hover:text-[var(--ink)] transition-colors underline underline-offset-4"
             >
-              <span>Erstellt von</span>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/fylu/fylu-marketing-logo.png"
-                alt="Fylu Marketing"
-                width={14}
-                height={14}
-                className="inline-block h-3.5 w-auto opacity-80"
-              />
-              <span>Fylu Marketing</span>
+              Fylu Marketing
             </a>
           </p>
         </div>
