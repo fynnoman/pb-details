@@ -119,8 +119,18 @@ export type LegalPagesData = {
 };
 
 export async function loadLegalPages(): Promise<LegalPagesData> {
-  const payload = await getPayloadClient();
-  return payload.findGlobal({ slug: "legal", depth: 0 }) as unknown as LegalPagesData;
+  // Defensiv: solange die `legal`-Tabelle in Prod noch nicht angelegt ist
+  // (Payload legt sie erst beim ersten erfolgreichen Boot mit push:true an),
+  // schlaegt der Query fehl und wuerde den ganzen Build kippen. In dem Fall
+  // fallen wir auf ein leeres Objekt zurueck – die Frontend-Seiten haben
+  // Fallback-Texte fuer diesen Fall.
+  try {
+    const payload = await getPayloadClient();
+    return (await payload.findGlobal({ slug: "legal", depth: 0 })) as unknown as LegalPagesData;
+  } catch (err) {
+    console.warn("[loadLegalPages] legal-Global nicht verfuegbar, nutze Fallback:", err instanceof Error ? err.message : err);
+    return {};
+  }
 }
 
 export async function loadPageByPath(path: string, opts: { draft?: boolean } = {}) {
