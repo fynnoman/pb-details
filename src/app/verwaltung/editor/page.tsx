@@ -861,6 +861,20 @@ export default function EditorPage() {
         </SectionCard>
 
         {/* RECHTSTEXTE */}
+        <div
+          style={{
+            background: "#fff8e6",
+            border: "1px solid #e7d38c",
+            borderRadius: 12,
+            padding: "10px 14px",
+            marginBottom: 8,
+            color: "#7a5a1e",
+            fontSize: 13,
+            fontWeight: 500,
+          }}
+        >
+          ⚖️ Rechtstexte pflegen: Impressum, Datenschutzerklärung und AGB können direkt unten bearbeitet werden.
+        </div>
         <SectionCard title="Rechtstexte (Impressum · Datenschutz · AGB)" icon="⚖️">
           <p style={{ fontSize: 13, color: "#928c81", marginTop: 0, marginBottom: 16, lineHeight: 1.5 }}>
             Hier bearbeitet Karsten Impressum, Datenschutzerklärung und AGB. Jeder Abschnitt hat eine
