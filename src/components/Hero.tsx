@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { HomeData, SiteSettings } from "@/lib/site-types";
 import { mediaUrl } from "@/lib/media";
@@ -26,6 +26,21 @@ export default function Hero({
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const disableScrollFx = isMobile || prefersReducedMotion;
+  const bgStyle = disableScrollFx ? undefined : { y, scale };
+  const textStyle = disableScrollFx ? undefined : { y: textY, opacity };
+  const fadeStyle = disableScrollFx ? undefined : { opacity };
+
   const bgUrl =
     mediaUrl(home.backgroundImage, "hero") ||
     "/images/hero/schwarzes-auto-keramikversiegelung.jpg";
@@ -36,7 +51,7 @@ export default function Hero({
       ref={ref}
       className="relative min-h-[100svh] w-full overflow-hidden grain vignette"
     >
-      <motion.div style={{ y, scale }} className="absolute inset-0 will-change-transform">
+      <motion.div style={bgStyle} className="absolute inset-0 will-change-transform">
         <EditableImage globalSlug="home" path="backgroundImage" className="w-full h-full">
           <img src={bgUrl} alt="" className="w-full h-full object-cover" />
         </EditableImage>
@@ -45,7 +60,7 @@ export default function Hero({
       </motion.div>
 
       <motion.div
-        style={{ y: textY, opacity }}
+        style={textStyle}
         className="relative z-10 min-h-[100svh] flex flex-col justify-end pb-24 sm:pb-32 pt-28 sm:pt-44 md:pt-48"
       >
         <div className="mx-auto max-w-[1400px] w-full px-4 sm:px-8 lg:px-10">
@@ -130,7 +145,7 @@ export default function Hero({
         </div>
       </motion.div>
 
-      <motion.div style={{ opacity }} className="absolute bottom-0 inset-x-0 z-10 hidden sm:block">
+      <motion.div style={fadeStyle} className="absolute bottom-0 inset-x-0 z-10 hidden sm:block">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10 pb-4 sm:pb-6">
           <div className="glass rounded-2xl px-4 sm:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3 sm:gap-4 text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.24em] uppercase text-[var(--ink-dim)]">
             {settings.provenExpert && (
@@ -156,7 +171,7 @@ export default function Hero({
       </motion.div>
 
       <motion.div
-        style={{ opacity }}
+        style={fadeStyle}
         className="hidden md:flex absolute bottom-32 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 text-[10px] tracking-[0.4em] uppercase text-[var(--ink-mute)]"
       >
         <span>Scroll</span>
