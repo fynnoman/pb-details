@@ -89,8 +89,11 @@ function renderNode(node: LexicalNode, key: number): React.ReactNode {
       );
     case "table":
       return (
-        <div key={key} className="glass rounded-[1.5rem] overflow-hidden not-prose">
-          <table className="w-full border-collapse">
+        <div
+          key={key}
+          className="glass rounded-[1.5rem] overflow-x-auto not-prose -mx-4 sm:mx-0 rounded-none sm:rounded-[1.5rem]"
+        >
+          <table className="w-full min-w-[520px] border-collapse">
             <tbody>{renderChildren(node.children)}</tbody>
           </table>
         </div>

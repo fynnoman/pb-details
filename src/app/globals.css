@@ -170,6 +170,7 @@ body {
   align-items: center;
   gap: 0.6rem;
   padding: 0.9rem 1.5rem;
+  min-height: 44px;
   border-radius: 999px;
   background:
     linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 100%),
@@ -200,6 +201,7 @@ body {
   align-items: center;
   gap: 0.6rem;
   padding: 0.95rem 1.6rem;
+  min-height: 44px;
   border-radius: 999px;
   background: linear-gradient(180deg, #f4dcb2 0%, #d4b483 55%, #a2814f 100%);
   color: #100e0a;
