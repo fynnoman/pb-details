@@ -8,7 +8,6 @@ import { mediaUrl } from "@/lib/media";
 import type { MediaDoc } from "@/lib/media";
 import EditableImage from "./edit/EditableImage";
 import EditableText from "./edit/EditableText";
-import TiltCard from "./motion/TiltCard";
 
 export type ServiceItem = {
   id: string | number;
@@ -46,43 +45,28 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
       }`}
     >
       <div className="col-span-12 lg:col-span-7">
-        <TiltCard
-          intensity={5}
-          shine
-          className="rounded-2xl sm:rounded-[1.8rem]"
+        <Link
+          href={href}
+          className="block relative aspect-[16/11] rounded-2xl sm:rounded-[1.8rem] overflow-hidden group bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
         >
-          <Link
-            href={href}
-            className="block relative aspect-[16/11] rounded-2xl sm:rounded-[1.8rem] overflow-hidden group bg-gradient-to-br from-[#1a1814] via-[#100e0a] to-black"
-          >
-            {imageUrl && (
-              <>
-                <EditableImage collection="services" docId={service.id} path="heroImage" className="absolute inset-0">
-                  <motion.img
-                    src={imageUrl}
-                    alt={service.heroImage?.alt || service.title}
-                    style={{ y, scale }}
-                    className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
-                    loading="lazy"
-                  />
-                </EditableImage>
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20 pointer-events-none" />
-                {/* Subtle edge-light on hover for cinematic feel */}
-                <div
-                  aria-hidden
-                  className="absolute inset-0 rounded-2xl sm:rounded-[1.8rem] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    boxShadow:
-                      "inset 0 1px 0 rgba(255,255,255,0.15), inset 0 0 30px rgba(212,180,131,0.12)",
-                  }}
+          {imageUrl && (
+            <>
+              <EditableImage collection="services" docId={service.id} path="heroImage" className="absolute inset-0">
+                <motion.img
+                  src={imageUrl}
+                  alt={service.heroImage?.alt || service.title}
+                  style={{ y, scale }}
+                  className="absolute inset-0 w-full h-full object-cover will-change-transform group-hover:brightness-110 transition-[filter] duration-700"
+                  loading="lazy"
                 />
-              </>
-            )}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 glass rounded-full px-3 py-1.5 sm:px-4 text-[10px] tracking-[0.28em] sm:tracking-[0.32em] uppercase">
-              {tag} / Leistung
-            </div>
-          </Link>
-        </TiltCard>
+              </EditableImage>
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20 pointer-events-none" />
+            </>
+          )}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 glass rounded-full px-3 py-1.5 sm:px-4 text-[10px] tracking-[0.28em] sm:tracking-[0.32em] uppercase">
+            {tag} / Leistung
+          </div>
+        </Link>
       </div>
 
       <div className="col-span-12 lg:col-span-5">

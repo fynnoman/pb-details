@@ -91,37 +91,15 @@ function Initials({ name }: { name: string }) {
 }
 
 function ReviewCard({ review, i }: { review: Review; i: number }) {
-  // Extract a "pull quote" — first sentence, capped, for editorial feel
-  const firstSentence = review.text.split(/(?<=[.!?])\s/)[0] || review.text;
-  const pullQuote =
-    firstSentence.length > 220
-      ? firstSentence.slice(0, 200).trim() + "…"
-      : firstSentence;
-
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.95, delay: (i % 3) * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
-      className="relative glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 flex flex-col snap-start shrink-0 w-[88%] max-w-[340px] sm:max-w-none sm:w-auto h-full overflow-hidden"
+      transition={{ duration: 0.9, delay: (i % 3) * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
+      className="glass rounded-2xl sm:rounded-[1.5rem] p-5 sm:p-6 flex flex-col snap-start shrink-0 w-[88%] max-w-[340px] sm:max-w-none sm:w-auto h-full"
     >
-      {/* Ornamental quote mark */}
-      <span
-        aria-hidden
-        className="absolute -top-3 -left-2 sm:-top-4 sm:-left-1 font-display italic text-[6rem] sm:text-[8rem] leading-none text-[var(--gold)]/[0.14] select-none pointer-events-none"
-      >
-        „
-      </span>
-
-      <div className="relative">
-        <Stars />
-        <p className="mt-4 sm:mt-5 font-display italic text-lg sm:text-xl leading-[1.4] text-[var(--ink)] tracking-[-0.005em]">
-          {pullQuote}
-        </p>
-      </div>
-
-      <div className="relative mt-auto pt-5 sm:pt-6 flex items-center gap-3 border-t border-white/5">
+      <header className="flex items-start gap-3 mb-4">
         <Initials name={review.author} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
@@ -136,7 +114,11 @@ function ReviewCard({ review, i }: { review: Review; i: number }) {
             {review.date}
           </div>
         </div>
-      </div>
+      </header>
+      <Stars />
+      <p className="mt-4 text-sm text-[var(--ink-dim)] leading-relaxed whitespace-pre-line flex-1">
+        {review.text}
+      </p>
     </motion.article>
   );
 }

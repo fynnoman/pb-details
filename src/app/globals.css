@@ -236,21 +236,6 @@ body {
   .marquee-track { animation-duration: 32s; }
 }
 
-/* Custom Cursor — verstecke OS-Cursor sobald der eigene aktiv ist.
-   Wird nur auf hover-fähigen fine pointers via .pb-custom-cursor
-   Klasse aktiviert (CustomCursor Komponente togglet die Klasse). */
-html.pb-custom-cursor,
-html.pb-custom-cursor body,
-html.pb-custom-cursor a,
-html.pb-custom-cursor button,
-html.pb-custom-cursor input,
-html.pb-custom-cursor textarea,
-html.pb-custom-cursor select,
-html.pb-custom-cursor label,
-html.pb-custom-cursor [role="button"] {
-  cursor: none;
-}
-
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }

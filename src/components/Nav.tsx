@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import MagneticLink from "./motion/MagneticLink";
 
 type NavChild = { label: string; href: string };
 type NavItem = { label: string; href: string; children?: NavChild[] };
@@ -140,21 +139,14 @@ export default function Nav({
             })}
           </ul>
 
-          <MagneticLink
-            as="a"
+          <Link
             href={cta.href}
-            strength={0.25}
-            className="hidden sm:inline-flex ml-auto lg:ml-2"
+            className="hidden sm:inline-flex btn-gold ml-auto lg:ml-2 text-[12px] sm:text-[13px] py-2 sm:py-2.5 px-3 sm:px-5"
           >
-            <Link
-              href={cta.href}
-              className="btn-gold text-[12px] sm:text-[13px] py-2 sm:py-2.5 px-3 sm:px-5"
-            >
-              <span className="hidden md:inline">{cta.label}</span>
-              <span className="md:hidden">{cta.shortLabel || cta.label}</span>
-              <span aria-hidden>→</span>
-            </Link>
-          </MagneticLink>
+            <span className="hidden md:inline">{cta.label}</span>
+            <span className="md:hidden">{cta.shortLabel || cta.label}</span>
+            <span aria-hidden>→</span>
+          </Link>
 
           <button
             aria-label="Menü öffnen"

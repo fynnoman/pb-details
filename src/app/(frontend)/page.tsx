@@ -12,8 +12,6 @@ import Region from "@/components/Region";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import JsonLd from "@/components/JsonLd";
-import SousLaSurface from "@/components/SousLaSurface";
-import Divider from "@/components/motion/Divider";
 import {
   breadcrumbList,
   buildProductAggregateRating,
@@ -76,11 +74,8 @@ export default async function HomePage() {
       <main className="relative">
         <Hero home={home} settings={settings} />
         <Anspruch settings={settings} home={home} />
-        <SousLaSurface />
-        <Divider variant="diamond" />
         <Services services={services} home={home} />
         <Vehicles vehicles={vehicles} home={home} />
-        <Divider variant="diamond" />
         <Process
           kicker={home.processKicker}
           heading={home.processHeading}
@@ -96,7 +91,6 @@ export default async function HomePage() {
         />
         <Reviews settings={settings} />
         <Awards awards={awards} home={home} />
-        <Divider variant="diamond" />
         <Region home={home} settings={settings} />
         <FAQ faqs={homeFaqs} home={home} />
         <Contact settings={settings} home={home} />

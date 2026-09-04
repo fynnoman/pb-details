@@ -5,7 +5,6 @@ import { useRef } from "react";
 import Reveal from "./Reveal";
 import type { HomeData, SiteSettings } from "@/lib/site-types";
 import EditableText from "./edit/EditableText";
-import Counter from "./motion/Counter";
 
 export default function Anspruch({
   settings,
@@ -70,16 +69,11 @@ export default function Anspruch({
                   <EditableText globalSlug="home" path="anspruch.badgeLabel" value={badgeLabel} />
                 </div>
                 <div className="font-display text-[1.75rem] sm:text-4xl text-chrome leading-none">
-                  <Counter to={settings.recommendation} duration={1.6} />
+                  {settings.recommendation}
                   <span className="text-[var(--gold)]">%</span>
                 </div>
                 <div className="text-[10.5px] sm:text-xs text-[var(--ink-dim)] mt-1.5 sm:mt-2 leading-snug">
-                  aus{" "}
-                  <Counter
-                    to={totalReviews > 0 ? totalReviews : settings.provenExpert?.count || 0}
-                    duration={1.8}
-                  />{" "}
-                  verifizierten Bewertungen
+                  aus {totalReviews > 0 ? totalReviews : settings.provenExpert?.count} verifizierten Bewertungen
                 </div>
               </motion.div>
             </div>
