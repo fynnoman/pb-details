@@ -58,7 +58,7 @@ export default function Process({
               transition={{ duration: 1, delay: i * 0.12, ease: [0.2, 0.7, 0.2, 1] }}
               className="glass rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-8 lg:p-10 relative overflow-hidden"
             >
-              <div className="font-display text-[3.5rem] sm:text-[5rem] lg:text-[7rem] leading-none text-[var(--ink)]/[0.16] absolute -top-1 sm:-top-2 lg:-top-4 -right-1 lg:-right-2 select-none pointer-events-none">
+              <div className="font-display text-[5rem] sm:text-[7rem] leading-none text-[var(--ink)]/[0.18] absolute -top-2 sm:-top-4 -right-1 sm:-right-2 select-none pointer-events-none">
                 {String(i + 1).padStart(2, "0")}
               </div>
               <div className="text-[11px] sm:text-xs tracking-[0.32em] uppercase text-[var(--gold)] mb-3 sm:mb-4 relative z-10">

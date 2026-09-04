@@ -132,8 +132,7 @@ export default function CookieBanner() {
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "center",
-        padding:
-          "16px 16px calc(env(safe-area-inset-bottom, 0px) + 16px)",
+        padding: 16,
         pointerEvents: "auto",
         fontFamily:
           "var(--font-roboto), -apple-system, 'SF Pro Text', system-ui, sans-serif",
@@ -212,24 +211,14 @@ export default function CookieBanner() {
           </div>
         )}
 
-        <div className="pb-cookie-actions">
-          <style>{`
-            .pb-cookie-actions {
-              display: flex;
-              gap: 8px;
-              flex-wrap: wrap;
-              justify-content: flex-end;
-            }
-            @media (max-width: 400px) {
-              .pb-cookie-actions {
-                flex-direction: column-reverse;
-                align-items: stretch;
-              }
-              .pb-cookie-actions > button {
-                width: 100%;
-              }
-            }
-          `}</style>
+        <div
+          style={{
+            display: "flex",
+            gap: 8,
+            flexWrap: "wrap",
+            justifyContent: "flex-end",
+          }}
+        >
           {!showSettings && (
             <button
               type="button"
@@ -322,7 +311,7 @@ function CategoryRow({
             </span>
           )}
         </div>
-        <div style={{ fontSize: 13, color: "#6d685f", lineHeight: 1.55 }}>
+        <div style={{ fontSize: 12.5, color: "#6d685f", lineHeight: 1.5 }}>
           {description}
         </div>
       </div>

@@ -45,7 +45,7 @@ export default async function KontaktPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <Reveal>
               <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
-                <div className="text-[10px] tracking-[0.24em] sm:tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+                <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   Adresse
                 </div>
                 <div className="font-display text-lg sm:text-xl leading-snug tracking-[-0.015em]">
@@ -76,7 +76,7 @@ export default async function KontaktPage() {
             </Reveal>
             <Reveal delay={0.05}>
               <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
-                <div className="text-[10px] tracking-[0.24em] sm:tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+                <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   Direkter Draht
                 </div>
                 <a
@@ -107,7 +107,7 @@ export default async function KontaktPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <div className="glass rounded-2xl sm:rounded-[1.5rem] p-6 sm:p-8 h-full">
-                <div className="text-[10px] tracking-[0.24em] sm:tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
+                <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
                   Öffnungszeiten
                 </div>
                 <div className="space-y-2 text-sm text-[var(--ink-dim)]">

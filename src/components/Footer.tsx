@@ -96,12 +96,12 @@ export default function Footer({
                   href={settings.provenExpert.url || "#"}
                   target="_blank"
                   rel="noopener"
-                  className="glass rounded-2xl p-2.5 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
+                  className="glass rounded-2xl p-3 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
                 >
-                  <div className="font-display text-xl sm:text-3xl text-chrome leading-none">
+                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
                     {settings.provenExpert.value.toString().replace(".", ",")}
                   </div>
-                  <div className="text-[9.5px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
+                  <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
                     {settings.provenExpert.count} · ProvenExpert
                   </div>
                 </a>
@@ -111,19 +111,19 @@ export default function Footer({
                   href={settings.google.mapsUrl || settings.google.url || "#"}
                   target="_blank"
                   rel="noopener"
-                  className="glass rounded-2xl p-2.5 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
+                  className="glass rounded-2xl p-3 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
                 >
-                  <div className="font-display text-xl sm:text-3xl text-chrome leading-none">
+                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
                     {settings.google.count}
                   </div>
-                  <div className="text-[9.5px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
+                  <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
                     Google-Bewertungen
                   </div>
                 </a>
               )}
               {settings.wkdb && (
-                <div className="glass rounded-2xl p-2.5 sm:p-4 min-h-[48px]">
-                  <div className="font-display text-xl sm:text-3xl text-chrome leading-none">
+                <div className="glass rounded-2xl p-3 sm:p-4 min-h-[48px]">
+                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
                     {settings.wkdb.count}
                   </div>
                   <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">

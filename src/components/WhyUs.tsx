@@ -134,7 +134,7 @@ export default function WhyUs({
           </motion.div>
 
           <div className="col-span-12 md:col-span-5 flex flex-col gap-4 sm:gap-6">
-            <div className="grid grid-cols-2 gap-3 sm:gap-6 content-start">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 content-start">
               {reasons.map((r, i) => {
                 const Comp = r.href ? motion.a : motion.div;
                 const linkProps = r.href
@@ -153,16 +153,16 @@ export default function WhyUs({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{ duration: 0.9, delay: i * 0.06, ease: [0.2, 0.7, 0.2, 1] }}
-                    className={`glass rounded-2xl sm:rounded-[1.25rem] p-3.5 sm:p-6 min-h-[120px] sm:min-h-[130px] h-full flex flex-col justify-between ${
+                    className={`glass rounded-2xl sm:rounded-[1.25rem] p-4 sm:p-6 min-h-[120px] sm:min-h-[130px] h-full flex flex-col justify-between ${
                       r.href
                         ? "hover:ring-1 hover:ring-[var(--gold)]/40 transition-all group cursor-pointer"
                         : ""
                     }`}
                   >
-                    <div className="font-display text-[1.15rem] sm:text-4xl leading-[1.05] sm:leading-none text-chrome break-words">
+                    <div className="font-display text-xl sm:text-4xl leading-none text-chrome break-words">
                       {r.headline}
                     </div>
-                    <div className="text-[11px] sm:text-xs text-[var(--ink-dim)] mt-2 sm:mt-3 leading-snug sm:leading-relaxed">
+                    <div className="text-[11px] sm:text-xs text-[var(--ink-dim)] mt-2 sm:mt-3 leading-relaxed">
                       {r.body}
                     </div>
                     {r.href && (

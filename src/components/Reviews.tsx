@@ -97,7 +97,7 @@ function ReviewCard({ review, i }: { review: Review; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.9, delay: (i % 3) * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
-      className="glass rounded-2xl sm:rounded-[1.5rem] p-5 sm:p-6 flex flex-col snap-start shrink-0 w-[88%] max-w-[340px] sm:max-w-none sm:w-auto h-full"
+      className="glass rounded-2xl sm:rounded-[1.5rem] p-5 sm:p-6 flex flex-col snap-start shrink-0 w-[88%] sm:w-auto h-full"
     >
       <header className="flex items-start gap-3 mb-4">
         <Initials name={review.author} />

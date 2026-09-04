@@ -91,7 +91,7 @@ export default function Contact({
                     <span className="text-[10px] sm:text-[11px] tracking-[0.28em] sm:tracking-[0.32em] uppercase text-[var(--ink-mute)]">
                       <EditableText globalSlug="home" path="contact.callAt" value={callAt} />
                     </span>
-                    <span className="font-display text-[1.05rem] sm:text-2xl md:text-3xl text-chrome tracking-[-0.01em] truncate">
+                    <span className="font-display text-xl sm:text-2xl md:text-3xl text-chrome tracking-[-0.01em] truncate">
                       <EditableText globalSlug="settings" path="phone.display" value={settings.phone.display} />
                     </span>
                   </span>
