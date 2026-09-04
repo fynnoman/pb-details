@@ -98,7 +98,7 @@ export const Settings: GlobalConfig = {
               name: "provenExpert",
               label: "ProvenExpert",
               fields: [
-                { name: "count", type: "number", required: true, defaultValue: 648 },
+                { name: "count", type: "number", required: true, defaultValue: 187 },
                 { name: "value", type: "number", required: true, defaultValue: 4.92 },
                 { name: "url", type: "text", label: "Profil-URL" },
               ],
