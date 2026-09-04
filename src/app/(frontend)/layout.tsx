@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import CookieBanner from "@/components/CookieBanner";
 import GoogleTagManager from "@/components/GoogleTagManager";
+import CustomCursor from "@/components/motion/CustomCursor";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/schema";
 import { loadFooter, loadNavigation, loadSettings } from "@/lib/site-data";
 
@@ -56,6 +57,7 @@ export default async function FrontendLayout({
       className={`${roboto.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
+        <CustomCursor />
         <CookieBanner />
         <GoogleTagManager />
         <JsonLd data={buildOrganizationSchema(settings)} />
