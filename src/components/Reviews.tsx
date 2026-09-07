@@ -8,6 +8,7 @@ type Review = {
   author: string;
   date: string;
   text: string;
+  url: string;
 };
 
 const REVIEWS: Review[] = [
@@ -15,26 +16,31 @@ const REVIEWS: Review[] = [
     author: "Patrick Schirmbeck",
     date: "vor 3 Monaten",
     text: `Ich habe mein Leasingfahrzeug zur Rückgabe aufbereiten lassen. Was mir sofort positiv aufgefallen ist, war die gründliche Begutachtung von Innen- und Außenbereich. Anschließend wurde – basierend auf dem Fahrzeugzustand – ein „Pflegepaket“ zusammengestellt und mir im Detail erklärt. Nachdem ich das Auto zum vereinbarten Termin abgegeben hatte, wurden die Arbeiten pünktlich fertiggestellt. Beim Abholen konnte ich meinen Augen kaum trauen. Es war wie ein Neuwagen. Alles war makellos sauber, bis in die kleinste Ritze. Sogar die Delle am hinteren Radkasten war verschwunden. Ich bin absolut begeistert und kann die Jungs uneingeschränkt weiterempfehlen. Großartige Arbeit, weiter so!\n\nIch habe das Auto inzwischen zurückgegeben. Der Kommentar des Gutachters: „Wenn jeder sein Auto so zurückgeben würde, wären wir bald arbeitslos.“ Mehr muss man nicht sagen.`,
+    url: "https://share.google/k0a5uKZ9jwtpHypo8",
   },
   {
     author: "Gabriel Escher",
     date: "vor 2 Monaten",
     text: `Unser 9 Sitzer Staria hat leider Bekanntschaft gemacht mit einem Stahlpfosten :) (Dem Pfosten geht es gut) haha.\n\nSomit war klar, dass der direkte Weg zu PB Fahrzeugpflege führt. Und ich kann abschließend folgendes sagen:\n\nWhatsapp Nachricht\nTermin gemacht\nAbgestellt\nFertig als wäre nichts passiert\n\nDiese Jungs können eben mehr als „NUR“ Autos putzen. Und machen sich ihrem Namen PB Fahrzeugpflege alle Ehren.`,
+    url: "https://share.google/iY6PcVSbnJntD11cF",
   },
   {
     author: "Martin Chandon",
     date: "vor 4 Monaten",
     text: `Einfach Mega gute Arbeit. Hatte meinen geliebten Mustang zur Aufbereitung und Versiegelung bei PB. Das Ergebnis ist einfach überragend. Es passte einfach alles, tolle Beratung, super freundlich und das Ergebnis machte mich sprachlos. Komme sehr gerne wieder und empfehle es gerne weiter.`,
+    url: "https://share.google/Jpl1Zn0EsmNS9zTlm",
   },
   {
     author: "Markus Stahl",
     date: "vor 2 Monaten",
     text: `Vorab: Fantastisches Ergebnis! Mein Pony bekam eine Keramikversiegelung, das Komplettpaket. Lack, Felgen, Verdeck, Scheiben. Das Fahrzeug sieht wie aus dem Showroom. Absolut 1a und ich bin Tage nach Abholung immer noch sprachlos. Die Beratung von Herrn Paul und Herrn Becker absolut top. Super sympathisch und super kompetent. Vom ganzen Ablauf des Erstkontaktes über die Beratung bis zur Abholung des Fahrzeuges 1+. Absolute Empfehlung! Wer Wert auf maximale Qualität legt, auf jeden Fall zu diesem Team gehen. Ich komme definitiv wieder!`,
+    url: "https://share.google/clyID2yFA7NGCU9zl",
   },
   {
     author: "LaBastin",
     date: "vor 4 Monaten",
     text: `Wir haben letzte Woche unseren 2 Jahre alten Hyundai Tucson zur Aufbereitung abgegeben. Die beiden Herren, die mit uns gesprochen haben, waren auf Anhieb super sympathisch. Uns wurde vorab erklärt, was gemacht werden kann und verschiedene Alternativen angeboten. Es wurde uns nichts aufgezwungen, alles war unverbindlich und es wurde sich viel Zeit genommen.\n\nWir haben uns für eine Innen- sowie Außenaufbereitung entschieden mit Keramikversiegelung. Bei der Abholung hat unser Auto richtig gestrahlt, so einen Lack hatte das Auto zuvor nicht. Auch nicht, als wir es neu beim Händler erhalten haben. Sogar die Plastikteile außen sehen besser aus als im neuen Zustand.\n\nDie Arbeit, welche hier geleistet wurde, ist unschlagbar. Wir werden mit unserem zweiten Auto, sobald dieses geliefert wurde, erneut vorbeischauen und das Auto nur hier aufbereiten lassen.`,
+    url: "https://share.google/Pp6JNqm5Dm1jLSKCf",
   },
 ];
 
@@ -92,12 +98,16 @@ function Initials({ name }: { name: string }) {
 
 function ReviewCard({ review, i }: { review: Review; i: number }) {
   return (
-    <motion.article
+    <motion.a
+      href={review.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Rezension von ${review.author} auf Google ansehen`}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.9, delay: (i % 3) * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
-      className="glass rounded-2xl sm:rounded-[1.5rem] p-5 sm:p-6 flex flex-col snap-start shrink-0 w-[88%] sm:w-auto h-full"
+      className="glass rounded-2xl sm:rounded-[1.5rem] p-5 sm:p-6 flex flex-col snap-start shrink-0 w-[88%] sm:w-auto h-full cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition"
     >
       <header className="flex items-start gap-3 mb-4">
         <Initials name={review.author} />
@@ -119,14 +129,11 @@ function ReviewCard({ review, i }: { review: Review; i: number }) {
       <p className="mt-4 text-sm text-[var(--ink-dim)] leading-relaxed whitespace-pre-line flex-1">
         {review.text}
       </p>
-    </motion.article>
+    </motion.a>
   );
 }
 
 export default function Reviews({ settings }: { settings: SiteSettings }) {
-  const reviewUrl =
-    settings.google?.url || settings.google?.mapsUrl || undefined;
-
   return (
     <section
       id="rezensionen"
@@ -174,28 +181,6 @@ export default function Reviews({ settings }: { settings: SiteSettings }) {
             <ReviewCard key={r.author} review={r} i={i} />
           ))}
         </div>
-
-        {reviewUrl && (
-          <Reveal delay={0.2}>
-            <div className="mt-10 sm:mt-14 flex justify-center">
-              <a
-                href={reviewUrl}
-                target="_blank"
-                rel="noopener"
-                className="glass-flat rounded-full px-5 py-3 inline-flex items-center gap-3 text-sm text-[var(--ink-dim)] hover:text-[var(--ink)] hover:ring-1 hover:ring-[var(--gold)]/40 transition-all group min-h-[48px]"
-              >
-                <GoogleG />
-                <span>Alle Rezensionen auf Google ansehen</span>
-                <span
-                  aria-hidden
-                  className="transition-transform group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </a>
-            </div>
-          </Reveal>
-        )}
       </div>
     </section>
   );
