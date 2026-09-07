@@ -149,15 +149,6 @@ export const pageContent: PageContent[] = [
       { type: "p", text: "Um es klar zu sagen: Jahrzehntelange Erfahrung, durchdachte Abläufe, hochwertigste Materialien und vor allem Zeit gibt es nicht zum Billigpreis. Ja, es gibt günstigere Anbieter – die meisten sogar. Doch wer nur nach dem niedrigsten Preis sucht, bekommt selten den höchsten Wert." },
       { type: "p", text: "Wir stehen für Qualität statt Kompromisse. Für eine klare Linie. Für Ergebnisse, die überzeugen – unabhängig davon, welches Ziel Sie mit Ihrem Fahrzeug verfolgen. Darum geben wir keine Pauschalpreise am Telefon oder per Mail." },
       { type: "p", text: "Wenn all das für Sie logisch klingt, sind Sie bei uns richtig. Kommen Sie ohne Termin vorbei – lassen Sie uns Ihr Fahrzeug gemeinsam ansehen. So entsteht ein individuelles Angebot, das zu Ihrem Fahrzeug und Ihrem Ziel passt. Denn bei uns beginnt Premium schon bei der Beratung." },
-      { type: "h2", text: "Orientierungswerte" },
-      { type: "p", text: "Damit Sie einen groben Rahmen haben – bitte beachten Sie: Das verbindliche Angebot erstellen wir immer erst nach der persönlichen Begutachtung." },
-      { type: "table",
-        header: ["Leistung", "Preis", "Hinweis"],
-        rows: [
-          ["Keramikversiegelung", "1.500 – 1.900 €", "Orientierungswert je nach Fahrzeug und Zustand"],
-          ["Leihwagen", "ab 55 € / Tag", "Nach Verfügbarkeit, bitte vorab reservieren"],
-          ["Smart Repair", "bis zu 70 % günstiger", "Verglichen mit klassischer Lackierung"],
-        ]},
     ],
   },
   {

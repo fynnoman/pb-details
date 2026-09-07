@@ -88,13 +88,7 @@ function renderNode(node: LexicalNode, key: number): React.ReactNode {
         </blockquote>
       );
     case "table":
-      return (
-        <div key={key} className="glass rounded-[1.5rem] overflow-hidden not-prose">
-          <table className="w-full border-collapse">
-            <tbody>{renderChildren(node.children)}</tbody>
-          </table>
-        </div>
-      );
+      return renderTable(node, key);
     case "tablerow":
       return <tr key={key}>{renderChildren(node.children)}</tr>;
     case "tablecell": {
@@ -119,7 +113,126 @@ function renderNode(node: LexicalNode, key: number): React.ReactNode {
   }
 }
 
+function renderTable(node: LexicalNode, key: number): React.ReactNode {
+  const rows = (node.children || []).filter((c) => c.type === "tablerow");
+  if (rows.length === 0) return null;
+
+  const cellsFor = (row: LexicalNode) =>
+    (row.children || []).filter((c) => c.type === "tablecell");
+
+  const isHeaderRow = (row: LexicalNode) => {
+    const cells = cellsFor(row);
+    if (cells.length === 0) return false;
+    return cells.every((c) => c.headerState === 1);
+  };
+
+  let headerCells: LexicalNode[] = [];
+  let bodyRows: LexicalNode[] = rows;
+  if (isHeaderRow(rows[0])) {
+    headerCells = cellsFor(rows[0]);
+    bodyRows = rows.slice(1);
+  }
+
+  const headerLabels = headerCells.map((c) => nodeText(c).trim());
+
+  return (
+    <div key={key} className="not-prose">
+      {/* Desktop / Tablet ab 768px: klassische Tabelle */}
+      <div className="hidden md:block glass rounded-[1.5rem] overflow-hidden">
+        <table className="w-full border-collapse table-fixed">
+          <tbody>
+            {rows.map((r, i) => (
+              <tr key={i}>
+                {cellsFor(r).map((c, j) => {
+                  const isHeader = c.headerState === 1;
+                  const Tag = isHeader ? "th" : "td";
+                  return (
+                    <Tag
+                      key={j}
+                      className={
+                        isHeader
+                          ? "text-left px-4 sm:px-6 py-4 text-[11px] tracking-[0.28em] uppercase text-[var(--gold)] border-b border-white/5 break-words"
+                          : "px-4 sm:px-6 py-4 text-[var(--ink-dim)] text-sm sm:text-base border-b border-white/5 align-top break-words"
+                      }
+                    >
+                      {renderChildren(c.children)}
+                    </Tag>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile < 768px: gestapelte Karten pro Zeile */}
+      <div className="md:hidden flex flex-col gap-4">
+        {bodyRows.map((row, ri) => {
+          const cells = cellsFor(row);
+          const [firstCell, ...restCells] = cells;
+          return (
+            <div
+              key={ri}
+              className="glass rounded-[1.5rem] p-5"
+            >
+              {firstCell && (
+                <div className="font-medium text-[var(--ink)] leading-snug mb-4 break-words">
+                  {renderChildren(firstCell.children)}
+                </div>
+              )}
+              <div className="flex flex-col gap-4">
+                {restCells.map((c, ci) => {
+                  const label = headerLabels[ci + 1] || "";
+                  return (
+                    <div key={ci} className="min-w-0">
+                      {label && (
+                        <div className="text-[10px] tracking-[0.28em] uppercase text-[var(--gold)] mb-1.5 break-words">
+                          {label}
+                        </div>
+                      )}
+                      <div className="text-[var(--ink-dim)] text-sm leading-relaxed break-words">
+                        {renderChildren(c.children)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const REMOVED_HEADINGS = new Set(["orientierungswerte"]);
+
+function nodeText(node: LexicalNode): string {
+  if (node.type === "text") return node.text || "";
+  if (!node.children) return "";
+  return node.children.map(nodeText).join("");
+}
+
+function stripRemovedSections(nodes: LexicalNode[]): LexicalNode[] {
+  const out: LexicalNode[] = [];
+  let skipping = false;
+  for (const n of nodes) {
+    if (n.type === "heading") {
+      const label = nodeText(n).trim().toLowerCase();
+      if (REMOVED_HEADINGS.has(label)) {
+        skipping = true;
+        continue;
+      }
+      skipping = false;
+    }
+    if (skipping) continue;
+    out.push(n);
+  }
+  return out;
+}
+
 export default function LexicalRenderer({ data }: { data?: LexicalRoot | null }) {
   if (!data?.root?.children) return null;
-  return <div className="space-y-8">{renderChildren(data.root.children)}</div>;
+  const filtered = stripRemovedSections(data.root.children);
+  return <div className="space-y-8">{renderChildren(filtered)}</div>;
 }

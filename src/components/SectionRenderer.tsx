@@ -260,7 +260,7 @@ async function RenderSection({ section, index }: { section: Section; index: numb
             )}
             <Reveal delay={0.1}>
               <div className="glass rounded-2xl sm:rounded-[1.5rem] overflow-hidden">
-                <div className="hidden sm:grid grid-cols-12 gap-0 text-[11px] tracking-[0.28em] uppercase text-[var(--ink-mute)] px-6 sm:px-8 py-5 border-b border-white/5">
+                <div className="hidden md:grid grid-cols-12 gap-0 text-[11px] tracking-[0.28em] uppercase text-[var(--ink-mute)] px-6 sm:px-8 py-5 border-b border-white/5">
                   <div className="col-span-4">Kriterium</div>
                   <div className="col-span-4 text-[var(--gold)]">
                     {section.columnA}
@@ -273,35 +273,35 @@ async function RenderSection({ section, index }: { section: Section; index: numb
                       key={row.kriterium}
                       className="px-5 sm:px-8 py-5"
                     >
-                      <div className="hidden sm:grid grid-cols-12 gap-4 text-sm sm:text-base">
-                        <div className="col-span-4 font-medium text-[var(--ink)]">
+                      <div className="hidden md:grid grid-cols-12 gap-4 text-sm sm:text-base">
+                        <div className="col-span-4 font-medium text-[var(--ink)] break-words">
                           {row.kriterium}
                         </div>
-                        <div className="col-span-4 text-[var(--ink-dim)]">
+                        <div className="col-span-4 text-[var(--ink-dim)] break-words">
                           {row.valueA}
                         </div>
-                        <div className="col-span-4 text-[var(--ink-dim)]">
+                        <div className="col-span-4 text-[var(--ink-dim)] break-words">
                           {row.valueB}
                         </div>
                       </div>
-                      <div className="sm:hidden">
-                        <div className="font-medium text-[var(--ink)] mb-3">
+                      <div className="md:hidden">
+                        <div className="font-medium text-[var(--ink)] mb-4 break-words">
                           {row.kriterium}
                         </div>
-                        <div className="grid grid-cols-2 gap-3 text-sm">
-                          <div>
-                            <div className="text-[10px] tracking-[0.24em] uppercase text-[var(--gold)] mb-1">
+                        <div className="flex flex-col gap-4 text-sm">
+                          <div className="min-w-0">
+                            <div className="text-[10px] tracking-[0.28em] uppercase text-[var(--gold)] mb-1.5 break-words">
                               {section.columnA}
                             </div>
-                            <div className="text-[var(--ink-dim)]">
+                            <div className="text-[var(--ink-dim)] leading-relaxed break-words">
                               {row.valueA}
                             </div>
                           </div>
-                          <div>
-                            <div className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)] mb-1">
+                          <div className="min-w-0">
+                            <div className="text-[10px] tracking-[0.28em] uppercase text-[var(--ink-mute)] mb-1.5 break-words">
                               {section.columnB}
                             </div>
-                            <div className="text-[var(--ink-dim)]">
+                            <div className="text-[var(--ink-dim)] leading-relaxed break-words">
                               {row.valueB}
                             </div>
                           </div>

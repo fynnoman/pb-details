@@ -137,7 +137,7 @@ export default async function ServiceDetailPage({
                 href="/kontakt/#termin"
                 className="btn-gold min-h-[48px] w-full sm:w-auto justify-center"
               >
-                Termin buchen
+                Jetzt anfragen
                 <span aria-hidden>→</span>
               </Link>
               <Link

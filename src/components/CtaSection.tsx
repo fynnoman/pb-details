@@ -14,7 +14,7 @@ export default async function CtaSection({
   kicker = "Unverbindlich anfragen",
   title,
   text,
-  primaryLabel = "Termin online buchen",
+  primaryLabel = "Jetzt anfragen",
   primaryHref = "/kontakt/#termin",
 }: Props) {
   const settings = await loadSettings();

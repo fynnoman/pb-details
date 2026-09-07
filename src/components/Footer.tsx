@@ -95,8 +95,8 @@ export default function Footer({
                 <a
                   href={settings.provenExpert.url || "#"}
                   target="_blank"
-                  rel="noopener"
-                  className="glass rounded-2xl p-3 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
+                  rel="noopener noreferrer"
+                  className="glass rounded-2xl p-3 sm:p-4 block cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
                 >
                   <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
                     {settings.provenExpert.value.toString().replace(".", ",")}
@@ -110,8 +110,8 @@ export default function Footer({
                 <a
                   href={settings.google.mapsUrl || settings.google.url || "#"}
                   target="_blank"
-                  rel="noopener"
-                  className="glass rounded-2xl p-3 sm:p-4 block hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
+                  rel="noopener noreferrer"
+                  className="glass rounded-2xl p-3 sm:p-4 block cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
                 >
                   <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
                     {settings.google.count}
@@ -122,14 +122,30 @@ export default function Footer({
                 </a>
               )}
               {settings.wkdb && (
-                <div className="glass rounded-2xl p-3 sm:p-4 min-h-[48px]">
-                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
-                    {settings.wkdb.count}
+                settings.wkdb.url ? (
+                  <a
+                    href={settings.wkdb.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass rounded-2xl p-3 sm:p-4 block cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
+                  >
+                    <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
+                      {settings.wkdb.count}
+                    </div>
+                    <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
+                      {settings.wkdb.value.toString().replace(".", ",")} · WKDB
+                    </div>
+                  </a>
+                ) : (
+                  <div className="glass rounded-2xl p-3 sm:p-4 min-h-[48px]">
+                    <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
+                      {settings.wkdb.count}
+                    </div>
+                    <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
+                      {settings.wkdb.value.toString().replace(".", ",")} · WKDB
+                    </div>
                   </div>
-                  <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
-                    {settings.wkdb.value.toString().replace(".", ",")} · WKDB
-                  </div>
-                </div>
+                )
               )}
             </div>
           </div>
