@@ -73,7 +73,7 @@ export default function Anspruch({
                   <span className="text-[var(--gold)]">%</span>
                 </div>
                 <div className="text-xs text-[var(--ink-dim)] mt-2">
-                  aus {totalReviews > 0 ? totalReviews : settings.provenExpert?.count} verifizierten Bewertungen
+                  aus über 600 verifizierten Bewertungen
                 </div>
               </motion.div>
             </div>
