@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import CookieBanner from "@/components/CookieBanner";
 import GoogleTagManager from "@/components/GoogleTagManager";
+import GoogleAdsTag from "@/components/GoogleAdsTag";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/schema";
 import { loadFooter, loadNavigation, loadSettings } from "@/lib/site-data";
 
@@ -58,6 +59,7 @@ export default async function FrontendLayout({
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
         <CookieBanner />
         <GoogleTagManager />
+        <GoogleAdsTag />
         <JsonLd data={buildOrganizationSchema(settings)} />
         <JsonLd data={buildWebsiteSchema(settings)} />
         <Nav items={navigation.items} cta={navigation.cta} />

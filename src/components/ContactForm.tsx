@@ -42,6 +42,7 @@ export default function ContactForm() {
       if (res.ok && json.ok) {
         setStatus("sent");
         form.reset();
+        window.dispatchEvent(new CustomEvent("pb:contact-form-success"));
       } else {
         setStatus("error");
         setErrorMessage(
