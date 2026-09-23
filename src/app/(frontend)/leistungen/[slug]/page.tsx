@@ -132,19 +132,13 @@ export default async function ServiceDetailPage({
           <LexicalRenderer data={service.content} />
 
           <Reveal delay={0.1}>
-            <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <div className="mt-10 sm:mt-14 flex justify-center sm:justify-start">
               <Link
                 href="/kontakt/#termin"
                 className="btn-gold min-h-[48px] w-full sm:w-auto justify-center"
               >
                 Jetzt anfragen
                 <span aria-hidden>→</span>
-              </Link>
-              <Link
-                href="/preise/"
-                className="btn-glass min-h-[48px] w-full sm:w-auto justify-center"
-              >
-                Preise ansehen
               </Link>
             </div>
           </Reveal>

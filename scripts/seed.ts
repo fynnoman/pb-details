@@ -298,7 +298,7 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
       kicker: "PB Fahrzeugpflege Saarlouis · Seit 1997",
       title: "The Art of Detailing.",
       subtitle:
-        "Premium-Fahrzeugaufbereitung, Keramikversiegelung und Werterhalt für Sportwagen, Luxusfahrzeuge und Sammlerstücke.",
+        "Premium-Fahrzeugaufbereitung, Keramikversiegelung und professioneller Werterhalt für Ihr Fahrzeug.",
       backgroundImage: mediaMap["/images/hero/schwarzes-auto-keramikversiegelung.jpg"],
       primaryCta: { label: "Termin vereinbaren", href: "/kontakt/#termin" },
       secondaryCta: { label: "Leistungen ansehen", href: "/leistungen/" },
@@ -827,28 +827,29 @@ async function seedPages(payload: Payload) {
       title: "Preise",
       metaTitle: "Preise – Fahrzeugaufbereitung & Keramikversiegelung Saarlouis",
       metaDescription:
-        "Transparente Pakete für Fahrzeugaufbereitung und Keramikversiegelung im Saarland. Individuell nach Fahrzeuggröße und Aufwand kalkuliert.",
+        "Fahrzeugaufbereitung und Keramikversiegelung im Saarland: individuell nach Fahrzeuggröße, Zustand und Leistungsumfang kalkuliert. Verbindliches Angebot nach persönlicher Begutachtung.",
       sections: [
         {
           blockType: "hero",
           kicker: "Preise",
-          title: "Klare Pakete, ehrlich kalkuliert.",
+          title: "Individuell kalkuliert. Passend zu Ihrem Fahrzeug.",
           subtitle:
-            "Unsere Preise variieren je nach Fahrzeuggröße, Lackzustand und Aufwand. Die folgenden Pakete geben Ihnen einen Orientierungsrahmen – ein verbindliches Angebot erstellen wir nach der persönlichen Begutachtung.",
+            "Kein Fahrzeug ist wie das andere. Fahrzeuggröße, Lackzustand, Innenraum, gewünschte Leistungen und der tatsächliche Arbeitsaufwand unterscheiden sich teilweise erheblich. Deshalb arbeiten wir bewusst nicht mit pauschalen Online-Preisen.",
         },
         {
           blockType: "text",
-          heading: "Individuelle Kalkulation",
+          heading: "Ihr Fahrzeug. Ihr Aufwand. Ihr Preis.",
           body: lexicalPlaceholder(
-            "Kommen Sie zu unseren Öffnungszeiten unverbindlich vorbei. Wir sehen uns Ihr Fahrzeug direkt an und erstellen ein transparentes Angebot – ohne Pauschalversprechen.",
+            "Für eine seriöse Kalkulation sehen wir uns Ihr Fahrzeug persönlich an. Dabei berücksichtigen wir Zustand, Fahrzeuggröße und gewünschten Leistungsumfang. Anschließend erhalten Sie ein transparentes und verbindliches Angebot. So bezahlen Sie genau für die Leistungen, die Ihr Fahrzeug tatsächlich benötigt.\n\nPersönliche Begutachtung · transparente Kalkulation · verbindliches Angebot",
           ),
         },
         {
           blockType: "cta",
-          heading: "Angebot per WhatsApp oder Telefon",
-          text: "Für eine schnelle erste Einschätzung schicken Sie uns gerne 2–3 Fotos Ihres Fahrzeugs per WhatsApp.",
-          primaryLabel: "WhatsApp öffnen",
-          primaryHref: "https://wa.me/+496831461229",
+          kicker: "Termin vereinbaren",
+          heading: "Fahrzeug begutachten lassen",
+          text: "Kommen Sie zu unseren Öffnungszeiten unverbindlich vorbei oder vereinbaren Sie einen Termin. Wir sehen uns Ihr Fahrzeug direkt an und erstellen Ihnen ein individuelles Angebot.",
+          primaryLabel: "Besichtigung anfragen",
+          primaryHref: "/kontakt/#termin",
         },
       ],
     },
@@ -957,7 +958,7 @@ async function seedPages(payload: Payload) {
           kicker: "Gutschein",
           title: "Ein Geschenk mit Wert.",
           subtitle:
-            "Verschenken Sie einen Gutschein für Fahrzeugaufbereitung oder Lackschutz – im Wunschbetrag oder für ein konkretes Paket.",
+            "Verschenken Sie einen Gutschein für Fahrzeugaufbereitung oder Lackschutz – im Wunschbetrag oder für eine konkrete Leistung.",
         },
         {
           blockType: "cta",

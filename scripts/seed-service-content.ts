@@ -15,7 +15,7 @@ export const serviceDetails: ServiceDetail[] = [
   {
     slug: "keramikversiegelung",
     faqs: [
-      { question: "Was kostet eine Keramikversiegelung?", answer: "Die Kosten richten sich nach Fahrzeuggröße, Lackzustand und Aufbau. Nach einer kurzen Begutachtung erhalten Sie ein transparentes Festpreis-Angebot – unverbindlich und auch ohne Termin. Aktuelle Preise finden Sie auf unserer Seite Preise." },
+      { question: "Was kostet eine Keramikversiegelung?", answer: "Die Kosten richten sich nach Fahrzeuggröße, Lackzustand und dem gewünschten Schutzaufbau. Da jedes Fahrzeug unterschiedliche Voraussetzungen mitbringt, kalkulieren wir jede Versiegelung individuell. Nach einer kurzen persönlichen Begutachtung erhalten Sie von uns ein transparentes und verbindliches Angebot." },
       { question: "Wie lange hält eine Keramikversiegelung?", answer: "Eine professionell aufgetragene Keramikversiegelung hält in der Regel mehrere Jahre. Die genaue Haltbarkeit hängt von Nutzung und Pflege ab – mit der richtigen Pflege bleibt der Schutz besonders lange erhalten." },
       { question: "Wie lange dauert eine Keramikversiegelung?", answer: "Je nach Fahrzeug und Lackzustand dauert die komplette Aufbereitung und Versiegelung in der Regel zwei bis vier Tage, da wir den Lack vor dem Auftragen gründlich vorbereiten." },
       { question: "Lohnt sich eine Keramikversiegelung beim Neuwagen?", answer: "Ja. Gerade beim Neuwagen ist der Klarlack noch im Rohzustand und besonders empfindlich. Eine Keramikversiegelung ab dem ersten Kilometer schützt den Lack, bevor erste Schäden entstehen, und erhält den Wert des Fahrzeugs." },
@@ -47,7 +47,7 @@ export const serviceDetails: ServiceDetail[] = [
       { type: "blockquote", text: "„Für andere reicht das Erzählte, für uns zählt das Erreichte!“" },
       { type: "p", text: "Sie haben noch weitere Fragen zu unserer Keramikversiegelung? Dann rufen Sie uns einfach an oder kommen Sie einfach ohne Termin zur unverbindlichen Beratung und Angebotserstellung bei uns in Saarlouis / Ensdorf vorbei!" },
       { type: "h2", text: "Was kostet eine Keramikversiegelung?" },
-      { type: "p", text: "Die Kosten einer Keramikversiegelung hängen von Fahrzeuggröße, Lackzustand und dem gewünschten Schutzaufbau ab. Da wir jedes Fahrzeug vor der Versiegelung gründlich aufbereiten, erstellen wir Ihnen nach einer kurzen Begutachtung ein transparentes Festpreis-Angebot – unverbindlich und auch ohne Termin. Eine Übersicht finden Sie auf unserer Seite Preise." },
+      { type: "p", text: "Die Kosten einer Keramikversiegelung richten sich nach Fahrzeuggröße, Lackzustand und dem gewünschten Schutzaufbau. Da jedes Fahrzeug unterschiedliche Voraussetzungen mitbringt, kalkulieren wir jede Versiegelung individuell. Nach einer kurzen persönlichen Begutachtung erhalten Sie von uns ein transparentes und verbindliches Angebot." },
       { type: "h2", text: "Was bringt eine Keramikversiegelung – und für wen lohnt sie sich?" },
       { type: "p", text: "Eine Keramikversiegelung bringt vor allem dreierlei: dauerhaften Schutz vor Umwelteinflüssen, einen intensiven, tiefen Glanz und eine spürbar leichtere Reinigung dank Abperleffekt. Besonders lohnt sie sich bei Fahrzeugen, deren Wert und Erscheinungsbild langfristig erhalten bleiben sollen:" },
       { type: "ul", items: [
@@ -91,7 +91,7 @@ export const serviceDetails: ServiceDetail[] = [
   {
     slug: "nanoversiegelung",
     faqs: [
-      { question: "Was kostet eine Nanoversiegelung?", answer: "Die Kosten richten sich nach Fahrzeuggröße und Lackzustand. Als preisbewusste Alternative zur Keramikversiegelung ist die Nanoversiegelung deutlich günstiger. Nach einer kurzen Begutachtung erhalten Sie ein transparentes Angebot – auch ohne Termin. Aktuelle Preise finden Sie auf unserer Seite Preise." },
+      { question: "Was kostet eine Nanoversiegelung?", answer: "Die Kosten richten sich nach Fahrzeuggröße und Lackzustand. Als preisbewusste Alternative zur Keramikversiegelung ist die Nanoversiegelung deutlich günstiger. Da jedes Fahrzeug unterschiedliche Voraussetzungen mitbringt, kalkulieren wir jede Versiegelung individuell. Nach einer kurzen persönlichen Begutachtung erhalten Sie ein transparentes und verbindliches Angebot." },
       { question: "Wie lange hält eine Nanoversiegelung?", answer: "Unsere 1K-Nanoversiegelung bietet langanhaltenden Schutz von bis zu 18 Monaten – deutlich länger als herkömmliches Wachs, das selten über vier Monate hält. Die genaue Standzeit hängt von Nutzung und Pflege ab." },
       { question: "Was ist der Unterschied zwischen Nano- und Keramikversiegelung?", answer: "Die Keramikversiegelung ist härter und hält mehrere Jahre, ist aber teurer und aufwendiger. Die Nanoversiegelung ist die günstigere Lösung mit Schutz bis zu 18 Monaten. Für höchsten, langjährigen Schutz empfehlen wir Keramik; für ein gutes Preis-Leistungs-Verhältnis die Nanoversiegelung." },
       { question: "Was bringt eine Nanoversiegelung beim Auto?", answer: "Sie schützt den Lack vor UV-Strahlung, Streusalz und Umwelteinflüssen, sorgt für intensiven Glanz und einen Abperleffekt, der die Wäsche erleichtert (Easy-to-Clean). Außerdem hält sie deutlich länger als Wachs." },
@@ -107,7 +107,7 @@ export const serviceDetails: ServiceDetail[] = [
       { type: "p", text: "Dank des Abperleffekts lassen sich Anhaftungen wie Insekten, Vogelkot und Blütenstaub deutlich einfacher entfernen. Diese Easy-to-Clean-Performance sorgt für eine spürbar leichtere Wagenwäsche – Wasser und Schmutz perlen einfach ab." },
       { type: "p", text: "Sie möchten den bestmöglichen Schutz für Ihren Autolack? Dann geht’s hier zu unserer Keramikversiegelung!" },
       { type: "h2", text: "Was kostet eine Nanoversiegelung?" },
-      { type: "p", text: "Die Kosten einer Nanoversiegelung hängen von Fahrzeuggröße und Lackzustand ab. Als preisbewusste Alternative zur Keramikversiegelung ist sie deutlich günstiger. Nach einer kurzen Begutachtung erhalten Sie ein transparentes Angebot – unverbindlich und auch ohne Termin. Eine Übersicht finden Sie auf unserer Seite Preise." },
+      { type: "p", text: "Die Kosten einer Nanoversiegelung richten sich nach Fahrzeuggröße und Lackzustand. Als preisbewusste Alternative zur Keramikversiegelung ist sie deutlich günstiger. Da jedes Fahrzeug unterschiedliche Voraussetzungen mitbringt, kalkulieren wir jede Versiegelung individuell. Nach einer kurzen persönlichen Begutachtung erhalten Sie ein transparentes und verbindliches Angebot." },
       { type: "h2", text: "Was bringt eine Nanoversiegelung – und ist sie sinnvoll?" },
       { type: "p", text: "Eine Nanoversiegelung schützt den Lack vor UV-Strahlung, Streusalz und Umwelteinflüssen, sorgt für intensiven Glanz und macht dank Abperleffekt die Wäsche leichter. Sinnvoll ist sie vor allem dann, wenn Sie guten, langanhaltenden Lackschutz zu einem attraktiven Preis möchten:" },
       { type: "ul", items: [
@@ -149,7 +149,7 @@ export const serviceDetails: ServiceDetail[] = [
   {
     slug: "fahrzeugaufbereitung",
     faqs: [
-      { question: "Was kostet eine Fahrzeugaufbereitung?", answer: "Die Kosten richten sich nach Fahrzeuggröße, Zustand und Umfang. Eine reine Innenraumaufbereitung ist günstiger als eine komplette Aufbereitung mit Lackpolitur und Versiegelung. Nach einer kurzen Begutachtung erhalten Sie ein transparentes Angebot – auch ohne Termin. Preise finden Sie auf unserer Seite Preise." },
+      { question: "Was kostet eine Fahrzeugaufbereitung?", answer: "Die Kosten richten sich nach Fahrzeuggröße, Zustand und gewünschtem Leistungsumfang. Da jedes Fahrzeug individuell zu beurteilen ist, arbeiten wir bewusst nicht mit pauschalen Online-Preisen. Nach einer kurzen persönlichen Begutachtung erhalten Sie ein transparentes und verbindliches Angebot." },
       { question: "Wie lange dauert eine Fahrzeugaufbereitung?", answer: "Je nach Umfang und Fahrzeugzustand dauert eine komplette Fahrzeugaufbereitung in der Regel zwei bis drei Werktage, da wir in mehreren Stufen und in Handarbeit arbeiten." },
       { question: "Was gehört zu einer professionellen Fahrzeugaufbereitung?", answer: "Eine professionelle Fahrzeugaufbereitung umfasst die Außen- bzw. Lackaufbereitung (Vorwäsche, Handwäsche, Lackreinigung, Politur und Versiegelung) sowie die Innenraumaufbereitung (Staubsaugen, Polster- und Lederreinigung, Kunststoffpflege, Scheiben und Desinfektion)." },
       { question: "Lohnt sich eine Fahrzeugaufbereitung vor dem Verkauf?", answer: "Ja. Ein makelloser Zustand steigert den Verkaufspreis, sorgt für einen starken ersten Eindruck und minimiert bei einer Leasingrückgabe mögliche Nachberechnungen." },
@@ -183,7 +183,7 @@ export const serviceDetails: ServiceDetail[] = [
       ]},
       { type: "p", text: "Für Verkauf oder Leasingrückgabe optimieren wir gezielt den Fahrzeugzustand: Wertsteigerung durch makellosen Auftritt, bleibender erster Eindruck und Minimierung von möglichen Nachberechnungen. Je nach Zweck (Hochzeit, Fahrzeugverkauf, Leasingrückgabe, Werterhalt etc.) bieten wir verschiedene Detailing-Levels an. Gerne beraten wir Sie ausführlich in einem persönlichen Gespräch direkt bei uns vor Ort – ein Termin ist nicht erforderlich. Dauer: ca. 2–3 Werktage." },
       { type: "h2", text: "Was kostet eine Fahrzeugaufbereitung?" },
-      { type: "p", text: "Die Kosten einer Fahrzeugaufbereitung hängen von Fahrzeuggröße, Zustand und gewünschtem Umfang ab – eine reine Innenraumaufbereitung kostet weniger als eine komplette Aufbereitung mit Lackpolitur und Versiegelung. Da wir jedes Fahrzeug individuell beurteilen, erstellen wir Ihnen nach einer kurzen Begutachtung ein transparentes Angebot, unverbindlich und ohne Termin. Eine Übersicht finden Sie auf unserer Seite Preise." },
+      { type: "p", text: "Die Kosten einer Fahrzeugaufbereitung richten sich nach Fahrzeuggröße, Zustand und gewünschtem Leistungsumfang. Da jedes Fahrzeug unterschiedliche Voraussetzungen mitbringt, kalkulieren wir jede Aufbereitung individuell. Nach einer kurzen persönlichen Begutachtung erhalten Sie von uns ein transparentes und verbindliches Angebot." },
       { type: "h2", text: "Fahrzeugaufbereitung im Saarland, in Saarlouis & Umgebung" },
       { type: "p", text: "Sie finden uns in der Provinzialstraße 243 in 66806 Ensdorf – direkt bei Saarlouis. Zu uns kommen Kunden aus dem gesamten Saarland, u. a. aus Saarlouis, Saarbrücken, Dillingen und St. Wendel, sowie aus Trier, Luxemburg und dem grenznahen Raum. Eine unverbindliche Begutachtung ist während der Öffnungszeiten auch ohne Termin möglich." },
       { type: "h2", text: "Autowäsche oder Fahrzeugaufbereitung – der Unterschied" },
@@ -234,7 +234,7 @@ export const serviceDetails: ServiceDetail[] = [
       ]},
       { type: "p", text: "Vermeiden Sie unnötige Schäden durch unprofessionelle Beulen-Reparaturen und kommen Sie direkt zu den Experten. Wir bieten Ihnen eine unverbindliche Begutachtung Ihres Schadens – jederzeit und ohne Termin." },
       { type: "h2", text: "Was kostet Smart Repair?" },
-      { type: "p", text: "Die Kosten für Smart Repair hängen von Art, Größe und Lage des Schadens ab. Da nur die beschädigte Stelle bearbeitet wird, ist Smart Repair bis zu 70 % günstiger als eine herkömmliche Lackierung des gesamten Bauteils. Den genauen Preis nennen wir Ihnen nach einer kurzen, unverbindlichen Begutachtung – auch ohne Termin. Eine Übersicht finden Sie auf unserer Seite Preise." },
+      { type: "p", text: "Die Kosten für Smart Repair richten sich nach Art, Größe und Lage des Schadens. Da nur die beschädigte Stelle bearbeitet wird, ist Smart Repair bis zu 70 % günstiger als eine herkömmliche Lackierung des gesamten Bauteils. Da jeder Schaden individuell zu beurteilen ist, kalkulieren wir jede Reparatur einzeln. Nach einer kurzen persönlichen Begutachtung erhalten Sie ein transparentes und verbindliches Angebot." },
       { type: "h2", text: "Wie funktioniert die Ausbeultechnik? Dellen ohne Lackieren" },
       { type: "p", text: "Ja – kleinere Dellen und Beulen lassen sich ohne Lackieren entfernen. Bei der lackschadenfreien Ausbeultechnik (auch Paintless Dent Repair) wird die Delle mit speziellen Hebel- und Klebewerkzeugen vorsichtig von hinten oder außen zurück in ihre ursprüngliche Form gebracht – der Originallack bleibt dabei vollständig erhalten. Das ist schneller und günstiger als Spachteln und Lackieren und vermeidet eine Wertminderung durch nachlackierte Teile." },
       { type: "h2", text: "Smart Repair oder klassische Lackierung – der Unterschied" },

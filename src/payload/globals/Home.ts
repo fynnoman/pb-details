@@ -39,7 +39,7 @@ export const Home: GlobalConfig = {
               type: "textarea",
               label: "Untertitel",
               defaultValue:
-                "Premium-Fahrzeugaufbereitung, Keramikversiegelung und Werterhalt für Sportwagen, Luxusfahrzeuge und Sammlerstücke.",
+                "Premium-Fahrzeugaufbereitung, Keramikversiegelung und professioneller Werterhalt für Ihr Fahrzeug.",
             },
             {
               name: "backgroundImage",
