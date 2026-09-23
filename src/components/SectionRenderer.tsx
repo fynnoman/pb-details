@@ -32,7 +32,7 @@ type Section =
   | BaseBlock<"why-us-bento", { kicker?: string; heading: string; metrics?: Array<{ headline: string; body: string }>; bullets?: Array<{ text: string }> }>
   | BaseBlock<"awards-marquee", { kicker?: string; heading: string; showStoryCards?: boolean }>
   | BaseBlock<"region-block", { kicker?: string; heading: string; text?: string; regions?: Array<{ label: string }>; showMap?: boolean }>
-  | BaseBlock<"kontakt-block", { kicker?: string; heading: string; text?: string; showCalendly?: boolean }>;
+  | BaseBlock<"kontakt-block", { kicker?: string; heading: string; text?: string }>;
 
 export default async function SectionRenderer({ sections }: { sections?: Section[] }) {
   if (!sections || sections.length === 0) return null;

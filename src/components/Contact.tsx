@@ -2,7 +2,6 @@
 
 import Reveal from "./Reveal";
 import type { HomeData, SiteSettings } from "@/lib/site-types";
-import CalendlyEmbed from "./CalendlyEmbed";
 import EditableText from "./edit/EditableText";
 
 export default function Contact({
@@ -12,12 +11,11 @@ export default function Contact({
   settings: SiteSettings;
   home?: HomeData;
 }) {
-  const hasCalendly = Boolean(settings.calendly?.url);
   const t = home?.contact || {};
   const kicker = t.kicker || "Termin vereinbaren";
   const title = t.title || "Sprechen wir über Ihr";
   const titleHighlight = t.titleHighlight || "Fahrzeug.";
-  const intro = t.intro || "Wählen Sie direkt einen Termin aus – oder rufen Sie an. Eine unverbindliche Begutachtung ist auch ohne Termin möglich, während unserer Öffnungszeiten.";
+  const intro = t.intro || "Rufen Sie uns an oder schreiben Sie uns per WhatsApp. Eine unverbindliche Begutachtung ist auch ohne Termin möglich, während unserer Öffnungszeiten.";
   const directLabel = t.directLabel || "Direkter Draht";
   const callAt = t.callAt || "Anrufen · Mo–Sa";
   const response = t.response || "Antwort in 24 h";
@@ -35,9 +33,9 @@ export default function Contact({
         <div className="absolute inset-0 bg-black/35" />
       </div>
 
-      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
+      <div className="relative mx-auto max-w-[720px] px-4 sm:px-8 lg:px-10">
         <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
-          <div className="col-span-12 lg:col-span-5">
+          <div className="col-span-12">
             <Reveal>
               <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
@@ -118,50 +116,6 @@ export default function Contact({
                   </span>
                 </div>
               </div>
-            </Reveal>
-          </div>
-
-          <div className="col-span-12 lg:col-span-7" id="termin">
-            <Reveal delay={0.05}>
-              {hasCalendly ? (
-                <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-3 sm:p-6">
-                  <CalendlyEmbed url={settings.calendly!.url!} />
-                </div>
-              ) : (
-                <div className="glass-strong rounded-2xl sm:rounded-[1.75rem] p-6 sm:p-10">
-                  <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--gold)] mb-4">
-                    Online-Terminbuchung
-                  </div>
-                  <h3 className="font-display text-2xl sm:text-3xl leading-tight tracking-[-0.015em]">
-                    Termin direkt online reservieren
-                  </h3>
-                  <p className="mt-5 text-[var(--ink-dim)] leading-relaxed">
-                    Die Online-Terminbuchung wird in Kürze hier verfügbar
-                    sein. Bis dahin erreichen Sie uns direkt telefonisch,
-                    per WhatsApp oder besuchen uns ohne Termin während
-                    unserer Öffnungszeiten.
-                  </p>
-                  <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
-                    <a
-                      href={`tel:${settings.phone.e164}`}
-                      className="btn-gold min-h-[48px] w-full sm:w-auto justify-center"
-                    >
-                      Jetzt anrufen
-                      <span aria-hidden>→</span>
-                    </a>
-                    {settings.whatsapp && (
-                      <a
-                        href={settings.whatsapp}
-                        target="_blank"
-                        rel="noopener"
-                        className="btn-glass min-h-[48px] w-full sm:w-auto justify-center"
-                      >
-                        WhatsApp öffnen
-                      </a>
-                    )}
-                  </div>
-                </div>
-              )}
             </Reveal>
           </div>
         </div>

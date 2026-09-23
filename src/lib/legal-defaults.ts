@@ -83,61 +83,56 @@ export function defaultLegalSections(settings: SettingsLike): {
         body: `Wenn Sie unser Kontaktformular nutzen, verarbeiten wir die von Ihnen eingegebenen Daten (Vorname, E-Mail-Adresse, optional Telefonnummer und Fahrzeugangaben, Nachricht). Der technische Versand der Formularanfrage erfolgt über den Auftragsverarbeiter Resend (Resend, Inc., 2261 Market Street #5039, San Francisco, CA 94114, USA). Resend leitet die Anfrage per E-Mail an ${email} weiter und speichert die Inhalte zur Zustellungssicherung kurzzeitig.\n\nRechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen bzw. Vertragsdurchführung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung Ihrer Anfrage). Die Daten werden nach abgeschlossener Bearbeitung gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.\n\nDa Resend seinen Sitz in den USA hat, findet eine Datenübermittlung in ein Drittland statt. Grundlage der Übermittlung sind Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO sowie – soweit anwendbar – die Selbstzertifizierung nach dem EU-U.S. Data Privacy Framework.\n\nZum Schutz vor Spam nutzen wir zusätzlich ein Honeypot-Feld (technisch unsichtbar) sowie ein Rate-Limit pro IP-Adresse. Es werden hierfür keine dauerhaften Nutzerprofile erstellt.`,
       },
       {
-        heading: "7. Terminbuchung via Calendly",
-        body:
-          "Auf unserer Kontaktseite binden wir – soweit aktiv geschaltet – das Terminbuchungs-Widget von Calendly (Calendly LLC, 271 17th Street NW, Suite 1000, Atlanta, GA 30363, USA) ein. Beim Aufruf der Seite wird eine Verbindung zu Calendly-Servern aufgebaut, wobei technische Daten wie IP-Adresse, Browsertyp und aufgerufene Seiten übertragen werden können. Bei einer Terminbuchung übermitteln Sie zusätzlich Name, E-Mail und optionale Angaben direkt an Calendly.\n\nRechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. lit. f DSGVO (berechtigtes Interesse an effizienter Terminvereinbarung). Für die Drittstaaten-Übermittlung an Calendly (USA) gelten die Anforderungen des Kapitels V DSGVO. Weitere Informationen: https://calendly.com/de/legal/privacy-notice.",
-      },
-      {
-        heading: "8. Google Maps",
+        heading: "7. Google Maps",
         body:
           "Auf unserer Startseite binden wir – ausschließlich nach Ihrer Einwilligung in die Kategorie „Marketing“ – eine Google-Maps-Karte zur Darstellung unseres Standorts ein. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Ohne Ihre Einwilligung wird die Karte nicht geladen und es findet keine Verbindung zu Google-Servern statt. Erst nach Einwilligung wird die Karte nachgeladen; dabei wird Ihre IP-Adresse an Google übertragen und kann von Google in den USA verarbeitet werden.\n\nRechtsgrundlage ist § 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Sie können Ihre Einwilligung jederzeit über die Cookie-Einstellungen im Footer widerrufen. Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von Google: https://policies.google.com/privacy.",
       },
       {
-        heading: "9. Google Tag Manager",
+        heading: "8. Google Tag Manager",
         body:
           "Wir binden – ausschließlich nach Ihrer Einwilligung in die Kategorien „Analyse“ oder „Marketing“ – den Google Tag Manager der Google Ireland Limited ein, um Tags zentral zu verwalten. Der Tag Manager selbst erhebt keine personenbezogenen Daten, führt aber Tags aus, die dies tun können. Ohne Einwilligung wird der Tag Manager nicht geladen.\n\nRechtsgrundlage: § 25 Abs. 1 TDDDG i. V. m. Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit über die Cookie-Einstellungen im Footer widerrufen.",
       },
       {
-        heading: "10. Selbstgehostete Schriftarten",
+        heading: "9. Selbstgehostete Schriftarten",
         body:
           "Zur einheitlichen Darstellung von Schriften nutzen wir die Schriftart „Roboto“ (Google LLC). Die Schriftdateien werden ausschließlich lokal vom Server dieser Website geladen; es erfolgt keine Verbindung zu Google-Servern.",
       },
       {
-        heading: "11. WhatsApp-Button",
+        heading: "10. WhatsApp-Button",
         body:
           "Der WhatsApp-Button führt Sie – nach aktivem Klick – zu einer Kommunikation über WhatsApp. Durch das Öffnen des Buttons werden Daten an WhatsApp übertragen. Verantwortlicher Dienstanbieter ist die WhatsApp Ireland Ltd., 4 Grand Canal Square, Dublin 2, Irland. Bitte beachten Sie, dass WhatsApp unter Umständen Nutzerdaten an Meta-Unternehmen weitergibt. Die Nutzung erfolgt freiwillig; wir empfehlen, keine sensiblen Informationen über WhatsApp zu senden.",
       },
       {
-        heading: "12. Externe Links (ProvenExpert, Google, Social Media)",
+        heading: "11. Externe Links (ProvenExpert, Google, Social Media)",
         body:
           "Wir verlinken auf externe Bewertungs- und Social-Media-Profile (z. B. ProvenExpert, Google-Rezensionen, Instagram, Facebook, YouTube). Erst durch Klick auf den jeweiligen Link werden Daten an den externen Anbieter übertragen. Für die Datenverarbeitung auf den verlinkten Seiten ist der jeweilige Betreiber verantwortlich.",
       },
       {
-        heading: "13. SSL-/TLS-Verschlüsselung",
+        heading: "12. SSL-/TLS-Verschlüsselung",
         body:
           "Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie am „https://“ in der Adresszeile Ihres Browsers und am Schloss-Symbol.",
       },
       {
-        heading: "14. Ihre Rechte als betroffene Person",
+        heading: "13. Ihre Rechte als betroffene Person",
         body: `Sie haben uns gegenüber jederzeit folgende Rechte:\n\n- Recht auf Auskunft (Art. 15 DSGVO)\n- Recht auf Berichtigung (Art. 16 DSGVO)\n- Recht auf Löschung (Art. 17 DSGVO)\n- Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)\n- Recht auf Datenübertragbarkeit (Art. 20 DSGVO)\n- Recht auf Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)\n- Recht auf Widerruf einer erteilten Einwilligung (Art. 7 Abs. 3 DSGVO) mit Wirkung für die Zukunft\n\nZur Ausübung Ihrer Rechte wenden Sie sich formlos an ${email}.`,
       },
       {
-        heading: "15. Beschwerderecht bei der Aufsichtsbehörde",
+        heading: "14. Beschwerderecht bei der Aufsichtsbehörde",
         body:
           "Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren (Art. 77 DSGVO). Für uns zuständig ist:\n\nUnabhängiges Datenschutzzentrum Saarland\nFritz-Dobisch-Straße 12\n66111 Saarbrücken\nTelefon: +49 681 94781-0\nE-Mail: poststelle@datenschutz.saarland.de",
       },
       {
-        heading: "16. Automatisierte Entscheidungsfindung / Profiling",
+        heading: "15. Automatisierte Entscheidungsfindung / Profiling",
         body:
           "Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne des Art. 22 DSGVO findet nicht statt.",
       },
       {
-        heading: "17. Speicherdauer",
+        heading: "16. Speicherdauer",
         body:
           "Personenbezogene Daten werden nur so lange gespeichert, wie es für die Erfüllung der jeweiligen Zwecke erforderlich ist oder wie es gesetzliche Aufbewahrungspflichten (insbesondere aus HGB und AO) vorsehen. Danach werden die Daten gelöscht oder gesperrt.",
       },
       {
-        heading: "18. Änderungen dieser Datenschutzerklärung",
+        heading: "17. Änderungen dieser Datenschutzerklärung",
         body:
           "Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen an unseren Leistungen umzusetzen. Für Ihren nächsten Besuch gilt dann die neue Datenschutzerklärung.\n\nStand: August 2026",
       },

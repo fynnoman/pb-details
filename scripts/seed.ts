@@ -239,7 +239,6 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
       facebook: "https://de-de.facebook.com/pbfahrzeugpflege",
       instagram: "https://www.instagram.com/pbfahrzeugpflege/",
       youtube: "https://www.youtube.com/channel/UC7Xmy1J1uXXCQCz9rvTxuNA",
-      calendly: { url: "" },
     },
   });
   console.log("✓ Global: settings");
@@ -874,7 +873,7 @@ async function seedPages(payload: Payload) {
       title: "Kontakt",
       metaTitle: "Kontakt – PB Fahrzeugpflege Saarlouis",
       metaDescription:
-        "Terminvereinbarung, Adresse, Anfahrt: PB Fahrzeugpflege Saarlouis in Ensdorf. Telefon, WhatsApp, E-Mail und Online-Termin.",
+        "Terminvereinbarung, Adresse, Anfahrt: PB Fahrzeugpflege Saarlouis in Ensdorf. Telefon, WhatsApp und E-Mail.",
       sections: [
         {
           blockType: "hero",
@@ -886,9 +885,8 @@ async function seedPages(payload: Payload) {
         {
           blockType: "kontakt-block",
           kicker: "Termin vereinbaren",
-          heading: "Termin direkt online reservieren",
-          text: "Die Online-Terminbuchung wird in Kürze hier verfügbar sein. Bis dahin erreichen Sie uns direkt telefonisch, per WhatsApp oder besuchen uns ohne Termin.",
-          showCalendly: true,
+          heading: "So erreichen Sie uns",
+          text: "Rufen Sie uns an, schreiben Sie per WhatsApp oder besuchen Sie uns ohne Termin während unserer Öffnungszeiten.",
         },
       ],
     },

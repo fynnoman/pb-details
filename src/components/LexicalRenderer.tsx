@@ -205,7 +205,7 @@ function renderTable(node: LexicalNode, key: number): React.ReactNode {
   );
 }
 
-const REMOVED_HEADINGS = new Set(["orientierungswerte"]);
+const REMOVED_HEADINGS = new Set(["orientierungswerte", "orientierungsrahmen"]);
 
 function nodeText(node: LexicalNode): string {
   if (node.type === "text") return node.text || "";

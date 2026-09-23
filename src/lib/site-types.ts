@@ -32,7 +32,6 @@ export type SiteSettings = {
   facebook?: string;
   instagram?: string;
   youtube?: string;
-  calendly?: { url?: string };
 };
 
 export type NavigationData = {

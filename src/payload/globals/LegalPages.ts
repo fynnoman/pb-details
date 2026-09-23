@@ -11,7 +11,7 @@ import type { GlobalConfig, Field } from "payload";
  *  - Impressum USt-IdNr. (hardcoded auf DE268106468, siehe Kommentar in
  *    src/app/(frontend)/impressum/page.tsx)
  *  - Datenschutz § 1 Verantwortliche Stelle (Settings-Daten)
- *  - Datenschutz § 4 Server-Logs, § 5 Cookies, § 7 Calendly, § 8 Google Maps,
+ *  - Datenschutz § 4 Server-Logs, § 5 Cookies, § 7 Google Maps,
  *    § 14 Rechte (enthalten Listen, externe Links oder eingebettete
  *    Settings-Daten – hardcoded, damit Formatierung intakt bleibt)
  *

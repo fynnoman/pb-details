@@ -140,21 +140,11 @@ export const Settings: GlobalConfig = {
           ],
         },
         {
-          label: "Social & Booking",
+          label: "Social",
           fields: [
             { name: "facebook", type: "text", label: "Facebook-URL" },
             { name: "instagram", type: "text", label: "Instagram-URL" },
             { name: "youtube", type: "text", label: "YouTube-URL" },
-            {
-              type: "group",
-              name: "calendly",
-              label: "Calendly (Online-Terminbuchung)",
-              admin: {
-                description:
-                  "Sobald hier eine URL eingetragen ist, ersetzt das Calendly-Widget den Fallback-Kontaktblock.",
-              },
-              fields: [{ name: "url", type: "text", label: "Calendly-URL" }],
-            },
           ],
         },
       ],

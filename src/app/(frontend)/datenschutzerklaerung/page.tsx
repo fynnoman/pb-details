@@ -239,37 +239,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>7. Terminbuchung via Calendly</H2>
-            <P>
-              Auf unserer Kontaktseite binden wir – soweit aktiv geschaltet –
-              das Terminbuchungs-Widget von Calendly (Calendly LLC, 271 17th
-              Street NW, Suite 1000, Atlanta, GA 30363, USA) ein. Beim Aufruf
-              der Seite wird eine Verbindung zu Calendly-Servern aufgebaut,
-              wobei technische Daten wie IP-Adresse, Browsertyp und
-              aufgerufene Seiten übertragen werden können. Bei einer
-              Terminbuchung übermitteln Sie zusätzlich Name, E-Mail und
-              optionale Angaben direkt an Calendly.
-            </P>
-            <P>
-              Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche
-              Maßnahmen) bzw. lit. f DSGVO (berechtigtes Interesse an
-              effizienter Terminvereinbarung). Für die Drittstaaten-
-              Übermittlung an Calendly (USA) gelten die Anforderungen des
-              Kapitels V DSGVO. Weitere Informationen: {""}
-              <a
-                href="https://calendly.com/de/legal/privacy-notice"
-                target="_blank"
-                rel="noopener"
-                className="text-[var(--ink)] hover:text-[var(--gold)] underline underline-offset-4"
-              >
-                calendly.com/de/legal/privacy-notice
-              </a>
-              .
-            </P>
-          </Reveal>
-
-          <Reveal>
-            <H2>8. Google Maps</H2>
+            <H2>7. Google Maps</H2>
             <P>
               Auf unserer Startseite binden wir – ausschließlich nach Ihrer
               Einwilligung in die Kategorie „Marketing" – eine
@@ -300,7 +270,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>9. Google Tag Manager</H2>
+            <H2>8. Google Tag Manager</H2>
             <P>
               Wir binden – ausschließlich nach Ihrer Einwilligung in die
               Kategorien „Analyse" oder „Marketing" – den Google Tag Manager
@@ -317,7 +287,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>10. Selbstgehostete Schriftarten</H2>
+            <H2>9. Selbstgehostete Schriftarten</H2>
             <P>
               Zur einheitlichen Darstellung von Schriften nutzen wir die
               Schriftart „Roboto" (Google LLC). Die Schriftdateien werden
@@ -328,7 +298,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>11. WhatsApp-Button</H2>
+            <H2>10. WhatsApp-Button</H2>
             <P>
               Der WhatsApp-Button führt Sie – nach aktivem Klick – zu einer
               Kommunikation über WhatsApp. Durch das Öffnen des Buttons werden
@@ -342,7 +312,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>12. Externe Links (ProvenExpert, Google, Social Media)</H2>
+            <H2>11. Externe Links (ProvenExpert, Google, Social Media)</H2>
             <P>
               Wir verlinken auf externe Bewertungs- und Social-Media-Profile
               (z. B. ProvenExpert, Google-Rezensionen, Instagram, Facebook,
@@ -354,7 +324,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>13. SSL-/TLS-Verschlüsselung</H2>
+            <H2>12. SSL-/TLS-Verschlüsselung</H2>
             <P>
               Diese Website nutzt aus Sicherheitsgründen und zum Schutz der
               Übertragung vertraulicher Inhalte eine SSL- bzw.
@@ -365,7 +335,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>14. Ihre Rechte als betroffene Person</H2>
+            <H2>13. Ihre Rechte als betroffene Person</H2>
             <P>
               Sie haben uns gegenüber jederzeit folgende Rechte:
             </P>
@@ -398,7 +368,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>15. Beschwerderecht bei der Aufsichtsbehörde</H2>
+            <H2>14. Beschwerderecht bei der Aufsichtsbehörde</H2>
             <P>
               Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde
               über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu
@@ -418,7 +388,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>16. Automatisierte Entscheidungsfindung / Profiling</H2>
+            <H2>15. Automatisierte Entscheidungsfindung / Profiling</H2>
             <P>
               Eine automatisierte Entscheidungsfindung einschließlich
               Profiling im Sinne des Art. 22 DSGVO findet nicht statt.
@@ -426,7 +396,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>17. Speicherdauer</H2>
+            <H2>16. Speicherdauer</H2>
             <P>
               Personenbezogene Daten werden nur so lange gespeichert, wie es
               für die Erfüllung der jeweiligen Zwecke erforderlich ist oder
@@ -437,7 +407,7 @@ export default async function DatenschutzPage() {
           </Reveal>
 
           <Reveal>
-            <H2>18. Änderungen dieser Datenschutzerklärung</H2>
+            <H2>17. Änderungen dieser Datenschutzerklärung</H2>
             <P>
               Wir behalten uns vor, diese Datenschutzerklärung anzupassen,
               damit sie stets den aktuellen rechtlichen Anforderungen

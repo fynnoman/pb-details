@@ -278,12 +278,6 @@ const sectionBlocks = [
       { name: "kicker", type: "text", defaultValue: "Termin vereinbaren" },
       { name: "heading", type: "text", required: true },
       { name: "text", type: "textarea", label: "Beschreibung" },
-      {
-        name: "showCalendly",
-        type: "checkbox",
-        defaultValue: true,
-        label: "Calendly-Widget anzeigen (nur wenn URL in Einstellungen gesetzt)",
-      },
     ] as Field[],
   },
 ];

@@ -78,7 +78,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease: [0.2, 0.7, 0.2, 1], delay: 0.05 }}
-            className="font-display font-light text-[clamp(1.9rem,9vw,5.8rem)] leading-[0.98] tracking-[-0.03em] max-w-[16ch] mb-4 sm:mb-6"
+            className="font-display font-light text-[clamp(1.9rem,9vw,5.8rem)] leading-[1.12] tracking-[-0.03em] max-w-[16ch] mb-4 sm:mb-6 pt-[0.15em] pb-[0.1em]"
           >
             <EditableText
               globalSlug="home"
