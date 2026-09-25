@@ -232,7 +232,7 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
       wkdb: {
         count: 445,
         value: 4.9,
-        url: "",
+        url: "https://www.werkenntdenbesten.de/e/54542096/autopflege/ensdorf-saar/pb-fahrzeugpflege-saarlouis-bewertungen.html",
       },
       recommendation: 95,
       ratingScale: 5,
