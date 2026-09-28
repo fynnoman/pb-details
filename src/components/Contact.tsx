@@ -15,10 +15,10 @@ export default function Contact({
   const kicker = t.kicker || "Termin vereinbaren";
   const title = t.title || "Sprechen wir über Ihr";
   const titleHighlight = t.titleHighlight || "Fahrzeug.";
-  const intro = t.intro || "Rufen Sie uns an oder schreiben Sie uns per WhatsApp. Eine unverbindliche Begutachtung ist auch ohne Termin möglich, während unserer Öffnungszeiten.";
+  const intro = t.intro || "Eine unverbindliche Besichtigung ist während unserer Öffnungszeiten ohne Termin möglich. Für die Durchführung der Arbeiten vereinbaren wir mit Ihnen einen Termin.";
   const directLabel = t.directLabel || "Direkter Draht";
-  const callAt = t.callAt || "Anrufen · Mo–Sa";
-  const response = t.response || "Antwort in 24 h";
+  const callAt = t.callAt || "Anrufen · Mo bis Sa";
+  const response = t.response || "Antwort in der Regel innerhalb von 48 h";
 
   return (
     <section id="kontakt" className="relative py-16 sm:py-24 lg:py-44 overflow-hidden">

@@ -189,7 +189,7 @@ const sectionBlocks = [
       {
         name: "packages",
         type: "array",
-        label: "Preispakete",
+        label: "Pakete (optional, wird aktuell nicht auf der Website ausgegeben)",
         minRows: 1,
         labels: { singular: "Paket", plural: "Pakete" },
         fields: [

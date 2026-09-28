@@ -31,9 +31,9 @@ export default function Awards({
   const marqueeBadges = [...badges, ...badges];
   const t = home?.awards || {};
   const kicker = t.kicker || "Ausgezeichnet";
-  const title = t.title || "Mehrfach zertifiziert, jährlich";
-  const titleHighlight = t.titleHighlight || "bestätigt.";
-  const linkLabel = t.linkLabel || "Alle Auszeichnungen & Referenzen ansehen";
+  const title = t.title || "Unsere Auszeichnungen und Zertifikate.";
+  const titleHighlight = t.titleHighlight || "";
+  const linkLabel = t.linkLabel || "Zu den Auszeichnungen und Zertifikaten";
 
   return (
     <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">

@@ -112,7 +112,7 @@ export default async function LeistungenPage() {
 
       <CtaSection
         title={<>Sprechen wir über Ihr <span className="italic text-gold">Fahrzeug.</span></>}
-        text="Kommen Sie ohne Termin vorbei oder rufen Sie kurz an. Nach einer Begutachtung erhalten Sie ein transparentes Festpreis-Angebot."
+        text="Kommen Sie während unserer Öffnungszeiten unverbindlich vorbei oder rufen Sie kurz an. Nach einer persönlichen Besichtigung erhalten Sie ein individuelles Angebot für die besprochenen Leistungen."
       />
     </main>
   );

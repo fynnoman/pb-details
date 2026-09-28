@@ -356,7 +356,7 @@ export default function EditHomeSimple({
               <EditableText globalSlug="settings" path="email" value={settings.email} as="span" />
             </Field>
             <Field label="Antwortzeit">
-              <EditableText globalSlug="home" path="contact.response" value={home.contact?.response || "Antwort in 24 h"} as="span" />
+              <EditableText globalSlug="home" path="contact.response" value={home.contact?.response || "Antwort in der Regel innerhalb von 48 h"} as="span" />
             </Field>
           </Row>
         </Section>

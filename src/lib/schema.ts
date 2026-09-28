@@ -87,22 +87,19 @@ export function buildWebsiteSchema(settings: SiteSettings) {
 }
 
 export function buildProductAggregateRating(settings: SiteSettings) {
-  const total =
-    (settings.provenExpert?.count || 0) +
-    (settings.wkdb?.count || 0) +
-    (settings.google?.count || 0);
+  const count = settings.provenExpert?.count;
   const ratingValue = settings.provenExpert?.value || 4.9;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: settings.name,
     description:
-      "Keramikversiegelung, Autoaufbereitung, Smart Repair & Beulendoktor im Saarland",
+      "Keramikversiegelung, Autoaufbereitung, Smart Repair und Beulendoktor im Saarland",
     brand: { "@type": "Brand", name: settings.name },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingCount: total > 0 ? total : settings.provenExpert?.count,
-      reviewCount: total > 0 ? total : settings.provenExpert?.count,
+      ratingCount: count,
+      reviewCount: count,
       ratingValue,
       bestRating: settings.ratingScale,
       worstRating: 1,

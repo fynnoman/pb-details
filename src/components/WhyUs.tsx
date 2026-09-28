@@ -33,11 +33,6 @@ export default function WhyUs({
   const imgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.02, 1.15]);
 
-  const totalReviews =
-    (settings.provenExpert?.count || 0) +
-    (settings.wkdb?.count || 0) +
-    (settings.google?.count || 0);
-
   const googleWriteReviewUrl =
     "https://search.google.com/local/writereview?placeid=ChIJrXjI7NyolUcRW7NcbxMyZ8c";
   const googleReviewsUrl =
@@ -51,15 +46,15 @@ export default function WhyUs({
   }> = [
     {
       headline: `Seit ${settings.founded || 1997}`,
-      body: `Inhabergeführt${settings.founders ? ` — gegründet von ${settings.founders}` : ""}`,
+      body: `Inhabergeführt${settings.founders ? `, gegründet von ${settings.founders}` : ""}`,
     },
     {
-      headline: totalReviews > 0 ? String(totalReviews) : String(settings.provenExpert?.count || ""),
-      body: "positive, verifizierte Kundenbewertungen aus ProvenExpert, Google und werkenntdenBESTEN",
+      headline: settings.provenExpert?.count ? String(settings.provenExpert.count) : "",
+      body: "Kundenbewertungen auf ProvenExpert",
     },
     {
       headline: `${settings.recommendation} %`,
-      body: "Weiterempfehlungsquote",
+      body: "Weiterempfehlungsquote auf ProvenExpert",
       href: googleWriteReviewUrl,
       hint: "Jetzt auf Google bewerten",
     },

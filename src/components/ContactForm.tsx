@@ -77,9 +77,8 @@ export default function ContactForm() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mt-6 text-[var(--ink-dim)] leading-relaxed">
-                Sie können lieber schreiben statt anrufen oder buchen? Kein
-                Problem. Wir melden uns in der Regel innerhalb von 24 Stunden
-                zurück.
+                Sie können lieber schreiben statt anrufen? Kein Problem. Wir
+                melden uns in der Regel innerhalb von 48 Stunden zurück.
               </p>
             </Reveal>
             <Reveal delay={0.15}>
@@ -177,7 +176,7 @@ export default function ContactForm() {
                   <p className="text-[11px] text-[var(--ink-mute)] max-w-sm leading-relaxed">
                     Informationen zur Verarbeitung Ihrer Daten finden Sie in
                     unserer Datenschutzerklärung. Wir melden uns i. d. R.
-                    innerhalb von 24 h zurück.
+                    innerhalb von 48 h zurück.
                   </p>
                   <button
                     type="submit"

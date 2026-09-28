@@ -350,7 +350,7 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
       ],
       metaTitle: "Fahrzeugaufbereitung Saarlouis & Keramikversiegelung",
       metaDescription:
-        "Premium-Fahrzeugaufbereitung & Keramikversiegelung im Saarland und Luxemburg – seit 1997. Spezialist für Neuwagen, Sportwagen & Luxusfahrzeuge. Über 648 Top-Bewertungen.",
+        "Premium-Fahrzeugaufbereitung und Keramikversiegelung im Saarland und Luxemburg, inhabergeführt seit 1997. Spezialist für Neuwagen, Sportwagen und Luxusfahrzeuge.",
     },
   });
   console.log("✓ Global: home");
@@ -369,7 +369,7 @@ const topicBySlug: Record<string, string> = {
 async function seedFaqs(payload: Payload) {
   const items: Array<{ q: string; a: string; topic: string; order: number }> = [
     // Homepage FAQs
-    { topic: "home", order: 10, q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?", a: 'PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein perfektes Ergebnis – nach dem Motto „Wir schützen Werte“. 187 positive Bewertungen und eine Weiterempfehlungsrate von über 95 % bestätigen das.' },
+    { topic: "home", order: 10, q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?", a: 'PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein sauberes Ergebnis. Kundenbewertungen auf ProvenExpert, Google und werkenntdenBESTEN sowie eine Weiterempfehlungsquote von 95 % auf ProvenExpert bestätigen diesen Anspruch.' },
     { topic: "home", order: 20, q: "Bieten Sie auch Aufbereitung für Sportwagen, Oldtimer und Luxusfahrzeuge an?", a: "Ja. Hochwertige Fahrzeuge sind unsere Spezialität – vom High-End-Lackschutz per Keramikversiegelung bis zur kompletten Innen- und Außenaufbereitung." },
     { topic: "home", order: 30, q: "Seit wann gibt es PB Fahrzeugpflege?", a: "PB Fahrzeugpflege Saarlouis besteht seit 1997 und gehört mit über 29 Jahren Erfahrung zu den ältesten und erfahrensten Fahrzeugaufbereitern Deutschlands." },
     { topic: "home", order: 40, q: "Aus welchen Regionen kommen Ihre Kunden?", a: "Unsere Kunden kommen aus Saarlouis und dem gesamten Saarland, aus Luxemburg sowie aus den angrenzenden Regionen. Unser Standort in Ensdorf an der B51 liegt verkehrsgünstig mit unmittelbarer Zuganbindung." },
@@ -559,7 +559,7 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
       title: "Nanoversiegelung",
       tagline: "Preisbewusster Lackschutz mit Easy-to-Clean-Effekt.",
       intro:
-        "Die preisbewusste Alternative zur Keramikversiegelung – 1K-Nanoversiegelung, die sich fest mit dem Lack verbindet und bis zu viermal länger hält als Wachs.",
+        "Die preisbewusste Alternative zur Keramikversiegelung, 1K-Nanoversiegelung, die sich fest mit dem Lack verbindet. Standzeit laut Produktangabe bis zu 18 Monate, abhängig von Nutzung und Pflege.",
       heroImage: mediaMap["/images/hero/nanoversiegelung-abperleffekt.jpg"],
       features: [
         { text: "Schutz bis zu 18 Monate" },
@@ -620,7 +620,7 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
       order: 50,
       metaTitle: "Unfallschaden-Abwicklung Saarlouis | PB Fahrzeugpflege",
       metaDescription:
-        "Komplette Unfallschadenabwicklung im Saarland: Gutachter, Anwalt, Leihwagen und Karosserieinstandsetzung – kostenlos bei Haftpflichtschäden.",
+        "Wir unterstützen Sie bei der Schadenabwicklung nach einem Unfall und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Anwälten und Reparaturbetrieben in Saarlouis.",
     },
   ];
 
@@ -725,10 +725,10 @@ async function seedRedirects(payload: Payload) {
 async function seedBlogPosts(payload: Payload, mediaMap: MediaMap) {
   const posts = [
     {
-      slug: "warum-neuwagen-im-rohzustand-sind-und-sofort-geschuetzt-werden-sollten",
-      title: "Warum Neuwagen im Rohzustand sind – und sofort geschützt werden sollten",
+      slug: "neuwagen-lackschutz-was-wirklich-sinnvoll-ist",
+      title: "Neuwagen und Lackschutz: was wirklich sinnvoll ist",
       intro:
-        "Ab Werk sind moderne Klarlacke deutlich empfindlicher als früher. Ohne zusätzliche Versiegelung entstehen schon in den ersten Wochen sichtbare Wasch- und Sonnenschäden.",
+        "Auch bei einem Neuwagen lohnt sich eine Prüfung des vorhandenen Lackschutzes, bevor eine weitere Behandlung aufgetragen wird. Wir zeigen, worauf es dabei ankommt.",
       publishedAt: "2025-06-01T09:00:00.000Z",
     },
     {
@@ -824,31 +824,31 @@ async function seedPages(payload: Payload) {
     {
       path: "/preise/",
       title: "Preise",
-      metaTitle: "Preise – Fahrzeugaufbereitung & Keramikversiegelung Saarlouis",
+      metaTitle: "Preise – Individuelles Angebot nach Besichtigung | PB Fahrzeugpflege Saarlouis",
       metaDescription:
-        "Fahrzeugaufbereitung und Keramikversiegelung im Saarland: individuell nach Fahrzeuggröße, Zustand und Leistungsumfang kalkuliert. Verbindliches Angebot nach persönlicher Begutachtung.",
+        "Preise nennen wir nach einer persönlichen Besichtigung Ihres Fahrzeugs vor Ort. Anschließend erhalten Sie ein individuelles Angebot für die besprochenen Leistungen.",
       sections: [
         {
           blockType: "hero",
           kicker: "Preise",
-          title: "Individuell kalkuliert. Passend zu Ihrem Fahrzeug.",
+          title: "Individuelles Angebot nach Besichtigung.",
           subtitle:
-            "Kein Fahrzeug ist wie das andere. Fahrzeuggröße, Lackzustand, Innenraum, gewünschte Leistungen und der tatsächliche Arbeitsaufwand unterscheiden sich teilweise erheblich. Deshalb arbeiten wir bewusst nicht mit pauschalen Online-Preisen.",
+            "Jedes Fahrzeug bringt andere Voraussetzungen mit. Deshalb nennen wir Preise erst nach einer persönlichen Besichtigung Ihres Fahrzeugs vor Ort. Auf dieser Grundlage erstellen wir Ihnen ein individuelles Angebot für die besprochenen Leistungen.",
         },
         {
           blockType: "text",
-          heading: "Ihr Fahrzeug. Ihr Aufwand. Ihr Preis.",
+          heading: "Individuelle Kalkulation",
           body: lexicalPlaceholder(
-            "Für eine seriöse Kalkulation sehen wir uns Ihr Fahrzeug persönlich an. Dabei berücksichtigen wir Zustand, Fahrzeuggröße und gewünschten Leistungsumfang. Anschließend erhalten Sie ein transparentes und verbindliches Angebot. So bezahlen Sie genau für die Leistungen, die Ihr Fahrzeug tatsächlich benötigt.\n\nPersönliche Begutachtung · transparente Kalkulation · verbindliches Angebot",
+            "Jedes Fahrzeug bringt andere Voraussetzungen mit. Deshalb nennen wir Preise erst nach einer persönlichen Besichtigung Ihres Fahrzeugs vor Ort. Auf dieser Grundlage erstellen wir Ihnen ein individuelles Angebot für die besprochenen Leistungen.",
           ),
         },
         {
           blockType: "cta",
-          kicker: "Termin vereinbaren",
-          heading: "Fahrzeug begutachten lassen",
-          text: "Kommen Sie zu unseren Öffnungszeiten unverbindlich vorbei oder vereinbaren Sie einen Termin. Wir sehen uns Ihr Fahrzeug direkt an und erstellen Ihnen ein individuelles Angebot.",
-          primaryLabel: "Besichtigung anfragen",
-          primaryHref: "/kontakt/#termin",
+          kicker: "Besichtigung und Angebot",
+          heading: "Fahrzeug persönlich begutachten lassen",
+          text: "Kommen Sie während unserer Öffnungszeiten unverbindlich vorbei. Auf Basis der Besichtigung erstellen wir Ihnen ein individuelles Angebot für die besprochenen Leistungen.",
+          primaryLabel: "Besichtigung und Angebot",
+          primaryHref: "/kontakt/",
         },
       ],
     },
@@ -857,36 +857,36 @@ async function seedPages(payload: Payload) {
       title: "Unfallschaden",
       metaTitle: "Unfallschaden-Abwicklung Saarlouis | PB Fahrzeugpflege",
       metaDescription:
-        "Komplette Unfallschadenabwicklung: Gutachter, Anwalt, Leihwagen und Karosserieinstandsetzung – kostenlos bei Haftpflichtschäden.",
+        "Wir unterstützen Sie bei der Schadenabwicklung und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Anwälten und Reparaturbetrieben in Saarlouis.",
       sections: [
         {
           blockType: "hero",
           kicker: "Unfallschaden",
           title: "Alles aus einer Hand.",
           subtitle:
-            "Vom Gutachter über den Anwalt bis zur Karosserieinstandsetzung – wir kümmern uns um die komplette Abwicklung. Kostenlos bei Haftpflichtschäden.",
+            "Wir unterstützen Sie bei der Schadenabwicklung und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Anwälten und Reparaturbetrieben.",
         },
       ],
     },
     {
       path: "/kontakt/",
       title: "Kontakt",
-      metaTitle: "Kontakt – PB Fahrzeugpflege Saarlouis",
+      metaTitle: "Kontakt und Anfahrt | PB Fahrzeugpflege Saarlouis",
       metaDescription:
-        "Terminvereinbarung, Adresse, Anfahrt: PB Fahrzeugpflege Saarlouis in Ensdorf. Telefon, WhatsApp und E-Mail.",
+        "Terminvereinbarung, Adresse und Anfahrt zu PB Fahrzeugpflege Saarlouis in Ensdorf. Erreichbar per Telefon, WhatsApp und E-Mail. Unverbindliche Besichtigung während unserer Öffnungszeiten auch ohne Termin.",
       sections: [
         {
           blockType: "hero",
           kicker: "Kontakt",
           title: "Sprechen wir über Ihr Fahrzeug.",
           subtitle:
-            "Wählen Sie direkt einen Termin aus – oder rufen Sie an. Eine unverbindliche Begutachtung ist auch ohne Termin möglich, während unserer Öffnungszeiten.",
+            "Eine unverbindliche Besichtigung ist während unserer Öffnungszeiten ohne Termin möglich. Für die Durchführung der Arbeiten vereinbaren wir mit Ihnen einen Termin.",
         },
         {
           blockType: "kontakt-block",
-          kicker: "Termin vereinbaren",
+          kicker: "So erreichen Sie uns",
           heading: "So erreichen Sie uns",
-          text: "Rufen Sie uns an, schreiben Sie per WhatsApp oder besuchen Sie uns ohne Termin während unserer Öffnungszeiten.",
+          text: "Rufen Sie uns an, schreiben Sie per WhatsApp oder besuchen Sie uns während unserer Öffnungszeiten für eine unverbindliche Besichtigung.",
         },
       ],
     },
@@ -912,18 +912,18 @@ async function seedPages(payload: Payload) {
     {
       path: "/referenzen/",
       title: "Referenzen",
-      metaTitle: "Referenzen & Auszeichnungen | PB Fahrzeugpflege Saarlouis",
+      metaTitle: "Auszeichnungen und Zertifikate | PB Fahrzeugpflege Saarlouis",
       metaDescription:
-        "Über 648 verifizierte Bewertungen, mehrfach ausgezeichnet: ProvenExpert Top Dienstleister, werkenntdenBESTEN, Q-Siegel, BRILA Certified Installer.",
+        "Auszeichnungen, Zertifikate und Bewertungssiegel von PB Fahrzeugpflege Saarlouis in Ensdorf: Q-Siegel, BRILA Certified Installer und Auszeichnungen von ProvenExpert und werkenntdenBESTEN.",
       sections: [
         {
           blockType: "hero",
           kicker: "Referenzen",
-          title: "Mehrfach zertifiziert, jährlich bestätigt.",
+          title: "Unsere Auszeichnungen und Zertifikate.",
         },
         {
           blockType: "awards-marquee",
-          heading: "Auszeichnungen",
+          heading: "Auszeichnungen im Überblick",
           showStoryCards: true,
         },
       ],

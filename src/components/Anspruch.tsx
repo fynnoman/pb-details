@@ -23,11 +23,6 @@ export default function Anspruch({
   const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.15, 1.05]);
   const badgeRotate = useTransform(scrollYProgress, [0, 1], [-8, 8]);
 
-  const totalReviews =
-    (settings.provenExpert?.count || 0) +
-    (settings.wkdb?.count || 0) +
-    (settings.google?.count || 0);
-
   const t = home?.anspruch || {};
   const kicker = t.kicker || "Unser Anspruch";
   const title = t.title || "Kompromisslose Qualität bis ins Detail.";
@@ -73,7 +68,7 @@ export default function Anspruch({
                   <span className="text-[var(--gold)]">%</span>
                 </div>
                 <div className="text-xs text-[var(--ink-dim)] mt-2">
-                  aus über 600 verifizierten Bewertungen
+                  Weiterempfehlungsquote auf ProvenExpert
                 </div>
               </motion.div>
             </div>
