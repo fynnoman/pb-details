@@ -148,18 +148,19 @@ export default function Hero({
       <motion.div style={fadeStyle} className="absolute bottom-0 inset-x-0 z-10 hidden sm:block">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10 pb-4 sm:pb-6">
           <div className="glass rounded-2xl px-4 sm:px-8 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3 sm:gap-4 text-[10px] sm:text-xs tracking-[0.22em] sm:tracking-[0.24em] uppercase text-[var(--ink-dim)]">
-            {settings.provenExpert && (
+            {settings.provenExpert?.value != null && settings.provenExpert?.count != null && (
               <span>
-                ⭑ {settings.provenExpert.value.toString().replace(".", ",")} /{" "}
-                {settings.ratingScale} · {settings.provenExpert.count} ProvenExpert
+                ⭑ {settings.provenExpert.value.toString().replace(".", ",")}
+                {settings.ratingScale != null ? ` / ${settings.ratingScale}` : ""} ·{" "}
+                {settings.provenExpert.count} ProvenExpert
               </span>
             )}
-            {settings.google && (
+            {settings.google?.count != null && (
               <span className="hidden sm:inline">
                 {settings.google.count} Google
               </span>
             )}
-            {settings.wkdb && (
+            {settings.wkdb?.count != null && (
               <span className="hidden md:inline">
                 {settings.wkdb.count} werkenntdenBESTEN
               </span>

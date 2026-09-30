@@ -117,9 +117,9 @@ export const pageContent: PageContent[] = [
     path: "/ueber-uns/",
     contentBlocks: [
       { type: "h2", text: "Im Jahr 1997 …" },
-      { type: "p", text: "… als junge und ambitionierte Unternehmer im Alter von 18 und 24 Jahren, haben wir – Thomas Paul und Karsten Becker – die professionelle Fahrzeugaufbereitung im Saarland auf ein neues Level gehoben. Während andere sich auf die Massenabfertigung für Autohäuser und Gebrauchtwagenhändler konzentrierten, hatten wir ein anderes Ziel:" },
+      { type: "p", text: "… als junge und ambitionierte Unternehmer im Alter von 18 und 24 Jahren, haben wir – Thomas Paul-Mohm und Karsten Becker – die professionelle Fahrzeugaufbereitung im Saarland auf ein neues Level gehoben. Während andere sich auf die Massenabfertigung für Autohäuser und Gebrauchtwagenhändler konzentrierten, hatten wir ein anderes Ziel:" },
       { type: "p", text: "Wir wollten der beste Fahrzeugaufbereiter im Saarland werden, mit einem klaren Fokus auf den Privatkunden." },
-      { type: "p", text: "Unsere Leidenschaft für Perfektion und unser unermüdlicher Ehrgeiz haben uns zum Erfolg geführt. Fast drei Jahrzehnte später haben wir nicht nur unser Ziel erreicht, sondern weit übertroffen. Heute dürfen wir Kunden aus ganz Deutschland und sogar darüber hinaus bei PB Fahrzeugpflege Saarlouis® begrüßen. Unsere Liebe zum Detail und unser Engagement für höchste Qualität haben uns zu einer festen Größe in der Branche gemacht." },
+      { type: "p", text: "Fast drei Jahrzehnte später betreuen wir Kunden aus dem Saarland, aus Luxemburg und aus weiteren Teilen Deutschlands bei PB Fahrzeugpflege Saarlouis®. Unsere Liebe zum Detail und unser Anspruch an gleichbleibend hohe Qualität sind über all die Jahre unverändert geblieben." },
       { type: "h2", text: "Erfahrung, die Vertrauen schafft" },
       { type: "p", text: "In den vergangenen Jahrzehnten haben wir nicht nur unser Handwerk perfektioniert, sondern auch ein tiefes Verständnis für die Bedürfnisse unserer Kunden entwickelt. Unsere Geschichte ist geprägt von stetiger Weiterentwicklung und der Fähigkeit, uns immer wieder neu zu erfinden, um den hohen Ansprüchen unserer Kunden gerecht zu werden." },
       { type: "h2", text: "Warum PB Fahrzeugpflege Saarlouis®?" },

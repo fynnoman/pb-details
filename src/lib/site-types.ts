@@ -24,11 +24,11 @@ export type SiteSettings = {
   saturdayHours?: string;
   hoursNote?: string;
   holidayNotice?: { text?: string; until?: string };
-  provenExpert?: { count: number; value: number; url?: string };
-  google?: { count: number; url?: string; mapsUrl?: string };
-  wkdb?: { count: number; value: number; url?: string };
-  recommendation: number;
-  ratingScale: number;
+  provenExpert?: { count?: number; value?: number; url?: string };
+  google?: { count?: number; url?: string; mapsUrl?: string };
+  wkdb?: { count?: number; value?: number; url?: string };
+  recommendation?: number;
+  ratingScale?: number;
   facebook?: string;
   instagram?: string;
   youtube?: string;

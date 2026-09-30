@@ -814,7 +814,7 @@ export default function EditorPage() {
             <Field label="Google – Anzahl" value={String(settings.google?.count ?? "")} onChange={(v) => setSettingsSub("google", { count: parseInt(v, 10) || 0 })} />
             <Field label="WKDB – Anzahl" value={String(settings.wkdb?.count ?? "")} onChange={(v) => setSettingsSub("wkdb", { count: parseInt(v, 10) || 0 })} />
           </div>
-          <Field label="Weiterempfehlungsquote in %" value={String(settings.recommendation ?? "")} onChange={(v) => setSettings({ recommendation: parseInt(v, 10) || 0 })} />
+          <Field label="Anteil positiver Bewertungen in %" value={String(settings.recommendation ?? "")} onChange={(v) => setSettings({ recommendation: parseInt(v, 10) || 0 })} />
         </SectionCard>
 
         {/* FOOTER */}

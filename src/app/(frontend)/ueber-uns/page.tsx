@@ -8,7 +8,7 @@ import { breadcrumbList, webPageSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: { absolute: "Über uns – Fahrzeugaufbereitung im Saarland" },
   description:
-    "Seit 1997 stehen Thomas Paul & Karsten Becker für professionelle Fahrzeugaufbereitung im Saarland – mit Leidenschaft, Qualität und fast 30 Jahren Erfahrung.",
+    "Seit 1997 stehen Thomas Paul-Mohm und Karsten Becker für professionelle Fahrzeugaufbereitung im Saarland – mit Leidenschaft, Qualität und fast 30 Jahren Erfahrung.",
   alternates: { canonical: "/ueber-uns/" },
 };
 
@@ -17,7 +17,7 @@ export default function UeberUnsPage() {
     path: "/ueber-uns/",
     name: "Über uns – Fahrzeugaufbereitung im Saarland",
     description:
-      "Seit 1997 stehen Thomas Paul & Karsten Becker für professionelle Fahrzeugaufbereitung im Saarland.",
+      "Seit 1997 stehen Thomas Paul-Mohm und Karsten Becker für professionelle Fahrzeugaufbereitung im Saarland.",
     breadcrumb: breadcrumbList([
       { name: "Home", path: "/" },
       { name: "Über uns", path: "/ueber-uns/" },
@@ -28,7 +28,7 @@ export default function UeberUnsPage() {
       <JsonLd data={webPage} />
       <PageHero
         kicker="Über uns"
-        title="Thomas Paul & Karsten Becker von PB Fahrzeugpflege Saarlouis®"
+        title="Thomas Paul-Mohm und Karsten Becker von PB Fahrzeugpflege Saarlouis®"
         subtitle="Inhabergeführt seit 1997. Was mit zwei Jungunternehmern begann, ist heute ein etablierter, spezialisierter Fahrzeugpflegebetrieb im Saarland."
         backgroundImage="/images/team/karsten-thomas-empfang-wide.jpg"
       />
@@ -44,11 +44,11 @@ export default function UeberUnsPage() {
             <Reveal delay={0.05}>
               <p>
                 … als junge und ambitionierte Unternehmer im Alter von 18 und
-                24 Jahren, haben wir – Thomas Paul und Karsten Becker – die
-                professionelle Fahrzeugaufbereitung im Saarland auf ein neues
-                Level gehoben. Während andere sich auf die Massenabfertigung
-                für Autohäuser und Gebrauchtwagenhändler konzentrierten,
-                hatten wir ein anderes Ziel:
+                24 Jahren, haben wir – Thomas Paul-Mohm und Karsten Becker –
+                die professionelle Fahrzeugaufbereitung im Saarland auf ein
+                neues Level gehoben. Während andere sich auf die
+                Massenabfertigung für Autohäuser und Gebrauchtwagenhändler
+                konzentrierten, hatten wir ein anderes Ziel:
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -59,14 +59,11 @@ export default function UeberUnsPage() {
             </Reveal>
             <Reveal delay={0.15}>
               <p>
-                Unsere Leidenschaft für Perfektion und unser unermüdlicher
-                Ehrgeiz haben uns zum Erfolg geführt. Fast drei Jahrzehnte
-                später haben wir nicht nur unser Ziel erreicht, sondern weit
-                übertroffen. Heute dürfen wir Kunden aus ganz Deutschland und
-                sogar darüber hinaus bei PB Fahrzeugpflege Saarlouis® begrüßen.
-                Unsere Liebe zum Detail und unser Engagement für höchste
-                Qualität haben uns zu einer festen Größe in der Branche
-                gemacht.
+                Fast drei Jahrzehnte später betreuen wir Kunden aus dem
+                Saarland, aus Luxemburg und aus weiteren Teilen Deutschlands
+                bei PB Fahrzeugpflege Saarlouis®. Unsere Liebe zum Detail und
+                unser Anspruch an gleichbleibend hohe Qualität sind über all
+                die Jahre unverändert geblieben.
               </p>
             </Reveal>
           </div>

@@ -83,7 +83,7 @@ export const Home: GlobalConfig = {
               label: "Bulletpoints",
               fields: [{ name: "text", type: "text", required: true }],
               defaultValue: [
-                { text: "Einer der dienstältesten Fahrzeugaufbereiter Deutschlands" },
+                { text: "Fahrzeugaufbereitung im Saarland seit 1997" },
                 { text: "Auszeichnungen durch Heiko Maas und Anke Rehlinger für besondere Servicequalität" },
                 { text: "BRILA zertifizierter Fachbetrieb für Keramikversiegelungen" },
                 { text: "Eigener Qualitäts-Coach" },
@@ -177,7 +177,7 @@ export const Home: GlobalConfig = {
                 { name: "para1", type: "textarea", defaultValue: "Unser Qualitäts- und Leistungsanspruch beginnt dort, wo andere ihre Arbeit bereits als beendet ansehen. Wir nehmen uns die Zeit, die eine perfekte Aufbereitung braucht, und hören erst auf, wenn das Ergebnis stimmt." },
                 { name: "para2", type: "textarea", defaultValue: "Da wir ausschließlich private Kundenfahrzeuge betreuen – darunter viele Sportwagen, Oldtimer und Luxusfahrzeuge – ist Ihr Fahrzeug bei uns in besten Händen. Billig kann jeder – deshalb lautet unser Motto: „Glanz oder gar nicht!\"" },
                 { name: "quoteText", type: "textarea", defaultValue: "„Für andere reicht das Erzählte,\nfür uns zählt das Erreichte.\"" },
-                { name: "badgeLabel", type: "text", defaultValue: "Weiterempfehlung" },
+                { name: "badgeLabel", type: "text", defaultValue: "Positive Bewertungen" },
               ],
             },
             {

@@ -98,8 +98,8 @@ export const Settings: GlobalConfig = {
               name: "provenExpert",
               label: "ProvenExpert",
               fields: [
-                { name: "count", type: "number", required: true, defaultValue: 187 },
-                { name: "value", type: "number", required: true, defaultValue: 4.92 },
+                { name: "count", type: "number", label: "Anzahl Bewertungen (leer = ausblenden)" },
+                { name: "value", type: "number", label: "Durchschnittsnote (leer = ausblenden)" },
                 { name: "url", type: "text", label: "Profil-URL" },
               ],
             },
@@ -108,7 +108,7 @@ export const Settings: GlobalConfig = {
               name: "google",
               label: "Google",
               fields: [
-                { name: "count", type: "number", required: true, defaultValue: 184 },
+                { name: "count", type: "number", label: "Anzahl Bewertungen (leer = ausblenden)" },
                 { name: "url", type: "text", label: "Google-Profil-URL" },
                 { name: "mapsUrl", type: "text", label: "Google-Maps-URL" },
               ],
@@ -118,17 +118,15 @@ export const Settings: GlobalConfig = {
               name: "wkdb",
               label: "werkenntdenBESTEN",
               fields: [
-                { name: "count", type: "number", required: true, defaultValue: 445 },
-                { name: "value", type: "number", required: true, defaultValue: 4.9 },
+                { name: "count", type: "number", label: "Anzahl Bewertungen (leer = ausblenden)" },
+                { name: "value", type: "number", label: "Durchschnittsnote (leer = ausblenden)" },
                 { name: "url", type: "text", label: "Profil-URL" },
               ],
             },
             {
               name: "recommendation",
               type: "number",
-              required: true,
-              label: "Weiterempfehlungsquote in %",
-              defaultValue: 95,
+              label: "Anteil positiver Bewertungen in % (leer = ausblenden)",
             },
             {
               name: "ratingScale",

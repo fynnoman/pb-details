@@ -48,16 +48,20 @@ export default function WhyUs({
       headline: `Seit ${settings.founded || 1997}`,
       body: `Inhabergeführt${settings.founders ? `, gegründet von ${settings.founders}` : ""}`,
     },
-    {
-      headline: settings.provenExpert?.count ? String(settings.provenExpert.count) : "",
-      body: "Kundenbewertungen auf ProvenExpert",
-    },
-    {
-      headline: `${settings.recommendation} %`,
-      body: "Weiterempfehlungsquote auf ProvenExpert",
-      href: googleWriteReviewUrl,
-      hint: "Jetzt auf Google bewerten",
-    },
+    ...(settings.provenExpert?.count != null
+      ? [{
+          headline: String(settings.provenExpert.count),
+          body: "Kundenbewertungen auf ProvenExpert",
+        }]
+      : []),
+    ...(settings.recommendation != null
+      ? [{
+          headline: `${settings.recommendation} %`,
+          body: "Positive Bewertungen auf ProvenExpert",
+          href: googleWriteReviewUrl,
+          hint: "Jetzt auf Google bewerten",
+        }]
+      : []),
     {
       headline: "Q-Siegel",
       body: "Deutschlands erster Fahrzeugpflegebetrieb mit Q-Siegel",

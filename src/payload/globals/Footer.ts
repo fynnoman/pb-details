@@ -42,8 +42,7 @@ export const Footer: GlobalConfig = {
       name: "aiNote",
       type: "text",
       label: "AI-Hinweis (ganz unten)",
-      defaultValue:
-        "Diese Website wurde mit Unterstützung von Künstlicher Intelligenz erstellt.",
+      defaultValue: "",
     },
   ],
 };

@@ -91,22 +91,24 @@ export default function Footer({
               Bewertungen
             </div>
             <div className="grid grid-cols-3 md:grid-cols-1 gap-3">
-              {settings.provenExpert && (
+              {settings.provenExpert?.count != null && (
                 <a
                   href={settings.provenExpert.url || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="glass rounded-2xl p-3 sm:p-4 block cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
                 >
-                  <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
-                    {settings.provenExpert.value.toString().replace(".", ",")}
-                  </div>
+                  {settings.provenExpert.value != null && (
+                    <div className="font-display text-2xl sm:text-3xl text-chrome leading-none">
+                      {settings.provenExpert.value.toString().replace(".", ",")}
+                    </div>
+                  )}
                   <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
                     {settings.provenExpert.count} · ProvenExpert
                   </div>
                 </a>
               )}
-              {settings.google && (
+              {settings.google?.count != null && (
                 <a
                   href={settings.google.mapsUrl || settings.google.url || "#"}
                   target="_blank"
@@ -121,7 +123,7 @@ export default function Footer({
                   </div>
                 </a>
               )}
-              {settings.wkdb && (
+              {settings.wkdb?.count != null && (
                 settings.wkdb.url ? (
                   <a
                     href={settings.wkdb.url}
@@ -133,7 +135,9 @@ export default function Footer({
                       {settings.wkdb.count}
                     </div>
                     <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
-                      {settings.wkdb.value.toString().replace(".", ",")} · WKDB
+                      {settings.wkdb.value != null
+                        ? `${settings.wkdb.value.toString().replace(".", ",")} · WKDB`
+                        : "WKDB"}
                     </div>
                   </a>
                 ) : (
@@ -142,7 +146,9 @@ export default function Footer({
                       {settings.wkdb.count}
                     </div>
                     <div className="text-[10px] sm:text-xs text-[var(--ink-dim)] mt-1 leading-tight">
-                      {settings.wkdb.value.toString().replace(".", ",")} · WKDB
+                      {settings.wkdb.value != null
+                        ? `${settings.wkdb.value.toString().replace(".", ",")} · WKDB`
+                        : "WKDB"}
                     </div>
                   </div>
                 )
@@ -170,9 +176,11 @@ export default function Footer({
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/5 text-center">
-          <p className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)]/70 leading-relaxed">
-            <EditableText globalSlug="footer" path="aiNote" value={footer.aiNote || ""} multiline />
-          </p>
+          {footer.aiNote && (
+            <p className="text-[10px] tracking-[0.24em] uppercase text-[var(--ink-mute)]/70 leading-relaxed">
+              <EditableText globalSlug="footer" path="aiNote" value={footer.aiNote} multiline />
+            </p>
+          )}
           <p className="mt-4 text-xs text-[var(--ink-mute)] leading-none">
             Erstellt von{" "}
             <a

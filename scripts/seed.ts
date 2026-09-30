@@ -195,7 +195,7 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
       domain: "https://www.pb-fahrzeugpflege.de",
       founded: 1997,
       owner: "Thomas Paul-Mohm",
-      founders: "Thomas Paul & Karsten Becker",
+      founders: "Thomas Paul-Mohm & Karsten Becker",
       address: {
         street: "Provinzialstraße 243",
         zip: "66806",
@@ -285,8 +285,7 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
         { label: "Datenschutz", href: "/datenschutzerklaerung/" },
         { label: "AGB", href: "/allgemeine-geschaeftsbedingungen/" },
       ],
-      aiNote:
-        "Diese Website wurde mit Unterstützung von Künstlicher Intelligenz erstellt.",
+      aiNote: "",
     },
   });
   console.log("✓ Global: footer");
@@ -303,7 +302,7 @@ async function seedGlobals(payload: Payload, mediaMap: MediaMap) {
       secondaryCta: { label: "Leistungen ansehen", href: "/leistungen/" },
       whyUsHeading: "Handwerk, das seit fast 30 Jahren Vertrauen schafft.",
       whyUsBullets: [
-        { text: "Einer der dienstältesten Fahrzeugaufbereiter Deutschlands" },
+        { text: "Fahrzeugaufbereitung im Saarland seit 1997" },
         { text: "Auszeichnungen durch Heiko Maas und Anke Rehlinger für besondere Servicequalität" },
         { text: "BRILA zertifizierter Fachbetrieb für Keramikversiegelungen" },
         { text: "Eigener Qualitäts-Coach" },
@@ -369,7 +368,7 @@ const topicBySlug: Record<string, string> = {
 async function seedFaqs(payload: Payload) {
   const items: Array<{ q: string; a: string; topic: string; order: number }> = [
     // Homepage FAQs
-    { topic: "home", order: 10, q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?", a: 'PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein sauberes Ergebnis. Kundenbewertungen auf ProvenExpert, Google und werkenntdenBESTEN sowie eine Weiterempfehlungsquote von 95 % auf ProvenExpert bestätigen diesen Anspruch.' },
+    { topic: "home", order: 10, q: "Was unterscheidet PB Fahrzeugpflege von anderen Aufbereitern im Saarland?", a: 'PB Fahrzeugpflege Saarlouis arbeitet inhabergeführt seit 1997 ausschließlich an privaten Kundenfahrzeugen und ist auf Sportwagen, Oldtimer und Luxusfahrzeuge spezialisiert. Statt schneller Massenabfertigung nehmen wir uns die Zeit für ein sauberes Ergebnis. Kundenbewertungen auf ProvenExpert, Google und werkenntdenBESTEN mit einem sehr hohen Anteil positiver Rückmeldungen bestätigen diesen Anspruch.' },
     { topic: "home", order: 20, q: "Bieten Sie auch Aufbereitung für Sportwagen, Oldtimer und Luxusfahrzeuge an?", a: "Ja. Hochwertige Fahrzeuge sind unsere Spezialität – vom High-End-Lackschutz per Keramikversiegelung bis zur kompletten Innen- und Außenaufbereitung." },
     { topic: "home", order: 30, q: "Seit wann gibt es PB Fahrzeugpflege?", a: "PB Fahrzeugpflege Saarlouis besteht seit 1997 und gehört mit über 29 Jahren Erfahrung zu den ältesten und erfahrensten Fahrzeugaufbereitern Deutschlands." },
     { topic: "home", order: 40, q: "Aus welchen Regionen kommen Ihre Kunden?", a: "Unsere Kunden kommen aus Saarlouis und dem gesamten Saarland, aus Luxemburg sowie aus den angrenzenden Regionen. Unser Standort in Ensdorf an der B51 liegt verkehrsgünstig mit unmittelbarer Zuganbindung." },
@@ -497,10 +496,10 @@ async function seedAwards(payload: Payload, mediaMap: MediaMap) {
       order: 100,
     },
     {
-      title: "20 Jahre Jubiläum",
+      title: "20-jähriges Jubiläum",
       type: "story",
       image: mediaMap["/images/urkunden/20-jahre-buergermeister-gratulation.jpg"],
-      storyLabel: "20 Jahre Jubiläum",
+      storyLabel: "20-jähriges Jubiläum",
       storyText: "Gratulation vom Ensdorfer Bürgermeister Hartwin Faust.",
       order: 110,
     },
@@ -545,7 +544,7 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
         "High-End 9H-Lackschutz für Neuwagen, Sport- und Luxusfahrzeuge. Glasartige Schutzschicht auf Basis von Siliziumoxid, in über 20 Stunden Handarbeit aufgetragen.",
       heroImage: mediaMap["/images/hero/schwarzes-auto-keramikversiegelung.jpg"],
       features: [
-        { text: "Bis zu mehrere Jahre Schutz" },
+        { text: "Mehrjähriger Schutz je nach Nutzung und Pflege" },
         { text: "BRILA zertifiziert" },
         { text: "Ideal für Neuwagen ab Kilometer 0" },
       ],
@@ -613,7 +612,7 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
         "Komplette Schadenabwicklung aus einer Hand – Gutachter, Anwalt, Leihwagen und Karosserieinstandsetzung nach Herstellervorgaben. Freie Werkstattwahl, ohne Termin.",
       heroImage: mediaMap["/images/hero/unfallschaden-werkstatt.jpg"],
       features: [
-        { text: "Kostenlos bei Haftpflichtschäden*" },
+        { text: "Bei unverschuldeten Haftpflichtschäden meist ohne Eigenanteil" },
         { text: "Ein Ansprechpartner" },
         { text: "Werterhalt bei Premium-Fahrzeugen" },
       ],
@@ -796,14 +795,14 @@ async function seedPages(payload: Payload) {
       title: "Über uns",
       metaTitle: "Über uns – PB Fahrzeugpflege Saarlouis",
       metaDescription:
-        "Inhabergeführt seit 1997. Karsten Becker & Thomas Paul über Anspruch, Team und Geschichte von PB Fahrzeugpflege Saarlouis.",
+        "Inhabergeführt seit 1997. Thomas Paul-Mohm und Karsten Becker über Anspruch, Team und Geschichte von PB Fahrzeugpflege Saarlouis.",
       sections: [
         {
           blockType: "hero",
           kicker: "Über uns",
           title: "Handwerk, das Werte schützt.",
           subtitle:
-            "Seit 1997 inhabergeführt in Ensdorf bei Saarlouis. Karsten Becker und Thomas Paul leiten den Betrieb persönlich – mit dem Anspruch, ausschließlich private Kundenfahrzeuge kompromisslos aufzubereiten.",
+            "Gegründet 1997 in Ensdorf bei Saarlouis von Thomas Paul-Mohm und Karsten Becker. Heute inhabergeführt von Thomas Paul-Mohm, mit dem Anspruch, ausschließlich private Kundenfahrzeuge kompromisslos aufzubereiten.",
         },
         {
           blockType: "text",

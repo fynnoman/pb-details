@@ -30,7 +30,7 @@ export default function Anspruch({
   const para1 = t.para1 || "Unser Qualitäts- und Leistungsanspruch beginnt dort, wo andere ihre Arbeit bereits als beendet ansehen. Wir nehmen uns die Zeit, die eine perfekte Aufbereitung braucht, und hören erst auf, wenn das Ergebnis stimmt.";
   const para2 = t.para2 || 'Da wir ausschließlich private Kundenfahrzeuge betreuen – darunter viele Sportwagen, Oldtimer und Luxusfahrzeuge – ist Ihr Fahrzeug bei uns in besten Händen. Billig kann jeder – deshalb lautet unser Motto: „Glanz oder gar nicht!"';
   const quoteText = t.quoteText || "„Für andere reicht das Erzählte,\nfür uns zählt das Erreichte.“";
-  const badgeLabel = t.badgeLabel || "Weiterempfehlung";
+  const badgeLabel = t.badgeLabel || "Positive Bewertungen";
 
   // Titel ohne den Highlight-Teil (für styled render)
   const titleBase = titleHighlight && title.endsWith(titleHighlight)
@@ -49,28 +49,30 @@ export default function Anspruch({
             <div className="relative aspect-[4/5] sm:aspect-[4/5] rounded-2xl sm:rounded-[2rem] overflow-hidden">
               <motion.img
                 src="/images/team/karsten-thomas-empfang.jpg"
-                alt="Karsten Becker und Thomas Paul, Gründer von PB Fahrzeugpflege Saarlouis, am Empfang vor Zertifikatswand in Ensdorf"
+                alt="Thomas Paul-Mohm und Karsten Becker, Gründer von PB Fahrzeugpflege Saarlouis, am Empfang vor Zertifikatswand in Ensdorf"
                 style={{ y: imgY, scale: imgScale }}
                 className="absolute inset-0 w-full h-full object-cover object-top will-change-transform"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
-              <motion.div
-                style={{ rotate: badgeRotate }}
-                className="absolute right-3 bottom-3 sm:right-8 sm:bottom-8 glass-strong rounded-2xl px-4 py-3 sm:px-5 sm:py-4 max-w-[200px] sm:max-w-[240px] shadow-xl"
-              >
-                <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-1">
-                  <EditableText globalSlug="home" path="anspruch.badgeLabel" value={badgeLabel} />
-                </div>
-                <div className="font-display text-3xl sm:text-4xl text-chrome leading-none">
-                  {settings.recommendation}
-                  <span className="text-[var(--gold)]">%</span>
-                </div>
-                <div className="text-xs text-[var(--ink-dim)] mt-2">
-                  Weiterempfehlungsquote auf ProvenExpert
-                </div>
-              </motion.div>
+              {settings.recommendation != null && (
+                <motion.div
+                  style={{ rotate: badgeRotate }}
+                  className="absolute right-3 bottom-3 sm:right-8 sm:bottom-8 glass-strong rounded-2xl px-4 py-3 sm:px-5 sm:py-4 max-w-[200px] sm:max-w-[240px] shadow-xl"
+                >
+                  <div className="text-[10px] tracking-[0.32em] uppercase text-[var(--ink-mute)] mb-1">
+                    <EditableText globalSlug="home" path="anspruch.badgeLabel" value={badgeLabel} />
+                  </div>
+                  <div className="font-display text-3xl sm:text-4xl text-chrome leading-none">
+                    {settings.recommendation}
+                    <span className="text-[var(--gold)]">%</span>
+                  </div>
+                  <div className="text-xs text-[var(--ink-dim)] mt-2">
+                    Positive Bewertungen auf ProvenExpert
+                  </div>
+                </motion.div>
+              )}
             </div>
           </div>
 

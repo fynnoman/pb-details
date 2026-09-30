@@ -101,7 +101,7 @@ export function buildProductAggregateRating(settings: SiteSettings) {
       ratingCount: count,
       reviewCount: count,
       ratingValue,
-      bestRating: settings.ratingScale,
+      bestRating: settings.ratingScale ?? 5,
       worstRating: 1,
     },
   };
