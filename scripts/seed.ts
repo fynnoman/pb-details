@@ -607,9 +607,9 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
     {
       slug: "unfallschaden",
       title: "Unfallschaden",
-      tagline: "Komplette Schadenabwicklung aus einer Hand.",
+      tagline: "Unfallschaden-Service aus einer Hand.",
       intro:
-        "Komplette Schadenabwicklung aus einer Hand – Gutachter, Anwalt, Leihwagen und Karosserieinstandsetzung nach Herstellervorgaben. Freie Werkstattwahl, ohne Termin.",
+        "Wir koordinieren die erforderlichen Schritte rund um Gutachten, Instandsetzung, Ersatzmobilität und die Abrechnung unserer Leistungen. Bei rechtlichen Fragen kann auf Wunsch ein Fachanwalt für Verkehrsrecht hinzugezogen werden.",
       heroImage: mediaMap["/images/hero/unfallschaden-werkstatt.jpg"],
       features: [
         { text: "Bei unverschuldeten Haftpflichtschäden meist ohne Eigenanteil" },
@@ -617,9 +617,9 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
         { text: "Werterhalt bei Premium-Fahrzeugen" },
       ],
       order: 50,
-      metaTitle: "Unfallschaden-Abwicklung Saarlouis | PB Fahrzeugpflege",
+      metaTitle: "Unfallschaden-Service Saarlouis | PB Fahrzeugpflege",
       metaDescription:
-        "Wir unterstützen Sie bei der Schadenabwicklung nach einem Unfall und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Anwälten und Reparaturbetrieben in Saarlouis.",
+        "Wir unterstützen Sie bei der Organisation und Instandsetzung nach einem Unfallschaden und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Fachanwälten und Reparaturbetrieben in Saarlouis.",
     },
   ];
 
@@ -854,16 +854,16 @@ async function seedPages(payload: Payload) {
     {
       path: "/unfallschaden/",
       title: "Unfallschaden",
-      metaTitle: "Unfallschaden-Abwicklung Saarlouis | PB Fahrzeugpflege",
+      metaTitle: "Unfallschaden-Service Saarlouis | PB Fahrzeugpflege",
       metaDescription:
-        "Wir unterstützen Sie bei der Schadenabwicklung und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Anwälten und Reparaturbetrieben in Saarlouis.",
+        "Wir unterstützen Sie bei der Organisation und Instandsetzung nach einem Unfallschaden und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Fachanwälten und Reparaturbetrieben in Saarlouis.",
       sections: [
         {
           blockType: "hero",
           kicker: "Unfallschaden",
           title: "Alles aus einer Hand.",
           subtitle:
-            "Wir unterstützen Sie bei der Schadenabwicklung und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Anwälten und Reparaturbetrieben.",
+            "Wir unterstützen Sie bei der Organisation und Instandsetzung nach einem Unfallschaden und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Fachanwälten und Reparaturbetrieben.",
         },
       ],
     },

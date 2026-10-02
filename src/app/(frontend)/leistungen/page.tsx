@@ -12,7 +12,7 @@ import type { MediaDoc } from "@/lib/media";
 export const metadata: Metadata = {
   title: { absolute: "Leistungen - PB Fahrzeugpflege Saarlouis" },
   description:
-    "Alle Leistungen von PB Fahrzeugpflege Saarlouis auf einen Blick: Keramikversiegelung, Nanoversiegelung, Fahrzeugaufbereitung, Lack- & Beulendoktor sowie Unfallschaden-Abwicklung im Saarland und in Luxemburg.",
+    "Alle Leistungen von PB Fahrzeugpflege Saarlouis auf einen Blick: Keramikversiegelung, Nanoversiegelung, Fahrzeugaufbereitung, Lack- & Beulendoktor sowie Unfallschaden-Service im Saarland und in Luxemburg.",
   alternates: { canonical: "/leistungen/" },
 };
 
@@ -40,7 +40,7 @@ export default async function LeistungenPage() {
     path: "/leistungen/",
     name: "Leistungen - PB Fahrzeugpflege Saarlouis",
     description:
-      "Keramikversiegelung, Nanoversiegelung, Fahrzeugaufbereitung, Lack- & Beulendoktor sowie Unfallschaden-Abwicklung im Saarland & Luxemburg.",
+      "Keramikversiegelung, Nanoversiegelung, Fahrzeugaufbereitung, Lack- & Beulendoktor sowie Unfallschaden-Service im Saarland & Luxemburg.",
     breadcrumb: breadcrumbList([
       { name: "Home", path: "/" },
       { name: "Leistungen", path: "/leistungen/" },
@@ -53,7 +53,7 @@ export default async function LeistungenPage() {
       <PageHero
         kicker="Leistungen"
         title={<>Alles rund um Lackschutz, Aufbereitung und Schadenbehebung — <span className="italic text-gold">aus einer Hand.</span></>}
-        subtitle="Seit 1997 spezialisiert auf hochwertige Fahrzeugaufbereitung, Keramikversiegelung, Smart Repair und Unfallschaden-Abwicklung im Saarland und in Luxemburg."
+        subtitle="Seit 1997 spezialisiert auf hochwertige Fahrzeugaufbereitung, Keramikversiegelung, Smart Repair und Unfallschaden-Service im Saarland und in Luxemburg."
       />
 
       <section className="relative py-16 sm:py-24">

@@ -150,7 +150,7 @@ export const pageContent: PageContent[] = [
   {
     path: "/unfallschaden/",
     contentBlocks: [
-      { type: "p", text: "Nach einem Unfall unterstützen wir Sie bei der Schadenabwicklung und der Instandsetzung Ihres Fahrzeugs. Wir koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Anwälten und Reparaturbetrieben." },
+      { type: "p", text: "Wir unterstützen Sie bei der Organisation und Instandsetzung nach einem Unfallschaden und koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Fachanwälten und Reparaturbetrieben." },
       { type: "h2", text: "Was Sie am Unfallort tun sollten" },
       { type: "ul", items: [
         "Erste Hilfe leisten und bei Bedarf die Polizei rufen",
@@ -164,14 +164,14 @@ export const pageContent: PageContent[] = [
         "Unabhängiges Gutachten aus unserem Netzwerk",
         "Fachanwalt für Verkehrsrecht auf Wunsch",
         "Ersatzfahrzeug nach Verfügbarkeit und Fallkonstellation",
-        "Kommunikation mit der gegnerischen Versicherung",
+        "Abstimmung mit der Versicherung im Zusammenhang mit der Instandsetzung und unseren Leistungen",
         "Karosserieinstandsetzung und Lackierung nach Herstellervorgaben",
         "Dokumentation für Wiederverkauf oder Leasingrückgabe",
         "Ein Ansprechpartner für die gesamte Koordination",
       ]},
       { type: "p", text: "Welche Kosten eine Versicherung übernimmt, hängt vom Schadenfall und der Klärung der Haftung ab. Eine pauschale Zusage zur Kostenübernahme können wir nicht geben." },
-      { type: "h2", text: "Sie sprechen mit uns, wir sprechen mit den Beteiligten" },
-      { type: "p", text: "Sie erhalten von uns eine sachliche Einschätzung, welche Schritte wirtschaftlich und fachlich sinnvoll sind. Auf Wunsch übernehmen wir die Kommunikation mit den weiteren Beteiligten und stimmen die Instandsetzung eng mit Ihnen und dem Gutachter ab." },
+      { type: "h2", text: "Ein Ansprechpartner für die Koordination" },
+      { type: "p", text: "Wir koordinieren die für die Instandsetzung erforderlichen Schritte und stimmen uns mit Gutachter, Reparaturpartnern und, soweit erforderlich, der Versicherung ab. Bei rechtlichen Fragestellungen kann auf Wunsch ein Fachanwalt für Verkehrsrecht hinzugezogen werden." },
       { type: "h2", text: "Besonders wichtig bei hochwertigen Fahrzeugen" },
       { type: "p", text: "Bei Premium- und Sportfahrzeugen wirkt sich die Qualität der Instandsetzung direkt auf den späteren Marktwert aus. Achten Sie insbesondere auf:" },
       { type: "ul", items: [
@@ -190,12 +190,12 @@ export const pageContent: PageContent[] = [
       { type: "p", text: "Sie finden uns in der Provinzialstraße 243 in 66806 Ensdorf, direkt bei Saarlouis. Wir sind für Kunden aus dem gesamten Saarland und dem grenznahen Raum da. Für ein persönliches Gespräch kommen Sie während unserer Öffnungszeiten unverbindlich vorbei oder rufen kurz an, damit wir uns Zeit für Ihr Anliegen nehmen können." },
     ],
     faqs: [
-      { question: "Was tun nach einem Autounfall?", answer: "Sichern Sie zuerst die Unfallstelle, leisten Sie bei Bedarf Erste Hilfe und rufen Sie die Polizei, machen Sie Beweisfotos und tauschen Sie die Daten mit dem Unfallgegner aus (Versicherungsnummer, Kennzeichen). Bei der weiteren Schadenabwicklung unterstützen wir Sie gern." },
+      { question: "Was tun nach einem Autounfall?", answer: "Sichern Sie zuerst die Unfallstelle, leisten Sie bei Bedarf Erste Hilfe und rufen Sie die Polizei, machen Sie Beweisfotos und tauschen Sie die Daten mit dem Unfallgegner aus (Versicherungsnummer, Kennzeichen). Bei der weiteren Koordination unterstützen wir Sie gern." },
       { question: "Wer zahlt nach einem Unfall?", answer: "Bei einem unverschuldeten Unfall kann die Haftpflichtversicherung des Verursachers je nach Fall Reparatur, Gutachten, Ersatzfahrzeug und Anwalt übernehmen. Welche Kosten übernommen werden, hängt vom Schadenfall und der Klärung der Haftung ab. Eine pauschale Zusage zur Kostenübernahme können wir nicht geben." },
       { question: "Muss ich in die Partnerwerkstatt der Versicherung?", answer: "Bei einem unverschuldeten Unfall haben Sie in der Regel das Recht auf freie Werkstattwahl. Bei einem selbst verschuldeten Kaskoschaden mit Werkstattbindung kann Ihr Versicherer die Werkstatt vorgeben." },
       { question: "Habe ich freie Werkstattwahl?", answer: "Ja. Bei einem unverschuldeten Unfall haben Sie das Recht auf freie Werkstattwahl und auf eine fachgerechte, unabhängige Reparatur." },
       { question: "Was ist eine merkantile Wertminderung?", answer: "Das ist der Wertverlust, den ein Fahrzeug trotz fachgerechter Reparatur allein dadurch erleidet, dass es als Unfallfahrzeug gilt. Gerade bei hochwertigen Fahrzeugen kann dieser Betrag erheblich sein." },
-      { question: "Ist ein Parkschaden ein Unfallschaden?", answer: "Grundsätzlich ja. Ein Parkschaden zählt als Unfallschaden, da er durch ein äußeres Ereignis entstanden ist. Ob und wie er reguliert wird, hängt vom Einzelfall und der Schuldfrage ab. Wir prüfen das gern unverbindlich für Sie." },
+      { question: "Ist ein Parkschaden ein Unfallschaden?", answer: "Grundsätzlich ja. Ein Parkschaden zählt als Unfallschaden, da er durch ein äußeres Ereignis entstanden ist. Ob und in welchem Umfang Ansprüche bestehen, hängt vom jeweiligen Einzelfall und der Haftungssituation ab. Bei rechtlichen Fragen sollte ein Fachanwalt für Verkehrsrecht hinzugezogen werden." },
     ],
   },
   {

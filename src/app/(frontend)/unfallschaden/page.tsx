@@ -3,7 +3,7 @@ import CmsPage, { pageMetadata } from "@/components/CmsPage";
 const PATH = "/unfallschaden/";
 
 export const generateMetadata = () =>
-  pageMetadata(PATH, "Unfallschaden-Abwicklung – PB Fahrzeugpflege Saarlouis");
+  pageMetadata(PATH, "Unfallschaden-Service – PB Fahrzeugpflege Saarlouis");
 
 export default function UnfallschadenPage() {
   return (
