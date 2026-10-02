@@ -145,7 +145,7 @@ export default function Reviews({ settings }: { settings: SiteSettings }) {
             <Reveal>
               <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
                 <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                Original-Rezensionen von Google
+                Google-Rezensionen
               </p>
             </Reveal>
             <Reveal delay={0.05}>
@@ -181,6 +181,10 @@ export default function Reviews({ settings }: { settings: SiteSettings }) {
             <ReviewCard key={r.author} review={r} i={i} />
           ))}
         </div>
+
+        <p className="mt-8 sm:mt-10 text-[11px] sm:text-xs text-[var(--ink-mute)] leading-relaxed max-w-3xl">
+          Die Bewertungen werden über Google bereitgestellt. PB Fahrzeugpflege nimmt keine eigene Prüfung vor, ob die bewertende Person unsere Leistungen tatsächlich in Anspruch genommen hat.
+        </p>
       </div>
     </section>
   );

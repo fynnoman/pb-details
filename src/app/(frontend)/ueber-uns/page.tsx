@@ -53,8 +53,8 @@ export default function UeberUnsPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <p className="font-display text-lg sm:text-xl md:text-2xl leading-snug italic text-chrome not-italic">
-                Wir wollten der beste Fahrzeugaufbereiter im Saarland werden,
-                mit einem klaren Fokus auf den Privatkunden.
+                Unser Ziel war klar: bei Qualität und Service im Saarland
+                Maßstäbe zu setzen, mit einem klaren Fokus auf den Privatkunden.
               </p>
             </Reveal>
             <Reveal delay={0.15}>

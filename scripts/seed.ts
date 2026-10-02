@@ -580,7 +580,7 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
       features: [
         { text: "Innen & Außen" },
         { text: "In der Regel 2–3 Werktage" },
-        { text: "Werterhalt & Wertsteigerung" },
+        { text: "Werterhalt & bessere Verkaufspräsentation" },
       ],
       order: 30,
       metaTitle: "Fahrzeugaufbereitung Saarlouis | PB Fahrzeugpflege",
@@ -592,28 +592,28 @@ async function seedServices(payload: Payload, mediaMap: MediaMap) {
       title: "Lack- & Beulendoktor",
       tagline: "Smart Repair und Paintless Dent Repair.",
       intro:
-        "Smart Repair und lackschadenfreie Ausbeultechnik: Dellen und Lackschäden bis zu 70 % günstiger als eine klassische Lackierung reparieren – der Originallack bleibt erhalten.",
+        "Smart Repair und lackschadenfreie Ausbeultechnik: Dellen und Lackschäden punktuell reparieren – kann deutlich günstiger sein als die Lackierung des gesamten Bauteils. Der Originallack bleibt erhalten.",
       heroImage: mediaMap["/images/hero/beulendoktor-smart-repair.jpg"],
       features: [
-        { text: "Bis zu 70 % günstiger" },
+        { text: "Oft deutlich günstiger als Komplett­lackierung" },
         { text: "Paintless Dent Repair" },
         { text: "Werterhaltend" },
       ],
       order: 40,
       metaTitle: "Lack- & Beulendoktor Saarlouis | Smart Repair | PB Fahrzeugpflege",
       metaDescription:
-        "Smart Repair und Paintless Dent Repair im Saarland: Kleine Dellen und Lackschäden bis zu 70 % günstiger reparieren, Originallack bleibt erhalten.",
+        "Smart Repair und Paintless Dent Repair im Saarland: Kleine Dellen und Lackschäden punktuell reparieren – kann deutlich günstiger sein als die Lackierung des gesamten Bauteils. Originallack bleibt erhalten.",
     },
     {
       slug: "unfallschaden",
       title: "Unfallschaden",
-      tagline: "Unfallschaden-Service aus einer Hand.",
+      tagline: "Unfallschaden-Service mit zentraler Koordination.",
       intro:
-        "Wir koordinieren die erforderlichen Schritte rund um Gutachten, Instandsetzung, Ersatzmobilität und die Abrechnung unserer Leistungen. Bei rechtlichen Fragen kann auf Wunsch ein Fachanwalt für Verkehrsrecht hinzugezogen werden.",
+        "Wir koordinieren die erforderlichen Schritte mit unserem Netzwerk aus Gutachtern, Fachanwälten und Reparaturbetrieben.",
       heroImage: mediaMap["/images/hero/unfallschaden-werkstatt.jpg"],
       features: [
         { text: "Bei unverschuldeten Haftpflichtschäden meist ohne Eigenanteil" },
-        { text: "Ein Ansprechpartner" },
+        { text: "Gutachter & Fachanwalt auf Wunsch" },
         { text: "Werterhalt bei Premium-Fahrzeugen" },
       ],
       order: 50,
@@ -748,7 +748,7 @@ async function seedBlogPosts(payload: Payload, mediaMap: MediaMap) {
       slug: "smart-repair-wann-lohnt-sich-die-lackreparatur-ohne-lackierung",
       title: "Smart Repair: Wann lohnt sich die Lackreparatur ohne Lackierung?",
       intro:
-        "Kleine Dellen, Parkrempler oder Steinschläge müssen nicht immer neu lackiert werden. Smart Repair und Paintless Dent Repair reparieren solche Schäden bis zu 70 % günstiger – und erhalten den Originallack.",
+        "Kleine Dellen, Parkrempler oder Steinschläge müssen nicht immer neu lackiert werden. Smart Repair und Paintless Dent Repair können solche Schäden deutlich günstiger reparieren als eine Lackierung des gesamten Bauteils – und erhalten den Originallack.",
       publishedAt: "2025-09-01T09:00:00.000Z",
     },
   ];
