@@ -1,71 +1,37 @@
 "use client";
 
 import { useEffect } from "react";
-import { hasConsent } from "./CookieBanner";
 
 /**
- * Google Ads gtag.js + Conversion-Event-Listener.
+ * dataLayer-Events für Google Tag Manager.
  *
- * Lädt an das eigene Consent-System angekoppelt: gtag.js wird erst nach
- * Marketing-Einwilligung injiziert. CookieBanner dispatched
- * `pb-consent-changed`, worauf diese Komponente reagiert.
+ * Diese Komponente lädt gtag.js NICHT selbst — alle Google-Ads-
+ * Conversions werden in GTM konfiguriert. Hier pushen wir nur
+ * semantische Events in den dataLayer:
  *
- * Die Klick-/Event-Listener sind immer registriert — ohne geladenes
- * gtag.js sind sie ein No-Op.
+ *   pb_contact_submit  — Kontaktformular erfolgreich gesendet
+ *   pb_click_tel       — Klick auf tel:-Link
+ *   pb_click_mail      — Klick auf mailto:-Link
+ *   pb_click_whatsapp  — Klick auf wa.me / api.whatsapp.com
+ *   pb_thanks_pageview — Aufruf der /danke-Seite (Formular-Fallback)
  *
- * Conversion-IDs (Stand: aus Google-Ads-Konto übergeben):
- *   Basis:                AW-850199230
- *   Kontaktformular:      AW-850199230 (Custom-Event "pb:contact-form-success" + /danke)
- *   Anruf (tel:):         AW-850339404 + AW-849433151
- *   E-Mail (mailto:):     AW-850326666
- *   WhatsApp:             AW-849434126
+ * In GTM: pro Event ein Custom-Event-Trigger, verknüpft mit dem
+ * jeweiligen Google-Ads-Conversion-Tag (inkl. Conversion-Label).
+ * Marketing-Consent-Gating passiert in GTM via Consent-Mode oder
+ * eigener Trigger-Bedingung.
  */
-
-const BASE_ID = "AW-850199230";
-const CONFIG_IDS = [
-  "AW-850199230",
-  "AW-850339404",
-  "AW-850326666",
-  "AW-849433151",
-  "AW-849434126",
-] as const;
-const CONTACT_FORM_SEND_TO = "AW-850199230";
-const TEL_SEND_TO = ["AW-850339404", "AW-849433151"] as const;
-const MAIL_SEND_TO = "AW-850326666";
-const WHATSAPP_SEND_TO = "AW-849434126";
 
 declare global {
   interface Window {
     dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
-    __pbGtagLoaded?: boolean;
     __pbAdsListenersBound?: boolean;
   }
 }
 
-function loadGtag() {
+function push(event: string) {
   if (typeof window === "undefined") return;
-  if (window.__pbGtagLoaded) return;
-  window.__pbGtagLoaded = true;
-
   window.dataLayer = window.dataLayer || [];
-  const gtag = (...args: unknown[]) => {
-    window.dataLayer!.push(args);
-  };
-  window.gtag = gtag;
-  gtag("js", new Date());
-  for (const id of CONFIG_IDS) gtag("config", id);
-
-  const s = document.createElement("script");
-  s.async = true;
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${BASE_ID}`;
-  const first = document.getElementsByTagName("script")[0];
-  first?.parentNode?.insertBefore(s, first);
-}
-
-function fire(sendTo: string) {
-  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
-  window.gtag("event", "conversion", { send_to: sendTo });
+  window.dataLayer.push({ event });
 }
 
 function bindListeners() {
@@ -81,43 +47,29 @@ function bindListeners() {
       if (!a) return;
       const href = (a.getAttribute("href") || "").toLowerCase();
       if (href.startsWith("tel:")) {
-        for (const id of TEL_SEND_TO) fire(id);
+        push("pb_click_tel");
       } else if (href.startsWith("mailto:")) {
-        fire(MAIL_SEND_TO);
+        push("pb_click_mail");
       } else if (href.includes("wa.me") || href.includes("api.whatsapp.com")) {
-        fire(WHATSAPP_SEND_TO);
+        push("pb_click_whatsapp");
       }
     },
     true,
   );
 
   window.addEventListener("pb:contact-form-success", () => {
-    fire(CONTACT_FORM_SEND_TO);
+    push("pb_contact_submit");
   });
 
   const path = location.pathname.replace(/\/+$/, "") || "/";
   if (path === "/danke") {
-    let tries = 0;
-    const attempt = () => {
-      if (typeof window.gtag === "function") {
-        fire(CONTACT_FORM_SEND_TO);
-        return;
-      }
-      if (++tries < 20) setTimeout(attempt, 500);
-    };
-    attempt();
+    push("pb_thanks_pageview");
   }
 }
 
 export default function GoogleAdsTag() {
   useEffect(() => {
     bindListeners();
-    if (hasConsent("marketing")) loadGtag();
-    const onConsent = () => {
-      if (hasConsent("marketing")) loadGtag();
-    };
-    window.addEventListener("pb-consent-changed", onConsent);
-    return () => window.removeEventListener("pb-consent-changed", onConsent);
   }, []);
   return null;
 }

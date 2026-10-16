@@ -1,21 +1,34 @@
 "use client";
 
 import { useEffect } from "react";
-import { hasConsent } from "./CookieBanner";
+import { getConsent, hasConsent } from "./CookieBanner";
 
 /**
  * Google Tag Manager mit eigenem Consent-Gate.
  * Container-ID aus NEXT_PUBLIC_GTM_ID.
  *
- * GTM wird dynamisch erst dann geladen, wenn der Nutzer im eigenen
- * CookieBanner die Analyse-Kategorie akzeptiert. Das Signal kommt über
- * das `pb-consent-changed`-Event. Ohne Einwilligung passiert nichts.
+ * GTM wird dynamisch geladen, sobald der Nutzer entweder Analyse oder
+ * Marketing akzeptiert — beide Kategorien laufen in diesem Container.
+ * Der aktuelle Consent-Status wird in den dataLayer gepusht, damit
+ * Trigger in GTM darauf reagieren können.
  */
 
 declare global {
   interface Window {
+    dataLayer?: unknown[];
     __pbGtmLoaded?: boolean;
   }
+}
+
+function pushConsent() {
+  if (typeof window === "undefined") return;
+  const c = getConsent();
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "pb_consent",
+    pb_consent_analytics: c?.analytics === true,
+    pb_consent_marketing: c?.marketing === true,
+  });
 }
 
 function loadGtm(id: string) {
@@ -38,12 +51,13 @@ export default function GoogleTagManager() {
 
   useEffect(() => {
     if (!id) return;
-    if (hasConsent("analytics")) loadGtm(id);
-    const onConsent = () => {
-      if (hasConsent("analytics")) loadGtm(id);
+    const sync = () => {
+      pushConsent();
+      if (hasConsent("analytics") || hasConsent("marketing")) loadGtm(id);
     };
-    window.addEventListener("pb-consent-changed", onConsent);
-    return () => window.removeEventListener("pb-consent-changed", onConsent);
+    sync();
+    window.addEventListener("pb-consent-changed", sync);
+    return () => window.removeEventListener("pb-consent-changed", sync);
   }, [id]);
 
   if (!id) return null;
