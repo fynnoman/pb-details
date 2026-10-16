@@ -1,33 +1,61 @@
+"use client";
+
+import { useEffect } from "react";
+import { hasConsent } from "./CookieBanner";
+
 /**
- * Google Tag Manager mit CookieYes-Consent-Gate.
- * Container-ID aus NEXT_PUBLIC_GTM_ID (Default: GTM-PM4LRKZ aus Altseite).
+ * Google Tag Manager mit eigenem Consent-Gate.
+ * Container-ID aus NEXT_PUBLIC_GTM_ID.
  *
- * Das GTM-Init-Script wird mit type="text/plain" und
- * data-cookieyes="cookieyes-analytics" markiert. CookieYes tauscht den
- * Typ automatisch auf text/javascript, sobald der Nutzer die Analytics-
- * Kategorie akzeptiert – dadurch lädt GTM erst nach Einwilligung.
- * (Auto-Blocking-Feature von CookieYes muss im Dashboard aktiv sein.)
+ * GTM wird dynamisch erst dann geladen, wenn der Nutzer im eigenen
+ * CookieBanner die Analyse-Kategorie akzeptiert. Das Signal kommt über
+ * das `pb-consent-changed`-Event. Ohne Einwilligung passiert nichts.
  */
+
+declare global {
+  interface Window {
+    __pbGtmLoaded?: boolean;
+  }
+}
+
+function loadGtm(id: string) {
+  if (typeof window === "undefined") return;
+  if (window.__pbGtmLoaded) return;
+  window.__pbGtmLoaded = true;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = `https://www.googletagmanager.com/gtm.js?id=${id}`;
+  const first = document.getElementsByTagName("script")[0];
+  first?.parentNode?.insertBefore(s, first);
+}
+
 export default function GoogleTagManager() {
   const id = process.env.NEXT_PUBLIC_GTM_ID;
+
+  useEffect(() => {
+    if (!id) return;
+    if (hasConsent("analytics")) loadGtm(id);
+    const onConsent = () => {
+      if (hasConsent("analytics")) loadGtm(id);
+    };
+    window.addEventListener("pb-consent-changed", onConsent);
+    return () => window.removeEventListener("pb-consent-changed", onConsent);
+  }, [id]);
+
   if (!id) return null;
-  const initScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${id}');`;
   return (
-    <>
-      <script
-        type="text/plain"
-        data-cookieyes="cookieyes-analytics"
-        dangerouslySetInnerHTML={{ __html: initScript }}
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${id}`}
+        height="0"
+        width="0"
+        style={{ display: "none", visibility: "hidden" }}
+        title="Google Tag Manager"
       />
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${id}`}
-          height="0"
-          width="0"
-          style={{ display: "none", visibility: "hidden" }}
-          title="Google Tag Manager"
-        />
-      </noscript>
-    </>
+    </noscript>
   );
 }

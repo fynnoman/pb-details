@@ -1,15 +1,17 @@
+"use client";
+
+import { useEffect } from "react";
+import { hasConsent } from "./CookieBanner";
+
 /**
  * Google Ads gtag.js + Conversion-Event-Listener.
  *
- * Läuft parallel zum GoogleTagManager, hängt aber im gleichen
- * CookieYes-Consent-Gate wie GTM: das Init-Script ist mit
- * type="text/plain" und data-cookieyes="cookieyes-analytics"
- * markiert. CookieYes tauscht den Typ nach Einwilligung in
- * text/javascript um, wodurch gtag.js nachgeladen wird und
- * window.gtag erst dann existiert.
+ * Lädt an das eigene Consent-System angekoppelt: gtag.js wird erst nach
+ * Marketing-Einwilligung injiziert. CookieBanner dispatched
+ * `pb-consent-changed`, worauf diese Komponente reagiert.
  *
- * Die Klick-/Event-Listener werden immer registriert (kein
- * Consent-Gate nötig, da sie ohne window.gtag ein No-Op sind).
+ * Die Klick-/Event-Listener sind immer registriert — ohne geladenes
+ * gtag.js sind sie ein No-Op.
  *
  * Conversion-IDs (Stand: aus Google-Ads-Konto übergeben):
  *   Basis:                AW-850199230
@@ -27,63 +29,95 @@ const CONFIG_IDS = [
   "AW-849433151",
   "AW-849434126",
 ] as const;
+const CONTACT_FORM_SEND_TO = "AW-850199230";
+const TEL_SEND_TO = ["AW-850339404", "AW-849433151"] as const;
+const MAIL_SEND_TO = "AW-850326666";
+const WHATSAPP_SEND_TO = "AW-849434126";
 
-const initScript = `
-(function(w,d,s){
-  var t=d.createElement(s);t.async=true;t.src='https://www.googletagmanager.com/gtag/js?id=${BASE_ID}';
-  var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(t,f);
-  w.dataLayer=w.dataLayer||[];
-  function gtag(){w.dataLayer.push(arguments);}
-  w.gtag=gtag;
-  gtag('js', new Date());
-  ${CONFIG_IDS.map((id) => `gtag('config','${id}');`).join("\n  ")}
-})(window,document,'script');
-`.trim();
-
-const listenersScript = `
-(function(){
-  function fire(id){
-    if (typeof window.gtag === 'function') {
-      window.gtag('event','conversion',{'send_to': id});
-    }
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+    __pbGtagLoaded?: boolean;
+    __pbAdsListenersBound?: boolean;
   }
-  document.addEventListener('click', function(e){
-    var t = e.target;
-    var a = t && t.closest ? t.closest('a[href]') : null;
-    if (!a) return;
-    var href = (a.getAttribute('href') || '').toLowerCase();
-    if (href.indexOf('tel:') === 0) {
-      fire('AW-850339404');
-      fire('AW-849433151');
-    } else if (href.indexOf('mailto:') === 0) {
-      fire('AW-850326666');
-    } else if (href.indexOf('wa.me') !== -1 || href.indexOf('api.whatsapp.com') !== -1) {
-      fire('AW-849434126');
-    }
-  }, true);
-  window.addEventListener('pb:contact-form-success', function(){
-    fire('AW-850199230');
+}
+
+function loadGtag() {
+  if (typeof window === "undefined") return;
+  if (window.__pbGtagLoaded) return;
+  window.__pbGtagLoaded = true;
+
+  window.dataLayer = window.dataLayer || [];
+  const gtag = (...args: unknown[]) => {
+    window.dataLayer!.push(args);
+  };
+  window.gtag = gtag;
+  gtag("js", new Date());
+  for (const id of CONFIG_IDS) gtag("config", id);
+
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = `https://www.googletagmanager.com/gtag/js?id=${BASE_ID}`;
+  const first = document.getElementsByTagName("script")[0];
+  first?.parentNode?.insertBefore(s, first);
+}
+
+function fire(sendTo: string) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", "conversion", { send_to: sendTo });
+}
+
+function bindListeners() {
+  if (typeof window === "undefined") return;
+  if (window.__pbAdsListenersBound) return;
+  window.__pbAdsListenersBound = true;
+
+  document.addEventListener(
+    "click",
+    (e) => {
+      const target = e.target as Element | null;
+      const a = target && "closest" in target ? target.closest("a[href]") : null;
+      if (!a) return;
+      const href = (a.getAttribute("href") || "").toLowerCase();
+      if (href.startsWith("tel:")) {
+        for (const id of TEL_SEND_TO) fire(id);
+      } else if (href.startsWith("mailto:")) {
+        fire(MAIL_SEND_TO);
+      } else if (href.includes("wa.me") || href.includes("api.whatsapp.com")) {
+        fire(WHATSAPP_SEND_TO);
+      }
+    },
+    true,
+  );
+
+  window.addEventListener("pb:contact-form-success", () => {
+    fire(CONTACT_FORM_SEND_TO);
   });
-  var p = location.pathname.replace(/\\/+$/, '') || '/';
-  if (p === '/danke') {
-    var tries = 0;
-    (function attempt(){
-      if (typeof window.gtag === 'function') { fire('AW-850199230'); return; }
+
+  const path = location.pathname.replace(/\/+$/, "") || "/";
+  if (path === "/danke") {
+    let tries = 0;
+    const attempt = () => {
+      if (typeof window.gtag === "function") {
+        fire(CONTACT_FORM_SEND_TO);
+        return;
+      }
       if (++tries < 20) setTimeout(attempt, 500);
-    })();
+    };
+    attempt();
   }
-})();
-`.trim();
+}
 
 export default function GoogleAdsTag() {
-  return (
-    <>
-      <script
-        type="text/plain"
-        data-cookieyes="cookieyes-analytics"
-        dangerouslySetInnerHTML={{ __html: initScript }}
-      />
-      <script dangerouslySetInnerHTML={{ __html: listenersScript }} />
-    </>
-  );
+  useEffect(() => {
+    bindListeners();
+    if (hasConsent("marketing")) loadGtag();
+    const onConsent = () => {
+      if (hasConsent("marketing")) loadGtag();
+    };
+    window.addEventListener("pb-consent-changed", onConsent);
+    return () => window.removeEventListener("pb-consent-changed", onConsent);
+  }, []);
+  return null;
 }
