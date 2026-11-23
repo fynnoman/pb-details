@@ -21,10 +21,14 @@ export default function Awards({
   awards,
   showStoryCards = true,
   home,
+  hideHeading = false,
+  hideLink = false,
 }: {
   awards: AwardItem[];
   showStoryCards?: boolean;
   home?: import("@/lib/site-types").HomeData;
+  hideHeading?: boolean;
+  hideLink?: boolean;
 }) {
   const badges = awards.filter((a) => a.type === "badge");
   const stories = awards.filter((a) => a.type === "story");
@@ -37,33 +41,35 @@ export default function Awards({
 
   return (
     <section className="relative py-16 sm:py-24 lg:py-40 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-10 sm:mb-16 items-end">
-          <div className="col-span-12 lg:col-span-8">
-            <Reveal>
-              <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
-                <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
-                <EditableText globalSlug="home" path="awards.kicker" value={kicker} />
-              </p>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="font-display text-[clamp(1.75rem,7vw,3.8rem)] leading-[1.05] tracking-[-0.025em] max-w-[22ch]">
-                <EditableText
-                  globalSlug="home"
-                  path="awards.title"
-                  value={title}
-                  render={(v) => (
-                    <>
-                      {v}{" "}
-                      <span className="italic text-gold">{titleHighlight}</span>
-                    </>
-                  )}
-                />
-              </h2>
-            </Reveal>
+      {!hideHeading && (
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-10">
+          <div className="grid grid-cols-12 gap-6 lg:gap-10 mb-10 sm:mb-16 items-end">
+            <div className="col-span-12 lg:col-span-8">
+              <Reveal>
+                <p className="text-[10px] sm:text-[11px] tracking-[0.32em] sm:tracking-[0.4em] uppercase text-[var(--ink-mute)] mb-4 sm:mb-6">
+                  <span className="inline-block w-8 h-px bg-[var(--gold)] align-middle mr-3" />
+                  <EditableText globalSlug="home" path="awards.kicker" value={kicker} />
+                </p>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h2 className="font-display text-[clamp(1.75rem,7vw,3.8rem)] leading-[1.05] tracking-[-0.025em] max-w-[22ch]">
+                  <EditableText
+                    globalSlug="home"
+                    path="awards.title"
+                    value={title}
+                    render={(v) => (
+                      <>
+                        {v}{" "}
+                        <span className="italic text-gold">{titleHighlight}</span>
+                      </>
+                    )}
+                  />
+                </h2>
+              </Reveal>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {badges.length > 0 && (
         <div className="relative">
@@ -146,22 +152,24 @@ export default function Awards({
             })}
           </div>
 
-          <Reveal delay={0.3}>
-            <div className="mt-10 sm:mt-14 text-center">
-              <Link
-                href="/referenzen/"
-                className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group min-h-[44px]"
-              >
-                <EditableText globalSlug="home" path="awards.linkLabel" value={linkLabel} />
-                <span
-                  aria-hidden
-                  className="transition-transform group-hover:translate-x-1"
+          {!hideLink && (
+            <Reveal delay={0.3}>
+              <div className="mt-10 sm:mt-14 text-center">
+                <Link
+                  href="/referenzen/"
+                  className="inline-flex items-center gap-2 text-sm tracking-wide text-[var(--ink-dim)] hover:text-[var(--gold)] transition-colors group min-h-[44px]"
                 >
-                  →
-                </span>
-              </Link>
-            </div>
-          </Reveal>
+                  <EditableText globalSlug="home" path="awards.linkLabel" value={linkLabel} />
+                  <span
+                    aria-hidden
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </Link>
+              </div>
+            </Reveal>
+          )}
         </div>
       )}
     </section>

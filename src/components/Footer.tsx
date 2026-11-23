@@ -32,6 +32,26 @@ export default function Footer({
             <div className="mt-6 sm:mt-8 text-xs tracking-[0.32em] uppercase text-[var(--gold)]">
               <EditableText globalSlug="footer" path="motto" value={footer.motto || ""} />
             </div>
+            <a
+              href="https://bundesverbandfahrzeugaufbereitung.de/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 sm:mt-10 inline-flex items-center gap-3 text-[11px] text-[var(--ink-mute)] hover:text-[var(--ink)] transition-colors group"
+              aria-label="Bundesverband Fahrzeugaufbereitung & Detailing e. V. – offizielle Website öffnen"
+            >
+              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-white/[0.04] ring-1 ring-white/10 p-1 transition group-hover:ring-[var(--gold)]/30">
+                <img
+                  src="/images/logo/bfa-logo-square.png"
+                  alt="BFA Logo – Bundesverband Fahrzeugaufbereitung & Detailing e. V."
+                  className="h-full w-full object-contain"
+                  loading="lazy"
+                />
+              </span>
+              <span className="leading-tight">
+                Mitglied im<br />
+                <span className="text-[var(--ink-dim)]">Bundesverband Fahrzeugaufbereitung &amp; Detailing e.&nbsp;V.</span>
+              </span>
+            </a>
           </div>
 
           <div className="col-span-12 sm:col-span-6 md:col-span-3">

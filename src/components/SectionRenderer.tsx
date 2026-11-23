@@ -141,11 +141,22 @@ async function RenderSection({ section, index }: { section: Section; index: numb
           </div>
         </div>
       );
+      const linkIsExternal = !!section.linkHref && /^https?:\/\//i.test(section.linkHref);
       return (
         <section className="relative py-16 sm:py-24">
           <div className="mx-auto max-w-[1200px] px-4 sm:px-8 lg:px-10">
             <Reveal delay={index * 0.04}>
-              {section.linkHref ? <Link href={section.linkHref}>{inner}</Link> : inner}
+              {section.linkHref ? (
+                linkIsExternal ? (
+                  <a href={section.linkHref} target="_blank" rel="noopener noreferrer">
+                    {inner}
+                  </a>
+                ) : (
+                  <Link href={section.linkHref}>{inner}</Link>
+                )
+              ) : (
+                inner
+              )}
             </Reveal>
           </div>
         </section>
@@ -493,7 +504,14 @@ async function RenderSection({ section, index }: { section: Section; index: numb
 
     case "awards-marquee": {
       const awards = (await loadAwards()) as AwardItem[];
-      return <Awards awards={awards} showStoryCards={section.showStoryCards ?? true} />;
+      return (
+        <Awards
+          awards={awards}
+          showStoryCards={section.showStoryCards ?? true}
+          hideHeading
+          hideLink
+        />
+      );
     }
 
     case "region-block": {

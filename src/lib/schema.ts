@@ -70,6 +70,13 @@ export function buildOrganizationSchema(settings: SiteSettings) {
       settings.provenExpert?.url,
       settings.google?.mapsUrl,
     ].filter(Boolean),
+    memberOf: [
+      {
+        "@type": "Organization",
+        name: "Bundesverband Fahrzeugaufbereitung & Detailing e. V.",
+        url: "https://bundesverbandfahrzeugaufbereitung.de/",
+      },
+    ],
   };
 }
 

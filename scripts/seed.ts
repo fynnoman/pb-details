@@ -43,7 +43,7 @@ export async function runSeed(payload: Payload) {
   await seedServices(payload, mediaMap);
   await seedRedirects(payload);
   await seedBlogPosts(payload, mediaMap);
-  await seedPages(payload);
+  await seedPages(payload, mediaMap);
 }
 
 async function main() {
@@ -178,6 +178,15 @@ function mimeFor(filename: string): string {
 }
 
 function altFromFilename(filename: string): string {
+  const overrides: Record<string, string> = {
+    "bfa-mitglied-2026.png":
+      "Mitgliedssiegel 2026 des Bundesverbands Fahrzeugaufbereitung & Detailing e. V.",
+    "bfa-logo-horizontal.png":
+      "Logo Bundesverband Fahrzeugaufbereitung & Detailing e. V.",
+    "bfa-logo-square.png":
+      "Logo Bundesverband Fahrzeugaufbereitung & Detailing e. V.",
+  };
+  if (overrides[filename]) return overrides[filename];
   const base = filename.replace(/\.[^.]+$/, "");
   const words = base.replaceAll("-", " ").replaceAll("_", " ");
   return words.charAt(0).toUpperCase() + words.slice(1);
@@ -480,6 +489,7 @@ async function seedVehicles(payload: Payload, mediaMap: MediaMap) {
 async function seedAwards(payload: Payload, mediaMap: MediaMap) {
   const items = [
     // Badges
+    { title: "BFA Mitglied 2026 – Bundesverband Fahrzeugaufbereitung & Detailing e. V.", type: "badge", image: mediaMap["/images/badges/bfa-mitglied-2026.png"], order: 5 },
     { title: "ProvenExpert Top Dienstleister 2023", type: "badge", image: mediaMap["/images/badges/provenexpert-top-dienstleister-2023.png"], order: 10 },
     { title: "ProvenExpert Top Empfehlung 2021", type: "badge", image: mediaMap["/images/badges/provenexpert-top-empfehlung-2021.jpg"], order: 20 },
     { title: "ProvenExpert Top Empfehlung 2019", type: "badge", image: mediaMap["/images/badges/provenexpert-top-empfehlung-2019.jpg"], order: 30 },
@@ -487,6 +497,15 @@ async function seedAwards(payload: Payload, mediaMap: MediaMap) {
     { title: "Profi-Badge", type: "badge", image: mediaMap["/images/badges/profi-badge.webp"], order: 50 },
     { title: "Q-Siegel Servicequalität", type: "badge", image: mediaMap["/images/urkunden/q-siegel-logo.png"], order: 60 },
     // Story-Karten
+    {
+      title: "Mitglied im Bundesverband Fahrzeugaufbereitung & Detailing e. V.",
+      type: "story",
+      image: mediaMap["/images/urkunden/bfa-logo-horizontal.png"],
+      storyLabel: "BFA Mitglied 2026",
+      storyText:
+        "Mitglied im Bundesverband Fahrzeugaufbereitung & Detailing e. V. (BFA), der Interessenvertretung der Branche in Deutschland mit Sitz in Bonn.",
+      order: 95,
+    },
     {
       title: "BRILA Certified Installer",
       type: "story",
@@ -782,7 +801,7 @@ async function seedBlogPosts(payload: Payload, mediaMap: MediaMap) {
 
 /* ─── Pages (Content + Legal) ───────────────────────────────────────────── */
 
-async function seedPages(payload: Payload) {
+async function seedPages(payload: Payload, mediaMap: MediaMap) {
   const pages: Array<{
     path: string;
     title: string;
@@ -812,6 +831,14 @@ async function seedPages(payload: Payload) {
           ),
         },
         {
+          blockType: "leistungsblock",
+          heading: "Mitglied im Bundesverband Fahrzeugaufbereitung & Detailing e. V.",
+          description:
+            "Wir sind 2026 Mitglied im Bundesverband Fahrzeugaufbereitung & Detailing e. V. (BFA) mit Sitz in Bonn. Der BFA ist die Interessenvertretung für Fahrzeugaufbereitung, Detailing, Autoglas, Wrapping und Smart-Repair in Deutschland und verbindet uns mit Fachbetrieben, die sich den Qualitätsansprüchen professioneller Fahrzeugaufbereitung verpflichtet fühlen.",
+          image: mediaMap["/images/logo/bfa-logo-square.png"],
+          linkHref: "https://bundesverbandfahrzeugaufbereitung.de/",
+        },
+        {
           blockType: "cta",
           heading: "Lernen Sie uns kennen.",
           text: "Kommen Sie unverbindlich vorbei oder vereinbaren Sie einen Termin.",
@@ -833,13 +860,6 @@ async function seedPages(payload: Payload) {
           title: "Individuelles Angebot nach Besichtigung.",
           subtitle:
             "Jedes Fahrzeug bringt andere Voraussetzungen mit. Deshalb nennen wir Preise erst nach einer persönlichen Besichtigung Ihres Fahrzeugs vor Ort. Auf dieser Grundlage erstellen wir Ihnen ein individuelles Angebot für die besprochenen Leistungen.",
-        },
-        {
-          blockType: "text",
-          heading: "Individuelle Kalkulation",
-          body: lexicalPlaceholder(
-            "Jedes Fahrzeug bringt andere Voraussetzungen mit. Deshalb nennen wir Preise erst nach einer persönlichen Besichtigung Ihres Fahrzeugs vor Ort. Auf dieser Grundlage erstellen wir Ihnen ein individuelles Angebot für die besprochenen Leistungen.",
-          ),
         },
         {
           blockType: "cta",
