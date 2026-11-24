@@ -3,6 +3,14 @@ import type { SiteSettings, FooterData } from "@/lib/site-types";
 import EditableText from "./edit/EditableText";
 import CookieSettingsButton from "./CookieSettingsButton";
 
+// Verifizierte öffentliche Profile – im Code verankert, damit externe Links auch
+// dann nicht ins Leere laufen, wenn im CMS ein veralteter Wert steht.
+const REVIEW_URLS = {
+  provenExpert: "https://www.provenexpert.com/pb-fahrzeugpflege-saarlouis/",
+  googleMaps: "https://g.page/pbfahrzeugpflege?share",
+  wkdb: "https://www.werkenntdenbesten.de/e/54542096/autopflege/ensdorf-saar/pb-fahrzeugpflege-saarlouis-bewertungen.html",
+} as const;
+
 export default function Footer({
   settings,
   footer,
@@ -113,7 +121,7 @@ export default function Footer({
             <div className="grid grid-cols-3 md:grid-cols-1 gap-3">
               {settings.provenExpert?.count != null && (
                 <a
-                  href={settings.provenExpert.url || "#"}
+                  href={REVIEW_URLS.provenExpert}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="glass rounded-2xl p-3 sm:p-4 block cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
@@ -130,7 +138,7 @@ export default function Footer({
               )}
               {settings.google?.count != null && (
                 <a
-                  href={settings.google.mapsUrl || settings.google.url || "#"}
+                  href={REVIEW_URLS.googleMaps}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="glass rounded-2xl p-3 sm:p-4 block cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"
@@ -146,7 +154,7 @@ export default function Footer({
               {settings.wkdb?.count != null && (
                 settings.wkdb.url ? (
                   <a
-                    href={settings.wkdb.url}
+                    href={REVIEW_URLS.wkdb}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="glass rounded-2xl p-3 sm:p-4 block cursor-pointer hover:ring-1 hover:ring-[var(--gold)]/30 transition min-h-[48px]"

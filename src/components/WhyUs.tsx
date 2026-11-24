@@ -192,7 +192,7 @@ export default function WhyUs({
 
             {settings.google && (
               <motion.a
-                href={settings.google.url || settings.google.mapsUrl || "#"}
+                href={settings.google.mapsUrl || settings.google.url || "#"}
                 target="_blank"
                 rel="noopener"
                 initial={{ opacity: 0, y: 20 }}
